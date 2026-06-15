@@ -12,11 +12,10 @@ export function generateCalendar(type = 'red', options = {}) {
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//mo-sky-stones//Sky Stones ICS//ZH-CN',
+    'PRODID:-//mo-sky-stones//Sky Stones ICS//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     `X-WR-CALNAME:${escapeText(name)}`,
-    `X-WR-CALDESC:${escapeText(`光遇国服${TYPE_NAMES[type]}最后一场订阅`)}`,
     'X-WR-TIMEZONE:Asia/Shanghai',
   ];
 
@@ -43,20 +42,8 @@ function eventLines({ date, event }, dtstamp) {
     `DTSTART:${formatUtc(beijingTimeToUtc(date, event.startTime))}`,
     `DTEND:${formatUtc(beijingTimeToUtc(date, event.endTime))}`,
     `SUMMARY:${escapeText(`${typeName} ${event.map} ${event.area}`)}`,
-    `DESCRIPTION:${escapeText([
-      `类型: ${typeName}`,
-      `地点: ${event.map} ${event.area}`,
-      `北京时间: ${event.startTime}-${event.endTime}`,
-      '规则: 当天有红黑石时只取最后一场；最后一场 23 点以后开始则取前一场。',
-    ].join('\n'))}`,
-    `LOCATION:${escapeText(`${event.map} - ${event.area}`)}`,
     'STATUS:CONFIRMED',
     'TRANSP:OPAQUE',
-    'BEGIN:VALARM',
-    'ACTION:DISPLAY',
-    'TRIGGER:-PT15M',
-    `DESCRIPTION:${escapeText(`${typeName}将在 15 分钟后开始`)}`,
-    'END:VALARM',
     'END:VEVENT',
   ];
 }
