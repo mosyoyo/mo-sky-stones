@@ -1,0 +1,6 @@
+# 测试输出
+preview.ics
+preview-red.ics
+preview-black.ics
+node_modules/
+*.log
