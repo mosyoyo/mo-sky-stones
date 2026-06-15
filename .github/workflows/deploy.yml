@@ -1,0 +1,31 @@
+name: 生成并部署 ICS 日历
+
+on:
+  schedule:
+    - cron: '1 16 * * *'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate ICS
+        run: |
+          node -e "const {generateICS}=require('./ics-generator');const fs=require('fs');fs.writeFileSync('red.ics',generateICS('red',60,'red'));fs.writeFileSync('black.ics',generateICS('black',60,'black'));console.log('done');"
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          projectName: sky-stones-ics
+          directory: .
+          branch: main
