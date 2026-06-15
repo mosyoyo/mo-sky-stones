@@ -4,8 +4,7 @@
   "description": "光遇国服红黑石时间表 iCal 日历订阅",
   "private": true,
   "scripts": {
-    "dev": "node -e \"const {generateICS} = require('./ics-generator'); console.log(generateICS(60));\"",
-    "preview": "node -e \"const {generateICS} = require('./ics-generator'); require('fs').writeFileSync('preview.ics', generateICS(60)); console.log('Wrote preview.ics');\"",
+    "preview": "node test.js",
     "test": "node test.js"
   },
   "keywords": ["sky", "children-of-the-light", "ical", "calendar", "ics"],

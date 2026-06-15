@@ -95,7 +95,7 @@ sky-stones-ics/
 node test.js
 ```
 
-输出 `preview-red.ics` 和 `preview-black.ics` 两个文件，可直接导入日历 app 测试。
+输出 `preview-red.ics` 和 `preview-black.ics` 两个本地测试文件，可直接导入日历 app 测试。
 
 ## 📜 数据来源
 

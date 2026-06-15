@@ -1,6 +1,4 @@
-# 测试输出
-preview.ics
-preview-red.ics
-preview-black.ics
+# 本地生成的日历文件
+*.ics
 node_modules/
 *.log

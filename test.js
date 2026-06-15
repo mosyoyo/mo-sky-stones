@@ -44,7 +44,7 @@ for (const e of blackEvents) {
 // 验证每日只 1 个事件
 console.log('');
 console.log('=== 每日事件数验证 ===');
-const dayRegex = /DTSTART;TZID=Asia\/Shanghai:(\d{8})T/;
+const dayRegex = /UID:(\d{8})T/;
 const allEvents = redICS.split('BEGIN:VEVENT').slice(1);
 const dayCount = {};
 for (const e of allEvents) {
@@ -52,6 +52,11 @@ for (const e of allEvents) {
   if (m) dayCount[m[1]] = (dayCount[m[1]] || 0) + 1;
 }
 const days = Object.keys(dayCount);
-const maxPerDay = Math.max(...Object.values(dayCount));
+const maxPerDay = Math.max(0, ...Object.values(dayCount));
 console.log(`共 ${days.length} 个红石日，每日最多 ${maxPerDay} 场（期望 1 场）`);
-console.log(maxPerDay === 1 ? '✅ 验证通过' : '❌ 验证失败');
+if (maxPerDay === 1) {
+  console.log('✅ 验证通过');
+} else {
+  console.log('❌ 验证失败');
+  process.exitCode = 1;
+}
