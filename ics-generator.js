@@ -68,16 +68,28 @@ function generateICS(filterType, days = 30, calName = '光遇') {
       '数据来源: github.com/CikiSyteen/sky-stones (基于游戏内机制)',
     ].join('\n');
 
-    const dtstart = formatICSDateTime(date, event.startTime);
-    const dtend = formatICSDateTime(date, event.endTime);
+    // 转 UTC 时间（iOS/Android 都识识别，更可靠）
+    const [sh, sm] = event.startTime.split(':');
+    const [eh, em] = event.endTime.split(':');
+    const dtStart = new Date(date);
+    dtStart.setHours(parseInt(sh), parseInt(sm), 0, 0);
+    // 北京时间是 UTC+8，减 8 小时得到 UTC
+    const dtStartUTC = new Date(dtStart.getTime() - 8 * 60 * 60 * 1000);
+
+    const dtEnd = new Date(date);
+    dtEnd.setHours(parseInt(eh), parseInt(em), 0, 0);
+    const dtEndUTC = new Date(dtEnd.getTime() - 8 * 60 * 60 * 1000);
+
+    const dtstart = formatICSDateTimeUTC(dtStartUTC);
+    const dtend = formatICSDateTimeUTC(dtEndUTC);
     const uid = `${dtstart}-${event.map}-${event.area}-${event.type}-last@sky-stones-ics`;
 
     lines.push(
       'BEGIN:VEVENT',
       `UID:${uid}`,
       `DTSTAMP:${dtstamp}`,
-      `DTSTART;TZID=Asia/Shanghai:${dtstart}`,
-      `DTEND;TZID=Asia/Shanghai:${dtend}`,
+      `DTSTART:${dtstart}`,
+      `DTEND:${dtend}`,
       `SUMMARY:${escapeICS(summary)}`,
       `DESCRIPTION:${escapeICS(description)}`,
       `LOCATION:${escapeICS(event.map + ' - ' + event.area)}`,
