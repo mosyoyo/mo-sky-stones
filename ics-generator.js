@@ -63,7 +63,6 @@ function generateICS(filterType, days = 30, calName = '光遇') {
       `地图: ${event.map}`,
       `区域: ${event.area}`,
       `时间: ${event.startTime} - ${event.endTime}`,
-      '数据来源: github.com/CikiSyteen/sky-stones',
     ];
     // ICS 行折叠：换行后加一个空格
     const description = descriptionLines
@@ -99,9 +98,10 @@ function generateICS(filterType, days = 30, calName = '光遇') {
       'STATUS:CONFIRMED',
       'TRANSP:OPAQUE',
       'BEGIN:VALARM',
-      'ACTION:DISPLAY',
-      'DESCRIPTION:' + escapeICS(`${typeName}即将开始 - ${event.map}·${event.area}`),
       'TRIGGER:-PT15M',
+      'ACTION:DISPLAY',
+      `DESCRIPTION:${escapeICS(`${typeName}将在 15 分钟后开始`)}`,
+      `X-WR-ALARMUID:${uid}-alarm`,
       'END:VALARM',
       'END:VEVENT'
     );
