@@ -13,7 +13,7 @@
 
 ## Cloudflare Pages
 
-Pages 连接本仓库即可。无需构建命令，无需依赖安装，Functions 会直接响应订阅文件。
+Pages 连接本仓库即可。无需构建命令，无需依赖安装，直接发布根目录里的静态 `.ics` 文件。
 
 ## 本地检查
 
@@ -22,3 +22,9 @@ npm test
 ```
 
 脚本会生成 `preview-red.ics` 和 `preview-black.ics`，并检查 CRLF、UTC 时间和每日唯一事件。
+
+更新静态订阅文件：
+
+```bash
+npm run generate
+```
