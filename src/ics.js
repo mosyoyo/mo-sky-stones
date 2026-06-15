@@ -12,9 +12,12 @@ export function generateCalendar(type = 'red', options = {}) {
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//mo-sky-stones//Sky Stones ICS//EN',
+    `PRODID:-//mo-sky-stones//Sky Stones ${TYPE_NAMES[type]}//ZH-CN`,
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
+    `X-WR-CALNAME:${escapeText(name)}`,
+    `X-WR-CALDESC:${escapeText(`光遇国服${TYPE_NAMES[type]}降落时间表（仅含每日最后一场，含 15 分钟提醒）`)}`,
+    'X-WR-TIMEZONE:Asia/Shanghai',
   ];
 
   for (const item of events) {
@@ -39,9 +42,22 @@ function eventLines({ date, event }, dtstamp) {
     `DTSTAMP:${dtstamp}`,
     `DTSTART:${formatUtc(beijingTimeToUtc(date, event.startTime))}`,
     `DTEND:${formatUtc(beijingTimeToUtc(date, event.endTime))}`,
-    `SUMMARY:${escapeText(`${typeName} ${event.map} ${event.area}`)}`,
+    `SUMMARY:${escapeText(`【${typeName}】${event.map}·${event.area}`)}`,
+    `DESCRIPTION:${escapeText([
+      `类型: ${typeName}`,
+      `地图: ${event.map}`,
+      `区域: ${event.area}`,
+      `时间: ${event.startTime} - ${event.endTime}`,
+    ].join('\n'))}`,
+    `LOCATION:${escapeText(`${event.map}·${event.area}`)}`,
+    `CATEGORIES:游戏,光遇,${typeName}`,
     'STATUS:CONFIRMED',
     'TRANSP:OPAQUE',
+    'BEGIN:VALARM',
+    'ACTION:DISPLAY',
+    `DESCRIPTION:${escapeText(`${typeName}即将开始 - ${event.map}·${event.area}`)}`,
+    'TRIGGER:-PT15M',
+    'END:VALARM',
     'END:VEVENT',
   ];
 }

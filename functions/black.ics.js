@@ -8,7 +8,7 @@ const headers = {
 };
 
 export async function onRequestGet() {
-  const ics = generateCalendar('black', { name: '光遇黑石最后一场' });
+  const ics = generateCalendar('black', { name: '光遇·黑石(最后一场)' });
 
   return new Response(ics, {
     status: 200,
@@ -17,7 +17,7 @@ export async function onRequestGet() {
 }
 
 export async function onRequestHead() {
-  const ics = generateCalendar('black', { name: '光遇黑石最后一场' });
+  const ics = generateCalendar('black', { name: '光遇·黑石(最后一场)' });
   return new Response(null, {
     status: 200,
     headers: {
