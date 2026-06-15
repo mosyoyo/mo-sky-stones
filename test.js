@@ -6,13 +6,13 @@ const fs = require('fs');
 const path = require('path');
 
 // 生成红石
-const redICS = generateICS('red', 60);
+const redICS = generateICS('red', 30);
 const redPath = path.join(__dirname, 'preview-red.ics');
 fs.writeFileSync(redPath, redICS);
 const redCount = (redICS.match(/BEGIN:VEVENT/g) || []).length;
 
 // 生成黑石
-const blackICS = generateICS('black', 60);
+const blackICS = generateICS('black', 30);
 const blackPath = path.join(__dirname, 'preview-black.ics');
 fs.writeFileSync(blackPath, blackICS);
 const blackCount = (blackICS.match(/BEGIN:VEVENT/g) || []).length;

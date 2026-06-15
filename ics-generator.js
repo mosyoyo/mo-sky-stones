@@ -39,7 +39,7 @@ function escapeICS(text) {
  * @param {number} days - 生成未来多少天
  * @param {string} calName - 日历显示名
  */
-function generateICS(filterType, days = 60, calName = '光遇') {
+function generateICS(filterType, days = 30, calName = '光遇') {
   const upcoming = generateLastEvents(filterType, days);
   const now = new Date();
   const dtstamp = formatICSDateTimeUTC(now);
