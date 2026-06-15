@@ -47,6 +47,7 @@ function getEventsOnDate(date) {
 
 /**
  * 获取某日期的"最后一场"红黑石事件
+ * 规则：如果最尾一场开始时间 >= 23:00（太晚），则改用前一场
  * @param {Date} date
  * @returns {{type, map, area, startTime, endTime} | null}
  */
@@ -54,7 +55,13 @@ function getLastEventOnDate(date) {
   const events = getEventsOnDate(date);
   if (events.length === 0) return null;
   // 时间已按时间顺序排列，取最后一个
-  return events[events.length - 1];
+  let last = events[events.length - 1];
+  // 如果太晚（>= 23:00 才开始），改用前一场
+  const [startHH, startMM] = last.startTime.split(':').map(Number);
+  if (startHH >= 23 && events.length >= 2) {
+    last = events[events.length - 2];
+  }
+  return last;
 }
 
 /**
