@@ -48,7 +48,6 @@ function eventLines({ date, event }, dtstamp) {
       `地点: ${event.map} ${event.area}`,
       `北京时间: ${event.startTime}-${event.endTime}`,
       '规则: 当天有红黑石时只取最后一场；最后一场 23 点以后开始则取前一场。',
-      '来源: github.com/CikiSyteen/sky-stones',
     ].join('\n'))}`,
     `LOCATION:${escapeText(`${event.map} - ${event.area}`)}`,
     'STATUS:CONFIRMED',
