@@ -3,7 +3,7 @@ import { generateCalendar } from '../src/ics.js';
 const headers = {
   'Content-Type': 'text/calendar; charset=utf-8',
   'Content-Disposition': 'inline; filename="sky-red.ics"',
-  'Cache-Control': 'public, max-age=300',
+  'Cache-Control': 'no-store',
   'Access-Control-Allow-Origin': '*',
 };
 
@@ -17,7 +17,14 @@ export async function onRequestGet() {
 }
 
 export async function onRequestHead() {
-  return new Response(null, { status: 200, headers });
+  const ics = generateCalendar('red', { name: '光遇红石最后一场' });
+  return new Response(null, {
+    status: 200,
+    headers: {
+      ...headers,
+      'Content-Length': String(new TextEncoder().encode(ics).length),
+    },
+  });
 }
 
 export async function onRequest(context) {

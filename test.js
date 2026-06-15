@@ -17,7 +17,7 @@ fs.writeFileSync(path.join(__dirname, 'preview-black.ics'), black);
 assert.match(red, /^BEGIN:VCALENDAR\r\nVERSION:2.0\r\n/);
 assert.match(red, /DTSTART:\d{8}T\d{6}Z\r\n/);
 assert.doesNotMatch(red + black, /T240000/);
-assert.doesNotMatch(red + black, /DESCRIPTION|LOCATION|VALARM|来源|source|github\.com/i);
+assert.doesNotMatch(red + black, /DESCRIPTION|LOCATION|VALARM|TZID|X-WR-|来源|source|github\.com/i);
 
 const friday = new Date('2026-06-19T00:00:00+08:00');
 assert.equal(lastStoneEventOn(friday, 'red').startTime, '17:08');

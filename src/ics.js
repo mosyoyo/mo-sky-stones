@@ -15,8 +15,6 @@ export function generateCalendar(type = 'red', options = {}) {
     'PRODID:-//mo-sky-stones//Sky Stones ICS//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
-    `X-WR-CALNAME:${escapeText(name)}`,
-    'X-WR-TIMEZONE:Asia/Shanghai',
   ];
 
   for (const item of events) {
