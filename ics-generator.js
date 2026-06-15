@@ -98,10 +98,11 @@ function generateICS(filterType, days = 30, calName = '光遇') {
       'STATUS:CONFIRMED',
       'TRANSP:OPAQUE',
       'BEGIN:VALARM',
-      'TRIGGER:-PT15M',
+      `UID:${uid}-alarm`,
+      `X-WR-ALARMUID:${uid}-alarm`,
+      'TRIGGER;RELATED=START:-PT15M',
       'ACTION:DISPLAY',
       `DESCRIPTION:${escapeICS(`${typeName}将在 15 分钟后开始`)}`,
-      `X-WR-ALARMUID:${uid}-alarm`,
       'END:VALARM',
       'END:VEVENT'
     );
