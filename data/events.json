@@ -25,5 +25,14 @@
     "title": "旅行先祖",
     "start": "2026-06-10T22:00:00.000Z",
     "end": "2026-06-15T04:00:00.000Z"
+  },
+  {
+    "id": "maintenance-6a2692a35616a031f640dc07",
+    "sourceFeedId": "6a2692a35616a031f640dc07",
+    "enabled": true,
+    "type": "maintenance",
+    "title": "《光·遇》维护更新",
+    "start": "2026-06-11T17:00:00.000Z",
+    "end": "2026-06-12T02:00:00.000Z"
   }
 ]
