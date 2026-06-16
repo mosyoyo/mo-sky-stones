@@ -1,9 +1,13 @@
 {
-  "name": "sky-stones-ics",
-  "version": "1.0.0",
-  "description": "光遇国服红黑石时间表 iCal 日历订阅",
+  "name": "mo-sky-stones",
+  "version": "2.0.0",
+  "description": "光遇国服日历订阅（红黑石 + 官方公告活动）",
   "private": true,
   "scripts": {
+    "fetch": "node src/scripts/fetchFeeds.js",
+    "parse": "node src/scripts/parseFeed.js",
+    "build": "node src/scripts/buildEvents.js",
+    "sync": "node src/scripts/fetchFeeds.js && node src/scripts/parseFeed.js && node src/scripts/buildEvents.js",
     "preview": "node test.js",
     "test": "node test.js"
   },
