@@ -33,6 +33,10 @@ function formatBeijingTimeRange(start, end) {
   return `${fmt.format(start)} - ${fmt.format(end)}`;
 }
 
+function uidPart(value) {
+  return String(value || 'event').replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '') || 'event';
+}
+
 /**
  * ICS 文本转义（与 ics-generator.js 的 escapeICS 完全一致）
  */
@@ -136,7 +140,8 @@ export async function onRequestGet(context) {
           const endReminderStart = addMinutes(endDate, -60);
           const endReminderEnd = addMinutes(endReminderStart, 30);
           const safeLabel = label.replace(/\s+/g, '');
-          const baseUid = `${formatICSUTCDate(eventStart)}-${safeLabel}-公告-${ev.type}@sky-stones-ics`;
+          const eventId = uidPart(ev.id);
+          const baseUid = `${formatICSUTCDate(eventStart)}-${safeLabel}-公告-${eventId}@sky-stones-ics`;
 
           const startLines = [
             'BEGIN:VEVENT',
@@ -162,7 +167,7 @@ export async function onRequestGet(context) {
           eventVEVENTS.push(buildLines(startLines));
 
           if (endReminderStart > eventStart) {
-            const endUid = `${formatICSUTCDate(endReminderStart)}-${safeLabel}-结束提醒-${ev.type}@sky-stones-ics`;
+            const endUid = `${formatICSUTCDate(endReminderStart)}-${safeLabel}-结束提醒-${eventId}@sky-stones-ics`;
             const endLines = [
               'BEGIN:VEVENT',
               'UID:' + endUid,
