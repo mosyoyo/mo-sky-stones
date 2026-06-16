@@ -1,28 +1,39 @@
 [
   {
-    "id": "traveling_spirit-6a30cdb3",
-    "enabled": true,
-    "type": "traveling_spirit",
-    "title": "6月18日丨本周旅行先祖即将到临",
-    "start": "2026-06-17T22:00:00.000Z",
-    "end": "2026-06-22T04:00:00.000Z",
-    "sourceFeedId": "6a30cdb3ea7f101c51122693"
-  },
-  {
-    "id": "activity-6a2cc7b5",
+    "id": "activity-6a2692a3",
     "enabled": true,
     "type": "activity",
-    "title": "擂鼓逐光 竞渡云端丨《光·遇》端午节更新内容公告",
+    "title": "《光·遇》6月12日 更新时间公告",
     "start": "2026-06-18T16:00:00.000Z",
-    "end": "2026-07-02T15:59:00.000Z",
-    "sourceFeedId": "6a2cc7b5ea7f101c5108ea3e",
-    "mergedFrom": [
-      "6a2e27b7ef9b336306e6fbcd",
-      "6a2d0e00ef9b336306e43ae2",
-      "6a2a24b3c5bff359d154f2a4",
-      "6a28e1446564803a4e26e0f4",
-      "6a2692a35616a031f640dc07"
-    ]
+    "end": "2026-06-19T15:59:59.000Z",
+    "sourceFeedId": "6a2692a35616a031f640dc07"
+  },
+  {
+    "id": "traveling_spirit-6a278fc3",
+    "enabled": true,
+    "type": "traveling_spirit",
+    "title": "6月11日丨本周旅行先祖即将到临",
+    "start": "2026-06-10T22:00:00.000Z",
+    "end": "2026-06-15T04:00:00.000Z",
+    "sourceFeedId": "6a278fc3934e1047685a17d7"
+  },
+  {
+    "id": "activity-6a28e144",
+    "enabled": true,
+    "type": "activity",
+    "title": "一起过与“粽”不同的端午吧！",
+    "start": "2026-06-18T16:00:00.000Z",
+    "end": "2026-06-19T15:59:59.000Z",
+    "sourceFeedId": "6a28e1446564803a4e26e0f4"
+  },
+  {
+    "id": "activity-6a2a24b3",
+    "enabled": true,
+    "type": "activity",
+    "title": "擂鼓声声 龙舟竞速丨《光·遇》端午节龙舟赛规则说明",
+    "start": "2026-06-18T16:00:00.000Z",
+    "end": "2026-06-19T15:59:59.000Z",
+    "sourceFeedId": "6a2a24b3c5bff359d154f2a4"
   },
   {
     "id": "traveling_spirit-6a2a32c3",
@@ -31,207 +42,42 @@
     "title": "6月11日丨本周旅行先祖到临提醒",
     "start": "2026-06-10T22:00:00.000Z",
     "end": "2026-06-15T04:00:00.000Z",
-    "sourceFeedId": "6a2a32c3ea7f101c510235bb",
-    "mergedFrom": [
-      "6a278fc3934e1047685a17d7"
-    ]
+    "sourceFeedId": "6a2a32c3ea7f101c510235bb"
   },
   {
-    "id": "activity-6a24ecc3",
+    "id": "activity-6a2cc7b5",
     "enabled": true,
     "type": "activity",
-    "title": "星光同游 不“七”而遇 |《光·遇》七周年线下活动情报公开",
-    "start": "2026-07-03T16:00:00.000Z",
-    "end": "2026-07-12T15:59:00.000Z",
-    "sourceFeedId": "6a24ecc3cfd026003e38eb98"
+    "title": "擂鼓逐光 竞渡云端丨《光·遇》端午节更新内容公告",
+    "start": "2026-06-18T16:00:00.000Z",
+    "end": "2026-07-02T15:59:00.000Z",
+    "sourceFeedId": "6a2cc7b5ea7f101c5108ea3e"
   },
   {
-    "id": "traveling_spirit-6a151ac5",
-    "enabled": true,
-    "type": "traveling_spirit",
-    "title": "5月28日丨本周旅行先祖即将到临",
-    "start": "2026-05-27T22:00:00.000Z",
-    "end": "2026-06-01T04:00:00.000Z",
-    "sourceFeedId": "6a151ac5a6ee023e71c8d160",
-    "mergedFrom": [
-      "6a17bdc4634aee530f4f82d9"
-    ]
-  },
-  {
-    "id": "activity-69df0d47",
+    "id": "activity-6a2d0e00",
     "enabled": true,
     "type": "activity",
-    "title": "让守护真实发生丨《光·遇》自然日公益艺术循环车六城巡展即将启程",
-    "start": "2026-04-17T16:00:00.000Z",
-    "end": "2026-06-05T15:59:00.000Z",
-    "sourceFeedId": "69df0d47d0179a447686aa16",
-    "mergedFrom": [
-      "6a16c0a0a7b5660ce7121a32",
-      "6a15ae9730d18731c00ab74e",
-      "6a13c9536793b91fb5ea6bf1",
-      "6a117aa01fbbc626a55bc12b",
-      "6a11270d1c8e94302d8e6b6a",
-      "6a0fd4c48e7ca824573bbf23",
-      "6a0da948c416114487f9e5ea",
-      "6a0ae326adf0032d57f199be",
-      "6a093d40c6eca156634c72e2",
-      "6a0841e6c9996359496041c4",
-      "6a07ed26b44ac34100f378c5",
-      "6a07cfa3c6cdbd1d04faddcc",
-      "6a069a4703d5800965436ab2",
-      "6a059d20b44ac34100efe523",
-      "6a0422cbb6af3d1b66173c04",
-      "6a03f85a569d030f289c9a39",
-      "6a014633fdb21d641bf353ae",
-      "6a0057208b710733aafadf65",
-      "6a0002c70e2f5154d239233b",
-      "69feb1416e6ff17722b3c4c1",
-      "69fb118494b57005cec7bffb",
-      "69f1dee0fb6b2f7b6027714a"
-    ]
+    "title": "端午龙舟赛在即！谁会是最后的赢家？👀",
+    "start": "2026-06-18T16:00:00.000Z",
+    "end": "2026-06-19T15:59:59.000Z",
+    "sourceFeedId": "6a2d0e00ef9b336306e43ae2"
   },
   {
-    "id": "season-6a0daa7c",
-    "enabled": true,
-    "type": "season",
-    "title": "暑期狂欢持续|《光·遇》七周年惊喜爆料",
-    "start": "2026-05-02T16:00:00.000Z",
-    "end": "2026-05-31T15:59:00.000Z",
-    "sourceFeedId": "6a0daa7c1c8e94302d879f07",
-    "mergedFrom": [
-      "69e84854f89d686a581c905b"
-    ]
-  },
-  {
-    "id": "traveling_spirit-6a0548c4",
-    "enabled": true,
-    "type": "traveling_spirit",
-    "title": "5月14日丨本周旅行先祖即将到临",
-    "start": "2026-05-13T22:00:00.000Z",
-    "end": "2026-05-18T04:00:00.000Z",
-    "sourceFeedId": "6a0548c4250ef4560747a077",
-    "mergedFrom": [
-      "6a01544361400c66ea73c2e5"
-    ]
-  },
-  {
-    "id": "traveling_spirit-69f2d3c3",
-    "enabled": true,
-    "type": "traveling_spirit",
-    "title": "4月30日丨本周旅行先祖到临提醒",
-    "start": "2026-04-29T22:00:00.000Z",
-    "end": "2026-05-04T04:00:00.000Z",
-    "sourceFeedId": "69f2d3c3c1a4bd21dbe09ddf",
-    "mergedFrom": [
-      "69f030c3a5158a19387dcc02"
-    ]
-  },
-  {
-    "id": "activity-69e6f640",
+    "id": "activity-6a2e27b7",
     "enabled": true,
     "type": "activity",
-    "title": "跟随节拍，和爱哥一起拍出全景大片吧！",
-    "start": "2026-04-30T16:00:00.000Z",
-    "end": "2026-05-01T15:59:59.000Z",
-    "sourceFeedId": "69e6f640fdfff55ed38913a1"
+    "title": "王国特刊丨“粽”享欢乐端午！",
+    "start": "2026-06-18T16:00:00.000Z",
+    "end": "2026-06-19T15:59:59.000Z",
+    "sourceFeedId": "6a2e27b7ef9b336306e6fbcd"
   },
   {
-    "id": "maintenance-69e302f4",
-    "enabled": true,
-    "type": "maintenance",
-    "title": "云端相聚，狂欢开场丨《光·遇》奇妙之旅：狂欢季更新内容公告",
-    "start": "2026-04-22T16:00:00.000Z",
-    "end": "2026-07-08T15:59:00.000Z",
-    "sourceFeedId": "69e302f48d4c6a771f1d338e",
-    "mergedFrom": [
-      "69e356232be1015603d87a6e"
-    ]
-  },
-  {
-    "id": "traveling_spirit-69e09702",
+    "id": "traveling_spirit-6a30cdb3",
     "enabled": true,
     "type": "traveling_spirit",
-    "title": "4月16日丨本周旅行先祖到临提醒",
-    "start": "2026-04-15T22:00:00.000Z",
-    "end": "2026-04-20T04:00:00.000Z",
-    "sourceFeedId": "69e09702f89d686a580fbb9e",
-    "mergedFrom": [
-      "69ddbbc579904e31ef51e8eb"
-    ]
-  },
-  {
-    "id": "activity-69db18c4",
-    "enabled": true,
-    "type": "activity",
-    "title": "拾瓶净流 守护海洋丨《光·遇》自然日更新内容公告",
-    "start": "2026-04-15T16:00:00.000Z",
-    "end": "2026-04-29T15:59:00.000Z",
-    "sourceFeedId": "69db18c4009b4420db483362",
-    "mergedFrom": [
-      "69df3a284a003b44691e080d",
-      "69dc6a4004203d38f3a8b760",
-      "69d9b9333390632b0292211c"
-    ]
-  },
-  {
-    "id": "traveling_spirit-69c8ab5d",
-    "enabled": true,
-    "type": "traveling_spirit",
-    "title": "4月4日 《光·遇》旅行先祖集结回归",
-    "start": "2026-04-03T22:00:00.000Z",
-    "end": "2026-04-17T15:59:00.000Z",
-    "sourceFeedId": "69c8ab5db20c115c04e51a7f",
-    "mergedFrom": [
-      "69d08cc4f229e1648b27e7eb",
-      "69cde9c35ebb9906129b9038",
-      "69cb46c32289db2479ead581"
-    ]
-  },
-  {
-    "id": "season-69ce06dd",
-    "enabled": true,
-    "type": "season",
-    "title": "循光织谜 星轨映心｜《光·遇》织光季运营活动公告",
-    "start": "2026-04-02T16:00:00.000Z",
-    "end": "2026-04-09T15:59:00.000Z",
-    "sourceFeedId": "69ce06dd0aaed2679327d5c7"
-  },
-  {
-    "id": "activity-69aba2c1",
-    "enabled": true,
-    "type": "activity",
-    "title": "雪径飞驰 共赴荣光 ｜《光·遇》冬日运动会同人分享",
-    "start": "2026-02-05T16:00:00.000Z",
-    "end": "2026-03-31T15:59:00.000Z",
-    "sourceFeedId": "69aba2c1e12fe47a5de7c5a4",
-    "mergedFrom": [
-      "69c260a05b02536f2818a922",
-      "69bd07d55ad4c6717acdb0cc",
-      "69bcb8342baabc2d7e70dadb",
-      "69bcabd8e1a78b2116ebb720",
-      "69ba2342f62f837f9385d557",
-      "69b931290f5cbd0b0b4de4a9",
-      "69b4dd4737718f13da30cba4",
-      "69b38d15ac3aca6c22191238",
-      "69b38034f7b0c557a60e5fe3",
-      "69b23ab681a2966c6c472ffa",
-      "69afcf97f7238418f788fcc8",
-      "69ae9a216e5b975930040d50",
-      "69acf441f5035e58d350a49e",
-      "69aa445dd4a4a74f68ada970"
-    ]
-  },
-  {
-    "id": "traveling_spirit-69bb74c7",
-    "enabled": true,
-    "type": "traveling_spirit",
-    "title": "3月19日丨本周旅行先祖到临提醒",
-    "start": "2026-03-18T22:00:00.000Z",
-    "end": "2026-03-23T04:00:00.000Z",
-    "sourceFeedId": "69bb74c72d66384359b93dca",
-    "mergedFrom": [
-      "69b8d1caa3b6a00846172a65",
-      "69b62ec5dd3b677ce8eadc9e"
-    ]
+    "title": "6月18日丨本周旅行先祖即将到临",
+    "start": "2026-06-17T22:00:00.000Z",
+    "end": "2026-06-22T04:00:00.000Z",
+    "sourceFeedId": "6a30cdb3ea7f101c51122693"
   }
 ]

@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Fetch feeds (90 days)
-        run: node src/scripts/fetchFeeds.js 90
+      - name: Fetch feeds
+        run: node src/scripts/fetchFeeds.js
 
       - name: Parse feeds
         run: node src/scripts/parseFeed.js
