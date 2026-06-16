@@ -7,5 +7,23 @@
     "title": "6月18日丨本周旅行先祖即将到临",
     "start": "2026-06-17T22:00:00.000Z",
     "end": "2026-06-22T04:00:00.000Z"
+  },
+  {
+    "id": "activity-6a2cc7b5ea7f101c5108ea3e",
+    "sourceFeedId": "6a2cc7b5ea7f101c5108ea3e",
+    "enabled": true,
+    "type": "activity",
+    "title": "擂鼓逐光 竞渡云端丨《光·遇》端午节更新内容公告#光遇# #光遇端午节# #光遇也要划龙舟#",
+    "start": "2026-06-18T16:00:00.000Z",
+    "end": "2026-07-02T15:59:00.000Z"
+  },
+  {
+    "id": "traveling_spirit-6a2a32c3ea7f101c510235bb",
+    "sourceFeedId": "6a2a32c3ea7f101c510235bb",
+    "enabled": true,
+    "type": "traveling_spirit",
+    "title": "6月11日丨本周旅行先祖到临提醒#光遇# #光遇端午节# #光遇也要划龙舟#勤劳的先祖在今天",
+    "start": "2026-06-10T22:00:00.000Z",
+    "end": "2026-06-15T04:00:00.000Z"
   }
 ]
