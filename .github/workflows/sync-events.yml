@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 */6 * * *"  # 每6小时
   workflow_dispatch:         # 手动触发
+    inputs:
+      days:
+        description: "抓取天数（默认1天，补全历史用90）"
+        required: false
+        default: "1"
 
 jobs:
   sync:
@@ -18,8 +23,8 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Fetch feeds (90 days)
-        run: node src/scripts/fetchFeeds.js 90
+      - name: Fetch feeds
+        run: node src/scripts/fetchFeeds.js ${{ github.event.inputs.days || '1' }}
 
       - name: Parse feeds
         run: node src/scripts/parseFeed.js
@@ -31,6 +36,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ feeds.json calendar.ics events.ics
+          git add data/ calendar.ics events.ics
           git diff --cached --quiet || git commit -m "chore: auto sync $(date +'%Y-%m-%d %H:%M')"
           git push
