@@ -65,6 +65,10 @@ function validDate(value) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+function shouldIncludeEvent(endDate) {
+  return endDate >= new Date();
+}
+
 function addMinutes(date, minutes) {
   return new Date(date.getTime() + minutes * 60 * 1000);
 }
@@ -112,6 +116,7 @@ function buildEventVEVENTS() {
     const startDate = validDate(ev.start);
     const endDate = validDate(ev.end);
     if (!startDate || !endDate || endDate <= startDate) continue;
+    if (!shouldIncludeEvent(endDate)) continue;
 
     // 清理标题中的话题标签和多余换行
     const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();

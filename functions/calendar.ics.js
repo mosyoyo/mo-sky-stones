@@ -85,6 +85,10 @@ function validDate(value) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+function shouldIncludeEvent(endDate) {
+  return endDate >= new Date();
+}
+
 function extractVEVENTS(icsStr) {
   const events = [];
   const blocks = icsStr.split('BEGIN:VEVENT');
@@ -121,6 +125,7 @@ export async function onRequestGet(context) {
           const startDate = validDate(ev.start);
           const endDate = validDate(ev.end);
           if (!startDate || !endDate || endDate <= startDate) continue;
+          if (!shouldIncludeEvent(endDate)) continue;
 
           const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
