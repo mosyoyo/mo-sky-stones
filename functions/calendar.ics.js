@@ -13,6 +13,14 @@ const TYPE_LABELS = {
   other: '其他',
 };
 
+function esc(text) {
+  return String(text)
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\n/g, '\\n');
+}
+
 /**
  * ISO 时间 → UTC ICS 格式 (20260618T060000Z)
  * 与 ics-generator.js 的 formatICSDateTimeUTC 一致
@@ -20,17 +28,6 @@ const TYPE_LABELS = {
 function toICSUTC(isoStr) {
   const d = new Date(isoStr);
   return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-}
-
-/**
- * ICS 文本转义（与 ics-generator.js 的 escapeICS 完全一致）
- */
-function escapeICS(text) {
-  return String(text)
-    .replace(/\\/g, '\\\\')
-    .replace(/;/g, '\\;')
-    .replace(/,/g, '\\,')
-    .replace(/\n/g, '\\n');
 }
 
 function extractVEVENTS(icsStr) {
@@ -71,15 +68,12 @@ export async function onRequestGet(context) {
           const dtend = toICSUTC(ev.end);
           const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
-          // 描述：与红石 ICS 完全一致的行折叠格式
-          // 先转义每行，再用 CRLF + 空格（行折叠）连接
-          const descriptionLines = [
+          // 描述：与红石 ICS 格式一致，用 \n 分隔多行
+          const descLines = [
             '类型: ' + label,
             '标题: ' + cleanTitle,
           ];
-          const description = descriptionLines
-            .map(line => escapeICS(line))
-            .join('\r\n ');  // \r\n + 空格 = ICS 行折叠
+          const description = descLines.map(l => esc(l)).join('\\n');
 
           const lines = [
             'BEGIN:VEVENT',
@@ -87,18 +81,16 @@ export async function onRequestGet(context) {
             'DTSTAMP:' + dtstamp,
             'DTSTART:' + dtstart,
             'DTEND:' + dtend,
-            'SUMMARY:' + escapeICS('【' + label + '】' + cleanTitle),
+            'SUMMARY:' + esc('【' + label + '】' + cleanTitle),
             'DESCRIPTION:' + description,
-            'LOCATION:' + escapeICS(label),
-            'CATEGORIES:游戏,光遇,' + label,
             'STATUS:CONFIRMED',
             'TRANSP:OPAQUE',
             'BEGIN:VALARM',
             'UID:' + uid + '-alarm',
             'X-WR-ALARMUID:' + uid + '-alarm',
-            'TRIGGER;RELATED=START:-PT10M',
+            'TRIGGER;RELATED=START:-PT15M',
             'ACTION:DISPLAY',
-            'DESCRIPTION:' + escapeICS(label + '将在 10 分钟后开始'),
+            'DESCRIPTION:' + esc(label + '将在 15 分钟后开始'),
             'END:VALARM',
             'END:VEVENT',
           ];
