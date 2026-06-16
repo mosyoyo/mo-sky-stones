@@ -5,6 +5,7 @@ const LIST_URL = 'https://inf.ds.163.com/v1/web/feed/basic/getSomeOneFeeds';
 const DETAIL_URL = 'https://inf.ds.163.com/v1/web/feed/basic/facade';
 const FEED_TYPES = '1,2,3,4,6,7,10,11';
 const TARGET_COUNT = 100;
+const PAGE_SIZE = 100;
 
 function collectFeeds(payload) {
   const found = [];
@@ -86,12 +87,22 @@ async function main() {
     url.searchParams.set('feedTypes', FEED_TYPES);
     url.searchParams.set('someOneUid', OFFICIAL_UID);
     url.searchParams.set('cursor', String(cursor));
+    url.searchParams.set('pageSize', String(PAGE_SIZE));
+    url.searchParams.set('limit', String(PAGE_SIZE));
+    url.searchParams.set('size', String(PAGE_SIZE));
+    url.searchParams.set('count', String(PAGE_SIZE));
     const payload = await fetchJSON(url);
     const batch = collectFeeds(payload);
     for (const item of batch) list.push(item);
     const typed = collectByType(payload);
     for (const item of typed) list.push(item);
-    const nextCursor = payload?.result?.nextCursor ?? payload?.result?.cursor ?? payload?.cursor ?? payload?.data?.cursor;
+    const nextCursor = payload?.result?.nextCursor
+      ?? payload?.result?.cursor
+      ?? payload?.cursor
+      ?? payload?.data?.cursor
+      ?? payload?.data?.nextCursor
+      ?? payload?.result?.nextPageCursor
+      ?? payload?.nextPageCursor;
     if (nextCursor == null || String(nextCursor) === String(cursor)) break;
     cursor = nextCursor;
     page++;

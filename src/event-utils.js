@@ -312,46 +312,33 @@ function buildReminderEvents(events, options = {}) {
       continue;
     }
 
-    if (event.type === 'traveling_spirit' && duration <= 5) {
-      blocks.push(createTimedEvent({
-        uid: `${id}-spirit-range@sky-stones-ics`,
-        dtstamp,
-        start,
-        end,
-        summary: `【${label}】${title}`,
-        description: desc,
-        location: label,
-        category: label,
-        alarm: { trigger: '-PT10M', description: `${label}将在 10 分钟后开始` },
-      }));
-    } else if (event.type !== 'season') {
-      blocks.push(createTimedEvent({
-        uid: `${id}-start@sky-stones-ics`,
-        dtstamp,
-        start,
-        end: addMinutes(start, 60),
-        summary: `【${label}】${title}`,
-        description: desc,
-        location: label,
-        category: label,
-        alarm: { trigger: '-PT10M', description: `${label}将在 10 分钟后开始` },
-      }));
-    }
+    const mainAlarm = event.type === 'season'
+      ? { trigger: '-P1D', description: `${label}明天就要开始了` }
+      : { trigger: '-PT10M', description: `${label}将在 10 分钟后开始` };
 
-    const endOffset = event.type === 'traveling_spirit' ? 120 : 24 * 60;
-    const reminderStart = addMinutes(end, -endOffset);
-    if (reminderStart > start) {
-      blocks.push(createTimedEvent({
-        uid: `${id}-end-reminder@sky-stones-ics`,
-        dtstamp,
-        start: reminderStart,
-        end: addMinutes(reminderStart, 30),
-        summary: event.type === 'traveling_spirit' ? '旅行先祖即将离开' : `【${label}】即将结束`,
-        description: `${title}\n结束时间: ${beijingText(end)}`,
-        location: label,
-        category: label,
-      }));
-    }
+    blocks.push(createTimedEvent({
+      uid: `${id}-range@sky-stones-ics`,
+      dtstamp,
+      start,
+      end,
+      summary: `【${label}】${title}`,
+      description: desc,
+      location: label,
+      category: label,
+      alarm: mainAlarm,
+    }));
+
+    const endReminderTitle = event.type === 'traveling_spirit' ? '旅行先祖即将离开' : `【${label}】即将结束`;
+    blocks.push(createTimedEvent({
+      uid: `${id}-end-reminder@sky-stones-ics`,
+      dtstamp,
+      start: end,
+      end: addMinutes(end, 30),
+      summary: endReminderTitle,
+      description: `${title}\n结束时间: ${beijingText(end)}`,
+      location: label,
+      category: label,
+    }));
   }
 
   return blocks;

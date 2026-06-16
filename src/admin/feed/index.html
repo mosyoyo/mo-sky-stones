@@ -14,14 +14,19 @@
       <a href="/admin/events/">事件</a>
       <a href="/admin/sync/">同步</a>
     </nav>
-    <div class="shell">
-      <aside class="sidebar">
+    <header class="hero">
+      <div>
         <h1>公告审核</h1>
         <p class="muted">先看分类，再改标题和时间，最后统一提交。</p>
-        <div class="stack">
-          <button class="navbtn active" data-panel="review">审核</button>
-          <button class="navbtn" data-panel="preview">预览</button>
-        </div>
+      </div>
+      <div class="toolbar">
+        <span id="pendingCount" class="muted">暂无待提交改动</span>
+        <button id="commit" disabled>统一提交</button>
+      </div>
+    </header>
+    <div class="shell">
+      <aside class="sidebar">
+        <h2>筛选</h2>
         <div class="filters">
           <label class="chip">
             <span>类型</span>
@@ -46,15 +51,12 @@
           </label>
           <label class="pill"><input id="hideOther" type="checkbox" checked>隐藏其他</label>
         </div>
-        <div class="toolbar shell-toolbar">
-          <span id="pendingCount" class="muted">暂无待提交改动</span>
-          <button id="commit" disabled>统一提交</button>
-        </div>
+        <p class="muted">每条公告都可以单独改标题、类型和时间，右侧会实时预览。</p>
       </aside>
       <section class="workspace">
         <div id="preview" class="preview-card">
           <h2>事件预览</h2>
-          <p class="muted">选中一条公告后，会在这里显示清洗后的标题和时间。</p>
+          <p class="muted">选中一条公告后，这里会显示清洗结果。</p>
           <div id="previewEmpty" class="empty">还没选中公告</div>
           <div id="previewBody" hidden>
             <div class="preview-title" id="previewTitle"></div>
@@ -78,7 +80,7 @@
     const formatClock = value => value ? new Date(value).toLocaleTimeString('zh-CN', { timeZone: tz, hour12: false, hour: '2-digit', minute: '2-digit' }) : '';
     const formatTime = value => value ? `${formatDate(value)} ${formatClock(value)}` : '未识别';
     const splitLocal = value => {
-      if (!value) return '';
+      if (!value) return { date: '', time: '' };
       const date = new Date(value);
       const parts = new Intl.DateTimeFormat('en-US', {
         timeZone: tz,
@@ -98,15 +100,7 @@
       const [hour, minute] = timePart.split(':').map(Number);
       return new Date(Date.UTC(year, month - 1, day, hour - 8, minute || 0, 0)).toISOString();
     };
-    const toLocalInput = value => {
-      const out = splitLocal(value);
-      return out ? `${out.date}T${out.time}` : '';
-    };
-    const splitDraft = value => {
-      const local = toLocalInput(value);
-      const [date = '', time = ''] = local.split('T');
-      return { date, time };
-    };
+    const splitDraft = value => splitLocal(value);
     async function load() {
       const box = document.querySelector('#list');
       box.innerHTML = '<p class="muted">正在读取公告...</p>';
@@ -127,10 +121,6 @@
       document.querySelector('#typeFilter').onchange = render;
       document.querySelector('#statusFilter').onchange = render;
       document.querySelector('#hideOther').onchange = render;
-      document.querySelectorAll('[data-panel]').forEach(btn => btn.onclick = () => {
-        document.querySelectorAll('[data-panel]').forEach(item => item.classList.toggle('active', item === btn));
-        document.querySelector('#preview').style.display = btn.dataset.panel === 'preview' ? 'block' : 'block';
-      });
     }
     function filteredFeeds() {
       const typeFilter = document.querySelector('#typeFilter').value;
@@ -148,45 +138,64 @@
       if (!visible.length) {
         document.querySelector('#list').innerHTML = '<section><strong>没有符合条件的公告</strong><p>换个筛选条件试试。</p></section>';
         renderPreview(null);
+        updateToolbar();
         return;
       }
       const current = visible.find(feed => feed.id === activeId) || visible[0];
       activeId = current.id;
       renderPreview(current);
-      document.querySelector('#list').innerHTML = visible.map(feed => `
-        <section class="feed-item ${feed.id === activeId ? 'selected' : ''}" data-feed="${h(feed.id)}" data-type="${h(feed.autoType)}" data-status="${h(feed.status)}">
-          <div class="top"><strong>${h(feed.calendarTitle || feed.title || feed.id)}</strong><span>${h(feed.status)}</span></div>
-          <p>${new Date(feed.createTime || Date.now()).toLocaleString('zh-CN', { hour12: false })}</p>
-          <p class="meta">自动识别：${h(typeNames[feed.autoType] || feed.autoType || '未知')} · ${feed.parsed ? '已识别时间' : '未识别时间'}</p>
-          <div class="grid">
-            <label>日历标题<input data-field="title" value="${h(feed.calendarTitle || feed.title || '')}"></label>
-            <label>类型<select data-field="type">${types.map(type => `<option value="${type}" ${feed.autoType === type ? 'selected' : ''}>${typeNames[type]}</option>`).join('')}</select></label>
-            <div class="datepair">
-              <label>开始日期<input type="date" data-field="start-date" value="${h(splitDraft(feed.parsedResult?.start || '').date)}"></label>
-              <label>开始时间<input type="time" data-field="start-time" value="${h(splitDraft(feed.parsedResult?.start || '').time)}"></label>
+      document.querySelector('#list').innerHTML = visible.map(feed => {
+        const draft = drafts.get(feed.id) || {};
+        const statusText = draft.status || feed.status;
+        return `
+        <section class="feed-item ${feed.id === activeId ? 'selected' : ''}" data-feed="${h(feed.id)}" data-type="${h(feed.autoType)}" data-status="${h(statusText)}">
+          <div class="top">
+            <div>
+              <strong>${h(draft.title || feed.calendarTitle || feed.title || feed.id)}</strong>
+              <div class="meta">${new Date(feed.createTime || Date.now()).toLocaleString('zh-CN', { hour12: false })}</div>
             </div>
-            <div class="datepair">
-              <label>结束日期<input type="date" data-field="end-date" value="${h(splitDraft(feed.parsedResult?.end || '').date)}"></label>
-              <label>结束时间<input type="time" data-field="end-time" value="${h(splitDraft(feed.parsedResult?.end || '').time)}"></label>
+            <span class="status ${h(statusText)}">${h(statusText)}</span>
+          </div>
+          <div class="row" style="margin-top:12px">
+            <span class="tag ${h(feed.autoType)}">${h(typeNames[feed.autoType] || feed.autoType || '未知')}</span>
+            <span class="tag">${feed.parsed ? '已识别时间' : '未识别时间'}</span>
+          </div>
+          <div class="grid">
+            <label class="field">
+              <span>日历标题</span>
+              <input data-field="title" value="${h(draft.title ?? feed.calendarTitle ?? feed.title ?? '')}">
+            </label>
+            <label class="field">
+              <span>类型</span>
+              <select data-field="type">${types.map(type => `<option value="${type}" ${(draft.type ?? feed.autoType) === type ? 'selected' : ''}>${typeNames[type]}</option>`).join('')}</select>
+            </label>
+            <div class="date-card">
+              <span class="field-label">开始时间</span>
+              <div class="date-grid">
+                <input type="date" data-field="start-date" value="${h(splitDraft(draft.start || feed.parsedResult?.start || '').date)}">
+                <input type="time" data-field="start-time" value="${h(splitDraft(draft.start || feed.parsedResult?.start || '').time)}">
+              </div>
+            </div>
+            <div class="date-card">
+              <span class="field-label">结束时间</span>
+              <div class="date-grid">
+                <input type="date" data-field="end-date" value="${h(splitDraft(draft.end || feed.parsedResult?.end || '').date)}">
+                <input type="time" data-field="end-time" value="${h(splitDraft(draft.end || feed.parsedResult?.end || '').time)}">
+              </div>
             </div>
           </div>
           <p class="muted">解析时间：${h(formatTime(feed.parsedResult?.start))} - ${h(formatTime(feed.parsedResult?.end))}</p>
-          <details><summary>原文</summary><pre>${h(feed.content || '')}</pre></details>
+          <details>
+            <summary>原文</summary>
+            <pre>${h(feed.content || '')}</pre>
+          </details>
           <div class="row">
             <button data-action="approved" data-id="${feed.id}">标记批准</button>
             <button class="ghost" data-action="ignored" data-id="${feed.id}">标记忽略</button>
           </div>
-        </section>`).join('');
-      document.querySelectorAll('button[data-action]').forEach(btn => btn.onclick = () => {
-        activeId = btn.dataset.id;
-        render();
-        mark(btn);
-      });
-      document.querySelectorAll('.feed-item').forEach(item => item.onclick = event => {
-        if (event.target.closest('input,select,button,details,summary,textarea')) return;
-        activeId = item.dataset.feed;
-        render();
-      });
+        </section>`;
+      }).join('');
+      bindCardEvents();
       updateToolbar();
     }
     function renderPreview(feed) {
@@ -197,36 +206,64 @@
         body.hidden = true;
         return;
       }
-      const title = feed.calendarTitle || feed.title || feed.id;
-      const start = feed.parsedResult?.start;
-      const end = feed.parsedResult?.end;
+      const draft = drafts.get(feed.id) || {};
+      const title = draft.title || feed.calendarTitle || feed.title || feed.id;
+      const start = draft.start || feed.parsedResult?.start;
+      const end = draft.end || feed.parsedResult?.end;
       empty.hidden = true;
       body.hidden = false;
       document.querySelector('#previewTitle').textContent = title;
-      document.querySelector('#previewMeta').textContent = `${typeNames[feed.autoType] || feed.autoType} · ${formatTime(start)} — ${formatTime(end)}`;
+      document.querySelector('#previewMeta').textContent = `${typeNames[draft.type || feed.autoType] || draft.type || feed.autoType} · ${formatTime(start)} — ${formatTime(end)}`;
       document.querySelector('#previewDesc').textContent = feed.content || '';
     }
-    function readDraft(btn) {
-      const feedId = btn.dataset.id;
-      const status = btn.dataset.action;
-      const section = btn.closest('section');
-      const value = field => section?.querySelector(`[data-field="${field}"]`)?.value.trim();
-      const start = localToUTC(value('start-date'), value('start-time'));
-      const end = localToUTC(value('end-date'), value('end-time'));
-      return { feedId, status, title: value('title'), type: value('type'), start, end };
+    function readDraft(section) {
+      const field = name => section.querySelector(`[data-field="${name}"]`)?.value.trim();
+      return {
+        title: field('title'),
+        type: field('type'),
+        start: localToUTC(field('start-date'), field('start-time')),
+        end: localToUTC(field('end-date'), field('end-time')),
+      };
+    }
+    function syncDraft(feedId, section) {
+      const feed = feeds.find(item => item.id === feedId);
+      if (!feed || !section) return;
+      const prev = drafts.get(feedId) || {};
+      const next = { ...prev, feedId, ...readDraft(section) };
+      drafts.set(feedId, next);
+      renderPreview(feed);
+      updateToolbar();
+    }
+    function bindCardEvents() {
+      document.querySelectorAll('.feed-item').forEach(section => {
+        const feedId = section.dataset.feed;
+        section.onclick = event => {
+          if (event.target.closest('input,select,button,details,summary,textarea')) return;
+          activeId = feedId;
+          render();
+        };
+        section.querySelectorAll('[data-field]').forEach(el => {
+          el.oninput = () => {
+            syncDraft(feedId, section);
+            section.dataset.pending = drafts.get(feedId)?.status || '';
+          };
+        });
+      });
+      document.querySelectorAll('button[data-action]').forEach(btn => btn.onclick = () => {
+        const feedId = btn.dataset.id;
+        activeId = feedId;
+        const section = btn.closest('section');
+        const next = { ...(drafts.get(feedId) || {}), feedId, ...readDraft(section), status: btn.dataset.action };
+        drafts.set(feedId, next);
+        render();
+        const currentSection = document.querySelector(`.feed-item[data-feed="${CSS.escape(feedId)}"]`);
+        if (currentSection) currentSection.dataset.pending = btn.dataset.action;
+      });
     }
     function updateToolbar() {
       const count = drafts.size;
       document.querySelector('#pendingCount').textContent = count ? `待提交 ${count} 条改动` : '暂无待提交改动';
       document.querySelector('#commit').disabled = count === 0;
-    }
-    function mark(btn) {
-      const item = readDraft(btn);
-      drafts.set(item.feedId, item);
-      const section = btn.closest('section');
-      section.dataset.pending = item.status;
-      section.querySelector('.top span').textContent = item.status === 'approved' ? '待提交: 批准' : '待提交: 忽略';
-      updateToolbar();
     }
     async function commitDrafts() {
       if (!drafts.size) return;
