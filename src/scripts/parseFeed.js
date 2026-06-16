@@ -1,9 +1,10 @@
-const { detectType, extractDateRange, uidPart } = require('../event-utils');
+const { detectType, extractDateRange, normalizeFeed, uidPart } = require('../event-utils');
 const { appendSyncLog, readJSON, writeJSON } = require('./common');
 
 function parseFeed(feed) {
   const type = detectType(feed.title, feed.content);
-  const range = extractDateRange(feed.title, feed.content);
+  const baseTime = Number(feed.createTime || 0) > 0 ? new Date(Number(feed.createTime)) : new Date();
+  const range = extractDateRange(feed.title, feed.content, baseTime);
   return {
     type,
     start: range ? range.start : '',
@@ -30,6 +31,11 @@ function main() {
   let parsedCount = 0;
 
   for (const feed of feeds) {
+    if (feed.raw) {
+      const normalized = normalizeFeed(feed.raw);
+      feed.title = normalized.title;
+      feed.content = normalized.content;
+    }
     const parsed = parseFeed(feed);
     feed.autoType = parsed.type;
     feed.parsed = Boolean(parsed.start && parsed.end);

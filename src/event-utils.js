@@ -105,6 +105,18 @@ function cleanText(text = '') {
     .trim();
 }
 
+function parseContentPayload(value) {
+  if (!value || typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  if (!trimmed.startsWith('{')) return null;
+  try {
+    const parsed = JSON.parse(trimmed);
+    return parsed && parsed.body ? parsed.body : parsed;
+  } catch (_) {
+    return null;
+  }
+}
+
 function parseDateMatch(match, fallbackYear) {
   const month = Number(match[1]);
   const day = Number(match[2]);
@@ -113,9 +125,41 @@ function parseDateMatch(match, fallbackYear) {
   return new Date(Date.UTC(fallbackYear, month - 1, day, hour - 8, minute, 0));
 }
 
+const WEEKDAY_MAP = {
+  日: 0,
+  天: 0,
+  一: 1,
+  二: 2,
+  三: 3,
+  四: 4,
+  五: 5,
+  六: 6,
+};
+
+function relativeWeekdayDate(text, now) {
+  const match = text.match(/(本周|下周)([日天一二三四五六])(?:早上|上午|中午|下午|晚上)?\s*(\d{1,2})[:：](\d{2})/);
+  if (!match) return null;
+  const base = beijingDateParts(now);
+  const todayWeekday = new Date(Date.UTC(base.year, base.month - 1, base.day, 4, 0, 0)).getUTCDay();
+  const target = WEEKDAY_MAP[match[2]];
+  let delta = target - todayWeekday;
+  if (match[1] === '下周') delta += 7;
+  const hour = Number(match[3]);
+  const minute = Number(match[4]);
+  return new Date(Date.UTC(base.year, base.month - 1, base.day + delta, hour - 8, minute, 0));
+}
+
 function extractDateRange(title = '', content = '', now = new Date()) {
   const text = cleanText(`${title}\n${content}`);
   const year = beijingDateParts(now).year;
+  const relatives = [...text.matchAll(/(?:本周|下周)[日天一二三四五六](?:早上|上午|中午|下午|晚上)?\s*\d{1,2}[:：]\d{2}/g)]
+    .map(match => relativeWeekdayDate(match[0], now))
+    .filter(Boolean);
+  if (relatives.length >= 2) {
+    relatives.sort((a, b) => a - b);
+    return { start: relatives[0].toISOString(), end: relatives[relatives.length - 1].toISOString() };
+  }
+
   const dateTime = '(\\d{1,2})月(\\d{1,2})日(?:\\s*(\\d{1,2})[:：](\\d{2}))?';
   const between = new RegExp(`${dateTime}[\\s\\S]{0,20}(?:至|到|~|—|-)[\\s\\S]{0,20}${dateTime}`);
   const range = text.match(between);
@@ -284,8 +328,9 @@ function generateEventsICS(events, options = {}) {
 
 function normalizeFeed(raw) {
   const id = String(raw.id || raw.feedId || raw.feed_id || '');
-  const title = cleanText(raw.title || raw.share_title || raw.summary || raw.contentTitle || '');
-  const content = cleanText(raw.content || raw.text || raw.desc || raw.plainText || '');
+  const body = parseContentPayload(raw.content) || parseContentPayload(raw.detail?.result?.feed?.content) || {};
+  const title = cleanText(body.title || raw.title || raw.share_title || raw.summary || raw.contentTitle || '');
+  const content = cleanText(body.text || raw.text || raw.desc || raw.plainText || raw.content || '');
   const autoType = detectType(title, content);
   return {
     id,
