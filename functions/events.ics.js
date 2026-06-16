@@ -17,6 +17,7 @@ const TYPE_LABELS = {
 function escapeICS(text) {
   return String(text)
     .replace(/\\/g, '\\\\')
+    .replace(/\r/g, '')
     .replace(/;/g, '\\;')
     .replace(/,/g, '\\,')
     .replace(/\n/g, '\\n');
@@ -31,6 +32,42 @@ function toICSUTC(isoStr) {
 }
 
 const CRLF = '\r\n';
+
+function foldLine(line) {
+  const bytes = new TextEncoder();
+  const out = [];
+  let current = '';
+
+  for (const ch of Array.from(line)) {
+    const next = current + ch;
+    if (current && bytes.encode(next).length > 73) {
+      out.push(current);
+      current = ' ' + ch;
+    } else {
+      current = next;
+    }
+  }
+
+  out.push(current);
+  return out.join(CRLF);
+}
+
+function buildLines(lines) {
+  return lines.map(foldLine).join(CRLF);
+}
+
+function foldBlock(block) {
+  return String(block).split(/\r?\n/).map(foldLine).join(CRLF);
+}
+
+function joinCalendarParts(parts) {
+  return parts.map(foldBlock).join(CRLF);
+}
+
+function validDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
 
 export async function onRequestGet(context) {
   try {
@@ -61,6 +98,10 @@ export async function onRequestGet(context) {
     for (const ev of enabled) {
       const label = TYPE_LABELS[ev.type] || ev.type;
       const uid = ev.id + '@mo-sky-stones';
+      const startDate = validDate(ev.start);
+      const endDate = validDate(ev.end);
+      if (!startDate || !endDate || endDate <= startDate) continue;
+
       const dtstart = toICSUTC(ev.start);
       const dtend = toICSUTC(ev.end);
       const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
@@ -99,7 +140,7 @@ export async function onRequestGet(context) {
 
     lines.push('END:VCALENDAR');
 
-    return new Response(lines.join(CRLF), {
+    return new Response(joinCalendarParts(lines), {
       status: 200,
       headers: {
         'Content-Type': 'text/calendar; charset=utf-8',

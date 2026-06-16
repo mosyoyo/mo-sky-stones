@@ -28,9 +28,46 @@ function toICSUTC(isoStr) {
 function escapeICS(text) {
   return String(text)
     .replace(/\\/g, '\\\\')
+    .replace(/\r/g, '')
     .replace(/;/g, '\\;')
     .replace(/,/g, '\\,')
     .replace(/\n/g, '\\n');
+}
+
+function foldLine(line) {
+  const bytes = new TextEncoder();
+  const out = [];
+  let current = '';
+
+  for (const ch of Array.from(line)) {
+    const next = current + ch;
+    if (current && bytes.encode(next).length > 73) {
+      out.push(current);
+      current = ' ' + ch;
+    } else {
+      current = next;
+    }
+  }
+
+  out.push(current);
+  return out.join(CRLF);
+}
+
+function buildLines(lines) {
+  return lines.map(foldLine).join(CRLF);
+}
+
+function foldBlock(block) {
+  return String(block).split(/\r?\n/).map(foldLine).join(CRLF);
+}
+
+function joinCalendarParts(parts) {
+  return parts.map(foldBlock).join(CRLF);
+}
+
+function validDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
 }
 
 function extractVEVENTS(icsStr) {
@@ -52,8 +89,8 @@ export async function onRequestGet(context) {
     // 1. 红黑石事件（算法推算，不依赖 JSON）
     const redICS = generateStoneICS('red', 60, '光遇·红石(最后一场)');
     const blackICS = generateStoneICS('black', 60, '光遇·黑石(最后一场)');
-    const redEvents = extractVEVENTS(redICS);
-    const blackEvents = extractVEVENTS(blackICS);
+    const redEvents = extractVEVENTS(redICS).map(foldBlock);
+    const blackEvents = extractVEVENTS(blackICS).map(foldBlock);
 
     // 2. 公告事件（从静态 JSON 读取）
     let eventVEVENTS = [];
@@ -67,6 +104,10 @@ export async function onRequestGet(context) {
         for (const ev of enabled) {
           const label = TYPE_LABELS[ev.type] || ev.type;
           const uid = ev.id + '@mo-sky-stones';
+          const startDate = validDate(ev.start);
+          const endDate = validDate(ev.end);
+          if (!startDate || !endDate || endDate <= startDate) continue;
+
           const dtstart = toICSUTC(ev.start);
           const dtend = toICSUTC(ev.end);
           const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
@@ -103,7 +144,7 @@ export async function onRequestGet(context) {
             'END:VALARM',
             'END:VEVENT',
           ];
-          eventVEVENTS.push(lines.join(CRLF));
+          eventVEVENTS.push(buildLines(lines));
         }
       }
     } catch (e) {
@@ -125,7 +166,7 @@ export async function onRequestGet(context) {
       'END:VCALENDAR',
     ];
 
-    return new Response(calendarLines.join(CRLF), {
+    return new Response(joinCalendarParts(calendarLines), {
       status: 200,
       headers: {
         'Content-Type': 'text/calendar; charset=utf-8',

@@ -24,9 +24,45 @@ function writeJSON(filename, data) {
 function esc(text) {
   return String(text)
     .replace(/\\/g, '\\\\')
+    .replace(/\r/g, '')
     .replace(/;/g, '\\;')
     .replace(/,/g, '\\,')
     .replace(/\n/g, '\\n');
+}
+
+function foldLine(line) {
+  const out = [];
+  let current = '';
+
+  for (const ch of Array.from(line)) {
+    const next = current + ch;
+    if (current && Buffer.byteLength(next, 'utf8') > 73) {
+      out.push(current);
+      current = ' ' + ch;
+    } else {
+      current = next;
+    }
+  }
+
+  out.push(current);
+  return out.join('\r\n');
+}
+
+function buildLines(lines) {
+  return lines.map(foldLine).join('\r\n');
+}
+
+function foldBlock(block) {
+  return String(block).split(/\r?\n/).map(foldLine).join('\r\n');
+}
+
+function joinCalendarParts(parts) {
+  return parts.map(foldBlock).join('\r\n');
+}
+
+function validDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
 }
 
 /**
@@ -59,6 +95,10 @@ function buildEventVEVENTS() {
   for (const ev of enabled) {
     const label = typeLabels[ev.type] || ev.type;
     const uid = `${ev.id}@mo-sky-stones`;
+    const startDate = validDate(ev.start);
+    const endDate = validDate(ev.end);
+    if (!startDate || !endDate || endDate <= startDate) continue;
+
     const dtstart = toICSUTC(ev.start);
     const dtend = toICSUTC(ev.end);
     // 清理标题中的话题标签和多余换行
@@ -71,7 +111,7 @@ function buildEventVEVENTS() {
     ];
     const description = descLines.map(l => esc(l)).join('\\n');
 
-    lines.push(
+    lines.push(buildLines([
       'BEGIN:VEVENT',
       `UID:${uid}`,
       `DTSTAMP:${dtstamp}`,
@@ -81,16 +121,15 @@ function buildEventVEVENTS() {
       `DESCRIPTION:${description}`,
       'STATUS:CONFIRMED',
       'TRANSP:OPAQUE',
-      // 15 分钟提醒
       'BEGIN:VALARM',
       `UID:${uid}-alarm`,
       `X-WR-ALARMUID:${uid}-alarm`,
-      'TRIGGER;RELATED=START:-PT15M',
+      'TRIGGER;RELATED=START:-PT10M',
       'ACTION:DISPLAY',
-      `DESCRIPTION:${esc(`${label}将在 15 分钟后开始`)}`,
+      `DESCRIPTION:${esc(`${label}将在 10 分钟后开始`)}`,
       'END:VALARM',
       'END:VEVENT',
-    );
+    ]));
   }
   return lines;
 }
@@ -137,7 +176,7 @@ function buildCalendarICS() {
     'END:VCALENDAR',
   ];
 
-  return lines.join('\r\n');
+  return joinCalendarParts(lines);
 }
 
 /**
@@ -148,7 +187,7 @@ function buildEventsICS() {
 
   if (eventVEVENTS.length === 0) {
     // 冇公告事件，返回空日历
-    return [
+    return buildLines([
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'PRODID:-//mo-sky-stones//Sky:CoL Events (CN)//ZH',
@@ -158,7 +197,7 @@ function buildEventsICS() {
       'X-WR-CALDESC:光遇国服活动日历',
       'X-WR-TIMEZONE:Asia/Shanghai',
       'END:VCALENDAR',
-    ].join('\r\n');
+    ]);
   }
 
   const lines = [
@@ -174,7 +213,7 @@ function buildEventsICS() {
     'END:VCALENDAR',
   ];
 
-  return lines.join('\r\n');
+  return joinCalendarParts(lines);
 }
 
 function main() {
