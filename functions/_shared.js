@@ -52,7 +52,12 @@ function parseTypes(url) {
   return value.split(',').map(s => s.trim()).filter(Boolean);
 }
 
-function buildCalendar(events, types) {
+function parseEventMode(url) {
+  const value = new URL(url).searchParams.get('eventMode');
+  return ['all', 'range', 'end'].includes(value) ? value : 'all';
+}
+
+function buildCalendar(events, types, options = {}) {
   const include = new Set(types);
   const parts = [
     'BEGIN:VCALENDAR',
@@ -69,7 +74,7 @@ function buildCalendar(events, types) {
   if (include.has('black')) parts.push(...extractVEVENTS(generateStoneICS('black', 60, '光遇·黑石(最后一场)')));
   const eventTypes = [...include].filter(type => !['red', 'black'].includes(type));
   if (eventTypes.length) {
-    const ics = generateEventsICS(events, { name: '光遇·活动提醒', types: eventTypes });
+    const ics = generateEventsICS(events, { name: '光遇·活动提醒', types: eventTypes, eventMode: options.eventMode });
     parts.push(...extractVEVENTS(ics));
   }
 
@@ -179,6 +184,7 @@ module.exports = {
   githubPutJSONFiles,
   githubPutJSON,
   json,
+  parseEventMode,
   parseTypes,
   readAssetJSON,
 };

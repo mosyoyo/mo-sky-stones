@@ -32,6 +32,8 @@
       box-shadow: 0 22px 60px rgba(0,0,0,.08);
       backdrop-filter: blur(18px);
     }
+    .group { display: grid; gap: 14px; margin-bottom: 18px; }
+    .group h2 { margin: 0; font-size: 16px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
     label {
       display: flex;
@@ -45,7 +47,8 @@
       font-size: 15px;
       color: #1d1d1f;
     }
-    input[type="checkbox"] { width: 19px; height: 19px; accent-color: #0071e3; }
+    .mode label { justify-content: space-between; }
+    input[type="checkbox"], input[type="radio"] { width: 19px; height: 19px; accent-color: #0071e3; }
     input[type="text"] {
       width: 100%;
       min-width: 0;
@@ -70,6 +73,8 @@
     }
     .ghost { background: #e8f2ff; color: #0066cc; }
     .muted { color: #6e6e73; font-size: 14px; line-height: 1.7; margin: 18px 0 0; }
+    .linkbox { display: grid; gap: 10px; }
+    .tiny { color: #6e6e73; font-size: 13px; }
     @media (max-width: 640px) {
       main { padding-top: 48px; }
       section { border-radius: 22px; padding: 18px; }
@@ -86,36 +91,55 @@
       <p class="lead">选择想关注的内容，生成一个干净的 iCalendar 订阅链接。</p>
     </div>
     <section>
-      <div class="grid">
-        <label><input type="checkbox" value="red" checked>红石</label>
-        <label><input type="checkbox" value="black" checked>黑石</label>
-        <label><input type="checkbox" value="traveling_spirit">旅行先祖</label>
-        <label><input type="checkbox" value="season">季节</label>
-        <label><input type="checkbox" value="activity">活动</label>
-        <label><input type="checkbox" value="bonus">双倍活动</label>
-        <label><input type="checkbox" value="maintenance">维护更新</label>
+      <div class="group">
+        <h2>订阅内容</h2>
+        <div class="grid">
+          <label><input type="checkbox" value="red" checked>红石</label>
+          <label><input type="checkbox" value="black" checked>黑石</label>
+          <label><input type="checkbox" value="traveling_spirit">旅行先祖</label>
+          <label><input type="checkbox" value="season">季节</label>
+          <label><input type="checkbox" value="activity">活动</label>
+          <label><input type="checkbox" value="bonus">双倍活动</label>
+          <label><input type="checkbox" value="maintenance">维护更新</label>
+        </div>
       </div>
-      <div class="row">
+      <div class="group mode">
+        <h2>活动模式</h2>
+        <label><span>两者都要</span><input type="radio" name="eventMode" value="all" checked></label>
+        <label><span>只要连续事件</span><input type="radio" name="eventMode" value="range"></label>
+        <label><span>只要结束提醒</span><input type="radio" name="eventMode" value="end"></label>
+      </div>
+      <div class="linkbox">
         <input id="url" type="text" readonly>
+        <div class="row">
+          <button id="copy">复制链接</button>
+          <a id="open" class="button ghost" href="#">打开订阅</a>
+        </div>
       </div>
-      <div class="row">
-        <button id="copy">复制链接</button>
-        <a id="open" class="button ghost" href="#">打开订阅</a>
-      </div>
-      <p class="muted">红石和黑石默认开启；活动类内容会在后台审核后进入订阅。</p>
+      <p class="muted">红石和黑石默认开启；活动类内容会在后台审核后进入订阅。你可以先切换模式试一下，看看手机到底认哪一种。</p>
+      <p class="tiny" id="preview"></p>
     </section>
   </main>
   <script>
     const checks = [...document.querySelectorAll('input[type="checkbox"]')];
+    const modes = [...document.querySelectorAll('input[name="eventMode"]')];
     const url = document.querySelector('#url');
     const openLink = document.querySelector('#open');
+    const preview = document.querySelector('#preview');
     function update() {
       const types = checks.filter(c => c.checked).map(c => c.value).join(',');
-      const value = `${location.origin}/calendar.ics?types=${encodeURIComponent(types)}`;
+      const eventMode = modes.find(r => r.checked)?.value || 'all';
+      const value = `${location.origin}/calendar.ics?types=${encodeURIComponent(types)}&eventMode=${encodeURIComponent(eventMode)}`;
       url.value = value;
       openLink.href = value;
+      preview.textContent = eventMode === 'all'
+        ? '当前模式：连续事件 + 结束提醒'
+        : eventMode === 'range'
+          ? '当前模式：只保留连续事件'
+          : '当前模式：只保留结束提醒';
     }
     checks.forEach(c => c.addEventListener('change', update));
+    modes.forEach(r => r.addEventListener('change', update));
     document.querySelector('#copy').addEventListener('click', async () => navigator.clipboard.writeText(url.value));
     update();
   </script>

@@ -283,6 +283,7 @@ function createAllDayEvent({ uid, dtstamp, start, end, summary, description, loc
 
 function buildReminderEvents(events, options = {}) {
   const types = new Set(options.types || Object.keys(TYPE_LABELS));
+  const eventMode = options.eventMode || 'all';
   const dtstamp = formatUTC(new Date());
   const blocks = [];
 
@@ -316,29 +317,33 @@ function buildReminderEvents(events, options = {}) {
       ? { trigger: '-P1D', description: `${label}明天就要开始了` }
       : { trigger: '-PT10M', description: `${label}将在 10 分钟后开始` };
 
-    blocks.push(createTimedEvent({
-      uid: `${id}-range@sky-stones-ics`,
-      dtstamp,
-      start,
-      end,
-      summary: `【${label}】${title}`,
-      description: desc,
-      location: label,
-      category: label,
-      alarm: mainAlarm,
-    }));
+    if (eventMode !== 'end') {
+      blocks.push(createTimedEvent({
+        uid: `${id}-range@sky-stones-ics`,
+        dtstamp,
+        start,
+        end,
+        summary: `【${label}】${title}`,
+        description: desc,
+        location: label,
+        category: label,
+        alarm: mainAlarm,
+      }));
+    }
 
-    const endReminderTitle = event.type === 'traveling_spirit' ? '旅行先祖即将离开' : `【${label}】即将结束`;
-    blocks.push(createTimedEvent({
-      uid: `${id}-end-reminder@sky-stones-ics`,
-      dtstamp,
-      start: end,
-      end: addMinutes(end, 30),
-      summary: endReminderTitle,
-      description: `${title}\n结束时间: ${beijingText(end)}`,
-      location: label,
-      category: label,
-    }));
+    if (eventMode !== 'range') {
+      const endReminderTitle = event.type === 'traveling_spirit' ? '旅行先祖即将离开' : `【${label}】即将结束`;
+      blocks.push(createTimedEvent({
+        uid: `${id}-end-reminder@sky-stones-ics`,
+        dtstamp,
+        start: end,
+        end: addMinutes(end, 30),
+        summary: endReminderTitle,
+        description: `${title}\n结束时间: ${beijingText(end)}`,
+        location: label,
+        category: label,
+      }));
+    }
   }
 
   return blocks;

@@ -1,12 +1,13 @@
 const { generateEventsICS } = require('../src/event-utils');
-const { parseTypes, readAssetJSON } = require('./_shared');
+const { parseEventMode, parseTypes, readAssetJSON } = require('./_shared');
 
 const EVENT_TYPES = ['traveling_spirit', 'season', 'activity', 'bonus', 'maintenance'];
 
 export async function onRequestGet(context) {
   const events = await readAssetJSON(context, '/data/events.json', []);
   const types = new URL(context.request.url).searchParams.has('types') ? parseTypes(context.request.url) : EVENT_TYPES;
-  const ics = generateEventsICS(events, { name: '光遇·活动提醒', types });
+  const eventMode = parseEventMode(context.request.url);
+  const ics = generateEventsICS(events, { name: '光遇·活动提醒', types, eventMode });
   return new Response(ics, {
     headers: {
       'Content-Type': 'text/calendar; charset=utf-8',
