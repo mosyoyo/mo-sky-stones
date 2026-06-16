@@ -1,6 +1,5 @@
 // /events.ics — 纯公告事件日历（不含红黑石）
 // CF Pages Function：用 fetch 读静态 JSON，ICS 生成逻辑内联（不依赖 fs/path）
-// 格式与红石 ics-generator.js 完全一致：UTC 时间，CRLF 换行，含 VALARM
 
 const TYPE_LABELS = {
   traveling_spirit: '旅行先祖',
@@ -19,12 +18,16 @@ function esc(text) {
     .replace(/\n/g, '\\n');
 }
 
-/**
- * ISO 时间 → UTC ICS 格式 (20260618T060000Z)
- */
-function toICSUTC(isoStr) {
+function toICSLocalDateTime(isoStr) {
   const d = new Date(isoStr);
-  return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  const bj = new Date(d.getTime() + 8 * 60 * 60 * 1000);
+  const y = bj.getUTCFullYear();
+  const m = String(bj.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(bj.getUTCDate()).padStart(2, '0');
+  const h = String(bj.getUTCHours()).padStart(2, '0');
+  const min = String(bj.getUTCMinutes()).padStart(2, '0');
+  const s = String(bj.getUTCSeconds()).padStart(2, '0');
+  return y + m + day + 'T' + h + min + s;
 }
 
 const CRLF = '\r\n';
@@ -58,25 +61,18 @@ export async function onRequestGet(context) {
     for (const ev of enabled) {
       const label = TYPE_LABELS[ev.type] || ev.type;
       const uid = ev.id + '@mo-sky-stones';
-      const dtstart = toICSUTC(ev.start);
-      const dtend = toICSUTC(ev.end);
+      const start = toICSLocalDateTime(ev.start);
+      const end = toICSLocalDateTime(ev.end);
       const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
-
-      // 描述：与红石 ICS 格式一致，用 \n 分隔多行
-      const descLines = [
-        '类型: ' + label,
-        '标题: ' + cleanTitle,
-      ];
-      const description = descLines.map(l => esc(l)).join('\\n');
 
       lines.push(
         'BEGIN:VEVENT',
         'UID:' + uid,
         'DTSTAMP:' + dtstamp,
-        'DTSTART:' + dtstart,
-        'DTEND:' + dtend,
+        'DTSTART;TZID=Asia/Shanghai:' + start,
+        'DTEND;TZID=Asia/Shanghai:' + end,
         'SUMMARY:' + esc('【' + label + '】' + cleanTitle),
-        'DESCRIPTION:' + description,
+        'DESCRIPTION:' + esc('类型:' + label + '\\n标题:' + cleanTitle),
         'STATUS:CONFIRMED',
         'TRANSP:OPAQUE',
         'BEGIN:VALARM',

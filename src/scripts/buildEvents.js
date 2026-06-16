@@ -1,8 +1,9 @@
-// buildEvents.js — 从 events.json 生成 ICS 文件（本地/GitHub Actions 用）
-// 格式与 ics-generator.js 完全一致：UTC 时间，CRLF 换行，含 VALARM
+// buildEvents.js — 从 events.json 生成 calendar.ics
+// 合并红黑石算法事件 + 公告事件
 
 const fs = require('fs');
 const path = require('path');
+const { generateLastEvents } = require('../../calendar-engine');
 const { generateICS: generateStoneICS } = require('../../ics-generator');
 
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
@@ -30,16 +31,31 @@ function esc(text) {
 }
 
 /**
- * ISO 时间 → UTC ICS 格式 (20260618T060000Z)
- * 与 ics-generator.js 的 formatICSDateTimeUTC 一致
+ * 格式化 ISO 时间为 ICS UTC 格式
  */
-function toICSUTC(isoStr) {
+function toICSDateTime(isoStr) {
   const d = new Date(isoStr);
   return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 }
 
 /**
- * 从 events.json 生成 VEVENT 块（UTC 格式，与红石 ICS 一致）
+ * 格式化 ISO 时间为 ICS 本地时间格式（TZID）
+ */
+function toICSLocalDateTime(isoStr) {
+  const d = new Date(isoStr);
+  // 转为北京时间
+  const bj = new Date(d.getTime() + 8 * 60 * 60 * 1000);
+  const y = bj.getUTCFullYear();
+  const m = String(bj.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(bj.getUTCDate()).padStart(2, '0');
+  const h = String(bj.getUTCHours()).padStart(2, '0');
+  const min = String(bj.getUTCMinutes()).padStart(2, '0');
+  const s = String(bj.getUTCSeconds()).padStart(2, '0');
+  return `${y}${m}${day}T${h}${min}${s}`;
+}
+
+/**
+ * 从 events.json 生成 VEVENT 块
  */
 function buildEventVEVENTS() {
   const events = readJSON('events.json');
@@ -59,26 +75,19 @@ function buildEventVEVENTS() {
   for (const ev of enabled) {
     const label = typeLabels[ev.type] || ev.type;
     const uid = `${ev.id}@mo-sky-stones`;
-    const dtstart = toICSUTC(ev.start);
-    const dtend = toICSUTC(ev.end);
+    const start = toICSLocalDateTime(ev.start);
+    const end = toICSLocalDateTime(ev.end);
     // 清理标题中的话题标签和多余换行
-    const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
-
-    // 描述：与红石 ICS 格式一致，用 \n 分隔多行
-    const descLines = [
-      '类型: ' + label,
-      '标题: ' + cleanTitle,
-    ];
-    const description = descLines.map(l => esc(l)).join('\\n');
+    const cleanTitle = ev.title.replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
     lines.push(
       'BEGIN:VEVENT',
       `UID:${uid}`,
       `DTSTAMP:${dtstamp}`,
-      `DTSTART:${dtstart}`,
-      `DTEND:${dtend}`,
+      `DTSTART;TZID=Asia/Shanghai:${start}`,
+      `DTEND;TZID=Asia/Shanghai:${end}`,
       `SUMMARY:${esc(`【${label}】${cleanTitle}`)}`,
-      `DESCRIPTION:${description}`,
+      `DESCRIPTION:${esc(`类型:${label}\\n标题:${cleanTitle}`)}`,
       'STATUS:CONFIRMED',
       'TRANSP:OPAQUE',
       // 15 分钟提醒
@@ -96,7 +105,7 @@ function buildEventVEVENTS() {
 }
 
 /**
- * 生成合并的 calendar.ics
+ * 生成合并嘅 calendar.ics
  * 包含：红黑石算法事件 + 公告事件
  */
 function buildCalendarICS() {
@@ -124,6 +133,7 @@ function buildCalendarICS() {
   const blackEvents = extractVEVENTS(blackICS);
   const allEvents = [...redEvents, ...blackEvents, ...eventVEVENTS];
 
+  const dtstamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
