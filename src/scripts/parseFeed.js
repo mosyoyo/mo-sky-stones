@@ -1,13 +1,27 @@
-const { cleanEventTitle, detectType, extractDateRange, normalizeFeed, uidPart } = require('../event-utils');
+const {
+  cleanEventTitle,
+  detectType,
+  extractDateRange,
+  extractTravelingSpiritLabel,
+  isLikelyGameActivity,
+  normalizeFeed,
+  uidPart,
+} = require('../event-utils');
 const { appendSyncLog, readJSON, writeJSON } = require('./common');
 
 function parseFeed(feed) {
-  const type = detectType(feed.title, feed.content);
+  let type = detectType(feed.title, feed.content);
   const baseTime = Number(feed.createTime || 0) > 0 ? new Date(Number(feed.createTime)) : new Date();
   const range = extractDateRange(feed.title, feed.content, baseTime);
+  if (type === 'activity' && range && !isLikelyGameActivity(range)) {
+    type = 'other';
+  }
+  const spiritLabel = type === 'traveling_spirit'
+    ? extractTravelingSpiritLabel(`${feed.title || ''}\n${feed.content || ''}`)
+    : '';
   return {
     type,
-    title: cleanEventTitle(feed.title, feed.content, type),
+    title: spiritLabel ? `旅行先祖·${spiritLabel}` : cleanEventTitle(feed.title, feed.content, type),
     start: range ? range.start : '',
     end: range ? range.end : '',
   };

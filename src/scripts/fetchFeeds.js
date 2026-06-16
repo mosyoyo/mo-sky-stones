@@ -4,8 +4,8 @@ const { appendSyncLog, readJSON, writeJSON } = require('./common');
 const LIST_URL = 'https://inf.ds.163.com/v1/web/feed/basic/getSomeOneFeeds';
 const DETAIL_URL = 'https://inf.ds.163.com/v1/web/feed/basic/facade';
 const FEED_TYPES = '1,2,3,4,6,7,10,11';
-const TARGET_COUNT = 100;
-const PAGE_SIZE = 100;
+const TARGET_COUNT = Number(process.env.FEED_TARGET_COUNT || 100);
+const MAX_PAGES = Number(process.env.FEED_MAX_PAGES || 10);
 
 function collectFeeds(payload) {
   const found = [];
@@ -87,7 +87,7 @@ async function main() {
   let minTime = 0;
   let page = 0;
 
-  while (list.length < TARGET_COUNT && page < 10) {
+  while (list.length < TARGET_COUNT && page < MAX_PAGES) {
     const url = new URL(LIST_URL);
     url.searchParams.set('feedTypes', FEED_TYPES);
     url.searchParams.set('someOneUid', OFFICIAL_UID);

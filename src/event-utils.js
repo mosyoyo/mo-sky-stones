@@ -6,6 +6,7 @@ const TYPE_LABELS = {
   season: '季节',
   activity: '活动',
   bonus: '双倍活动',
+  candle_heap: '大蜡烛',
   maintenance: '维护更新',
   other: '其他',
 };
@@ -14,7 +15,8 @@ const TYPE_KEYWORDS = {
   traveling_spirit: ['旅行先祖', '先祖到访', '复刻', '先祖即将到访', '到临提醒'],
   season: ['季节开启', '季节结束', '新季节', '赛季'],
   activity: ['活动开启', '周年庆', '自然日', '音乐节', '花憩节', '彩染季', '端午', '七周年'],
-  bonus: ['双倍蜡烛', '双倍爱心', '双倍季蜡', '额外烛火'],
+  bonus: ['双倍', '双倍蜡烛', '双倍爱心', '双倍季蜡', '双倍心火', '双倍烛火', '额外烛火'],
+  candle_heap: ['大蜡烛', '大蜡烛堆', '大蜡烛堆将出现在天空王国各地'],
   maintenance: ['停服', '维护', '更新维护', '升级维护', '更新时间公告', '更新中无法正常游戏', '开服时间'],
 };
 
@@ -95,7 +97,7 @@ function beijingText(date) {
 
 function detectType(title = '', content = '') {
   const text = `${title}\n${content}`;
-  for (const type of ['maintenance', 'traveling_spirit', 'bonus', 'season', 'activity']) {
+  for (const type of ['maintenance', 'traveling_spirit', 'bonus', 'candle_heap', 'season', 'activity']) {
     if (TYPE_KEYWORDS[type].some(keyword => text.includes(keyword))) return type;
   }
   return 'other';
@@ -115,6 +117,7 @@ function cleanEventTitle(title = '', content = '', type = '') {
   if (/[丨|]/.test(short)) short = short.split(/[丨|]/).pop().trim();
 
   if (type === 'traveling_spirit' || /旅行先祖|复刻|先祖到访|先祖即将到访/.test(text)) return '旅行先祖';
+  if (type === 'candle_heap' || /大蜡烛/.test(text)) return '《光·遇》大蜡烛';
   if (type === 'maintenance' || /停服|维护|版本更新|更新时间公告/.test(text)) return '《光·遇》维护更新';
   if (/端午/.test(text)) return '《光·遇》端午节';
   if (/七周年/.test(text)) return '《光·遇》七周年';
@@ -130,6 +133,36 @@ function cleanEventTitle(title = '', content = '', type = '') {
     .replace(/\s+/g, ' ')
     .trim();
   return short ? `《光·遇》${short}` : (TYPE_LABELS[type] || '光遇提醒');
+}
+
+function extractTravelingSpiritLabel(text = '') {
+  const source = cleanText(text);
+  const lines = source
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean);
+
+  const direct = lines.find(line => /[，,]/.test(line) && !/光遇|先祖|到临|即将|重返天空王国|与先祖/.test(line));
+  if (direct) {
+    const parts = direct.split(/[，,]/).map(part => part.trim()).filter(Boolean);
+    const tail = parts[parts.length - 1];
+    if (tail && tail.length <= 12) return tail.replace(/[~～。！？!?,，]$/, '');
+  }
+
+  const whispered = source.match(/先祖正在(?:[^，。！？\n]{1,10}?)([^，。！？\n]{2,12})/);
+  if (whispered && whispered[1]) return whispered[1].replace(/[~～。！？!?,，]$/, '');
+
+  return '';
+}
+
+function isLikelyGameActivity(event) {
+  const start = new Date(event.start);
+  const end = new Date(event.end);
+  if (!(start instanceof Date) || !(end instanceof Date) || Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+    return false;
+  }
+  const durationDays = Math.max(0, (end - start) / 86400000);
+  return durationDays >= 3;
 }
 
 function cleanText(text = '') {
@@ -316,6 +349,12 @@ function buildReminderEvents(events, options = {}) {
     const title = event.title || label;
     const start = new Date(event.start);
     const end = new Date(event.end);
+    const durationDays = eventDurationDays(event);
+
+    if (event.type === 'activity' && !isLikelyGameActivity(event)) {
+      continue;
+    }
+
     const summary = shortSummary(title, label);
     const desc = buildDescription([
       `类型: ${label}`,
@@ -323,9 +362,9 @@ function buildReminderEvents(events, options = {}) {
       `时间: ${beijingText(start)} - ${beijingText(end)}`,
     ]);
 
-    if (event.type === 'bonus') {
-      blocks.push(createAllDayEvent({
-        uid: `${id}-bonus-all-day@sky-stones-ics`,
+    if (event.type === 'bonus' || event.type === 'candle_heap') {
+      blocks.push(createTimedEvent({
+        uid: `${id}-${event.type}-range@sky-stones-ics`,
         dtstamp,
         start,
         end,
@@ -337,11 +376,12 @@ function buildReminderEvents(events, options = {}) {
       continue;
     }
 
+    const longActivity = event.type === 'activity' && durationDays > 5;
     const mainAlarm = event.type === 'season'
       ? { trigger: '-P1D', description: `${label}明天就要开始了` }
       : { trigger: '-PT10M', description: `${label}将在 10 分钟后开始` };
 
-    if (eventMode !== 'end') {
+    if (eventMode !== 'end' && !longActivity) {
       blocks.push(createTimedEvent({
         uid: `${id}-range@sky-stones-ics`,
         dtstamp,
@@ -353,6 +393,24 @@ function buildReminderEvents(events, options = {}) {
           `标题: ${summary}`,
           `时间: ${beijingText(start)} - ${beijingText(end)}`,
           event.type === 'bonus' ? '全天活动' : '开始提醒',
+        ]),
+        location: label,
+        category: label,
+        alarm: mainAlarm,
+      }));
+    }
+
+    if (longActivity && eventMode !== 'end') {
+      blocks.push(createTimedEvent({
+        uid: `${id}-start@sky-stones-ics`,
+        dtstamp,
+        start,
+        end: addMinutes(start, 30),
+        summary,
+        description: buildDescription([
+          `类型: ${label}`,
+          `标题: ${summary}`,
+          `开始时间: ${beijingText(start)}`,
         ]),
         location: label,
         category: label,
@@ -427,9 +485,11 @@ module.exports = {
   cleanEventTitle,
   detectType,
   escapeICS,
+  extractTravelingSpiritLabel,
   extractDateRange,
   formatUTC,
   generateEventsICS,
+  isLikelyGameActivity,
   normalizeFeed,
   uidPart,
 };
