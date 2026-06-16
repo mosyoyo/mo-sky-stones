@@ -12,7 +12,8 @@ export async function onRequestPost(context) {
     feed.status = body.status || 'approved';
     if (feed.status === 'approved') {
       const type = body.type || feed.autoType || detectType(feed.title, feed.content);
-      const range = body.start && body.end ? { start: body.start, end: body.end } : extractDateRange(feed.title, feed.content);
+      const baseTime = Number(feed.createTime || 0) > 0 ? new Date(Number(feed.createTime)) : new Date();
+      const range = body.start && body.end ? { start: body.start, end: body.end } : extractDateRange(feed.title, feed.content, baseTime);
       if (type !== 'other' && range) {
         const id = body.id || `${type}-${uidPart(feed.id)}`;
         const existing = events.find(event => event.id === id || event.sourceFeedId === feed.id);

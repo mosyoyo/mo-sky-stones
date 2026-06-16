@@ -15,20 +15,34 @@
   </main>
   <script>
     let events = [];
+    const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
     async function load() {
-      events = await fetch('/api/events').then(r => r.json());
+      const box = document.querySelector('#list');
+      box.innerHTML = '<p class="muted">正在读取事件...</p>';
+      try {
+        const res = await fetch('/api/events');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        events = await res.json();
+      } catch (err) {
+        box.innerHTML = `<section><strong>事件读取失败</strong><p>${h(err.message)}</p></section>`;
+        return;
+      }
       render();
     }
     function render() {
+      if (!events.length) {
+        document.querySelector('#list').innerHTML = '<section><strong>暂无事件</strong><p>在公告页批准一条公告后，这里会出现可编辑事件。</p></section>';
+        return;
+      }
       document.querySelector('#list').innerHTML = events.map((event, index) => `
         <section>
           <label><input type="checkbox" data-field="enabled" data-index="${index}" ${event.enabled ? 'checked' : ''}>启用</label>
-          <input data-field="title" data-index="${index}" value="${event.title || ''}" placeholder="标题">
+          <input data-field="title" data-index="${index}" value="${h(event.title || '')}" placeholder="标题">
           <select data-field="type" data-index="${index}">
             ${['traveling_spirit','season','activity','bonus','maintenance','other'].map(t => `<option value="${t}" ${event.type === t ? 'selected' : ''}>${t}</option>`).join('')}
           </select>
-          <input data-field="start" data-index="${index}" value="${event.start || ''}" placeholder="开始 ISO">
-          <input data-field="end" data-index="${index}" value="${event.end || ''}" placeholder="结束 ISO">
+          <input data-field="start" data-index="${index}" value="${h(event.start || '')}" placeholder="开始 ISO">
+          <input data-field="end" data-index="${index}" value="${h(event.end || '')}" placeholder="结束 ISO">
           <button class="ghost" data-delete="${index}">删除</button>
         </section>`).join('');
       document.querySelectorAll('[data-field]').forEach(el => el.oninput = () => {

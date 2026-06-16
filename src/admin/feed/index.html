@@ -14,26 +14,54 @@
   </main>
   <script>
     const typeNames = { traveling_spirit: '旅行先祖', season: '季节', activity: '活动', bonus: '双倍活动', maintenance: '维护更新', other: '其他' };
+    const types = Object.keys(typeNames);
+    const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+    const formatTime = value => value ? new Date(value).toLocaleString('zh-CN', { hour12: false }) : '未识别';
     async function load() {
-      const feeds = await fetch('/api/feed').then(r => r.json());
+      const box = document.querySelector('#list');
+      box.innerHTML = '<p class="muted">正在读取公告...</p>';
+      let feeds = [];
+      try {
+        const res = await fetch('/api/feed');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        feeds = await res.json();
+      } catch (err) {
+        box.innerHTML = `<section><strong>公告读取失败</strong><p>${h(err.message)}</p></section>`;
+        return;
+      }
+      if (!feeds.length) {
+        box.innerHTML = '<section><strong>暂无公告</strong><p>运行同步后，这里会显示抓到的官方动态。</p></section>';
+        return;
+      }
       document.querySelector('#list').innerHTML = feeds.map(feed => `
-        <section>
-          <div class="top"><strong>${feed.title || feed.id}</strong><span>${feed.status}</span></div>
-          <p>${new Date(feed.createTime || Date.now()).toLocaleString()}</p>
-          <p>类型：${typeNames[feed.autoType] || feed.autoType || '未知'}</p>
-          <details><summary>详情</summary><pre>${feed.content || ''}</pre></details>
+        <section data-feed="${h(feed.id)}">
+          <div class="top"><strong>${h(feed.title || feed.id)}</strong><span>${h(feed.status)}</span></div>
+          <p>${new Date(feed.createTime || Date.now()).toLocaleString('zh-CN', { hour12: false })}</p>
+          <p>自动识别：${h(typeNames[feed.autoType] || feed.autoType || '未知')} · ${feed.parsed ? '已识别时间' : '未识别时间'}</p>
+          <div class="grid">
+            <label>日历标题<input data-field="title" value="${h(feed.title || '')}"></label>
+            <label>类型<select data-field="type">${types.map(type => `<option value="${type}" ${feed.autoType === type ? 'selected' : ''}>${typeNames[type]}</option>`).join('')}</select></label>
+            <label>开始<input data-field="start" value="${h(feed.parsedResult?.start || '')}" placeholder="2026-06-18T22:00:00.000Z"></label>
+            <label>结束<input data-field="end" value="${h(feed.parsedResult?.end || '')}" placeholder="2026-06-22T04:00:00.000Z"></label>
+          </div>
+          <p class="muted">解析时间：${h(formatTime(feed.parsedResult?.start))} - ${h(formatTime(feed.parsedResult?.end))}</p>
+          <details><summary>原文</summary><pre>${h(feed.content || '')}</pre></details>
           <div class="row">
             <button data-action="approved" data-id="${feed.id}">批准</button>
             <button class="ghost" data-action="ignored" data-id="${feed.id}">忽略</button>
           </div>
         </section>`).join('');
-      document.querySelectorAll('button[data-action]').forEach(btn => btn.onclick = () => approve(btn.dataset.id, btn.dataset.action));
+      document.querySelectorAll('button[data-action]').forEach(btn => btn.onclick = () => approve(btn));
     }
-    async function approve(feedId, status) {
+    async function approve(btn) {
+      const feedId = btn.dataset.id;
+      const status = btn.dataset.action;
+      const section = btn.closest('section');
+      const value = field => section?.querySelector(`[data-field="${field}"]`)?.value.trim();
       const res = await fetch('/api/approve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ feedId, status }),
+        body: JSON.stringify({ feedId, status, title: value('title'), type: value('type'), start: value('start'), end: value('end') }),
       });
       const data = await res.json();
       if (!data.ok) alert(data.error || '保存失败');
