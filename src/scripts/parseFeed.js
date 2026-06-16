@@ -43,7 +43,9 @@ function main() {
   const feeds = readJSON('feeds.json', []);
   const events = readJSON('events.json', []);
   const eventMap = new Map(events.map(event => [event.sourceFeedId || event.id, event]));
+  const parsedFeeds = [];
   let parsedCount = 0;
+  let droppedCount = 0;
 
   for (const feed of feeds) {
     if (feed.raw) {
@@ -52,9 +54,15 @@ function main() {
       feed.content = normalized.content;
     }
     const parsed = parseFeed(feed);
+    if (!parsed.start || !parsed.end) {
+      eventMap.delete(feed.id);
+      droppedCount++;
+      continue;
+    }
     feed.autoType = parsed.type;
     feed.parsed = Boolean(parsed.start && parsed.end);
     feed.parsedResult = parsed;
+    parsedFeeds.push(feed);
 
     const existing = eventMap.get(feed.id);
     if (existing && parsed.type !== 'other' && parsed.start && parsed.end) {
@@ -74,10 +82,10 @@ function main() {
     }
   }
 
-  writeJSON('feeds.json', feeds);
+  writeJSON('feeds.json', parsedFeeds);
   writeJSON('events.json', [...eventMap.values()]);
-  appendSyncLog({ message: `解析公告 ${feeds.length} 条`, addedEvents: parsedCount });
-  console.log(`parsed feeds: ${feeds.length}, new events: ${parsedCount}`);
+  appendSyncLog({ message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条`, addedEvents: parsedCount });
+  console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}`);
 }
 
 if (require.main === module) main();
