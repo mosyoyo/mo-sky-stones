@@ -74,6 +74,23 @@ function toICSUTC(isoStr) {
   return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 }
 
+function toBeijingDateValue(isoStr) {
+  const d = new Date(new Date(isoStr).getTime() + 8 * 60 * 60 * 1000);
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  return `${y}${m}${day}`;
+}
+
+function toBeijingExclusiveEndDateValue(isoStr) {
+  const d = new Date(new Date(isoStr).getTime() + 8 * 60 * 60 * 1000);
+  d.setUTCDate(d.getUTCDate() + 1);
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  return `${y}${m}${day}`;
+}
+
 /**
  * 从 events.json 生成 VEVENT 块（UTC 格式，与红石 ICS 一致）
  */
@@ -99,8 +116,8 @@ function buildEventVEVENTS() {
     const endDate = validDate(ev.end);
     if (!startDate || !endDate || endDate <= startDate) continue;
 
-    const dtstart = toICSUTC(ev.start);
-    const dtend = toICSUTC(ev.end);
+    const dtstart = toBeijingDateValue(ev.start);
+    const dtend = toBeijingExclusiveEndDateValue(ev.end);
     // 清理标题中的话题标签和多余换行
     const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
@@ -115,19 +132,14 @@ function buildEventVEVENTS() {
       'BEGIN:VEVENT',
       `UID:${uid}`,
       `DTSTAMP:${dtstamp}`,
-      `DTSTART:${dtstart}`,
-      `DTEND:${dtend}`,
+      `DTSTART;VALUE=DATE:${dtstart}`,
+      `DTEND;VALUE=DATE:${dtend}`,
       `SUMMARY:${esc(`【${label}】${cleanTitle}`)}`,
       `DESCRIPTION:${description}`,
+      `LOCATION:${esc(label)}`,
+      `CATEGORIES:游戏,光遇,${label}`,
       'STATUS:CONFIRMED',
-      'TRANSP:OPAQUE',
-      'BEGIN:VALARM',
-      `UID:${uid}-alarm`,
-      `X-WR-ALARMUID:${uid}-alarm`,
-      'TRIGGER;RELATED=START:-PT10M',
-      'ACTION:DISPLAY',
-      `DESCRIPTION:${esc(`${label}将在 10 分钟后开始`)}`,
-      'END:VALARM',
+      'TRANSP:TRANSPARENT',
       'END:VEVENT',
     ]));
   }

@@ -22,6 +22,23 @@ function toICSUTC(isoStr) {
   return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 }
 
+function toBeijingDateValue(isoStr) {
+  const d = new Date(new Date(isoStr).getTime() + 8 * 60 * 60 * 1000);
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  return `${y}${m}${day}`;
+}
+
+function toBeijingExclusiveEndDateValue(isoStr) {
+  const d = new Date(new Date(isoStr).getTime() + 8 * 60 * 60 * 1000);
+  d.setUTCDate(d.getUTCDate() + 1);
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  return `${y}${m}${day}`;
+}
+
 /**
  * ICS 文本转义（与 ics-generator.js 的 escapeICS 完全一致）
  */
@@ -108,8 +125,8 @@ export async function onRequestGet(context) {
           const endDate = validDate(ev.end);
           if (!startDate || !endDate || endDate <= startDate) continue;
 
-          const dtstart = toICSUTC(ev.start);
-          const dtend = toICSUTC(ev.end);
+          const dtstart = toBeijingDateValue(ev.start);
+          const dtend = toBeijingExclusiveEndDateValue(ev.end);
           const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
           // 描述：与红石 ICS 完全一致——用字面量 \n（不行折叠）
@@ -127,21 +144,14 @@ export async function onRequestGet(context) {
             'BEGIN:VEVENT',
             'UID:' + uid,
             'DTSTAMP:' + dtstamp,
-            'DTSTART:' + dtstart,
-            'DTEND:' + dtend,
+            'DTSTART;VALUE=DATE:' + dtstart,
+            'DTEND;VALUE=DATE:' + dtend,
             'SUMMARY:' + escapeICS('【' + label + '】' + cleanTitle),
             'DESCRIPTION:' + description,
             'LOCATION:' + escapeICS(label),
             'CATEGORIES:游戏,光遇,' + label,
             'STATUS:CONFIRMED',
-            'TRANSP:OPAQUE',
-            'BEGIN:VALARM',
-            'UID:' + uid + '-alarm',
-            'X-WR-ALARMUID:' + uid + '-alarm',
-            'TRIGGER;RELATED=START:-PT10M',
-            'ACTION:DISPLAY',
-            'DESCRIPTION:' + escapeICS(label + '将在 10 分钟后开始'),
-            'END:VALARM',
+            'TRANSP:TRANSPARENT',
             'END:VEVENT',
           ];
           eventVEVENTS.push(buildLines(lines));
