@@ -5,24 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>光遇日历订阅</title>
   <style>
-    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; color: #202124; background: #f7f8fa; }
-    main { max-width: 760px; margin: 0 auto; padding: 32px 18px; }
-    h1 { font-size: 24px; margin: 0 0 20px; }
-    section { background: #fff; border: 1px solid #dfe3e8; border-radius: 8px; padding: 18px; margin-bottom: 16px; }
-    label { display: flex; align-items: center; gap: 8px; padding: 8px 0; }
-    input[type="checkbox"] { width: 18px; height: 18px; }
-    input[type="text"] { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid #c8ced6; border-radius: 6px; font-size: 14px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 4px 20px; }
-    .row { display: flex; gap: 8px; margin-top: 12px; }
-    button, a.button { border: 1px solid #1f6feb; background: #1f6feb; color: #fff; border-radius: 6px; padding: 9px 12px; font-size: 14px; text-decoration: none; cursor: pointer; }
-    .ghost { background: #fff; color: #1f6feb; }
-    .muted { color: #5f6368; font-size: 13px; line-height: 1.6; }
+    :root {
+      color-scheme: light;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: #f5f5f7;
+      color: #1d1d1f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255,255,255,.96) 0, rgba(255,255,255,.42) 34%, rgba(245,245,247,0) 62%),
+        #f5f5f7;
+    }
+    main { max-width: 920px; margin: 0 auto; padding: 72px 20px 44px; }
+    .hero { text-align: center; margin: 0 auto 34px; max-width: 720px; }
+    .eyebrow { color: #6e6e73; font-size: 15px; margin: 0 0 12px; }
+    h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.02; letter-spacing: 0; margin: 0; font-weight: 700; }
+    .lead { color: #515154; font-size: 19px; line-height: 1.55; margin: 18px auto 0; max-width: 620px; }
+    section {
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 22px 60px rgba(0,0,0,.08);
+      backdrop-filter: blur(18px);
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 13px 15px;
+      background: #f5f5f7;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 16px;
+      font-size: 15px;
+      color: #1d1d1f;
+    }
+    input[type="checkbox"] { width: 19px; height: 19px; accent-color: #0071e3; }
+    input[type="text"] {
+      width: 100%;
+      min-width: 0;
+      padding: 14px 16px;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      background: #fff;
+      color: #1d1d1f;
+      font-size: 14px;
+    }
+    .row { display: flex; gap: 10px; margin-top: 16px; }
+    button, a.button {
+      border: 0;
+      background: #0071e3;
+      color: #fff;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font-size: 15px;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .ghost { background: #e8f2ff; color: #0066cc; }
+    .muted { color: #6e6e73; font-size: 14px; line-height: 1.7; margin: 18px 0 0; }
+    @media (max-width: 640px) {
+      main { padding-top: 48px; }
+      section { border-radius: 22px; padding: 18px; }
+      .row { flex-direction: column; }
+      button, a.button { text-align: center; }
+    }
   </style>
 </head>
 <body>
   <main>
-    <h1>光遇日历订阅</h1>
+    <div class="hero">
+      <p class="eyebrow">Sky: Children of the Light</p>
+      <h1>光遇日历订阅</h1>
+      <p class="lead">选择想关注的内容，生成一个干净的 iCalendar 订阅链接。</p>
+    </div>
     <section>
       <div class="grid">
         <label><input type="checkbox" value="red" checked>红石</label>
@@ -40,7 +102,7 @@
         <button id="copy">复制链接</button>
         <a id="open" class="button ghost" href="#">打开订阅</a>
       </div>
-      <p class="muted">需要稳定使用时，建议先只订阅红石和黑石。活动订阅可以单独测试。</p>
+      <p class="muted">红石和黑石默认开启；活动类内容会在后台审核后进入订阅。</p>
     </section>
   </main>
   <script>

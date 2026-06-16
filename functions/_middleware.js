@@ -1,11 +1,26 @@
 const COOKIE_NAME = 'mo_admin_auth';
 
+function appConfig(env) {
+  let merged = {};
+  if (env.APP_CONFIG) {
+    try {
+      merged = JSON.parse(env.APP_CONFIG);
+    } catch (_) {
+      merged = {};
+    }
+  }
+  return {
+    adminPassword: merged.adminPassword || env.ADMIN_PASSWORD,
+  };
+}
+
 function isAdminPath(pathname) {
   return pathname.startsWith('/admin/') || pathname === '/admin' || pathname.startsWith('/src/admin/');
 }
 
 function isProtectedApi(pathname) {
   return pathname.startsWith('/api/approve')
+    || pathname.startsWith('/api/feed-batch')
     || pathname.startsWith('/api/events')
     || pathname.startsWith('/api/feed')
     || pathname.startsWith('/api/sync');
@@ -25,7 +40,7 @@ async function sign(value, secret) {
 }
 
 async function hasAuth(request, env) {
-  const secret = env.ADMIN_PASSWORD;
+  const secret = appConfig(env).adminPassword;
   if (!secret) return false;
   return getCookie(request) === await sign('mo-sky-stones', secret);
 }

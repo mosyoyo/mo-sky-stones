@@ -10,11 +10,16 @@
   <main>
     <nav><a href="/">订阅</a><a href="/admin/events/">事件</a><a href="/admin/sync/">同步</a></nav>
     <h1>公告审核</h1>
+    <div class="toolbar">
+      <span id="pendingCount" class="muted">暂无待提交改动</span>
+      <button id="commit" disabled>统一提交</button>
+    </div>
     <div id="list"></div>
   </main>
   <script>
     const typeNames = { traveling_spirit: '旅行先祖', season: '季节', activity: '活动', bonus: '双倍活动', maintenance: '维护更新', other: '其他' };
     const types = Object.keys(typeNames);
+    const drafts = new Map();
     const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
     const tz = 'Asia/Shanghai';
     const formatTime = value => value ? new Date(value).toLocaleString('zh-CN', { timeZone: tz, hour12: false }) : '未识别';
@@ -71,28 +76,52 @@
           <p class="muted">解析时间：${h(formatTime(feed.parsedResult?.start))} - ${h(formatTime(feed.parsedResult?.end))}</p>
           <details><summary>原文</summary><pre>${h(feed.content || '')}</pre></details>
           <div class="row">
-            <button data-action="approved" data-id="${feed.id}">批准</button>
-            <button class="ghost" data-action="ignored" data-id="${feed.id}">忽略</button>
+            <button data-action="approved" data-id="${feed.id}">标记批准</button>
+            <button class="ghost" data-action="ignored" data-id="${feed.id}">标记忽略</button>
           </div>
         </section>`).join('');
-      document.querySelectorAll('button[data-action]').forEach(btn => btn.onclick = () => approve(btn));
+      document.querySelectorAll('button[data-action]').forEach(btn => btn.onclick = () => mark(btn));
+      updateToolbar();
     }
-    async function approve(btn) {
+    function readDraft(btn) {
       const feedId = btn.dataset.id;
       const status = btn.dataset.action;
       const section = btn.closest('section');
       const value = field => section?.querySelector(`[data-field="${field}"]`)?.value.trim();
       const start = toUTCISO(value('start'));
       const end = toUTCISO(value('end'));
-      const res = await fetch('/api/approve', {
+      return { feedId, status, title: value('title'), type: value('type'), start, end };
+    }
+    function updateToolbar() {
+      const count = drafts.size;
+      document.querySelector('#pendingCount').textContent = count ? `待提交 ${count} 条改动` : '暂无待提交改动';
+      document.querySelector('#commit').disabled = count === 0;
+    }
+    function mark(btn) {
+      const item = readDraft(btn);
+      drafts.set(item.feedId, item);
+      const section = btn.closest('section');
+      section.dataset.pending = item.status;
+      section.querySelector('.top span').textContent = item.status === 'approved' ? '待提交: 批准' : '待提交: 忽略';
+      updateToolbar();
+    }
+    async function commitDrafts() {
+      if (!drafts.size) return;
+      const btn = document.querySelector('#commit');
+      btn.disabled = true;
+      btn.textContent = '提交中...';
+      const res = await fetch('/api/feed-batch', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ feedId, status, title: value('title'), type: value('type'), start, end }),
+        body: JSON.stringify({ items: [...drafts.values()] }),
       });
       const data = await res.json();
       if (!data.ok) alert(data.error || '保存失败');
+      drafts.clear();
+      btn.textContent = '统一提交';
       await load();
     }
+    document.querySelector('#commit').onclick = commitDrafts;
     load();
   </script>
 </body>

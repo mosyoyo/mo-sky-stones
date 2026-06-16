@@ -18,6 +18,24 @@ async function readAssetJSON(context, pathname, fallback) {
   return res.json();
 }
 
+function appConfig(env) {
+  let merged = {};
+  if (env.APP_CONFIG) {
+    try {
+      merged = JSON.parse(env.APP_CONFIG);
+    } catch (_) {
+      merged = {};
+    }
+  }
+  return {
+    adminPassword: merged.adminPassword || env.ADMIN_PASSWORD,
+    githubToken: merged.githubToken || env.GITHUB_TOKEN,
+    githubOwner: merged.githubOwner || env.GITHUB_OWNER,
+    githubRepo: merged.githubRepo || env.GITHUB_REPO,
+    githubBranch: merged.githubBranch || env.GITHUB_BRANCH || 'main',
+  };
+}
+
 function extractVEVENTS(ics) {
   const events = [];
   const blocks = String(ics).split('BEGIN:VEVENT');
@@ -60,11 +78,12 @@ function buildCalendar(events, types) {
 }
 
 function githubConfig(env) {
+  const cfg = appConfig(env);
   return {
-    token: env.GITHUB_TOKEN,
-    owner: env.GITHUB_OWNER,
-    repo: env.GITHUB_REPO,
-    branch: env.GITHUB_BRANCH || 'main',
+    token: cfg.githubToken,
+    owner: cfg.githubOwner,
+    repo: cfg.githubRepo,
+    branch: cfg.githubBranch,
   };
 }
 
@@ -107,9 +126,57 @@ async function githubPutJSON(env, path, data, message) {
   return res.json();
 }
 
+async function githubRequest(env, path, options = {}) {
+  const cfg = githubConfig(env);
+  if (!cfg.token || !cfg.owner || !cfg.repo) throw new Error('GitHub env is not configured');
+  const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}${path}`, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${cfg.token}`,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/json',
+      'User-Agent': 'mo-sky-stones-admin',
+      ...(options.headers || {}),
+    },
+  });
+  if (!res.ok) throw new Error(`GitHub request failed: ${res.status} ${await res.text()}`);
+  return res.json();
+}
+
+async function githubPutJSONFiles(env, files, message) {
+  const cfg = githubConfig(env);
+  const ref = await githubRequest(env, `/git/ref/heads/${cfg.branch}`);
+  const baseCommit = await githubRequest(env, `/git/commits/${ref.object.sha}`);
+  const tree = [];
+
+  for (const [path, data] of Object.entries(files)) {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2) + '\n')));
+    const blob = await githubRequest(env, '/git/blobs', {
+      method: 'POST',
+      body: JSON.stringify({ content, encoding: 'base64' }),
+    });
+    tree.push({ path, mode: '100644', type: 'blob', sha: blob.sha });
+  }
+
+  const nextTree = await githubRequest(env, '/git/trees', {
+    method: 'POST',
+    body: JSON.stringify({ base_tree: baseCommit.tree.sha, tree }),
+  });
+  const nextCommit = await githubRequest(env, '/git/commits', {
+    method: 'POST',
+    body: JSON.stringify({ message, tree: nextTree.sha, parents: [ref.object.sha] }),
+  });
+  return githubRequest(env, `/git/refs/heads/${cfg.branch}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ sha: nextCommit.sha }),
+  });
+}
+
 module.exports = {
   JSON_HEADERS,
+  appConfig,
   buildCalendar,
+  githubPutJSONFiles,
   githubPutJSON,
   json,
   parseTypes,

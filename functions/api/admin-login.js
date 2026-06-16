@@ -1,4 +1,4 @@
-const { json } = require('../_shared');
+const { appConfig, json } = require('../_shared');
 
 const COOKIE_NAME = 'mo_admin_auth';
 
@@ -13,8 +13,8 @@ function sign(value, secret) {
 export async function onRequestPost(context) {
   try {
     const { password } = await context.request.json();
-    const secret = context.env.ADMIN_PASSWORD;
-    if (!secret) return json({ error: 'ADMIN_PASSWORD is not configured' }, 500);
+    const secret = appConfig(context.env).adminPassword;
+    if (!secret) return json({ error: 'APP_CONFIG or ADMIN_PASSWORD is not configured' }, 500);
     if (!password || password !== secret) return json({ error: '密码不对' }, 401);
 
     const token = await sign('mo-sky-stones', secret);
