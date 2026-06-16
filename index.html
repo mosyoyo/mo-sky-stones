@@ -59,6 +59,18 @@
       color: #1d1d1f;
       font-size: 14px;
     }
+    textarea {
+      width: 100%;
+      min-height: 210px;
+      padding: 14px 16px;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      background: #fff;
+      color: #1d1d1f;
+      font-size: 13px;
+      line-height: 1.55;
+      resize: vertical;
+    }
     .row { display: flex; gap: 10px; margin-top: 16px; }
     button, a.button {
       border: 0;
@@ -119,6 +131,31 @@
       <p class="muted">红石和黑石默认开启；活动类内容会在后台审核后进入订阅。你可以先切换模式试一下，看看手机到底认哪一种。</p>
       <p class="tiny" id="preview"></p>
     </section>
+    <section style="margin-top:18px">
+      <div class="group">
+        <h2>自定义 ICS 测试</h2>
+        <textarea id="customIcs" spellcheck="false">BEGIN:VEVENT
+UID:test-event@mo-sky-stones
+DTSTAMP:20260616T000000Z
+DTSTART:20260620T020000Z
+DTEND:20260620T023000Z
+SUMMARY:测试事件
+DESCRIPTION:自定义ICS测试
+LOCATION:测试
+CATEGORIES:测试
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT</textarea>
+      </div>
+      <div class="linkbox">
+        <input id="customUrl" type="text" readonly>
+        <div class="row">
+          <button id="copyCustom">复制自定义链接</button>
+          <a id="openCustom" class="button ghost" href="#">打开自定义订阅</a>
+        </div>
+      </div>
+      <p class="muted">这里可以只写 VEVENT，也可以粘完整 VCALENDAR。链接会把内容放进 URL，适合临时测试，不适合放很长文本。</p>
+    </section>
   </main>
   <script>
     const checks = [...document.querySelectorAll('input[type="checkbox"]')];
@@ -126,6 +163,9 @@
     const url = document.querySelector('#url');
     const openLink = document.querySelector('#open');
     const preview = document.querySelector('#preview');
+    const customIcs = document.querySelector('#customIcs');
+    const customUrl = document.querySelector('#customUrl');
+    const openCustom = document.querySelector('#openCustom');
     function update() {
       const types = checks.filter(c => c.checked).map(c => c.value).join(',');
       const eventMode = modes.find(r => r.checked)?.value || 'all';
@@ -138,10 +178,18 @@
           ? '当前模式：只保留连续事件'
           : '当前模式：只保留结束提醒';
     }
+    function updateCustom() {
+      const value = `${location.origin}/custom.ics?data=${encodeURIComponent(customIcs.value.trim())}`;
+      customUrl.value = value;
+      openCustom.href = value;
+    }
     checks.forEach(c => c.addEventListener('change', update));
     modes.forEach(r => r.addEventListener('change', update));
     document.querySelector('#copy').addEventListener('click', async () => navigator.clipboard.writeText(url.value));
+    customIcs.addEventListener('input', updateCustom);
+    document.querySelector('#copyCustom').addEventListener('click', async () => navigator.clipboard.writeText(customUrl.value));
     update();
+    updateCustom();
   </script>
 </body>
 </html>

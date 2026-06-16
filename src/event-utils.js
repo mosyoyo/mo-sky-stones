@@ -244,6 +244,7 @@ function createTimedEvent({ uid, dtstamp, start, end, summary, description, loca
     `SUMMARY:${escapeICS(summary)}`,
     `DESCRIPTION:${escapeICS(description)}`,
     `LOCATION:${escapeICS(location || category)}`,
+    `CATEGORIES:${escapeICS(category || location || '')}`,
     'STATUS:CONFIRMED',
     'TRANSP:OPAQUE',
   ];
@@ -270,6 +271,7 @@ function createAllDayEvent({ uid, dtstamp, start, end, summary, description, loc
     `SUMMARY:${escapeICS(summary)}`,
     `DESCRIPTION:${escapeICS(description)}`,
     `LOCATION:${escapeICS(location || category)}`,
+    `CATEGORIES:${escapeICS(category || location || '')}`,
     'STATUS:CONFIRMED',
     'TRANSP:TRANSPARENT',
     'END:VEVENT',
