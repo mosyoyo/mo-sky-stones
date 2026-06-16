@@ -65,30 +65,24 @@ function validDate(value) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
-/**
- * ISO 时间 → UTC ICS 格式 (20260618T060000Z)
- * 与 ics-generator.js 的 formatICSDateTimeUTC 一致
- */
-function toICSUTC(isoStr) {
-  const d = new Date(isoStr);
-  return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+function addMinutes(date, minutes) {
+  return new Date(date.getTime() + minutes * 60 * 1000);
 }
 
-function toBeijingDateValue(isoStr) {
-  const d = new Date(new Date(isoStr).getTime() + 8 * 60 * 60 * 1000);
-  const y = d.getUTCFullYear();
-  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(d.getUTCDate()).padStart(2, '0');
-  return `${y}${m}${day}`;
+function formatICSUTCDate(date) {
+  return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 }
 
-function toBeijingExclusiveEndDateValue(isoStr) {
-  const d = new Date(new Date(isoStr).getTime() + 8 * 60 * 60 * 1000);
-  d.setUTCDate(d.getUTCDate() + 1);
-  const y = d.getUTCFullYear();
-  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(d.getUTCDate()).padStart(2, '0');
-  return `${y}${m}${day}`;
+function formatBeijingTimeRange(start, end) {
+  const fmt = new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+  return `${fmt.format(start)} - ${fmt.format(end)}`;
 }
 
 /**
@@ -111,13 +105,10 @@ function buildEventVEVENTS() {
   const lines = [];
   for (const ev of enabled) {
     const label = typeLabels[ev.type] || ev.type;
-    const uid = `${ev.id}@mo-sky-stones`;
     const startDate = validDate(ev.start);
     const endDate = validDate(ev.end);
     if (!startDate || !endDate || endDate <= startDate) continue;
 
-    const dtstart = toBeijingDateValue(ev.start);
-    const dtend = toBeijingExclusiveEndDateValue(ev.end);
     // 清理标题中的话题标签和多余换行
     const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
@@ -128,20 +119,59 @@ function buildEventVEVENTS() {
     ];
     const description = descLines.map(l => esc(l)).join('\\n');
 
+    const eventStart = startDate;
+    const eventStartEnd = addMinutes(eventStart, 60);
+    const endReminderStart = addMinutes(endDate, -60);
+    const endReminderEnd = addMinutes(endReminderStart, 30);
+    const safeLabel = label.replace(/\s+/g, '');
+    const baseUid = `${formatICSUTCDate(eventStart)}-${safeLabel}-公告-${ev.type}@sky-stones-ics`;
+
     lines.push(buildLines([
       'BEGIN:VEVENT',
-      `UID:${uid}`,
+      `UID:${baseUid}`,
       `DTSTAMP:${dtstamp}`,
-      `DTSTART;VALUE=DATE:${dtstart}`,
-      `DTEND;VALUE=DATE:${dtend}`,
+      `DTSTART:${formatICSUTCDate(eventStart)}`,
+      `DTEND:${formatICSUTCDate(eventStartEnd)}`,
       `SUMMARY:${esc(`【${label}】${cleanTitle}`)}`,
       `DESCRIPTION:${description}`,
       `LOCATION:${esc(label)}`,
       `CATEGORIES:游戏,光遇,${label}`,
       'STATUS:CONFIRMED',
-      'TRANSP:TRANSPARENT',
+      'TRANSP:OPAQUE',
+      'BEGIN:VALARM',
+      `UID:${baseUid}-alarm`,
+      `X-WR-ALARMUID:${baseUid}-alarm`,
+      'TRIGGER;RELATED=START:-PT10M',
+      'ACTION:DISPLAY',
+      `DESCRIPTION:${esc(`${label}将在 10 分钟后开始`)}`,
+      'END:VALARM',
       'END:VEVENT',
     ]));
+
+    if (endReminderStart > eventStart) {
+      const endUid = `${formatICSUTCDate(endReminderStart)}-${safeLabel}-结束提醒-${ev.type}@sky-stones-ics`;
+      lines.push(buildLines([
+        'BEGIN:VEVENT',
+        `UID:${endUid}`,
+        `DTSTAMP:${dtstamp}`,
+        `DTSTART:${formatICSUTCDate(endReminderStart)}`,
+        `DTEND:${formatICSUTCDate(endReminderEnd)}`,
+        `SUMMARY:${esc(`【${label}】即将结束`)}`,
+        `DESCRIPTION:${esc(`${cleanTitle}\n结束时间: ${formatBeijingTimeRange(endReminderStart, endDate)}`)}`,
+        `LOCATION:${esc(label)}`,
+        `CATEGORIES:游戏,光遇,${label}`,
+        'STATUS:CONFIRMED',
+        'TRANSP:OPAQUE',
+        'BEGIN:VALARM',
+        `UID:${endUid}-alarm`,
+        `X-WR-ALARMUID:${endUid}-alarm`,
+        'TRIGGER;RELATED=START:PT0M',
+        'ACTION:DISPLAY',
+        `DESCRIPTION:${esc(`${label}将在 1 小时后结束`)}`,
+        'END:VALARM',
+        'END:VEVENT',
+      ]));
+    }
   }
   return lines;
 }
