@@ -340,6 +340,7 @@ function buildReminderEvents(events, options = {}) {
         description: `${summary} ${beijingText(end)}结束`,
         location: label,
         category: label,
+        alarm: { trigger: '-PT1M', description: `${endReminderTitle}即将开始` },
       }));
     }
   }
