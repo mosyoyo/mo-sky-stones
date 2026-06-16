@@ -79,32 +79,31 @@ async function main() {
   const current = readJSON('feeds.json', []);
   const currentMap = new Map(current.map(feed => [feed.id, feed]));
   const list = [];
-  let cursor = 0;
+  const oldestTime = current
+    .map(feed => Number(feed.createTime || 0))
+    .filter(Boolean)
+    .sort((a, b) => a - b)[0];
+  let maxTime = oldestTime ? oldestTime - 1 : Date.now() + 24 * 60 * 60 * 1000;
+  let minTime = 0;
   let page = 0;
 
   while (list.length < TARGET_COUNT && page < 10) {
     const url = new URL(LIST_URL);
     url.searchParams.set('feedTypes', FEED_TYPES);
     url.searchParams.set('someOneUid', OFFICIAL_UID);
-    url.searchParams.set('cursor', String(cursor));
-    url.searchParams.set('pageSize', String(PAGE_SIZE));
-    url.searchParams.set('limit', String(PAGE_SIZE));
-    url.searchParams.set('size', String(PAGE_SIZE));
-    url.searchParams.set('count', String(PAGE_SIZE));
+    url.searchParams.set('maxTime', String(maxTime));
+    url.searchParams.set('minTime', String(minTime));
     const payload = await fetchJSON(url);
     const batch = collectFeeds(payload);
     for (const item of batch) list.push(item);
     const typed = collectByType(payload);
     for (const item of typed) list.push(item);
-    const nextCursor = payload?.result?.nextCursor
-      ?? payload?.result?.cursor
-      ?? payload?.cursor
-      ?? payload?.data?.cursor
-      ?? payload?.data?.nextCursor
-      ?? payload?.result?.nextPageCursor
-      ?? payload?.nextPageCursor;
-    if (nextCursor == null || String(nextCursor) === String(cursor)) break;
-    cursor = nextCursor;
+    const nextRange = payload?.result?.nextRangeParam;
+    const nextMaxTime = Number(nextRange?.maxTime);
+    const nextMinTime = Number(nextRange?.minTime ?? 0);
+    if (!nextMaxTime || Number.isNaN(nextMaxTime) || nextMaxTime >= maxTime) break;
+    maxTime = nextMaxTime;
+    minTime = nextMinTime;
     page++;
   }
 
