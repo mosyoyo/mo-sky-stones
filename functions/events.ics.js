@@ -43,47 +43,8 @@ function formatBeijingTimeRange(start, end) {
   return `${fmt.format(start)} - ${fmt.format(end)}`;
 }
 
-function formatBeijingClockRange(start, end) {
-  const fmt = new Intl.DateTimeFormat('zh-CN', {
-    timeZone: 'Asia/Shanghai',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-  return `${fmt.format(start)} - ${fmt.format(end)}`;
-}
-
 function uidPart(value) {
   return String(value || 'event').replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '') || 'event';
-}
-
-function displayEventInfo(ev, label, cleanTitle, start, end) {
-  if (ev.type === 'traveling_spirit') {
-    return {
-      startSummary: '【旅行先祖】遇境·复刻先祖',
-      endSummary: '【旅行先祖】即将结束',
-      location: '遇境 - 旅行先祖',
-      description: [
-        '地图: 遇境',
-        '区域: 旅行先祖',
-        '时间: ' + formatBeijingClockRange(start, end),
-      ].join('\n'),
-      startAlarm: '旅行先祖将在 10 分钟后开始',
-      endAlarm: '旅行先祖将在 1 小时后结束',
-    };
-  }
-
-  return {
-    startSummary: '【' + label + '】' + cleanTitle,
-    endSummary: '【' + label + '】即将结束',
-    location: label,
-    description: [
-      '类型: ' + label,
-      '标题: ' + cleanTitle,
-    ].join('\n'),
-    startAlarm: label + '将在 10 分钟后开始',
-    endAlarm: label + '将在 1 小时后结束',
-  };
 }
 
 const CRLF = '\r\n';
@@ -158,9 +119,17 @@ export async function onRequestGet(context) {
 
       const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
+      // 描述：与红石 ICS 完全一致——用字面量 \n（不行折叠）
+      // 红石 ics-generator.js 双重 escapeICS 产生 CR + 字面量 \n + 空格
+      // 这里直接用 \n 连接再整体 escapeICS，效果一致
+      const descriptionLines = [
+        '类型: ' + label,
+        '标题: ' + cleanTitle,
+      ];
+      const description = escapeICS(descriptionLines.join('\n'));
+
       const eventStart = startDate;
       const eventStartEnd = addMinutes(eventStart, 60);
-      const display = displayEventInfo(ev, label, cleanTitle, eventStart, eventStartEnd);
       const endReminderStart = addMinutes(endDate, -60);
       const endReminderEnd = addMinutes(endReminderStart, 30);
       const safeLabel = label.replace(/\s+/g, '');
@@ -173,9 +142,9 @@ export async function onRequestGet(context) {
         'DTSTAMP:' + dtstamp,
         'DTSTART:' + formatICSUTCDate(eventStart),
         'DTEND:' + formatICSUTCDate(eventStartEnd),
-        'SUMMARY:' + escapeICS(display.startSummary),
-        'DESCRIPTION:' + escapeICS(display.description),
-        'LOCATION:' + escapeICS(display.location),
+        'SUMMARY:' + escapeICS('【' + label + '】' + cleanTitle),
+        'DESCRIPTION:' + description,
+        'LOCATION:' + escapeICS(label),
         'CATEGORIES:游戏,光遇,' + label,
         'STATUS:CONFIRMED',
         'TRANSP:OPAQUE',
@@ -184,7 +153,7 @@ export async function onRequestGet(context) {
         'X-WR-ALARMUID:' + baseUid + '-alarm',
         'TRIGGER;RELATED=START:-PT10M',
         'ACTION:DISPLAY',
-        'DESCRIPTION:' + escapeICS(display.startAlarm),
+        'DESCRIPTION:' + escapeICS(label + '将在 10 分钟后开始'),
         'END:VALARM',
         'END:VEVENT',
       );
@@ -197,9 +166,9 @@ export async function onRequestGet(context) {
           'DTSTAMP:' + dtstamp,
           'DTSTART:' + formatICSUTCDate(endReminderStart),
           'DTEND:' + formatICSUTCDate(endReminderEnd),
-          'SUMMARY:' + escapeICS(display.endSummary),
+          'SUMMARY:' + escapeICS('【' + label + '】即将结束'),
           'DESCRIPTION:' + escapeICS(`${cleanTitle}\n结束时间: ${formatBeijingTimeRange(endReminderStart, endDate)}`),
-          'LOCATION:' + escapeICS(display.location),
+          'LOCATION:' + escapeICS(label),
           'CATEGORIES:游戏,光遇,' + label,
           'STATUS:CONFIRMED',
           'TRANSP:OPAQUE',
@@ -208,7 +177,7 @@ export async function onRequestGet(context) {
           'X-WR-ALARMUID:' + endUid + '-alarm',
           'TRIGGER;RELATED=START:PT0M',
           'ACTION:DISPLAY',
-          'DESCRIPTION:' + escapeICS(display.endAlarm),
+          'DESCRIPTION:' + escapeICS(label + '将在 1 小时后结束'),
           'END:VALARM',
           'END:VEVENT',
         );
