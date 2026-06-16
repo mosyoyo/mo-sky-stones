@@ -24,25 +24,13 @@ function escapeICS(text) {
     .replace(/\r/g, '')
     .replace(/;/g, '\\;')
     .replace(/,/g, '\\,')
-    .replace(/\n/g, '\\n');
+    .replace(/\n/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function foldLine(line) {
-  const out = [];
-  let current = '';
-  const encoder = typeof TextEncoder !== 'undefined' ? new TextEncoder() : null;
-  const byteLength = value => encoder ? encoder.encode(value).length : Buffer.byteLength(value, 'utf8');
-  for (const ch of Array.from(line)) {
-    const next = current + ch;
-    if (current && byteLength(next) > 73) {
-      out.push(current);
-      current = ' ' + ch;
-    } else {
-      current = next;
-    }
-  }
-  out.push(current);
-  return out.join(CRLF);
+  return String(line || '');
 }
 
 function buildLines(lines) {
@@ -238,6 +226,14 @@ function eventDurationDays(event) {
   return Math.max(0, (new Date(event.end) - new Date(event.start)) / 86400000);
 }
 
+function shortSummary(title, label) {
+  const cleaned = String(title || label || '光遇提醒')
+    .replace(/[【】]/g, '')
+    .replace(/\s+/g, '')
+    .trim();
+  return cleaned || label || '光遇提醒';
+}
+
 function createTimedEvent({ uid, dtstamp, start, end, summary, description, location, category, alarm }) {
   const lines = [
     'BEGIN:VEVENT',
@@ -296,8 +292,8 @@ function buildReminderEvents(events, options = {}) {
     const title = event.title || label;
     const start = new Date(event.start);
     const end = new Date(event.end);
-    const duration = eventDurationDays(event);
-    const desc = `类型: ${label}\n标题: ${title}\n时间: ${beijingText(start)} - ${beijingText(end)}`;
+    const summary = shortSummary(title, label);
+    const desc = `${label} ${beijingText(start)}-${beijingText(end)}`;
 
     if (event.type === 'bonus') {
       blocks.push(createAllDayEvent({
@@ -305,7 +301,7 @@ function buildReminderEvents(events, options = {}) {
         dtstamp,
         start,
         end,
-        summary: `【${label}】${title}`,
+        summary,
         description: desc,
         location: label,
         category: label,
@@ -323,7 +319,7 @@ function buildReminderEvents(events, options = {}) {
         dtstamp,
         start,
         end,
-        summary: `【${label}】${title}`,
+        summary,
         description: desc,
         location: label,
         category: label,
@@ -339,7 +335,7 @@ function buildReminderEvents(events, options = {}) {
         start: end,
         end: addMinutes(end, 30),
         summary: endReminderTitle,
-        description: `${title}\n结束时间: ${beijingText(end)}`,
+        description: `${summary} ${beijingText(end)}结束`,
         location: label,
         category: label,
       }));
