@@ -85,8 +85,47 @@ function formatBeijingTimeRange(start, end) {
   return `${fmt.format(start)} - ${fmt.format(end)}`;
 }
 
+function formatBeijingClockRange(start, end) {
+  const fmt = new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+  return `${fmt.format(start)} - ${fmt.format(end)}`;
+}
+
 function uidPart(value) {
   return String(value || 'event').replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '') || 'event';
+}
+
+function displayEventInfo(ev, label, cleanTitle, start, end) {
+  if (ev.type === 'traveling_spirit') {
+    return {
+      startSummary: '【旅行先祖】遇境·复刻先祖',
+      endSummary: '【旅行先祖】即将结束',
+      location: '遇境 - 旅行先祖',
+      description: [
+        '地图: 遇境',
+        '区域: 旅行先祖',
+        '时间: ' + formatBeijingClockRange(start, end),
+      ].join('\n'),
+      startAlarm: '旅行先祖将在 10 分钟后开始',
+      endAlarm: '旅行先祖将在 1 小时后结束',
+    };
+  }
+
+  return {
+    startSummary: '【' + label + '】' + cleanTitle,
+    endSummary: '【' + label + '】即将结束',
+    location: label,
+    description: [
+      '类型: ' + label,
+      '标题: ' + cleanTitle,
+    ].join('\n'),
+    startAlarm: label + '将在 10 分钟后开始',
+    endAlarm: label + '将在 1 小时后结束',
+  };
 }
 
 /**
@@ -116,15 +155,9 @@ function buildEventVEVENTS() {
     // 清理标题中的话题标签和多余换行
     const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
-    // 描述：与红石 ICS 格式一致，用 \n 分隔多行
-    const descLines = [
-      '类型: ' + label,
-      '标题: ' + cleanTitle,
-    ];
-    const description = descLines.map(l => esc(l)).join('\\n');
-
     const eventStart = startDate;
     const eventStartEnd = addMinutes(eventStart, 60);
+    const display = displayEventInfo(ev, label, cleanTitle, eventStart, eventStartEnd);
     const endReminderStart = addMinutes(endDate, -60);
     const endReminderEnd = addMinutes(endReminderStart, 30);
     const safeLabel = label.replace(/\s+/g, '');
@@ -137,9 +170,9 @@ function buildEventVEVENTS() {
       `DTSTAMP:${dtstamp}`,
       `DTSTART:${formatICSUTCDate(eventStart)}`,
       `DTEND:${formatICSUTCDate(eventStartEnd)}`,
-      `SUMMARY:${esc(`【${label}】${cleanTitle}`)}`,
-      `DESCRIPTION:${description}`,
-      `LOCATION:${esc(label)}`,
+      `SUMMARY:${esc(display.startSummary)}`,
+      `DESCRIPTION:${esc(display.description)}`,
+      `LOCATION:${esc(display.location)}`,
       `CATEGORIES:游戏,光遇,${label}`,
       'STATUS:CONFIRMED',
       'TRANSP:OPAQUE',
@@ -148,7 +181,7 @@ function buildEventVEVENTS() {
       `X-WR-ALARMUID:${baseUid}-alarm`,
       'TRIGGER;RELATED=START:-PT10M',
       'ACTION:DISPLAY',
-      `DESCRIPTION:${esc(`${label}将在 10 分钟后开始`)}`,
+      `DESCRIPTION:${esc(display.startAlarm)}`,
       'END:VALARM',
       'END:VEVENT',
     ]));
@@ -161,9 +194,9 @@ function buildEventVEVENTS() {
         `DTSTAMP:${dtstamp}`,
         `DTSTART:${formatICSUTCDate(endReminderStart)}`,
         `DTEND:${formatICSUTCDate(endReminderEnd)}`,
-        `SUMMARY:${esc(`【${label}】即将结束`)}`,
+        `SUMMARY:${esc(display.endSummary)}`,
         `DESCRIPTION:${esc(`${cleanTitle}\n结束时间: ${formatBeijingTimeRange(endReminderStart, endDate)}`)}`,
-        `LOCATION:${esc(label)}`,
+        `LOCATION:${esc(display.location)}`,
         `CATEGORIES:游戏,光遇,${label}`,
         'STATUS:CONFIRMED',
         'TRANSP:OPAQUE',
@@ -172,7 +205,7 @@ function buildEventVEVENTS() {
         `X-WR-ALARMUID:${endUid}-alarm`,
         'TRIGGER;RELATED=START:PT0M',
         'ACTION:DISPLAY',
-        `DESCRIPTION:${esc(`${label}将在 1 小时后结束`)}`,
+        `DESCRIPTION:${esc(display.endAlarm)}`,
         'END:VALARM',
         'END:VEVENT',
       ]));
