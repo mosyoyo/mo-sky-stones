@@ -29,6 +29,15 @@ function escapeICS(text) {
     .trim();
 }
 
+function escapeICSLine(text) {
+  return String(text || '')
+    .replace(/\\/g, '\\\\')
+    .replace(/\r/g, '')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .trim();
+}
+
 function foldLine(line) {
   return String(line || '');
 }
@@ -234,6 +243,11 @@ function shortSummary(title, label) {
   return cleaned || label || '光遇提醒';
 }
 
+function buildDescription(lines) {
+  const chunks = Array.isArray(lines) ? lines : [lines];
+  return chunks.map(line => escapeICSLine(line)).join('\r\n ');
+}
+
 function createTimedEvent({ uid, dtstamp, start, end, summary, description, location, category, alarm }) {
   const lines = [
     'BEGIN:VEVENT',
@@ -295,7 +309,11 @@ function buildReminderEvents(events, options = {}) {
     const start = new Date(event.start);
     const end = new Date(event.end);
     const summary = shortSummary(title, label);
-    const desc = `${label} ${beijingText(start)}-${beijingText(end)}`;
+    const desc = buildDescription([
+      `类型: ${label}`,
+      `标题: ${summary}`,
+      `时间: ${beijingText(start)} - ${beijingText(end)}`,
+    ]);
 
     if (event.type === 'bonus') {
       blocks.push(createAllDayEvent({
@@ -322,7 +340,12 @@ function buildReminderEvents(events, options = {}) {
         start,
         end,
         summary,
-        description: desc,
+        description: buildDescription([
+          `类型: ${label}`,
+          `标题: ${summary}`,
+          `时间: ${beijingText(start)} - ${beijingText(end)}`,
+          event.type === 'bonus' ? '全天活动' : '开始提醒',
+        ]),
         location: label,
         category: label,
         alarm: mainAlarm,
@@ -337,7 +360,10 @@ function buildReminderEvents(events, options = {}) {
         start: end,
         end: addMinutes(end, 30),
         summary: endReminderTitle,
-        description: `${summary} ${beijingText(end)}结束`,
+        description: buildDescription([
+          `标题: ${summary}`,
+          `结束时间: ${beijingText(end)}`,
+        ]),
         location: label,
         category: label,
         alarm: { trigger: '-PT1M', description: `${endReminderTitle}即将开始` },
