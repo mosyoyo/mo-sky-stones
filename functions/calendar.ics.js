@@ -71,16 +71,15 @@ export async function onRequestGet(context) {
           const dtend = toICSUTC(ev.end);
           const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
-          // 描述：与红石 ICS 完全一致——用字面量 \n（不行折叠）
-          // 红石 ics-generator.js 的 DESCRIPTION 经过双重 escapeICS：
-          //   第一层：每行 escapeICS → 第二层：整段再 escapeICS → \r\n 中的 \n 变成 \\n
-          // 最终输出：CR + 字面量 \n + 空格，iOS 能正确识别
-          // 这里直接用 \n 字面量连接，再整体 escapeICS，效果完全一致
+          // 描述：与红石 ICS 完全一致的行折叠格式
+          // 先转义每行，再用 CRLF + 空格（行折叠）连接
           const descriptionLines = [
             '类型: ' + label,
             '标题: ' + cleanTitle,
           ];
-          const description = escapeICS(descriptionLines.join('\n'));
+          const description = descriptionLines
+            .map(line => escapeICS(line))
+            .join('\r\n ');  // \r\n + 空格 = ICS 行折叠
 
           const lines = [
             'BEGIN:VEVENT',

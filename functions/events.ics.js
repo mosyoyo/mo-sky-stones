@@ -65,14 +65,14 @@ export async function onRequestGet(context) {
       const dtend = toICSUTC(ev.end);
       const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
-      // 描述：与红石 ICS 完全一致——用字面量 \n（不行折叠）
-      // 红石 ics-generator.js 双重 escapeICS 产生 CR + 字面量 \n + 空格
-      // 这里直接用 \n 连接再整体 escapeICS，效果一致
+      // 描述：与红石 ICS 完全一致的行折叠格式
       const descriptionLines = [
         '类型: ' + label,
         '标题: ' + cleanTitle,
       ];
-      const description = escapeICS(descriptionLines.join('\n'));
+      const description = descriptionLines
+        .map(line => escapeICS(line))
+        .join('\r\n ');  // \r\n + 空格 = ICS 行折叠
 
       lines.push(
         'BEGIN:VEVENT',
