@@ -229,6 +229,11 @@ function uidPart(value) {
   return String(value || 'event').replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '') || 'event';
 }
 
+function compactUid(value) {
+  const id = uidPart(value);
+  return id.length > 28 ? id.slice(-28) : id;
+}
+
 function eventDurationDays(event) {
   return Math.max(0, (new Date(event.end) - new Date(event.start)) / 86400000);
 }
@@ -249,8 +254,6 @@ function createTimedEvent({ uid, dtstamp, start, end, summary, description, loca
   if (alarm) {
     lines.push(
       'BEGIN:VALARM',
-      `UID:${uid}-alarm`,
-      `X-WR-ALARMUID:${uid}-alarm`,
       `TRIGGER;RELATED=START:${alarm.trigger}`,
       'ACTION:DISPLAY',
       `DESCRIPTION:${escapeICS(alarm.description)}`,
@@ -288,7 +291,7 @@ function buildReminderEvents(events, options = {}) {
     if (!event.start || !event.end || new Date(event.end) <= new Date(event.start)) continue;
 
     const label = TYPE_LABELS[event.type] || event.type;
-    const id = uidPart(event.id || event.sourceFeedId || event.title);
+    const id = compactUid(event.sourceFeedId || event.id || event.title);
     const title = event.title || label;
     const start = new Date(event.start);
     const end = new Date(event.end);
@@ -347,7 +350,6 @@ function buildReminderEvents(events, options = {}) {
         description: `${title}\n结束时间: ${beijingText(end)}`,
         location: label,
         category: label,
-        alarm: { trigger: 'PT0M', description: `${label}即将结束` },
       }));
     }
   }

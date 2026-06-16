@@ -8,43 +8,76 @@
 </head>
 <body>
   <main>
-    <nav><a href="/">订阅</a><a href="/admin/events/">事件</a><a href="/admin/sync/">同步</a></nav>
-    <h1>公告审核</h1>
-    <div class="toolbar filters">
-      <div class="row compact">
-        <select id="typeFilter">
-          <option value="all">全部类型</option>
-          <option value="traveling_spirit">旅行先祖</option>
-          <option value="season">季节</option>
-          <option value="activity">活动</option>
-          <option value="bonus">双倍活动</option>
-          <option value="maintenance">维护更新</option>
-          <option value="other">其他</option>
-        </select>
-        <select id="statusFilter">
-          <option value="all">全部状态</option>
-          <option value="pending">待审核</option>
-          <option value="approved">已批准</option>
-          <option value="ignored">已忽略</option>
-        </select>
-      </div>
-      <label class="toggle"><input id="hideOther" type="checkbox" checked>隐藏其他</label>
+    <nav class="shell-nav">
+      <a href="/">订阅</a>
+      <a class="active" href="/admin/feed/">公告</a>
+      <a href="/admin/events/">事件</a>
+      <a href="/admin/sync/">同步</a>
+    </nav>
+    <div class="shell">
+      <aside class="sidebar">
+        <h1>公告审核</h1>
+        <p class="muted">先看分类，再改标题和时间，最后统一提交。</p>
+        <div class="stack">
+          <button class="navbtn active" data-panel="review">审核</button>
+          <button class="navbtn" data-panel="preview">预览</button>
+        </div>
+        <div class="filters">
+          <label class="chip">
+            <span>类型</span>
+            <select id="typeFilter">
+              <option value="all">全部</option>
+              <option value="traveling_spirit">旅行先祖</option>
+              <option value="season">季节</option>
+              <option value="activity">活动</option>
+              <option value="bonus">双倍活动</option>
+              <option value="maintenance">维护更新</option>
+              <option value="other">其他</option>
+            </select>
+          </label>
+          <label class="chip">
+            <span>状态</span>
+            <select id="statusFilter">
+              <option value="all">全部</option>
+              <option value="pending">待审核</option>
+              <option value="approved">已批准</option>
+              <option value="ignored">已忽略</option>
+            </select>
+          </label>
+          <label class="pill"><input id="hideOther" type="checkbox" checked>隐藏其他</label>
+        </div>
+        <div class="toolbar shell-toolbar">
+          <span id="pendingCount" class="muted">暂无待提交改动</span>
+          <button id="commit" disabled>统一提交</button>
+        </div>
+      </aside>
+      <section class="workspace">
+        <div id="preview" class="preview-card">
+          <h2>事件预览</h2>
+          <p class="muted">选中一条公告后，会在这里显示清洗后的标题和时间。</p>
+          <div id="previewEmpty" class="empty">还没选中公告</div>
+          <div id="previewBody" hidden>
+            <div class="preview-title" id="previewTitle"></div>
+            <div class="preview-meta" id="previewMeta"></div>
+            <div class="preview-desc" id="previewDesc"></div>
+          </div>
+        </div>
+        <div id="list"></div>
+      </section>
     </div>
-    <div class="toolbar">
-      <span id="pendingCount" class="muted">暂无待提交改动</span>
-      <button id="commit" disabled>统一提交</button>
-    </div>
-    <div id="list"></div>
   </main>
   <script>
     const typeNames = { traveling_spirit: '旅行先祖', season: '季节', activity: '活动', bonus: '双倍活动', maintenance: '维护更新', other: '其他' };
     const types = Object.keys(typeNames);
     const drafts = new Map();
     let feeds = [];
+    let activeId = '';
     const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
     const tz = 'Asia/Shanghai';
-    const formatTime = value => value ? new Date(value).toLocaleString('zh-CN', { timeZone: tz, hour12: false }) : '未识别';
-    const toLocalInput = value => {
+    const formatDate = value => value ? new Date(value).toLocaleDateString('zh-CN', { timeZone: tz }) : '';
+    const formatClock = value => value ? new Date(value).toLocaleTimeString('zh-CN', { timeZone: tz, hour12: false, hour: '2-digit', minute: '2-digit' }) : '';
+    const formatTime = value => value ? `${formatDate(value)} ${formatClock(value)}` : '未识别';
+    const splitLocal = value => {
       if (!value) return '';
       const date = new Date(value);
       const parts = new Intl.DateTimeFormat('en-US', {
@@ -57,15 +90,22 @@
         hour12: false,
       }).formatToParts(date);
       const map = Object.fromEntries(parts.map(part => [part.type, part.value]));
-      return `${map.year}-${map.month}-${map.day}T${map.hour}:${map.minute}`;
+      return { date: `${map.year}-${map.month}-${map.day}`, time: `${map.hour}:${map.minute}` };
     };
-    const toUTCISO = value => {
-      if (!value) return '';
-      const [datePart, timePart] = value.split('T');
-      if (!datePart || !timePart) return value;
+    const localToUTC = (datePart, timePart) => {
+      if (!datePart || !timePart) return '';
       const [year, month, day] = datePart.split('-').map(Number);
       const [hour, minute] = timePart.split(':').map(Number);
       return new Date(Date.UTC(year, month - 1, day, hour - 8, minute || 0, 0)).toISOString();
+    };
+    const toLocalInput = value => {
+      const out = splitLocal(value);
+      return out ? `${out.date}T${out.time}` : '';
+    };
+    const splitDraft = value => {
+      const local = toLocalInput(value);
+      const [date = '', time = ''] = local.split('T');
+      return { date, time };
     };
     async function load() {
       const box = document.querySelector('#list');
@@ -82,10 +122,15 @@
         box.innerHTML = '<section><strong>暂无公告</strong><p>运行同步后，这里会显示抓到的官方动态。</p></section>';
         return;
       }
+      activeId = activeId || feeds[0].id;
       render();
       document.querySelector('#typeFilter').onchange = render;
       document.querySelector('#statusFilter').onchange = render;
       document.querySelector('#hideOther').onchange = render;
+      document.querySelectorAll('[data-panel]').forEach(btn => btn.onclick = () => {
+        document.querySelectorAll('[data-panel]').forEach(item => item.classList.toggle('active', item === btn));
+        document.querySelector('#preview').style.display = btn.dataset.panel === 'preview' ? 'block' : 'block';
+      });
     }
     function filteredFeeds() {
       const typeFilter = document.querySelector('#typeFilter').value;
@@ -102,18 +147,28 @@
       const visible = filteredFeeds();
       if (!visible.length) {
         document.querySelector('#list').innerHTML = '<section><strong>没有符合条件的公告</strong><p>换个筛选条件试试。</p></section>';
+        renderPreview(null);
         return;
       }
+      const current = visible.find(feed => feed.id === activeId) || visible[0];
+      activeId = current.id;
+      renderPreview(current);
       document.querySelector('#list').innerHTML = visible.map(feed => `
-        <section data-feed="${h(feed.id)}">
+        <section class="feed-item ${feed.id === activeId ? 'selected' : ''}" data-feed="${h(feed.id)}" data-type="${h(feed.autoType)}" data-status="${h(feed.status)}">
           <div class="top"><strong>${h(feed.calendarTitle || feed.title || feed.id)}</strong><span>${h(feed.status)}</span></div>
           <p>${new Date(feed.createTime || Date.now()).toLocaleString('zh-CN', { hour12: false })}</p>
-          <p>自动识别：${h(typeNames[feed.autoType] || feed.autoType || '未知')} · ${feed.parsed ? '已识别时间' : '未识别时间'}</p>
+          <p class="meta">自动识别：${h(typeNames[feed.autoType] || feed.autoType || '未知')} · ${feed.parsed ? '已识别时间' : '未识别时间'}</p>
           <div class="grid">
             <label>日历标题<input data-field="title" value="${h(feed.calendarTitle || feed.title || '')}"></label>
             <label>类型<select data-field="type">${types.map(type => `<option value="${type}" ${feed.autoType === type ? 'selected' : ''}>${typeNames[type]}</option>`).join('')}</select></label>
-            <label>开始<input type="datetime-local" data-field="start" value="${h(toLocalInput(feed.parsedResult?.start || ''))}" placeholder="2026-06-18T06:00"></label>
-            <label>结束<input type="datetime-local" data-field="end" value="${h(toLocalInput(feed.parsedResult?.end || ''))}" placeholder="2026-06-22T12:00"></label>
+            <div class="datepair">
+              <label>开始日期<input type="date" data-field="start-date" value="${h(splitDraft(feed.parsedResult?.start || '').date)}"></label>
+              <label>开始时间<input type="time" data-field="start-time" value="${h(splitDraft(feed.parsedResult?.start || '').time)}"></label>
+            </div>
+            <div class="datepair">
+              <label>结束日期<input type="date" data-field="end-date" value="${h(splitDraft(feed.parsedResult?.end || '').date)}"></label>
+              <label>结束时间<input type="time" data-field="end-time" value="${h(splitDraft(feed.parsedResult?.end || '').time)}"></label>
+            </div>
           </div>
           <p class="muted">解析时间：${h(formatTime(feed.parsedResult?.start))} - ${h(formatTime(feed.parsedResult?.end))}</p>
           <details><summary>原文</summary><pre>${h(feed.content || '')}</pre></details>
@@ -122,16 +177,42 @@
             <button class="ghost" data-action="ignored" data-id="${feed.id}">标记忽略</button>
           </div>
         </section>`).join('');
-      document.querySelectorAll('button[data-action]').forEach(btn => btn.onclick = () => mark(btn));
+      document.querySelectorAll('button[data-action]').forEach(btn => btn.onclick = () => {
+        activeId = btn.dataset.id;
+        render();
+        mark(btn);
+      });
+      document.querySelectorAll('.feed-item').forEach(item => item.onclick = event => {
+        if (event.target.closest('input,select,button,details,summary,textarea')) return;
+        activeId = item.dataset.feed;
+        render();
+      });
       updateToolbar();
+    }
+    function renderPreview(feed) {
+      const empty = document.querySelector('#previewEmpty');
+      const body = document.querySelector('#previewBody');
+      if (!feed) {
+        empty.hidden = false;
+        body.hidden = true;
+        return;
+      }
+      const title = feed.calendarTitle || feed.title || feed.id;
+      const start = feed.parsedResult?.start;
+      const end = feed.parsedResult?.end;
+      empty.hidden = true;
+      body.hidden = false;
+      document.querySelector('#previewTitle').textContent = title;
+      document.querySelector('#previewMeta').textContent = `${typeNames[feed.autoType] || feed.autoType} · ${formatTime(start)} — ${formatTime(end)}`;
+      document.querySelector('#previewDesc').textContent = feed.content || '';
     }
     function readDraft(btn) {
       const feedId = btn.dataset.id;
       const status = btn.dataset.action;
       const section = btn.closest('section');
       const value = field => section?.querySelector(`[data-field="${field}"]`)?.value.trim();
-      const start = toUTCISO(value('start'));
-      const end = toUTCISO(value('end'));
+      const start = localToUTC(value('start-date'), value('start-time'));
+      const end = localToUTC(value('end-date'), value('end-time'));
       return { feedId, status, title: value('title'), type: value('type'), start, end };
     }
     function updateToolbar() {
