@@ -42,16 +42,18 @@ function main() {
     feed.parsed = Boolean(parsed.start && parsed.end);
     feed.parsedResult = parsed;
 
+    const existing = eventMap.get(feed.id);
+    if (existing && parsed.type !== 'other' && parsed.start && parsed.end) {
+      Object.assign(existing, {
+        type: parsed.type,
+        title: parsed.title || existing.title,
+        start: parsed.start,
+        end: parsed.end,
+      });
+    }
+
     if (feed.status === 'approved' && parsed.type !== 'other' && parsed.start && parsed.end) {
-      const existing = eventMap.get(feed.id);
-      if (existing) {
-        Object.assign(existing, {
-          type: parsed.type,
-          title: parsed.title || existing.title,
-          start: parsed.start,
-          end: parsed.end,
-        });
-      } else {
+      if (!existing) {
         eventMap.set(feed.id, eventFromFeed(feed, parsed));
         parsedCount++;
       }
