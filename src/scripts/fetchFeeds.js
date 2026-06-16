@@ -1,4 +1,5 @@
 // fetchFeeds.js — 从网易大神抓取官方动态
+// 支持翻页抓取，默认往前3个月
 // 输出：data/feeds.json + data/processedIds.json
 
 const fs = require('fs');
@@ -6,6 +7,9 @@ const path = require('path');
 const { DASHEN_UID, FEED_LIST_URL, FEED_TYPES } = require('../config');
 
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
+
+// 默认往前抓多少天（3个月）
+const DEFAULT_LOOKBACK_DAYS = 90;
 
 function readJSON(filename) {
   const fp = path.join(DATA_DIR, filename);
@@ -19,15 +23,21 @@ function writeJSON(filename, data) {
 }
 
 /**
- * 抓取大神动态列表
+ * 抓取大神动态列表（单页）
  */
-async function fetchFeedList() {
-  const url = `${FEED_LIST_URL}?feedTypes=${FEED_TYPES}&someOneUid=${DASHEN_UID}`;
+async function fetchFeedPage(maxTime) {
+  let url = `${FEED_LIST_URL}?feedTypes=${FEED_TYPES}&someOneUid=${DASHEN_UID}`;
+  if (maxTime) {
+    url += `&maxTime=${maxTime}`;
+  }
   const res = await fetch(url);
   if (!res.ok) throw new Error(`API 返回 ${res.status}`);
   const json = await res.json();
   if (json.code !== 200) throw new Error(`API 报错: ${json.errmsg}`);
-  return json.result.feeds || [];
+  return {
+    feeds: json.result.feeds || [],
+    nextMaxTime: json.result.nextRangeParam?.maxTime || null,
+  };
 }
 
 /**
@@ -43,7 +53,7 @@ function parseFeed(raw) {
 
   const body = content.body || {};
   let text = body.text || '';
-  // 清理正文中的话题标签行（#光遇# #xxx#）
+  // 清理正文中的话题标签（#光遇# #xxx#）
   text = text.replace(/#[^#\n]+#/g, '').replace(/\n{3,}/g, '\n\n').trim();
   let title = (body.title || '').replace(/#[^#\n]+#/g, '').trim();
   // 如果没有 title，取正文第一行
@@ -68,51 +78,89 @@ function parseFeed(raw) {
     updateTime: raw.updateTime,
     topics: (raw.topicInfoList || []).map(t => t.topicName),
     status: 'pending',       // pending / approved / ignored
-    autoType: null,           // 自动识别类型（第二阶段）
+    autoType: null,           // 自动识别类型
     parsed: false,            // 是否已解析过时间
     parsedEvent: null,        // 解析结果
   };
 }
 
 /**
- * 主流程：抓取 → 合并 → 保存
+ * 主流程：翻页抓取 → 合并 → 保存
+ * @param {number} lookbackDays - 往前抓多少天，默认90天
  */
-async function main() {
-  console.log('📡 开始抓取大神动态...');
+async function main(lookbackDays) {
+  if (!lookbackDays) lookbackDays = DEFAULT_LOOKBACK_DAYS;
+  const cutoffTime = Date.now() - lookbackDays * 24 * 60 * 60 * 1000;
+
+  console.log(`📡 开始抓取大神动态（往前 ${lookbackDays} 天）...`);
 
   const feeds = readJSON('feeds.json');
   const processedIds = readJSON('processedIds.json');
   const existingIds = new Set(feeds.map(f => f.id));
   const processedSet = new Set(processedIds);
 
-  const rawFeeds = await fetchFeedList();
-  console.log(`   抓到 ${rawFeeds.length} 条动态`);
+  let allNewFeeds = [];
+  let maxTime = null; // 第一次不传，之后用 nextRangeParam
+  let page = 0;
+  const MAX_PAGES = 30; // 安全上限
 
-  let newCount = 0;
-  for (const raw of rawFeeds) {
-    // 跳过已处理嘅
-    if (existingIds.has(raw.id) || processedSet.has(raw.id)) continue;
+  while (page < MAX_PAGES) {
+    page++;
+    const { feeds: rawFeeds, nextMaxTime } = await fetchFeedPage(maxTime);
 
-    const feed = parseFeed(raw);
-    feeds.unshift(feed);  // 新嘅放最前
-    processedIds.push(raw.id);
-    newCount++;
-    console.log(`   📢 新公告: ${feed.title || feed.content.slice(0, 30)}`);
+    if (rawFeeds.length === 0) {
+      console.log(`   第 ${page} 页：无数据，停止`);
+      break;
+    }
+
+    const lastTime = rawFeeds[rawFeeds.length - 1].createTime;
+    const lastDate = new Date(lastTime).toISOString().slice(0, 10);
+
+    // 过滤新动态
+    let newInPage = 0;
+    for (const raw of rawFeeds) {
+      if (existingIds.has(raw.id) || processedSet.has(raw.id)) continue;
+      const feed = parseFeed(raw);
+      allNewFeeds.push(feed);
+      processedIds.push(raw.id);
+      newInPage++;
+    }
+
+    console.log(`   第 ${page} 页：${rawFeeds.length} 条（新增 ${newInPage}），最新到 ${lastDate}`);
+
+    // 检查是否已经超过了时间范围
+    if (lastTime <= cutoffTime) {
+      console.log(`   ✅ 已到达 ${lookbackDays} 天前，停止翻页`);
+      break;
+    }
+
+    // 翻页
+    if (!nextMaxTime) {
+      console.log(`   无更多数据，停止`);
+      break;
+    }
+    maxTime = nextMaxTime;
   }
 
-  writeJSON('feeds.json', feeds);
+  // 合并：新的放最前，按时间排序
+  const allFeeds = [...allNewFeeds, ...feeds];
+  // 按 createTime 降序排列
+  allFeeds.sort((a, b) => (b.createTime || 0) - (a.createTime || 0));
+
+  writeJSON('feeds.json', allFeeds);
   writeJSON('processedIds.json', processedIds);
 
-  console.log(`\n✅ 完成！新增 ${newCount} 条，总计 ${feeds.length} 条`);
-  return { newCount, total: feeds.length };
+  console.log(`\n✅ 完成！新增 ${allNewFeeds.length} 条，总计 ${allFeeds.length} 条，翻了 ${page} 页`);
+  return { newCount: allNewFeeds.length, total: allFeeds.length, pages: page };
 }
 
 // 直接运行
 if (require.main === module) {
-  main().catch(err => {
+  const lookbackDays = parseInt(process.argv[2]) || DEFAULT_LOOKBACK_DAYS;
+  main(lookbackDays).catch(err => {
     console.error('❌ 抓取失败:', err.message);
     process.exit(1);
   });
 }
 
-module.exports = { fetchFeedList, parseFeed, main };
+module.exports = { fetchFeedPage, parseFeed, main, DEFAULT_LOOKBACK_DAYS };
