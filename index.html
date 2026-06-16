@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>光遇日历订阅</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; color: #202124; background: #f7f8fa; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 18px; }
+    h1 { font-size: 24px; margin: 0 0 20px; }
+    section { background: #fff; border: 1px solid #dfe3e8; border-radius: 8px; padding: 18px; margin-bottom: 16px; }
+    label { display: flex; align-items: center; gap: 8px; padding: 8px 0; }
+    input[type="checkbox"] { width: 18px; height: 18px; }
+    input[type="text"] { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid #c8ced6; border-radius: 6px; font-size: 14px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 4px 20px; }
+    .row { display: flex; gap: 8px; margin-top: 12px; }
+    button, a.button { border: 1px solid #1f6feb; background: #1f6feb; color: #fff; border-radius: 6px; padding: 9px 12px; font-size: 14px; text-decoration: none; cursor: pointer; }
+    .ghost { background: #fff; color: #1f6feb; }
+    .muted { color: #5f6368; font-size: 13px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>光遇日历订阅</h1>
+    <section>
+      <div class="grid">
+        <label><input type="checkbox" value="red" checked>红石</label>
+        <label><input type="checkbox" value="black" checked>黑石</label>
+        <label><input type="checkbox" value="traveling_spirit">旅行先祖</label>
+        <label><input type="checkbox" value="season">季节</label>
+        <label><input type="checkbox" value="activity">活动</label>
+        <label><input type="checkbox" value="bonus">双倍活动</label>
+        <label><input type="checkbox" value="maintenance">维护更新</label>
+      </div>
+      <div class="row">
+        <input id="url" type="text" readonly>
+      </div>
+      <div class="row">
+        <button id="copy">复制链接</button>
+        <a id="open" class="button ghost" href="#">打开订阅</a>
+      </div>
+      <p class="muted">需要稳定使用时，建议先只订阅红石和黑石。活动订阅可以单独测试。</p>
+    </section>
+    <section>
+      <p class="muted">管理入口：<a href="/admin/feed/">公告</a> / <a href="/admin/events/">事件</a> / <a href="/admin/sync/">同步日志</a></p>
+    </section>
+  </main>
+  <script>
+    const checks = [...document.querySelectorAll('input[type="checkbox"]')];
+    const url = document.querySelector('#url');
+    const openLink = document.querySelector('#open');
+    function update() {
+      const types = checks.filter(c => c.checked).map(c => c.value).join(',');
+      const value = `${location.origin}/calendar.ics?types=${encodeURIComponent(types)}`;
+      url.value = value;
+      openLink.href = value;
+    }
+    checks.forEach(c => c.addEventListener('change', update));
+    document.querySelector('#copy').addEventListener('click', async () => navigator.clipboard.writeText(url.value));
+    update();
+  </script>
+</body>
+</html>

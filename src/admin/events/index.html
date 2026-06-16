@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>事件管理</title>
+  <link rel="stylesheet" href="/src/admin/style.css">
+</head>
+<body>
+  <main>
+    <nav><a href="/">订阅</a><a href="/admin/feed/">公告</a><a href="/admin/sync/">同步</a></nav>
+    <h1>事件管理</h1>
+    <div id="list"></div>
+    <div class="row"><button id="save">保存</button></div>
+  </main>
+  <script>
+    let events = [];
+    async function load() {
+      events = await fetch('/api/events').then(r => r.json());
+      render();
+    }
+    function render() {
+      document.querySelector('#list').innerHTML = events.map((event, index) => `
+        <section>
+          <label><input type="checkbox" data-field="enabled" data-index="${index}" ${event.enabled ? 'checked' : ''}>启用</label>
+          <input data-field="title" data-index="${index}" value="${event.title || ''}" placeholder="标题">
+          <select data-field="type" data-index="${index}">
+            ${['traveling_spirit','season','activity','bonus','maintenance','other'].map(t => `<option value="${t}" ${event.type === t ? 'selected' : ''}>${t}</option>`).join('')}
+          </select>
+          <input data-field="start" data-index="${index}" value="${event.start || ''}" placeholder="开始 ISO">
+          <input data-field="end" data-index="${index}" value="${event.end || ''}" placeholder="结束 ISO">
+          <button class="ghost" data-delete="${index}">删除</button>
+        </section>`).join('');
+      document.querySelectorAll('[data-field]').forEach(el => el.oninput = () => {
+        const value = el.type === 'checkbox' ? el.checked : el.value;
+        events[Number(el.dataset.index)][el.dataset.field] = value;
+      });
+      document.querySelectorAll('[data-delete]').forEach(el => el.onclick = () => {
+        events.splice(Number(el.dataset.delete), 1);
+        render();
+      });
+    }
+    document.querySelector('#save').onclick = async () => {
+      const res = await fetch('/api/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(events) });
+      const data = await res.json();
+      alert(data.ok ? '已保存' : (data.error || '保存失败'));
+    };
+    load();
+  </script>
+</body>
+</html>

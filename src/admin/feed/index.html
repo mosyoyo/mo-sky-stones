@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>公告审核</title>
+  <link rel="stylesheet" href="/src/admin/style.css">
+</head>
+<body>
+  <main>
+    <nav><a href="/">订阅</a><a href="/admin/events/">事件</a><a href="/admin/sync/">同步</a></nav>
+    <h1>公告审核</h1>
+    <div id="list"></div>
+  </main>
+  <script>
+    const typeNames = { traveling_spirit: '旅行先祖', season: '季节', activity: '活动', bonus: '双倍活动', maintenance: '维护更新', other: '其他' };
+    async function load() {
+      const feeds = await fetch('/api/feed').then(r => r.json());
+      document.querySelector('#list').innerHTML = feeds.map(feed => `
+        <section>
+          <div class="top"><strong>${feed.title || feed.id}</strong><span>${feed.status}</span></div>
+          <p>${new Date(feed.createTime || Date.now()).toLocaleString()}</p>
+          <p>类型：${typeNames[feed.autoType] || feed.autoType || '未知'}</p>
+          <details><summary>详情</summary><pre>${feed.content || ''}</pre></details>
+          <div class="row">
+            <button data-action="approved" data-id="${feed.id}">批准</button>
+            <button class="ghost" data-action="ignored" data-id="${feed.id}">忽略</button>
+          </div>
+        </section>`).join('');
+      document.querySelectorAll('button[data-action]').forEach(btn => btn.onclick = () => approve(btn.dataset.id, btn.dataset.action));
+    }
+    async function approve(feedId, status) {
+      const res = await fetch('/api/approve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ feedId, status }),
+      });
+      const data = await res.json();
+      if (!data.ok) alert(data.error || '保存失败');
+      await load();
+    }
+    load();
+  </script>
+</body>
+</html>

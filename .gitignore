@@ -2,3 +2,4 @@
 *.ics
 node_modules/
 *.log
+.wrangler/

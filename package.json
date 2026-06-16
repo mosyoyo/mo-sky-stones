@@ -4,6 +4,10 @@
   "description": "光遇国服红黑石时间表 iCal 日历订阅",
   "private": true,
   "scripts": {
+    "fetch": "node src/scripts/fetchFeeds.js",
+    "parse": "node src/scripts/parseFeed.js",
+    "build:events": "node src/scripts/buildEvents.js",
+    "sync": "node src/scripts/syncEvents.js",
     "preview": "node test.js",
     "test": "node test.js"
   },

@@ -2,7 +2,7 @@
 
 光遇国服红黑石日历订阅。
 
-项目会生成两个 `.ics` 订阅地址，每天只保留最后一场；如果当天最后一场在 23 点以后开始，就改用前一场。
+项目提供红石、黑石和活动提醒订阅。红黑石每天只保留最后一场；如果当天最后一场在 23 点以后开始，就改用前一场。
 
 ## 订阅
 
@@ -11,6 +11,8 @@
 ```text
 https://你的域名/red.ics
 https://你的域名/black.ics
+https://你的域名/events.ics
+https://你的域名/calendar.ics?types=red,black
 ```
 
 当前部署示例：
@@ -19,6 +21,8 @@ https://你的域名/black.ics
 https://sky-stones-bni.pages.dev/red.ics
 https://sky-stones-bni.pages.dev/black.ics
 ```
+
+主页可以勾选内容并生成自选订阅链接。
 
 ## 部署
 
@@ -37,6 +41,7 @@ Pages Functions 会处理 `/red.ics` 和 `/black.ics`。
 
 ```bash
 npm test
+npm run build:events
 ```
 
 测试会在本地生成 `preview-red.ics` 和 `preview-black.ics`。这些文件已被忽略，不会提交到 GitHub。
@@ -49,6 +54,8 @@ calendar-engine.js     日期和场次计算
 ics-generator.js       生成日历订阅内容
 functions/red.ics.js   红石订阅
 functions/black.ics.js 黑石订阅
+functions/events.ics.js 活动订阅
+functions/calendar.ics.js 自选合并订阅
 test.js                本地检查
 ```
 
