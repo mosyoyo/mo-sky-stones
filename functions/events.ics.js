@@ -85,10 +85,6 @@ function validDate(value) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
-function shouldIncludeEvent(endDate) {
-  return endDate >= new Date();
-}
-
 export async function onRequestGet(context) {
   try {
     // 从静态 JSON 读取事件
@@ -120,7 +116,6 @@ export async function onRequestGet(context) {
       const startDate = validDate(ev.start);
       const endDate = validDate(ev.end);
       if (!startDate || !endDate || endDate <= startDate) continue;
-      if (!shouldIncludeEvent(endDate)) continue;
 
       const cleanTitle = (ev.title || '').replace(/#[^#\s]+#/g, '').replace(/\n/g, ' ').trim();
 
