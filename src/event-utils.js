@@ -29,6 +29,14 @@ function escapeICS(text) {
     .trim();
 }
 
+function escapeDescriptionICS(text) {
+  return String(text || '')
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\n/g, '\\n');
+}
+
 function escapeICSLine(text) {
   return String(text || '')
     .replace(/\\/g, '\\\\')
@@ -256,7 +264,7 @@ function createTimedEvent({ uid, dtstamp, start, end, summary, description, loca
     `DTSTART:${formatUTC(start)}`,
     `DTEND:${formatUTC(end)}`,
     `SUMMARY:${escapeICS(summary)}`,
-    `DESCRIPTION:${escapeICS(description)}`,
+    `DESCRIPTION:${escapeDescriptionICS(description)}`,
     `LOCATION:${escapeICS(location || category)}`,
     `CATEGORIES:${escapeICS(category || location || '')}`,
     'STATUS:CONFIRMED',
@@ -283,7 +291,7 @@ function createAllDayEvent({ uid, dtstamp, start, end, summary, description, loc
     `DTSTART;VALUE=DATE:${formatDateValue(start)}`,
     `DTEND;VALUE=DATE:${formatDateValue(addDays(end, 1))}`,
     `SUMMARY:${escapeICS(summary)}`,
-    `DESCRIPTION:${escapeICS(description)}`,
+    `DESCRIPTION:${escapeDescriptionICS(description)}`,
     `LOCATION:${escapeICS(location || category)}`,
     `CATEGORIES:${escapeICS(category || location || '')}`,
     'STATUS:CONFIRMED',
