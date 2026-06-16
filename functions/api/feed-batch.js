@@ -1,4 +1,4 @@
-const { detectType, extractDateRange, uidPart } = require('../../src/event-utils');
+const { cleanEventTitle, detectType, extractDateRange, uidPart } = require('../../src/event-utils');
 const { githubPutJSONFiles, json, readAssetJSON } = require('../_shared');
 
 function upsertEvent(events, feed, item) {
@@ -13,7 +13,7 @@ function upsertEvent(events, feed, item) {
   Object.assign(event, {
     enabled: item.enabled !== false,
     type,
-    title: item.title || feed.title || type,
+    title: item.title || cleanEventTitle(feed.title, feed.content, type) || feed.title || type,
     start: range.start,
     end: range.end,
   });

@@ -1,4 +1,4 @@
-const { detectType, extractDateRange, normalizeFeed, uidPart } = require('../event-utils');
+const { cleanEventTitle, detectType, extractDateRange, normalizeFeed, uidPart } = require('../event-utils');
 const { appendSyncLog, readJSON, writeJSON } = require('./common');
 
 function parseFeed(feed) {
@@ -7,6 +7,7 @@ function parseFeed(feed) {
   const range = extractDateRange(feed.title, feed.content, baseTime);
   return {
     type,
+    title: cleanEventTitle(feed.title, feed.content, type),
     start: range ? range.start : '',
     end: range ? range.end : '',
   };
@@ -17,7 +18,7 @@ function eventFromFeed(feed, parsed) {
     id: `${parsed.type}-${uidPart(feed.id)}`,
     enabled: false,
     type: parsed.type,
-    title: feed.title || parsed.type,
+    title: parsed.title || feed.title || parsed.type,
     start: parsed.start,
     end: parsed.end,
     sourceFeedId: feed.id,
@@ -43,7 +44,14 @@ function main() {
 
     if (feed.status === 'approved' && parsed.type !== 'other' && parsed.start && parsed.end) {
       const existing = eventMap.get(feed.id);
-      if (!existing) {
+      if (existing) {
+        Object.assign(existing, {
+          type: parsed.type,
+          title: parsed.title || existing.title,
+          start: parsed.start,
+          end: parsed.end,
+        });
+      } else {
         eventMap.set(feed.id, eventFromFeed(feed, parsed));
         parsedCount++;
       }

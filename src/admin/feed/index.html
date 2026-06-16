@@ -10,6 +10,26 @@
   <main>
     <nav><a href="/">订阅</a><a href="/admin/events/">事件</a><a href="/admin/sync/">同步</a></nav>
     <h1>公告审核</h1>
+    <div class="toolbar filters">
+      <div class="row compact">
+        <select id="typeFilter">
+          <option value="all">全部类型</option>
+          <option value="traveling_spirit">旅行先祖</option>
+          <option value="season">季节</option>
+          <option value="activity">活动</option>
+          <option value="bonus">双倍活动</option>
+          <option value="maintenance">维护更新</option>
+          <option value="other">其他</option>
+        </select>
+        <select id="statusFilter">
+          <option value="all">全部状态</option>
+          <option value="pending">待审核</option>
+          <option value="approved">已批准</option>
+          <option value="ignored">已忽略</option>
+        </select>
+      </div>
+      <label class="toggle"><input id="hideOther" type="checkbox" checked>隐藏其他</label>
+    </div>
     <div class="toolbar">
       <span id="pendingCount" class="muted">暂无待提交改动</span>
       <button id="commit" disabled>统一提交</button>
@@ -20,6 +40,7 @@
     const typeNames = { traveling_spirit: '旅行先祖', season: '季节', activity: '活动', bonus: '双倍活动', maintenance: '维护更新', other: '其他' };
     const types = Object.keys(typeNames);
     const drafts = new Map();
+    let feeds = [];
     const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
     const tz = 'Asia/Shanghai';
     const formatTime = value => value ? new Date(value).toLocaleString('zh-CN', { timeZone: tz, hour12: false }) : '未识别';
@@ -49,7 +70,6 @@
     async function load() {
       const box = document.querySelector('#list');
       box.innerHTML = '<p class="muted">正在读取公告...</p>';
-      let feeds = [];
       try {
         const res = await fetch('/api/feed');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -62,13 +82,35 @@
         box.innerHTML = '<section><strong>暂无公告</strong><p>运行同步后，这里会显示抓到的官方动态。</p></section>';
         return;
       }
-      document.querySelector('#list').innerHTML = feeds.map(feed => `
+      render();
+      document.querySelector('#typeFilter').onchange = render;
+      document.querySelector('#statusFilter').onchange = render;
+      document.querySelector('#hideOther').onchange = render;
+    }
+    function filteredFeeds() {
+      const typeFilter = document.querySelector('#typeFilter').value;
+      const statusFilter = document.querySelector('#statusFilter').value;
+      const hideOther = document.querySelector('#hideOther').checked;
+      return feeds.filter(feed => {
+        if (typeFilter !== 'all' && feed.autoType !== typeFilter) return false;
+        if (statusFilter !== 'all' && feed.status !== statusFilter) return false;
+        if (hideOther && feed.autoType === 'other') return false;
+        return true;
+      });
+    }
+    function render() {
+      const visible = filteredFeeds();
+      if (!visible.length) {
+        document.querySelector('#list').innerHTML = '<section><strong>没有符合条件的公告</strong><p>换个筛选条件试试。</p></section>';
+        return;
+      }
+      document.querySelector('#list').innerHTML = visible.map(feed => `
         <section data-feed="${h(feed.id)}">
-          <div class="top"><strong>${h(feed.title || feed.id)}</strong><span>${h(feed.status)}</span></div>
+          <div class="top"><strong>${h(feed.calendarTitle || feed.title || feed.id)}</strong><span>${h(feed.status)}</span></div>
           <p>${new Date(feed.createTime || Date.now()).toLocaleString('zh-CN', { hour12: false })}</p>
           <p>自动识别：${h(typeNames[feed.autoType] || feed.autoType || '未知')} · ${feed.parsed ? '已识别时间' : '未识别时间'}</p>
           <div class="grid">
-            <label>日历标题<input data-field="title" value="${h(feed.title || '')}"></label>
+            <label>日历标题<input data-field="title" value="${h(feed.calendarTitle || feed.title || '')}"></label>
             <label>类型<select data-field="type">${types.map(type => `<option value="${type}" ${feed.autoType === type ? 'selected' : ''}>${typeNames[type]}</option>`).join('')}</select></label>
             <label>开始<input type="datetime-local" data-field="start" value="${h(toLocalInput(feed.parsedResult?.start || ''))}" placeholder="2026-06-18T06:00"></label>
             <label>结束<input type="datetime-local" data-field="end" value="${h(toLocalInput(feed.parsedResult?.end || ''))}" placeholder="2026-06-22T12:00"></label>

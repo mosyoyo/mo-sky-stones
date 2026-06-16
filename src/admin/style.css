@@ -46,6 +46,15 @@ section {
   box-shadow: 0 10px 30px rgba(0,0,0,.06);
   backdrop-filter: blur(16px);
 }
+.filters { align-items: flex-end; flex-wrap: wrap; }
+.compact { display: flex; gap: 10px; flex-wrap: wrap; }
+.toggle {
+  min-height: 40px;
+  padding: 0 8px;
+  background: transparent;
+  border: 0;
+  width: auto;
+}
 .row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
 .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; margin-top: 10px; }
 .muted { color: #6e6e73; }

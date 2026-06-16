@@ -1,3 +1,4 @@
+const { cleanEventTitle } = require('../../src/event-utils');
 const { json, readAssetJSON } = require('../_shared');
 
 function compactFeed(feed) {
@@ -8,6 +9,7 @@ function compactFeed(feed) {
     createTime: feed.createTime || 0,
     status: feed.status || 'pending',
     autoType: feed.autoType || 'other',
+    calendarTitle: feed.parsedResult?.title || cleanEventTitle(feed.title, feed.content, feed.autoType || 'other'),
     parsed: Boolean(feed.parsed),
     parsedResult: feed.parsedResult || null,
   };

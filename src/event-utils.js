@@ -15,7 +15,7 @@ const TYPE_KEYWORDS = {
   season: ['季节开启', '季节结束', '新季节', '赛季'],
   activity: ['活动开启', '周年庆', '自然日', '音乐节', '花憩节', '彩染季', '端午', '七周年'],
   bonus: ['双倍蜡烛', '双倍爱心', '双倍季蜡', '额外烛火'],
-  maintenance: ['停服', '维护', '更新维护', '升级维护'],
+  maintenance: ['停服', '维护', '更新维护', '升级维护', '版本更新', '更新时间公告', '更新公告'],
 };
 
 function escapeICS(text) {
@@ -96,6 +96,37 @@ function detectType(title = '', content = '') {
   return 'other';
 }
 
+function cleanEventTitle(title = '', content = '', type = '') {
+  let text = cleanText(`${title}\n${content}`)
+    .replace(/#[^#\n]+#/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const firstLine = cleanText(title).split('\n')[0] || text;
+  let short = firstLine
+    .replace(/#[^#\n]+#/g, '')
+    .replace(/^\d{1,2}月\d{1,2}日[丨|\s]*/, '')
+    .trim();
+
+  if (/[丨|]/.test(short)) short = short.split(/[丨|]/).pop().trim();
+
+  if (type === 'traveling_spirit' || /旅行先祖|复刻|先祖到访|先祖即将到访/.test(text)) return '旅行先祖';
+  if (type === 'maintenance' || /停服|维护|版本更新|更新时间公告/.test(text)) return '《光·遇》维护更新';
+  if (/端午/.test(text)) return '《光·遇》端午节';
+  if (/七周年/.test(text)) return '《光·遇》七周年';
+  if (/致梵高/.test(text)) return '《光·遇》致梵高';
+  if (/星光奖/.test(text)) return '《光·遇》星光奖';
+  if (/自然日/.test(text)) return '《光·遇》自然日';
+  if (/音乐节/.test(text)) return '《光·遇》音乐节';
+  if (/花憩节/.test(text)) return '《光·遇》花憩节';
+
+  short = short
+    .replace(/《光·遇》/g, '')
+    .replace(/更新内容公告|更新时间公告|更新公告|规则说明|到临提醒|即将到临|正式开启/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return short ? `《光·遇》${short}` : (TYPE_LABELS[type] || '光遇提醒');
+}
+
 function cleanText(text = '') {
   return String(text)
     .replace(/<[^>]+>/g, '')
@@ -123,6 +154,10 @@ function parseDateMatch(match, fallbackYear) {
   const hour = match[3] == null ? 0 : Number(match[3]);
   const minute = match[4] == null ? 0 : Number(match[4]);
   return new Date(Date.UTC(fallbackYear, month - 1, day, hour - 8, minute, 0));
+}
+
+function parseBeijingDateTime(year, month, day, hour = 0, minute = 0) {
+  return new Date(Date.UTC(year, month - 1, day, hour - 8, minute, 0));
 }
 
 const WEEKDAY_MAP = {
@@ -160,6 +195,20 @@ function extractDateRange(title = '', content = '', now = new Date()) {
     return { start: relatives[0].toISOString(), end: relatives[relatives.length - 1].toISOString() };
   }
 
+  const sameDayTimeRange = text.match(/(\d{1,2})月(\d{1,2})日\s*(\d{1,2})[:：](\d{2})\s*(?:至|到|~|—|-)\s*(\d{1,2})[:：](\d{2})/);
+  if (sameDayTimeRange) {
+    const month = Number(sameDayTimeRange[1]);
+    const day = Number(sameDayTimeRange[2]);
+    const startHour = Number(sameDayTimeRange[3]);
+    const startMinute = Number(sameDayTimeRange[4]);
+    const endHour = Number(sameDayTimeRange[5]);
+    const endMinute = Number(sameDayTimeRange[6]);
+    let start = parseBeijingDateTime(year, month, day, startHour, startMinute);
+    let end = parseBeijingDateTime(year, month, day, endHour, endMinute);
+    if (end <= start) end = addDays(end, 1);
+    return { start: start.toISOString(), end: end.toISOString() };
+  }
+
   const dateTime = '(\\d{1,2})月(\\d{1,2})日(?:\\s*(\\d{1,2})[:：](\\d{2}))?';
   const between = new RegExp(`${dateTime}[\\s\\S]{0,20}(?:至|到|~|—|-)[\\s\\S]{0,20}${dateTime}`);
   const range = text.match(between);
@@ -194,7 +243,6 @@ function createTimedEvent({ uid, dtstamp, start, end, summary, description, loca
     `SUMMARY:${escapeICS(summary)}`,
     `DESCRIPTION:${escapeICS(description)}`,
     `LOCATION:${escapeICS(location || category)}`,
-    `CATEGORIES:游戏,光遇,${escapeICS(category)}`,
     'STATUS:CONFIRMED',
     'TRANSP:OPAQUE',
   ];
@@ -223,7 +271,6 @@ function createAllDayEvent({ uid, dtstamp, start, end, summary, description, loc
     `SUMMARY:${escapeICS(summary)}`,
     `DESCRIPTION:${escapeICS(description)}`,
     `LOCATION:${escapeICS(location || category)}`,
-    `CATEGORIES:游戏,光遇,${escapeICS(category)}`,
     'STATUS:CONFIRMED',
     'TRANSP:TRANSPARENT',
     'END:VEVENT',
@@ -296,7 +343,7 @@ function buildReminderEvents(events, options = {}) {
         dtstamp,
         start: reminderStart,
         end: addMinutes(reminderStart, 30),
-        summary: event.type === 'traveling_spirit' ? '⚠️旅行先祖即将离开' : `【${label}】即将结束`,
+        summary: event.type === 'traveling_spirit' ? '旅行先祖即将离开' : `【${label}】即将结束`,
         description: `${title}\n结束时间: ${beijingText(end)}`,
         location: label,
         category: label,
@@ -350,6 +397,7 @@ module.exports = {
   TYPE_LABELS,
   buildReminderEvents,
   cleanText,
+  cleanEventTitle,
   detectType,
   escapeICS,
   extractDateRange,
