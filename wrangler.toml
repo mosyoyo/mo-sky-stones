@@ -1,6 +1,0 @@
-name = "mo-sky-stones"
-compatibility_date = "2024-01-01"
-
-# 排除 src/ 目录，避免 Workers bundler 尝试打包含 fs/path 的脚本
-[site]
-exclude = ["src/**", "data/**", ".github/**"]
