@@ -58,12 +58,16 @@ function generateICS(filterType, days = 30, calName = '光遇') {
 
   for (const { date, event } of upcoming) {
     const summary = `【${typeName}】${event.map}·${event.area}`;
+    // 描述使用真正的换行符 + RFC 5545 行折叠（前导空格）
     const descriptionLines = [
       `地图: ${event.map}`,
       `区域: ${event.area}`,
       `时间: ${event.startTime} - ${event.endTime}`,
     ];
-    const description = descriptionLines.join('\n');
+    // ICS 行折叠：换行后加一个空格
+    const description = descriptionLines
+      .map(line => escapeICS(line))
+      .join('\r\n ');  // \r\n + 空格 = 行折叠
 
     // 转 UTC 时间（iOS/Android 都识识别，更可靠）
     const [sh, sm] = event.startTime.split(':');
