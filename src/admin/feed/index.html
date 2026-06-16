@@ -16,7 +16,31 @@
     const typeNames = { traveling_spirit: '旅行先祖', season: '季节', activity: '活动', bonus: '双倍活动', maintenance: '维护更新', other: '其他' };
     const types = Object.keys(typeNames);
     const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-    const formatTime = value => value ? new Date(value).toLocaleString('zh-CN', { hour12: false }) : '未识别';
+    const tz = 'Asia/Shanghai';
+    const formatTime = value => value ? new Date(value).toLocaleString('zh-CN', { timeZone: tz, hour12: false }) : '未识别';
+    const toLocalInput = value => {
+      if (!value) return '';
+      const date = new Date(value);
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }).formatToParts(date);
+      const map = Object.fromEntries(parts.map(part => [part.type, part.value]));
+      return `${map.year}-${map.month}-${map.day}T${map.hour}:${map.minute}`;
+    };
+    const toUTCISO = value => {
+      if (!value) return '';
+      const [datePart, timePart] = value.split('T');
+      if (!datePart || !timePart) return value;
+      const [year, month, day] = datePart.split('-').map(Number);
+      const [hour, minute] = timePart.split(':').map(Number);
+      return new Date(Date.UTC(year, month - 1, day, hour - 8, minute || 0, 0)).toISOString();
+    };
     async function load() {
       const box = document.querySelector('#list');
       box.innerHTML = '<p class="muted">正在读取公告...</p>';
@@ -41,8 +65,8 @@
           <div class="grid">
             <label>日历标题<input data-field="title" value="${h(feed.title || '')}"></label>
             <label>类型<select data-field="type">${types.map(type => `<option value="${type}" ${feed.autoType === type ? 'selected' : ''}>${typeNames[type]}</option>`).join('')}</select></label>
-            <label>开始<input data-field="start" value="${h(feed.parsedResult?.start || '')}" placeholder="2026-06-18T22:00:00.000Z"></label>
-            <label>结束<input data-field="end" value="${h(feed.parsedResult?.end || '')}" placeholder="2026-06-22T04:00:00.000Z"></label>
+            <label>开始<input type="datetime-local" data-field="start" value="${h(toLocalInput(feed.parsedResult?.start || ''))}" placeholder="2026-06-18T06:00"></label>
+            <label>结束<input type="datetime-local" data-field="end" value="${h(toLocalInput(feed.parsedResult?.end || ''))}" placeholder="2026-06-22T12:00"></label>
           </div>
           <p class="muted">解析时间：${h(formatTime(feed.parsedResult?.start))} - ${h(formatTime(feed.parsedResult?.end))}</p>
           <details><summary>原文</summary><pre>${h(feed.content || '')}</pre></details>
@@ -58,10 +82,12 @@
       const status = btn.dataset.action;
       const section = btn.closest('section');
       const value = field => section?.querySelector(`[data-field="${field}"]`)?.value.trim();
+      const start = toUTCISO(value('start'));
+      const end = toUTCISO(value('end'));
       const res = await fetch('/api/approve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ feedId, status, title: value('title'), type: value('type'), start: value('start'), end: value('end') }),
+        body: JSON.stringify({ feedId, status, title: value('title'), type: value('type'), start, end }),
       });
       const data = await res.json();
       if (!data.ok) alert(data.error || '保存失败');
