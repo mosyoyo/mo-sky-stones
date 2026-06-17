@@ -15,7 +15,7 @@ const TYPE_LABELS = {
 // - start: 事件开始前多久提醒（RELATED=START）
 // - end:   事件结束前多久提醒（RELATED=END），维护系结束时
 const REMINDERS = {
-  traveling_spirit: { start: '-PT10M', end: '-PT1H', startDesc: '复刻先祖即将开始', endDesc: '复刻先祖1小时后离开' },
+  traveling_spirit: { start: '-PT10M', end: '-PT16H', startDesc: '复刻先祖即将开始', endDesc: '复刻先祖明晚就要离开' },
   season:            { start: '-P1D',   end: '-P1D',  startDesc: '季节明天就要开始了', endDesc: '季节明天就要结束了' },
   activity:          { start: '-PT10M', end: '-PT1H', startDesc: '活动即将开始',       endDesc: '活动1小时后结束' },
   bonus:             { start: '-PT10M', end: '-PT3H', startDesc: '双倍即将开始',       endDesc: '双倍3小时后结束' },
@@ -404,7 +404,7 @@ function createAllDayEvent({ uid, dtstamp, start, end, summary, description, loc
     `CATEGORIES:${escapeICS(category || location || '')}`,
     'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE',
     'STATUS:CONFIRMED',
-    'TRANSP:TRANSPARENT',
+    'TRANSP:OPAQUE',
   ];
   if (alarm) {
     lines.push(
