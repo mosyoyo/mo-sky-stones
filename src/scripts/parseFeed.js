@@ -9,6 +9,15 @@ const {
 } = require('../event-utils');
 const { appendSyncLog, readJSON, writeJSON } = require('./common');
 
+const TYPE_TITLE_PREFIX = {
+  traveling_spirit: '【复刻】',
+  season: '【季节】',
+  activity: '【活动】',
+  bonus: '【双倍】',
+  candle_heap: '【大蜡烛】',
+  maintenance: '【维护】',
+};
+
 function parseFeed(feed) {
   let type = detectType(feed.title, feed.content);
   const baseTime = Number(feed.createTime || 0) > 0 ? new Date(Number(feed.createTime)) : new Date();
@@ -19,9 +28,15 @@ function parseFeed(feed) {
   const spiritLabel = type === 'traveling_spirit'
     ? extractTravelingSpiritLabel(`${feed.title || ''}\n${feed.content || ''}`)
     : '';
+  const prefix = TYPE_TITLE_PREFIX[type] || '';
+  const baseTitle = spiritLabel
+    ? `${prefix}${spiritLabel}`
+    : (cleanEventTitle(feed.title, feed.content, type) && prefix
+        ? `${prefix}${cleanEventTitle(feed.title, feed.content, type).replace(/^[《【].+?[》】]\s*/, '')}`
+        : cleanEventTitle(feed.title, feed.content, type));
   return {
     type,
-    title: spiritLabel ? `旅行先祖·${spiritLabel}` : cleanEventTitle(feed.title, feed.content, type),
+    title: baseTitle,
     start: range ? range.start : '',
     end: range ? range.end : '',
   };
@@ -82,8 +97,28 @@ function main() {
     }
   }
 
+  // 复刻先祖按时间窗口去重：同一时间窗口内只保留最早那条
+  const allEvents = [...eventMap.values()];
+  const spiritEvents = allEvents.filter(e => e.type === 'traveling_spirit' && e.start);
+  const spiritByBucket = new Map();
+  for (const ev of spiritEvents) {
+    const bucket = Math.floor(new Date(ev.start).getTime() / (10 * 24 * 60 * 60 * 1000));
+    if (!spiritByBucket.has(bucket)) spiritByBucket.set(bucket, []);
+    spiritByBucket.get(bucket).push(ev);
+  }
+  const keptIds = new Set();
+  for (const [, group] of spiritByBucket) {
+    if (group.length === 1) {
+      keptIds.add(group[0].id);
+    } else {
+      group.sort((a, b) => new Date(a.start) - new Date(b.start));
+      keptIds.add(group[0].id);
+    }
+  }
+  const finalEvents = allEvents.filter(e => e.type !== 'traveling_spirit' || keptIds.has(e.id));
+
   writeJSON('feeds.json', parsedFeeds);
-  writeJSON('events.json', [...eventMap.values()]);
+  writeJSON('events.json', finalEvents);
   appendSyncLog({ message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条`, addedEvents: parsedCount });
   console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}`);
 }

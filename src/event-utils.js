@@ -2,13 +2,25 @@ const CRLF = '\r\n';
 const OFFICIAL_UID = '154db622a20e4327ac277bc35d4f2e76';
 
 const TYPE_LABELS = {
-  traveling_spirit: '旅行先祖',
+  traveling_spirit: '复刻',
   season: '季节',
   activity: '活动',
-  bonus: '双倍活动',
+  bonus: '双倍',
   candle_heap: '大蜡烛',
-  maintenance: '维护更新',
+  maintenance: '维护',
   other: '其他',
+};
+
+// 各类型提醒配置
+// - start: 事件开始前多久提醒（RELATED=START）
+// - end:   事件结束前多久提醒（RELATED=END），维护系结束时
+const REMINDERS = {
+  traveling_spirit: { start: '-PT10M', end: '-PT1H', startDesc: '复刻先祖即将开始', endDesc: '复刻先祖1小时后离开' },
+  season:            { start: '-P1D',   end: '-P1D',  startDesc: '季节明天就要开始了', endDesc: '季节明天就要结束了' },
+  activity:          { start: '-PT10M', end: '-PT1H', startDesc: '活动即将开始',       endDesc: '活动1小时后结束' },
+  bonus:             { start: '-PT10M', end: '-PT3H', startDesc: '双倍即将开始',       endDesc: '双倍3小时后结束' },
+  candle_heap:       { start: '-PT10M', end: '-PT10M',startDesc: '大蜡烛即将开始',     endDesc: '大蜡烛即将结束' },
+  maintenance:       { start: '-PT0M',  end: '-PT0M', startDesc: '维护结束',           endDesc: '维护结束' },
 };
 
 const TYPE_KEYWORDS = {
@@ -142,6 +154,15 @@ function extractTravelingSpiritLabel(text = '') {
     .map(line => line.trim())
     .filter(Boolean);
 
+  // 优先取物理第 3 行（用户指定）
+  if (lines.length >= 3) {
+    const third = lines[2];
+    if (/[，,]/.test(third) && third.length <= 16 && !/光遇|先祖|到临|即将|重返天空王国|与先祖/.test(third)) {
+      return third.replace(/[~～。！？!?,，]$/, '');
+    }
+  }
+
+  // Fallback 1: 找含逗号的非描述性行
   const direct = lines.find(line => /[，,]/.test(line) && !/光遇|先祖|到临|即将|重返天空王国|与先祖/.test(line));
   if (direct) {
     const parts = direct.split(/[，,]/).map(part => part.trim()).filter(Boolean);
@@ -149,6 +170,7 @@ function extractTravelingSpiritLabel(text = '') {
     if (tail && tail.length <= 12) return tail.replace(/[~～。！？!?,，]$/, '');
   }
 
+  // Fallback 2: 正则匹配
   const whispered = source.match(/先祖正在(?:[^，。！？\n]{1,10}?)([^，。！？\n]{2,12})/);
   if (whispered && whispered[1]) return whispered[1].replace(/[~～。！？!?,，]$/, '');
 
@@ -277,10 +299,8 @@ function eventDurationDays(event) {
 }
 
 function shortSummary(title, label) {
-  const cleaned = String(title || label || '光遇提醒')
-    .replace(/[【】]/g, '')
-    .replace(/\s+/g, '')
-    .trim();
+  // 唔再剥【】，因为标题已经包含【】
+  const cleaned = String(title || label || '光遇提醒').replace(/\s+/g, '').trim();
   return cleaned || label || '光遇提醒';
 }
 
@@ -316,7 +336,7 @@ function createTimedEvent({ uid, dtstamp, start, end, summary, description, loca
   return buildLines(lines);
 }
 
-function createAllDayEvent({ uid, dtstamp, start, end, summary, description, location, category }) {
+function createAllDayEvent({ uid, dtstamp, start, end, summary, description, location, category, alarm }) {
   const lines = [
     'BEGIN:VEVENT',
     `UID:${uid}`,
@@ -327,16 +347,31 @@ function createAllDayEvent({ uid, dtstamp, start, end, summary, description, loc
     `DESCRIPTION:${escapeDescriptionICS(description)}`,
     `LOCATION:${escapeICS(location || category)}`,
     `CATEGORIES:${escapeICS(category || location || '')}`,
+    'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE',
     'STATUS:CONFIRMED',
     'TRANSP:TRANSPARENT',
-    'END:VEVENT',
   ];
+  if (alarm) {
+    lines.push(
+      'BEGIN:VALARM',
+      `TRIGGER;RELATED=START:${alarm.trigger}`,
+      'ACTION:DISPLAY',
+      `DESCRIPTION:${escapeICS(alarm.description)}`,
+      'END:VALARM',
+    );
+  }
+  lines.push('END:VEVENT');
   return buildLines(lines);
 }
 
 function buildReminderEvents(events, options = {}) {
   const types = new Set(options.types || Object.keys(TYPE_LABELS));
-  const eventMode = options.eventMode || 'all';
+  const endOnly = options.endOnly instanceof Set
+    ? options.endOnly
+    : new Set(Array.isArray(options.endOnly) ? options.endOnly : []);
+  const allDay = options.allDay instanceof Set
+    ? options.allDay
+    : new Set(Array.isArray(options.allDay) ? options.allDay : []);
   const dtstamp = formatUTC(new Date());
   const blocks = [];
 
@@ -350,94 +385,102 @@ function buildReminderEvents(events, options = {}) {
     const start = new Date(event.start);
     const end = new Date(event.end);
     const durationDays = eventDurationDays(event);
+    const useAllDay = allDay.has(event.type) || event.allDay === true;
 
     if (event.type === 'activity' && !isLikelyGameActivity(event)) {
       continue;
     }
 
     const summary = shortSummary(title, label);
-    const desc = buildDescription([
-      `类型: ${label}`,
-      `标题: ${summary}`,
-      `时间: ${beijingText(start)} - ${beijingText(end)}`,
-    ]);
+    const reminder = REMINDERS[event.type] || REMINDERS.activity;
 
-    if (event.type === 'bonus' || event.type === 'candle_heap') {
-      blocks.push(createTimedEvent({
-        uid: `${id}-${event.type}-range@sky-stones-ics`,
-        dtstamp,
-        start,
-        end,
-        summary,
-        description: desc,
-        location: label,
-        category: label,
-      }));
-      continue;
+    // 1) range 事件（持续事件）
+    if (!endOnly.has(event.type)) {
+      const rangeDesc = buildDescription([
+        `类型: ${label}`,
+        `标题: ${summary}`,
+        `时间: ${beijingText(start)} - ${beijingText(end)}`,
+      ]);
+      const rangeAlarm = { trigger: reminder.start, description: reminder.startDesc };
+      const rangeUid = `${id}-range@sky-stones-ics`;
+      blocks.push(useAllDay
+        ? createAllDayEvent({
+            uid: rangeUid,
+            dtstamp,
+            start,
+            end,
+            summary,
+            description: rangeDesc,
+            location: label,
+            category: label,
+            alarm: rangeAlarm,
+          })
+        : createTimedEvent({
+            uid: rangeUid,
+            dtstamp,
+            start,
+            end,
+            summary,
+            description: rangeDesc,
+            location: label,
+            category: label,
+            alarm: rangeAlarm,
+          }));
     }
 
-    const longActivity = event.type === 'activity' && durationDays > 5;
-    const mainAlarm = event.type === 'season'
-      ? { trigger: '-P1D', description: `${label}明天就要开始了` }
-      : { trigger: '-PT10M', description: `${label}将在 10 分钟后开始` };
-
-    if (eventMode !== 'end' && !longActivity) {
-      blocks.push(createTimedEvent({
-        uid: `${id}-range@sky-stones-ics`,
-        dtstamp,
-        start,
-        end,
-        summary,
-        description: buildDescription([
-          `类型: ${label}`,
-          `标题: ${summary}`,
-          `时间: ${beijingText(start)} - ${beijingText(end)}`,
-          event.type === 'bonus' ? '全天活动' : '开始提醒',
-        ]),
-        location: label,
-        category: label,
-        alarm: mainAlarm,
-      }));
-    }
-
-    if (longActivity && eventMode !== 'end') {
-      blocks.push(createTimedEvent({
-        uid: `${id}-start@sky-stones-ics`,
-        dtstamp,
-        start,
-        end: addMinutes(start, 30),
-        summary,
-        description: buildDescription([
-          `类型: ${label}`,
-          `标题: ${summary}`,
-          `开始时间: ${beijingText(start)}`,
-        ]),
-        location: label,
-        category: label,
-        alarm: mainAlarm,
-      }));
-    }
-
-    if (eventMode !== 'range') {
-      const endReminderTitle = event.type === 'traveling_spirit' ? '旅行先祖即将离开' : `【${label}】即将结束`;
-      blocks.push(createTimedEvent({
-        uid: `${id}-end-reminder@sky-stones-ics`,
-        dtstamp,
-        start: end,
-        end: addMinutes(end, 30),
-        summary: endReminderTitle,
-        description: buildDescription([
-          `标题: ${summary}`,
-          `结束时间: ${beijingText(end)}`,
-        ]),
-        location: label,
-        category: label,
-        alarm: { trigger: '-PT1M', description: `${endReminderTitle}即将开始` },
-      }));
+    // 2) end 提醒（结束前 X 小时/天）
+    // 红石黑石不参与
+    if (event.type !== 'maintenance' || endOnly.has(event.type)) {
+      const endTitle = event.type === 'traveling_spirit'
+        ? '复刻先祖即将离开'
+        : `【${label}】即将结束`;
+      const endDesc = buildDescription([
+        `标题: ${summary}`,
+        `结束时间: ${beijingText(end)}`,
+      ]);
+      const endUid = `${id}-end-reminder@sky-stones-ics`;
+      // 结束事件：从 end 时间前 N 开始，到 end 后 30min
+      const endStart = addMinutes(end, parseISODurationMinutes(reminder.end));
+      blocks.push(useAllDay
+        ? createAllDayEvent({
+            uid: endUid,
+            dtstamp,
+            start: endStart,
+            end: addMinutes(end, 30),
+            summary: endTitle,
+            description: endDesc,
+            location: label,
+            category: label,
+            alarm: { trigger: reminder.end, description: reminder.endDesc },
+          })
+        : createTimedEvent({
+            uid: endUid,
+            dtstamp,
+            start: endStart,
+            end: addMinutes(end, 30),
+            summary: endTitle,
+            description: endDesc,
+            location: label,
+            category: label,
+            alarm: { trigger: reminder.end, description: reminder.endDesc },
+          }));
     }
   }
 
   return blocks;
+}
+
+// 把 ISO 8601 duration (e.g. -PT1H, -P1D) 转成分钟数（取绝对值用于计算时间偏移）
+function parseISODurationMinutes(value) {
+  if (!value) return 0;
+  // 去掉负号，我们只需要绝对值来计算「N 分钟前」
+  const s = String(value).replace(/^-/, '');
+  const m = s.match(/^P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?)?$/);
+  if (!m) return 0;
+  const days = Number(m[1] || 0);
+  const hours = Number(m[2] || 0);
+  const minutes = Number(m[3] || 0);
+  return days * 24 * 60 + hours * 60 + minutes;
 }
 
 function generateEventsICS(events, options = {}) {
@@ -480,6 +523,7 @@ module.exports = {
   CRLF,
   OFFICIAL_UID,
   TYPE_LABELS,
+  REMINDERS,
   buildReminderEvents,
   cleanText,
   cleanEventTitle,
@@ -491,5 +535,6 @@ module.exports = {
   generateEventsICS,
   isLikelyGameActivity,
   normalizeFeed,
+  parseISODurationMinutes,
   uidPart,
 };

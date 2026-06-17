@@ -52,13 +52,54 @@ function parseTypes(url) {
   return value.split(',').map(s => s.trim()).filter(Boolean);
 }
 
+// 解析新提醒选项：endOnly + allDay
+// 支持 ?endOnly=traveling_spirit,activity&allDay=season&eventMode=all (向后兼容)
+function parseReminderOptions(url) {
+  const params = new URL(url).searchParams;
+  const allTypes = Object.keys(TYPE_LABELS);
+  const result = { endOnly: new Set(), allDay: new Set() };
+
+  // 1) 新参数：endOnly
+  const endOnlyRaw = params.get('endOnly');
+  if (endOnlyRaw) {
+    if (endOnlyRaw === 'all') {
+      allTypes.forEach(t => result.endOnly.add(t));
+    } else {
+      endOnlyRaw.split(',').map(s => s.trim()).filter(Boolean).forEach(t => {
+        if (TYPE_LABELS[t]) result.endOnly.add(t);
+      });
+    }
+  }
+
+  // 2) 新参数：allDay
+  const allDayRaw = params.get('allDay');
+  if (allDayRaw) {
+    allDayRaw.split(',').map(s => s.trim()).filter(Boolean).forEach(t => {
+      if (TYPE_LABELS[t]) result.allDay.add(t);
+    });
+  }
+
+  // 3) 向后兼容旧 eventMode
+  const eventMode = params.get('eventMode');
+  if (eventMode && !endOnlyRaw) {
+    if (eventMode === 'end') {
+      allTypes.forEach(t => result.endOnly.add(t));
+    }
+    // 'range' = 不加 endOnly（无结束提醒）= 默认
+    // 'all'   = 默认
+  }
+
+  return result;
+}
+
+// 旧函数保留向后兼容
 function parseEventMode(url) {
-  const value = new URL(url).searchParams.get('eventMode');
-  return ['all', 'range', 'end'].includes(value) ? value : 'all';
+  return new URL(url).searchParams.get('eventMode') || 'all';
 }
 
 function buildCalendar(events, types, options = {}) {
   const include = new Set(types);
+  const reminderOpts = options.reminderOpts || parseReminderOptions(options.url || 'https://x/?');
   const parts = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -74,7 +115,12 @@ function buildCalendar(events, types, options = {}) {
   if (include.has('black')) parts.push(...extractVEVENTS(generateStoneICS('black', 60, '光遇·黑石(最后一场)')));
   const eventTypes = [...include].filter(type => !['red', 'black'].includes(type));
   if (eventTypes.length) {
-    const ics = generateEventsICS(events, { name: '光遇·活动提醒', types: eventTypes, eventMode: options.eventMode });
+    const ics = generateEventsICS(events, {
+      name: '光遇·活动提醒',
+      types: eventTypes,
+      endOnly: reminderOpts.endOnly,
+      allDay: reminderOpts.allDay,
+    });
     parts.push(...extractVEVENTS(ics));
   }
 
@@ -185,6 +231,7 @@ module.exports = {
   githubPutJSON,
   json,
   parseEventMode,
+  parseReminderOptions,
   parseTypes,
   readAssetJSON,
 };

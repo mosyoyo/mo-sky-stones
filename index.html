@@ -34,6 +34,7 @@
     }
     .group { display: grid; gap: 14px; margin-bottom: 18px; }
     .group h2 { margin: 0; font-size: 16px; }
+    .group h3 { margin: 8px 0 0; font-size: 14px; color: #515154; font-weight: 500; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
     label {
       display: flex;
@@ -48,7 +49,8 @@
       color: #1d1d1f;
     }
     .mode label { justify-content: space-between; }
-    input[type="checkbox"], input[type="radio"] { width: 19px; height: 19px; accent-color: #0071e3; }
+    .master { background: #e8f2ff; border-color: rgba(0,113,227,.25); }
+    input[type="checkbox"] { width: 19px; height: 19px; accent-color: #0071e3; }
     input[type="text"] {
       width: 100%;
       min-width: 0;
@@ -75,6 +77,7 @@
     .muted { color: #6e6e73; font-size: 14px; line-height: 1.7; margin: 18px 0 0; }
     .linkbox { display: grid; gap: 10px; }
     .tiny { color: #6e6e73; font-size: 13px; }
+    .divider { height: 1px; background: rgba(0,0,0,.08); margin: 6px 0; }
     @media (max-width: 640px) {
       main { padding-top: 48px; }
       section { border-radius: 22px; padding: 18px; }
@@ -94,21 +97,44 @@
       <div class="group">
         <h2>订阅内容</h2>
         <div class="grid">
-          <label><input type="checkbox" value="red" checked>红石</label>
-          <label><input type="checkbox" value="black" checked>黑石</label>
-          <label><input type="checkbox" value="traveling_spirit">旅行先祖</label>
-          <label><input type="checkbox" value="season">季节</label>
-          <label><input type="checkbox" value="activity">活动</label>
-          <label><input type="checkbox" value="bonus">双倍活动</label>
-          <label><input type="checkbox" value="maintenance">维护更新</label>
+          <label><input type="checkbox" data-type="red" checked>红石</label>
+          <label><input type="checkbox" data-type="black" checked>黑石</label>
+          <label><input type="checkbox" data-type="traveling_spirit">复刻先祖</label>
+          <label><input type="checkbox" data-type="season">季节</label>
+          <label><input type="checkbox" data-type="activity">活动</label>
+          <label><input type="checkbox" data-type="bonus">双倍</label>
+          <label><input type="checkbox" data-type="candle_heap">大蜡烛</label>
+          <label><input type="checkbox" data-type="maintenance">维护</label>
         </div>
       </div>
+
       <div class="group mode">
-        <h2>活动模式</h2>
-        <label><span>两者都要</span><input type="radio" name="eventMode" value="all" checked></label>
-        <label><span>只要连续事件</span><input type="radio" name="eventMode" value="range"></label>
-        <label><span>只要结束提醒</span><input type="radio" name="eventMode" value="end"></label>
+        <h2>仅结束时提醒（排除范围事件）</h2>
+        <label class="master">
+          <span>全部应用（总开关）</span>
+          <input type="checkbox" id="endOnlyMaster">
+        </label>
+        <div class="grid">
+          <label><span>复刻先祖</span><input type="checkbox" data-endonly="traveling_spirit"></label>
+          <label><span>活动</span><input type="checkbox" data-endonly="activity"></label>
+          <label><span>季节</span><input type="checkbox" data-endonly="season"></label>
+          <label><span>双倍</span><input type="checkbox" data-endonly="bonus"></label>
+          <label><span>大蜡烛</span><input type="checkbox" data-endonly="candle_heap"></label>
+        </div>
       </div>
+
+      <div class="group mode">
+        <h2>持续事件标记为全天</h2>
+        <div class="grid">
+          <label><span>复刻先祖</span><input type="checkbox" data-allday="traveling_spirit"></label>
+          <label><span>活动</span><input type="checkbox" data-allday="activity"></label>
+          <label><span>季节</span><input type="checkbox" data-allday="season"></label>
+          <label><span>双倍</span><input type="checkbox" data-allday="bonus"></label>
+          <label><span>大蜡烛</span><input type="checkbox" data-allday="candle_heap"></label>
+          <label><span>维护</span><input type="checkbox" data-allday="maintenance"></label>
+        </div>
+      </div>
+
       <div class="linkbox">
         <input id="url" type="text" readonly>
         <div class="row">
@@ -116,31 +142,59 @@
           <a id="open" class="button ghost" href="#">打开订阅</a>
         </div>
       </div>
-      <p class="muted">红石和黑石默认开启；活动类内容会在后台审核后进入订阅。你可以先切换模式试一下，看看手机到底认哪一种。</p>
+      <p class="muted">红石和黑石默认开启；活动类内容会在后台审核后进入订阅。仅结束时提醒会去掉范围事件，只留结束前 X 小时的提醒。勾选「全天」后该类型事件以全天格式输出。</p>
       <p class="tiny" id="preview"></p>
     </section>
   </main>
   <script>
-    const checks = [...document.querySelectorAll('input[type="checkbox"]')];
-    const modes = [...document.querySelectorAll('input[name="eventMode"]')];
-    const url = document.querySelector('#url');
-    const openLink = document.querySelector('#open');
-    const preview = document.querySelector('#preview');
-    function update() {
-      const types = checks.filter(c => c.checked).map(c => c.value).join(',');
-      const eventMode = modes.find(r => r.checked)?.value || 'all';
-      const value = `${location.origin}/calendar.ics?types=${encodeURIComponent(types)}&eventMode=${encodeURIComponent(eventMode)}`;
-      url.value = value;
-      openLink.href = value;
-      preview.textContent = eventMode === 'all'
-        ? '当前模式：连续事件 + 结束提醒'
-        : eventMode === 'range'
-          ? '当前模式：只保留连续事件'
-          : '当前模式：只保留结束提醒';
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => [...document.querySelectorAll(s)];
+    const typeChecks = $$('input[data-type]');
+    const endOnlyChecks = $$('input[data-endonly]');
+    const allDayChecks = $$('input[data-allday]');
+    const endOnlyMaster = $('#endOnlyMaster');
+    const urlInput = $('#url');
+    const openLink = $('#open');
+    const preview = $('#preview');
+
+    function getSelected(attr) {
+      return $$(`input[data-${attr}]:checked`).map(c => c.getAttribute(`data-${attr}`));
     }
-    checks.forEach(c => c.addEventListener('change', update));
-    modes.forEach(r => r.addEventListener('change', update));
-    document.querySelector('#copy').addEventListener('click', async () => navigator.clipboard.writeText(url.value));
+
+    function update() {
+      const types = typeChecks.filter(c => c.checked).map(c => c.getAttribute('data-type'));
+      const endOnly = getSelected('endonly');
+      const allDay = getSelected('allday');
+      const params = new URLSearchParams();
+      params.set('types', types.join(','));
+      if (endOnly.length) params.set('endOnly', endOnly.join(','));
+      if (allDay.length) params.set('allDay', allDay.join(','));
+      const value = `${location.origin}/calendar.ics?${params.toString()}`;
+      urlInput.value = value;
+      openLink.href = value;
+      preview.textContent = `已选 ${types.length} 种类型 · 结束提醒 ${endOnly.length} 种 · 全天事件 ${allDay.length} 种`;
+    }
+
+    // 总开关联动
+    function syncMaster() {
+      const all = endOnlyChecks.length;
+      const checked = endOnlyChecks.filter(c => c.checked).length;
+      endOnlyMaster.checked = all > 0 && checked === all;
+      endOnlyMaster.indeterminate = checked > 0 && checked < all;
+    }
+
+    endOnlyMaster.addEventListener('change', () => {
+      endOnlyChecks.forEach(c => { c.checked = endOnlyMaster.checked; });
+      syncMaster();
+      update();
+    });
+
+    typeChecks.forEach(c => c.addEventListener('change', update));
+    endOnlyChecks.forEach(c => c.addEventListener('change', () => { syncMaster(); update(); }));
+    allDayChecks.forEach(c => c.addEventListener('change', update));
+    $('#copy').addEventListener('click', async () => navigator.clipboard.writeText(urlInput.value));
+
+    syncMaster();
     update();
   </script>
 </body>
