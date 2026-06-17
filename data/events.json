@@ -79,5 +79,32 @@
     "title": "【复刻】白面黄喙，真诚致礼",
     "start": "2026-06-10T22:00:00.000Z",
     "end": "2026-06-15T04:00:00.000Z"
+  },
+  {
+    "id": "candle_heap-69d07eb306a7c35f3226831f",
+    "sourceFeedId": "69d07eb306a7c35f3226831f",
+    "enabled": true,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2026-03-31T16:00:00.000Z",
+    "end": "2026-04-07T15:59:00.000Z"
+  },
+  {
+    "id": "candle_heap-69c9f544bcc4bb50b4f84350",
+    "sourceFeedId": "69c9f544bcc4bb50b4f84350",
+    "enabled": true,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2026-03-31T16:00:00.000Z",
+    "end": "2026-04-07T15:59:00.000Z"
+  },
+  {
+    "id": "candle_heap-69759548327cc208071a0038",
+    "sourceFeedId": "69759548327cc208071a0038",
+    "enabled": true,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2026-01-29T16:00:00.000Z",
+    "end": "2026-03-05T15:59:00.000Z"
   }
 ]
