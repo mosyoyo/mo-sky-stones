@@ -349,5 +349,23 @@
     "start": "2025-04-23T16:00:00.000Z",
     "end": "2025-04-24T16:00:00.000Z",
     "sourceFeedId": "6802e78739898315a2794e3a"
+  },
+  {
+    "id": "maintenance-67df6b28feeeaf5f62e0fb37",
+    "enabled": false,
+    "type": "maintenance",
+    "title": "【维护】维护更新",
+    "start": "2025-03-26T16:00:00.000Z",
+    "end": "2025-03-27T16:00:00.000Z",
+    "sourceFeedId": "67df6b28feeeaf5f62e0fb37"
+  },
+  {
+    "id": "bonus-67d0eaa76a0a4051323b1fd8",
+    "enabled": false,
+    "type": "bonus",
+    "title": "【双倍】双倍心火",
+    "start": "2025-03-12T16:00:00.000Z",
+    "end": "2025-03-19T15:59:00.000Z",
+    "sourceFeedId": "67d0eaa76a0a4051323b1fd8"
   }
 ]
