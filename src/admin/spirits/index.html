@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>先祖订阅</title>
+  <link rel="stylesheet" href="/src/admin/style.css">
+  <script src="/src/admin/nav.js" defer></script>
+  <script src="/src/admin/common.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div>
+        <h1>先祖订阅</h1>
+        <p class="muted">选择你关心的复刻先祖，保存后会写入订阅配置。</p>
+      </div>
+      <button id="save">保存订阅</button>
+    </header>
+    <section>
+      <div class="toolbar">
+        <span class="muted" id="status">正在读取先祖列表...</span>
+        <label class="pill"><input id="onlySelected" type="checkbox">仅看已订阅</label>
+      </div>
+    </section>
+    <div id="list" class="log-grid"></div>
+  </main>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const { fetchJSON, h, showToast } = window.AdminCommon;
+      const list = document.querySelector('#list');
+      const status = document.querySelector('#status');
+      const onlySelected = document.querySelector('#onlySelected');
+      const saveBtn = document.querySelector('#save');
+      let items = [];
+      let selected = new Set();
+
+      function spiritLabel(item) {
+        return item.englishName ? `${item.spiritName} · ${item.englishName}` : item.spiritName;
+      }
+
+      function render() {
+        const visible = items.filter(item => !onlySelected.checked || selected.has(item.spiritName));
+        document.querySelector('#list').innerHTML = visible.map(item => {
+          const on = selected.has(item.spiritName);
+          return `
+            <section class="card">
+              <div class="top">
+                <div>
+                  <strong>${h(spiritLabel(item))}</strong>
+                  <span class="muted" style="margin-left:6px">${h(item.season || '')}${item.map ? ` · ${item.map}` : ''}</span>
+                </div>
+                <label class="event-enabled">
+                  <input type="checkbox" data-spirit="${h(item.spiritName)}" ${on ? 'checked' : ''}>
+                  <span>${on ? '已订阅' : '未订阅'}</span>
+                </label>
+              </div>
+              <div class="row" style="margin-top:10px">
+                ${(item.aliases || []).slice(0, 4).map(alias => `<span class="tag other">${h(alias)}</span>`).join('')}
+              </div>
+            </section>`;
+        }).join('');
+
+        document.querySelectorAll('[data-spirit]').forEach(input => {
+          input.onchange = () => {
+            const name = input.dataset.spirit;
+            if (input.checked) selected.add(name);
+            else selected.delete(name);
+            render();
+          };
+        });
+        status.textContent = `共 ${items.length} 个先祖，已订阅 ${selected.size} 个。`;
+      }
+
+      async function load() {
+        try {
+          const data = await fetchJSON('/api/spirits');
+          items = Array.isArray(data.items) ? data.items : [];
+          selected = new Set(Array.isArray(data.selected) ? data.selected : []);
+          render();
+        } catch (err) {
+          list.innerHTML = `<section class="card"><strong>读取失败</strong><p class="muted">${h(err.message)}</p></section>`;
+          status.textContent = '读取失败';
+        }
+      }
+
+      saveBtn.onclick = async () => {
+        saveBtn.disabled = true;
+        saveBtn.textContent = '保存中...';
+        try {
+          const data = await fetchJSON('/api/spirits', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ selected: [...selected] }),
+          });
+          showToast(`已保存${data.commit ? `：${data.commit.slice(0, 7)}` : ''}`, 'success');
+          status.textContent = `已保存，订阅 ${selected.size} 个先祖。`;
+        } catch (err) {
+          showToast(err.message, 'error');
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = '保存订阅';
+        }
+      };
+
+      onlySelected.onchange = render;
+      load();
+    });
+  </script>
+</body>
+</html>
