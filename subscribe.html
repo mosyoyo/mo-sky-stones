@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>自定义光遇日历订阅</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --card: #fff;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --line: rgba(60, 60, 67, .16);
+      --blue: #007aff;
+      --green: #34c759;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--bg); }
+    main { width: min(760px, 100%); margin: 0 auto; padding: 28px 14px 24px; }
+    header { padding: 6px 4px 16px; }
+    h1 { margin: 0; font-size: clamp(30px, 7vw, 48px); line-height: 1.08; letter-spacing: 0; font-weight: 760; }
+    .lead { margin: 8px 0 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
+    .group-label { margin: 0; padding: 0 16px 7px; color: var(--muted); font-size: 12px; font-weight: 650; letter-spacing: .04em; }
+    .settings { overflow: hidden; border: 1px solid rgba(0, 0, 0, .04); border-radius: 18px; background: var(--card); box-shadow: 0 12px 32px rgba(0, 0, 0, .05); }
+    .item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; min-height: 54px; padding: 9px 12px 9px 16px; cursor: pointer; user-select: none; }
+    .item + .item { border-top: 1px solid var(--line); }
+    .item-title { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 16px; font-weight: 620; }
+    .checkmark { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #eef0f3; color: transparent; font-size: 13px; font-weight: 800; flex: 0 0 auto; }
+    .item.is-on .checkmark { background: var(--blue); color: #fff; }
+    .item-note { margin: 3px 0 0 32px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+    .end-control { display: flex; align-items: center; gap: 8px; min-width: 112px; justify-content: flex-end; color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .item:not(.is-on) .end-control { opacity: .45; }
+    .switch {
+      position: relative;
+      width: 51px;
+      height: 31px;
+      margin: 0;
+      border: 0;
+      border-radius: 16px;
+      appearance: none;
+      -webkit-appearance: none;
+      background: #e9e9eb;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+    .switch:checked { background: var(--green); }
+    .switch::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+      transition: transform .2s ease;
+    }
+    .switch:checked::before { transform: translateX(20px); }
+    .bulk { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; padding: 11px 14px 11px 16px; border-radius: 16px; background: rgba(255, 255, 255, .72); color: var(--muted); font-size: 14px; }
+    .bulk label { display: flex; align-items: center; gap: 8px; color: var(--text); cursor: pointer; white-space: nowrap; }
+    .link-panel { margin-top: 14px; padding: 12px; border-radius: 18px; background: var(--card); box-shadow: 0 12px 32px rgba(0, 0, 0, .05); }
+    .url-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; align-items: center; }
+    input[type="text"] { width: 100%; min-width: 0; height: 42px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: #f5f5f7; color: #3a3a3c; font-size: 13px; }
+    button, a.button { display: inline-flex; align-items: center; justify-content: center; height: 42px; min-width: 78px; border: 0; border-radius: 999px; background: var(--blue); color: #fff; padding: 0 16px; font: inherit; font-size: 15px; font-weight: 650; text-decoration: none; cursor: pointer; white-space: nowrap; }
+    a.button { background: #e9f2ff; color: #0066cc; }
+    .summary { margin: 8px 2px 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    @media (max-width: 640px) {
+      main { padding: 14px 10px; }
+      header { padding-bottom: 10px; }
+      h1 { font-size: 30px; }
+      .lead { font-size: 13px; }
+      .group-label { padding-left: 10px; }
+      .settings { border-radius: 16px; }
+      .item { min-height: 47px; padding: 7px 10px 7px 12px; }
+      .item-title { font-size: 15px; }
+      .item-note { display: none; }
+      .end-control { min-width: 102px; font-size: 12px; }
+      .switch { width: 46px; height: 28px; }
+      .switch::before { width: 24px; height: 24px; }
+      .switch:checked::before { transform: translateX(18px); }
+      .bulk { margin-top: 8px; padding: 9px 10px 9px 12px; font-size: 12px; }
+      .link-panel { margin-top: 10px; padding: 10px; }
+      .url-row { grid-template-columns: 1fr 1fr; }
+      input[type="text"] { grid-column: 1 / -1; height: 38px; }
+      button, a.button { width: 100%; height: 38px; min-width: 0; }
+      .summary { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>自定义订阅</h1>
+      <p class="lead">选好内容，复制链接，添加到手机日历。</p>
+    </header>
+
+    <p class="group-label">订阅内容</p>
+    <section class="settings" id="options">
+      <div class="item is-on" data-type="red"><div><div class="item-title"><span class="checkmark">✓</span><span>红石</span></div><p class="item-note">每天最后一场。</p></div></div>
+      <div class="item" data-type="black"><div><div class="item-title"><span class="checkmark">✓</span><span>黑石</span></div><p class="item-note">每天最后一场。</p></div></div>
+      <div class="item is-on" data-type="traveling_spirit"><div><div class="item-title"><span class="checkmark">✓</span><span>旅行先祖</span></div><p class="item-note">默认仅在离开前提醒。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="traveling_spirit" checked></label></div>
+      <div class="item is-on" data-type="season"><div><div class="item-title"><span class="checkmark">✓</span><span>季节</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="season" checked></label></div>
+      <div class="item is-on" data-type="activity"><div><div class="item-title"><span class="checkmark">✓</span><span>活动</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="activity" checked></label></div>
+      <div class="item is-on" data-type="bonus"><div><div class="item-title"><span class="checkmark">✓</span><span>双倍</span></div><p class="item-note">连续事件。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="bonus"></label></div>
+      <div class="item is-on" data-type="candle_heap"><div><div class="item-title"><span class="checkmark">✓</span><span>大蜡烛</span></div><p class="item-note">连续事件。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="candle_heap"></label></div>
+      <div class="item is-on" data-type="maintenance"><div><div class="item-title"><span class="checkmark">✓</span><span>维护</span></div><p class="item-note">停服升级维护。</p></div></div>
+    </section>
+
+    <div class="bulk">
+      <span>带“仅结束”的项目</span>
+      <label><span>全部仅结束</span><input id="endOnlyAll" class="switch" type="checkbox"></label>
+    </div>
+
+    <section class="link-panel">
+      <div class="url-row">
+        <input id="url" type="text" readonly>
+        <button id="copy" type="button">复制</button>
+        <a id="open" class="button" href="#">打开</a>
+      </div>
+      <p class="summary" id="summary"></p>
+    </section>
+  </main>
+
+  <script>
+    const items = [...document.querySelectorAll('.item')];
+    const endOnlyChecks = [...document.querySelectorAll('input[data-endonly]')];
+    const endOnlyAll = document.querySelector('#endOnlyAll');
+    const urlInput = document.querySelector('#url');
+    const openLink = document.querySelector('#open');
+    const summary = document.querySelector('#summary');
+
+    function selectedTypes() {
+      return items.filter(item => item.classList.contains('is-on')).map(item => item.dataset.type);
+    }
+
+    function selectedEndOnly() {
+      const active = new Set(selectedTypes());
+      return endOnlyChecks
+        .filter(input => input.checked && active.has(input.dataset.endonly))
+        .map(input => input.dataset.endonly);
+    }
+
+    function syncEndOnlyAll() {
+      const checked = endOnlyChecks.filter(input => input.checked).length;
+      endOnlyAll.checked = checked === endOnlyChecks.length;
+      endOnlyAll.indeterminate = checked > 0 && checked < endOnlyChecks.length;
+    }
+
+    function update() {
+      const types = selectedTypes();
+      const endOnly = selectedEndOnly();
+      const params = new URLSearchParams();
+      params.set('types', types.length ? types.join(',') : 'none');
+      if (endOnly.length) params.set('endOnly', endOnly.join(','));
+      const value = `${location.origin}/calendar.ics?${params.toString()}`;
+      urlInput.value = value;
+      openLink.href = value;
+      summary.textContent = `已选 ${types.length} 项，其中 ${endOnly.length} 项仅结束提醒。`;
+      syncEndOnlyAll();
+    }
+
+    items.forEach(item => {
+      item.addEventListener('click', event => {
+        if (event.target.closest('.end-control')) return;
+        item.classList.toggle('is-on');
+        update();
+      });
+    });
+
+    endOnlyChecks.forEach(input => {
+      input.addEventListener('click', event => event.stopPropagation());
+      input.addEventListener('change', update);
+    });
+
+    endOnlyAll.addEventListener('change', () => {
+      endOnlyChecks.forEach(input => { input.checked = endOnlyAll.checked; });
+      update();
+    });
+
+    document.querySelector('#copy').addEventListener('click', async () => {
+      await navigator.clipboard.writeText(urlInput.value);
+      summary.textContent = '已复制订阅链接。';
+    });
+
+    update();
+  </script>
+</body>
+</html>

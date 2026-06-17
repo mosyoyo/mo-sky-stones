@@ -8,13 +8,13 @@
     :root {
       color-scheme: light;
       --bg: #f5f5f7;
-      --card: #fff;
+      --card: rgba(255, 255, 255, .82);
       --text: #1d1d1f;
       --muted: #6e6e73;
-      --line: rgba(60, 60, 67, .16);
       --blue: #007aff;
-      --green: #34c759;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      --blue-dark: #0066cc;
+      --line: rgba(60, 60, 67, .16);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
     }
@@ -22,381 +22,204 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: var(--bg);
+      background:
+        linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 55%, #efeff4 100%);
     }
     main {
-      width: min(760px, 100%);
+      min-height: 100vh;
+      width: min(720px, 100%);
       margin: 0 auto;
-      padding: 28px 14px 24px;
+      padding: 34px 18px 22px;
+      display: grid;
+      place-items: center;
     }
-    header {
-      padding: 6px 4px 16px;
+    .card {
+      width: 100%;
+      min-height: min(680px, calc(100vh - 56px));
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding: clamp(28px, 7vw, 64px) clamp(18px, 6vw, 52px) 22px;
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 34px;
+      background: var(--card);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .08);
+      backdrop-filter: blur(22px);
+    }
+    .hero {
+      align-self: center;
+      text-align: center;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--blue-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
     }
     h1 {
       margin: 0;
-      font-size: clamp(30px, 7vw, 48px);
-      line-height: 1.08;
+      font-size: clamp(42px, 10vw, 76px);
+      line-height: .98;
       letter-spacing: 0;
-      font-weight: 760;
+      font-weight: 780;
     }
-    .lead {
-      margin: 8px 0 0;
+    .subtitle {
+      margin: 16px auto 0;
+      max-width: 430px;
       color: var(--muted);
-      font-size: 15px;
-      line-height: 1.45;
-    }
-    .group-label {
-      margin: 0;
-      padding: 0 16px 7px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 650;
-      letter-spacing: .04em;
-    }
-    .settings {
-      overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, .04);
-      border-radius: 18px;
-      background: var(--card);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, .05);
-    }
-    .item {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      min-height: 54px;
-      padding: 9px 12px 9px 16px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .item + .item {
-      border-top: 1px solid var(--line);
-    }
-    .item-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      font-size: 16px;
-      font-weight: 620;
-    }
-    .checkmark {
-      display: grid;
-      place-items: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #eef0f3;
-      color: transparent;
-      font-size: 13px;
-      font-weight: 800;
-      flex: 0 0 auto;
-    }
-    .item.is-on .checkmark {
-      background: var(--blue);
-      color: #fff;
-    }
-    .item-note {
-      margin: 3px 0 0 32px;
-      color: var(--muted);
-      font-size: 12px;
+      font-size: clamp(18px, 4vw, 24px);
       line-height: 1.35;
+      font-weight: 500;
     }
-    .end-control {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 96px;
-      justify-content: flex-end;
-      color: var(--muted);
-      font-size: 13px;
-      white-space: nowrap;
-    }
-    .item:not(.is-on) .end-control {
-      opacity: .45;
-    }
-    input[type="checkbox"] {
-      width: 19px;
-      height: 19px;
-      margin: 0;
-      accent-color: var(--green);
-    }
-    .bulk {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-top: 10px;
-      padding: 11px 14px 11px 16px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, .72);
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .bulk label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text);
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .link-panel {
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 18px;
-      background: var(--card);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, .05);
-    }
-    .url-row {
+    .actions {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
-      gap: 8px;
-      align-items: center;
+      justify-items: center;
+      gap: 12px;
+      margin-top: 38px;
     }
-    input[type="text"] {
-      width: 100%;
-      min-width: 0;
-      height: 42px;
-      padding: 0 12px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #f5f5f7;
-      color: #3a3a3c;
-      font-size: 13px;
-    }
-    button,
-    a.button {
+    .primary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 42px;
-      min-width: 78px;
+      min-width: min(320px, 100%);
+      min-height: 58px;
+      padding: 0 30px;
       border: 0;
       border-radius: 999px;
       background: var(--blue);
       color: #fff;
-      padding: 0 16px;
       font: inherit;
+      font-size: 19px;
+      font-weight: 720;
+      cursor: pointer;
+      box-shadow: 0 14px 34px rgba(0, 122, 255, .28);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .primary:hover {
+      transform: translateY(-1px);
+      background: var(--blue-dark);
+      box-shadow: 0 18px 40px rgba(0, 122, 255, .34);
+    }
+    .note {
+      max-width: 460px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .advanced {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      margin-top: 16px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(255, 255, 255, .58);
+      text-decoration: none;
       font-size: 15px;
       font-weight: 650;
-      text-decoration: none;
-      cursor: pointer;
-      white-space: nowrap;
     }
-    a.button {
-      background: #e9f2ff;
-      color: #0066cc;
-    }
-    .summary {
-      margin: 8px 2px 0;
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding-top: 28px;
       color: var(--muted);
       font-size: 12px;
-      line-height: 1.45;
     }
-    @media (max-width: 640px) {
-      main {
-        padding: 14px 10px 14px;
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translate(-50%, 16px);
+      opacity: 0;
+      width: min(420px, calc(100vw - 32px));
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(29, 29, 31, .92);
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, .18);
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+    @media (max-width: 560px) {
+      main { padding: 12px; }
+      .card {
+        min-height: calc(100vh - 24px);
+        border-radius: 28px;
+        padding: 34px 18px 16px;
       }
-      header {
-        padding-bottom: 10px;
-      }
-      h1 {
-        font-size: 30px;
-      }
-      .lead {
-        font-size: 13px;
-      }
-      .group-label {
-        padding-left: 10px;
-      }
-      .settings {
-        border-radius: 16px;
-      }
-      .item {
-        min-height: 47px;
-        padding: 7px 10px 7px 12px;
-      }
-      .item-title {
-        font-size: 15px;
-      }
-      .item-note {
-        display: none;
-      }
-      .end-control {
-        min-width: 86px;
-        font-size: 12px;
-      }
-      .bulk {
-        margin-top: 8px;
-        padding: 9px 10px 9px 12px;
-        font-size: 12px;
-      }
-      .link-panel {
-        margin-top: 10px;
-        padding: 10px;
-      }
-      .url-row {
-        grid-template-columns: 1fr 1fr;
-      }
-      input[type="text"] {
-        grid-column: 1 / -1;
-        height: 38px;
-      }
-      button,
-      a.button {
-        width: 100%;
-        height: 38px;
-        min-width: 0;
-      }
-      .summary {
-        font-size: 11px;
-      }
+      .actions { margin-top: 30px; }
+      .primary { width: 100%; min-height: 56px; font-size: 18px; }
+      .advanced { width: 100%; }
+      footer { display: grid; justify-items: center; text-align: center; }
     }
   </style>
 </head>
 <body>
   <main>
-    <header>
-      <h1>光遇日历订阅</h1>
-      <p class="lead">选好内容，复制链接，添加到手机日历。</p>
-    </header>
-
-    <p class="group-label">订阅内容</p>
-    <section class="settings" id="options">
-      <div class="item is-on" data-type="red">
-        <div>
-          <div class="item-title"><span class="checkmark">✓</span><span>红石</span></div>
-          <p class="item-note">每天最后一场。</p>
+    <section class="card" aria-labelledby="title">
+      <div class="hero">
+        <p class="eyebrow">SKY CALENDAR</p>
+        <h1 id="title">光遇日历订阅</h1>
+        <p class="subtitle">你的天空王国日程。</p>
+        <div class="actions">
+          <button id="subscribe" class="primary" type="button">订阅光遇日历</button>
+          <p class="note">一键订阅全部提醒：复刻、季节、活动默认仅结束提醒；双倍、大蜡烛、维护保留全程提醒。</p>
+          <a class="advanced" href="/subscribe">高级选项：自定义订阅</a>
         </div>
       </div>
-      <div class="item" data-type="black">
-        <div>
-          <div class="item-title"><span class="checkmark">✓</span><span>黑石</span></div>
-          <p class="item-note">每天最后一场。</p>
-        </div>
-      </div>
-      <div class="item is-on" data-type="traveling_spirit">
-        <div>
-          <div class="item-title"><span class="checkmark">✓</span><span>旅行先祖</span></div>
-          <p class="item-note">默认仅在离开前提醒。</p>
-        </div>
-        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="traveling_spirit" checked></label>
-      </div>
-      <div class="item is-on" data-type="season">
-        <div>
-          <div class="item-title"><span class="checkmark">✓</span><span>季节</span></div>
-          <p class="item-note">默认仅在结束前提醒。</p>
-        </div>
-        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="season" checked></label>
-      </div>
-      <div class="item is-on" data-type="activity">
-        <div>
-          <div class="item-title"><span class="checkmark">✓</span><span>活动</span></div>
-          <p class="item-note">默认仅在结束前提醒。</p>
-        </div>
-        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="activity" checked></label>
-      </div>
-      <div class="item is-on" data-type="bonus">
-        <div>
-          <div class="item-title"><span class="checkmark">✓</span><span>双倍</span></div>
-          <p class="item-note">连续事件。</p>
-        </div>
-        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="bonus"></label>
-      </div>
-      <div class="item is-on" data-type="candle_heap">
-        <div>
-          <div class="item-title"><span class="checkmark">✓</span><span>大蜡烛</span></div>
-          <p class="item-note">连续事件。</p>
-        </div>
-        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="candle_heap"></label>
-      </div>
-      <div class="item is-on" data-type="maintenance">
-        <div>
-          <div class="item-title"><span class="checkmark">✓</span><span>维护</span></div>
-          <p class="item-note">停服升级维护。</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="bulk">
-      <span>带“仅结束”的项目</span>
-      <label><span>全部仅结束</span><input id="endOnlyAll" type="checkbox"></label>
-    </div>
-
-    <section class="link-panel">
-      <div class="url-row">
-        <input id="url" type="text" readonly>
-        <button id="copy" type="button">复制</button>
-        <a id="open" class="button" href="#">打开</a>
-      </div>
-      <p class="summary" id="summary"></p>
+      <footer>
+        <span>© 2026 mo-sky-stones</span>
+        <span id="fallback"></span>
+      </footer>
     </section>
   </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const items = [...document.querySelectorAll('.item')];
-    const endOnlyChecks = [...document.querySelectorAll('input[data-endonly]')];
-    const endOnlyAll = document.querySelector('#endOnlyAll');
-    const urlInput = document.querySelector('#url');
-    const openLink = document.querySelector('#open');
-    const summary = document.querySelector('#summary');
+    const host = 'sky-stones-bni.pages.dev';
+    const query = 'types=traveling_spirit,season,activity,bonus,candle_heap,maintenance&endOnly=traveling_spirit,season,activity';
+    const httpsUrl = `https://${host}/calendar.ics?${query}`;
+    const webcalUrl = `webcal://${host}/calendar.ics?${query}`;
+    const toast = document.querySelector('#toast');
 
-    function selectedTypes() {
-      return items.filter(item => item.classList.contains('is-on')).map(item => item.dataset.type);
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove('show'), 2800);
     }
 
-    function selectedEndOnly() {
-      const active = new Set(selectedTypes());
-      return endOnlyChecks
-        .filter(input => input.checked && active.has(input.dataset.endonly))
-        .map(input => input.dataset.endonly);
+    async function copyLink() {
+      try {
+        await navigator.clipboard.writeText(httpsUrl);
+        showToast('已复制订阅链接，请粘贴到日历 App。');
+      } catch (_) {
+        document.querySelector('#fallback').innerHTML = `<a href="${httpsUrl}">复制失败，点这里打开链接</a>`;
+        showToast('浏览器不允许自动复制，可以点底部链接。');
+      }
     }
 
-    function syncEndOnlyAll() {
-      const checked = endOnlyChecks.filter(input => input.checked).length;
-      endOnlyAll.checked = checked === endOnlyChecks.length;
-      endOnlyAll.indeterminate = checked > 0 && checked < endOnlyChecks.length;
-    }
-
-    function update() {
-      const types = selectedTypes();
-      const endOnly = selectedEndOnly();
-      const params = new URLSearchParams();
-      params.set('types', types.length ? types.join(',') : 'none');
-      if (endOnly.length) params.set('endOnly', endOnly.join(','));
-      const value = `${location.origin}/calendar.ics?${params.toString()}`;
-      urlInput.value = value;
-      openLink.href = value;
-      summary.textContent = `已选 ${types.length} 项，其中 ${endOnly.length} 项仅结束提醒。`;
-      syncEndOnlyAll();
-    }
-
-    items.forEach(item => {
-      item.addEventListener('click', event => {
-        if (event.target.closest('.end-control')) return;
-        item.classList.toggle('is-on');
-        update();
-      });
+    document.querySelector('#subscribe').addEventListener('click', async () => {
+      const ua = navigator.userAgent || '';
+      const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
+      if (isAppleMobile) {
+        location.href = webcalUrl;
+        return;
+      }
+      await copyLink();
     });
-
-    endOnlyChecks.forEach(input => {
-      input.addEventListener('click', event => event.stopPropagation());
-      input.addEventListener('change', update);
-    });
-
-    endOnlyAll.addEventListener('change', () => {
-      endOnlyChecks.forEach(input => {
-        input.checked = endOnlyAll.checked;
-      });
-      update();
-    });
-
-    document.querySelector('#copy').addEventListener('click', async () => {
-      await navigator.clipboard.writeText(urlInput.value);
-    });
-
-    update();
   </script>
 </body>
 </html>
