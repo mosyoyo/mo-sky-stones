@@ -24,13 +24,30 @@ const REMINDERS = {
 };
 
 const TYPE_KEYWORDS = {
-  traveling_spirit: ['旅行先祖', '先祖到访', '复刻', '先祖即将到访', '到临提醒'],
+  // 复刻先祖：只匹配「即将到临/即将来临」类预告公告
+  // 「到临提醒」「已到来」类（如「勤劳的先祖在今天重返天空王国啦」）会另行过滤
+  traveling_spirit: ['旅行先祖即将到临', '旅行先祖即将来临', '先祖即将到访', '复刻先祖'],
   season: ['季节开启', '季节结束', '新季节', '赛季'],
   activity: ['活动开启', '周年庆', '自然日', '音乐节', '花憩节', '彩染季', '端午', '七周年'],
   bonus: ['双倍', '双倍蜡烛', '双倍爱心', '双倍季蜡', '双倍心火', '双倍烛火', '额外烛火'],
   candle_heap: ['大蜡烛', '大蜡烛堆', '大蜡烛堆将出现在天空王国各地'],
   maintenance: ['停服', '维护', '更新维护', '升级维护', '更新时间公告', '更新中无法正常游戏', '开服时间'],
 };
+
+// 复刻先祖过滤：标题/正文含这些关键词的动态视为「已到来」或「非本周复刻」，应过滤
+// 1. 「到临提醒」/「到临啦」/「重返天空王国」= 已到来
+// 2. 「即将离开」/「已离开」= 已结束
+const SPIRIT_DROP_KEYWORDS = ['到临提醒', '到临啦', '重返天空王国', '即将离开', '已离开'];
+
+// 判断复刻先祖动态是否应该保留（只保留「即将到临/即将来临」类预告）
+function isTravelingSpiritUpcoming(title = '', content = '') {
+  const text = `${title}\n${content}`;
+  // 含 drop 关键词 → 过滤
+  if (SPIRIT_DROP_KEYWORDS.some(k => text.includes(k))) return false;
+  // 必须含「即将到临」「即将来临」或「先祖即将到访」
+  if (text.includes('即将到临') || text.includes('即将来临') || text.includes('先祖即将到访')) return true;
+  return false;
+}
 
 function escapeICS(text) {
   return String(text || '')
@@ -524,6 +541,7 @@ module.exports = {
   OFFICIAL_UID,
   TYPE_LABELS,
   REMINDERS,
+  SPIRIT_DROP_KEYWORDS,
   buildReminderEvents,
   cleanText,
   cleanEventTitle,
@@ -534,6 +552,7 @@ module.exports = {
   formatUTC,
   generateEventsICS,
   isLikelyGameActivity,
+  isTravelingSpiritUpcoming,
   normalizeFeed,
   parseISODurationMinutes,
   uidPart,

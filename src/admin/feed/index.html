@@ -63,6 +63,7 @@
             </select>
           </label>
           <label class="pill"><input id="hideOther" type="checkbox" checked>隐藏其他</label>
+          <label class="pill"><input id="hideArrived" type="checkbox" checked>隐藏已到来（复刻）</label>
         </div>
         <p class="muted">每条公告都可以单独改标题、类型和时间，右侧会实时预览。</p>
       </aside>
@@ -166,11 +167,18 @@
       const typeFilter = document.querySelector('#typeFilter').value;
       const statusFilter = document.querySelector('#statusFilter').value;
       const hideOther = document.querySelector('#hideOther').checked;
+      const hideArrived = document.querySelector('#hideArrived')?.checked ?? true;
       const keyword = document.querySelector('#searchBox').value.trim().toLowerCase();
+      const arrivedKeywords = ['到临提醒', '到临啦', '重返天空王国', '即将离开', '已离开'];
       return feeds.filter(feed => {
         if (typeFilter !== 'all' && feed.autoType !== typeFilter) return false;
         if (statusFilter !== 'all' && feed.status !== statusFilter) return false;
         if (hideOther && feed.autoType === 'other') return false;
+        // 隐藏已到来的复刻先祖公告
+        if (hideArrived && feed.autoType === 'traveling_spirit') {
+          const text = ((feed.title || '') + '\n' + (feed.content || ''));
+          if (arrivedKeywords.some(k => text.includes(k))) return false;
+        }
         if (keyword) {
           const haystack = [
             feed.title,

@@ -1796,8 +1796,8 @@
     "title": "6月11日丨本周旅行先祖到临提醒\n#光遇# #光遇端午节# #光遇也要划龙舟#\n勤劳的先祖在今天",
     "content": "6月11日丨本周旅行先祖到临提醒\n#光遇# #光遇端午节# #光遇也要划龙舟#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在暮土真诚致礼\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1781150400788,
-    "status": "ignored",
-    "autoType": "traveling_spirit",
+    "status": "approved",
+    "autoType": "activity",
     "parsed": true,
     "raw": {
       "id": "6a2a32c3ea7f101c510235bb",
@@ -1937,8 +1937,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】土真诚致礼",
+      "type": "activity",
+      "title": "【活动】旅行先祖",
       "start": "2026-06-10T22:00:00.000Z",
       "end": "2026-06-15T04:00:00.000Z"
     }
@@ -2404,7 +2404,7 @@
     "title": "6月11日丨本周旅行先祖即将到临\n#光遇# #光遇旅行先祖#\n白面黄喙，真诚致礼\n本周四早上6:",
     "content": "6月11日丨本周旅行先祖即将到临\n#光遇# #光遇旅行先祖#\n白面黄喙，真诚致礼\n本周四早上6:00\n下一位旅行先祖\n即将抵达天空王国啦~\n🎊\n未曾与这位先祖见面的旅人们\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦！",
     "createTime": 1780977600864,
-    "status": "approved",
+    "status": "ignored",
     "autoType": "traveling_spirit",
     "parsed": true,
     "raw": {
@@ -3141,7 +3141,7 @@
     "content": "5月28日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在晨岛忧郁小憩\n曾遗憾与之错过的旅人\n记得在本周四早上6:05至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1779940801157,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "6a17bdc4634aee530f4f82d9",
@@ -3273,8 +3273,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】岛忧郁小憩",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-05-27T22:05:00.000Z",
       "end": "2026-06-01T04:00:00.000Z"
     }
@@ -5850,7 +5850,7 @@
     "content": "5月14日丨本周旅行先祖即将到临\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在雨林静静站立\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1778731201081,
     "status": "ignored",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "6a0548c4250ef4560747a077",
@@ -5982,8 +5982,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】林静静站立",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-05-13T22:00:00.000Z",
       "end": "2026-05-18T04:00:00.000Z"
     }
@@ -7959,7 +7959,7 @@
     "content": "4月30日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在晨岛欢欣鼓劲\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1777521600524,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "69f2d3c3c1a4bd21dbe09ddf",
@@ -8091,8 +8091,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】岛欢欣鼓劲",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-04-29T22:00:00.000Z",
       "end": "2026-05-04T04:00:00.000Z"
     }
@@ -11137,7 +11137,7 @@
     "content": "4月16日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在云野轻唤水母\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1776326400234,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "69e09702f89d686a580fbb9e",
@@ -11269,8 +11269,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】野轻唤水母",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-04-15T22:00:00.000Z",
       "end": "2026-04-20T04:00:00.000Z"
     }
@@ -13039,7 +13039,7 @@
     "content": "4月4日丨旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖们在今天重返天空王国啦~\n六位先祖将带着多重礼赠与大家见面\n🌳\n先祖们正在雨林集结探险\n曾遗憾与之错过的旅人\n记得在4月4日06:00~4月17日23:59\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1775275201609,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "69d08cc4f229e1648b27e7eb",
@@ -13171,8 +13171,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】旅行先祖",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-04-03T22:00:00.000Z",
       "end": "2026-04-17T15:59:00.000Z"
     }
@@ -13471,7 +13471,7 @@
     "content": "4月2日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在暮土耐心劝阻\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1775102400256,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "69cde9c35ebb9906129b9038",
@@ -13603,8 +13603,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】土耐心劝阻",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-04-01T22:00:00.000Z",
       "end": "2026-04-06T04:00:00.000Z"
     }
@@ -13895,7 +13895,7 @@
     "content": "#光遇# #光遇旅行先祖# \n林间探险，集结出发\n旅行先祖们即将抵达天空王国啦~\n🧭\n未曾与这些先祖见面的旅人们\n记得在4月4日06:00~4月17日23:59\n前往雨林与先祖们换取喜欢的赠礼哦！",
     "createTime": 1774758748296,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "69c8ab5db20c115c04e51a7f",
@@ -14019,8 +14019,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】林间探险，集结出发",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-04-03T22:00:00.000Z",
       "end": "2026-04-17T15:59:00.000Z"
     }
@@ -14791,7 +14791,7 @@
     "content": "3月19日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在霞谷尽情欢乐\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1773892801411,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "69bb74c72d66384359b93dca",
@@ -14923,8 +14923,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】谷尽情欢乐",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-03-18T22:00:00.000Z",
       "end": "2026-03-23T04:00:00.000Z"
     }
@@ -17327,7 +17327,7 @@
     "content": "3月5日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在暮土点头称赞\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1772683202408,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "69a8ffc6d4a4a74f68ad3c2f",
@@ -17459,8 +17459,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】土点头称赞",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-03-04T22:00:00.000Z",
       "end": "2026-03-09T04:00:00.000Z"
     }
@@ -19575,7 +19575,7 @@
     "content": "2月19日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在云野绽放礼花\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1771473603719,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "69968acbd4c26d1fe6ac243f",
@@ -19707,8 +19707,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】野绽放礼花",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-02-18T22:00:00.000Z",
       "end": "2026-02-23T04:00:00.000Z"
     }
@@ -20775,7 +20775,7 @@
     "content": "2月14日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在云野呼唤夜莺\n曾遗憾与之错过的旅人\n记得在本周六早上6:00至下周三中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1771041602093,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "698ff3489cc7be561b969098",
@@ -20907,8 +20907,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "【复刻】野呼唤夜莺",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-02-13T22:00:00.000Z",
       "end": "2026-02-18T04:00:00.000Z"
     }
@@ -22420,7 +22420,7 @@
     },
     "parsedResult": {
       "type": "bonus",
-      "title": "《光·遇》水晶感应 同祈心愿｜同心节运营活动公告",
+      "title": "【双倍】水晶感应 同祈心愿｜同心节运营活动公告",
       "start": "2026-02-09T16:00:00.000Z",
       "end": "2026-02-23T15:59:00.000Z"
     }
@@ -23495,7 +23495,7 @@
     "content": "2月5日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在霞谷拨弦起舞\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1770264003810,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "698415c74eee87718253d6f5",
@@ -23627,8 +23627,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "旅行先祖·谷拨弦起舞",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-02-04T22:00:00.000Z",
       "end": "2026-02-09T04:00:00.000Z"
     }
@@ -24076,7 +24076,7 @@
     },
     "parsedResult": {
       "type": "traveling_spirit",
-      "title": "旅行先祖·轻抚琵琶",
+      "title": "【复刻】箬笠宽袖，轻抚琵琶",
       "start": "2026-02-04T22:00:00.000Z",
       "end": "2026-02-09T04:00:00.000Z"
     }
@@ -25428,7 +25428,7 @@
     },
     "parsedResult": {
       "type": "candle_heap",
-      "title": "《光·遇》大蜡烛",
+      "title": "【大蜡烛】大蜡烛",
       "start": "2026-01-29T16:00:00.000Z",
       "end": "2026-03-05T15:59:00.000Z"
     }
@@ -26173,7 +26173,7 @@
     "content": "1月22日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在晨岛随心律动\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
     "createTime": 1769054405064,
     "status": "pending",
-    "autoType": "traveling_spirit",
+    "autoType": "other",
     "parsed": true,
     "raw": {
       "id": "6971a0c8315d635827f472fd",
@@ -26305,8 +26305,8 @@
       }
     },
     "parsedResult": {
-      "type": "traveling_spirit",
-      "title": "旅行先祖·岛随心律动",
+      "type": "other",
+      "title": "旅行先祖",
       "start": "2026-01-21T22:00:00.000Z",
       "end": "2026-01-26T04:00:00.000Z"
     }
@@ -26458,7 +26458,7 @@
     },
     "parsedResult": {
       "type": "maintenance",
-      "title": "《光·遇》维护更新",
+      "title": "【维护】维护更新",
       "start": "2026-01-22T16:00:00.000Z",
       "end": "2026-01-23T16:00:00.000Z"
     }
@@ -26762,7 +26762,7 @@
     },
     "parsedResult": {
       "type": "season",
-      "title": "《光·遇》织光解谜 暖遇此时｜奇妙之旅：织光季运营活动公告",
+      "title": "【季节】织光解谜 暖遇此时｜奇妙之旅：织光季运营活动公告",
       "start": "2026-01-22T16:00:00.000Z",
       "end": "2026-02-05T15:59:00.000Z"
     }
@@ -26906,7 +26906,7 @@
     },
     "parsedResult": {
       "type": "traveling_spirit",
-      "title": "旅行先祖·悠闲漫步",
+      "title": "【复刻】暖绒棉裤，悠闲漫步",
       "start": "2026-01-21T22:00:00.000Z",
       "end": "2026-01-26T04:00:00.000Z"
     }

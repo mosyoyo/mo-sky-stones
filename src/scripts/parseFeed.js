@@ -4,6 +4,7 @@ const {
   extractDateRange,
   extractTravelingSpiritLabel,
   isLikelyGameActivity,
+  isTravelingSpiritUpcoming,
   normalizeFeed,
   uidPart,
 } = require('../event-utils');
@@ -25,6 +26,22 @@ function parseFeed(feed) {
   if (type === 'activity' && range && !isLikelyGameActivity(range)) {
     type = 'other';
   }
+
+  // 复刻先祖过滤规则：
+  // 1. 只保留「即将到临/即将来临」类预告，过滤「到临提醒/已到来/已离开」
+  // 2. duration < 1 天的全部过滤（短于一天说明不是标准复刻）
+  if (type === 'traveling_spirit') {
+    if (!isTravelingSpiritUpcoming(feed.title || '', feed.content || '')) {
+      type = 'other';
+    } else if (range && range.start && range.end) {
+      const durationMs = new Date(range.end) - new Date(range.start);
+      const oneDayMs = 24 * 60 * 60 * 1000;
+      if (durationMs < oneDayMs) {
+        type = 'other';
+      }
+    }
+  }
+
   const spiritLabel = type === 'traveling_spirit'
     ? extractTravelingSpiritLabel(`${feed.title || ''}\n${feed.content || ''}`)
     : '';
