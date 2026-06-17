@@ -53,25 +53,5 @@
     "source": "wiki",
     "wikiUrl": "https://wiki.biligame.com/sky/2026%E5%B9%B4%E5%91%A8%E5%B9%B4%E5%BA%86",
     "_source": "wiki"
-  },
-  {
-    "enabled": true,
-    "id": "traveling_spirit-6a30cdb3ea7f101c51122693",
-    "sourceFeedId": "6a30cdb3ea7f101c51122693",
-    "type": "traveling_spirit",
-    "title": "【复刻】鸟羽双辫，展翼为领",
-    "start": "2026-06-17T22:00:00.000Z",
-    "end": "2026-06-22T04:00:00.000Z",
-    "_source": "netease"
-  },
-  {
-    "enabled": true,
-    "id": "activity-6a2cc7b5ea7f101c5108ea3e",
-    "sourceFeedId": "6a2cc7b5ea7f101c5108ea3e",
-    "type": "activity",
-    "title": "【活动】端午节",
-    "start": "2026-06-18T16:00:00.000Z",
-    "end": "2026-07-02T15:59:00.000Z",
-    "_source": "netease"
   }
 ]
