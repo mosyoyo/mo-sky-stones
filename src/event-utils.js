@@ -126,7 +126,10 @@ function beijingText(date) {
 
 function detectType(title = '', content = '') {
   const text = `${title}\n${content}`;
-  for (const type of ['maintenance', 'traveling_spirit', 'bonus', 'candle_heap', 'season', 'activity']) {
+  // 优先级：season/activity 在 maintenance 之前
+  // 原因：季节/活动类「宴会节 更新内容公告」「时装节 更新内容公告」含「维护」字样
+  //       但实际是季节/活动公告，maintenance 关键词「维护」太宽
+  for (const type of ['season', 'activity', 'traveling_spirit', 'bonus', 'candle_heap', 'maintenance']) {
     if (TYPE_KEYWORDS[type].some(keyword => text.includes(keyword))) return type;
   }
   return 'other';

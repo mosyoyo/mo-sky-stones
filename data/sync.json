@@ -1,5 +1,74 @@
 [
   {
+    "time": "2026-06-17T07:49:37.046Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 0 条，反查关闭 0 条，清理过期 0 条，关键词忽略 6 条",
+    "addedEvents": 0,
+    "autoApproved": 0,
+    "droppedFromEvents": 0,
+    "droppedExpired": 0,
+    "ignoredByKeyword": 6
+  },
+  {
+    "time": "2026-06-17T07:49:09.414Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 0 条，反查关闭 0 条，清理过期 0 条，关键词忽略 34 条",
+    "addedEvents": 0,
+    "autoApproved": 0,
+    "droppedFromEvents": 0,
+    "droppedExpired": 0,
+    "ignoredByKeyword": 34
+  },
+  {
+    "time": "2026-06-17T07:48:43.232Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 1 条，反查关闭 0 条，清理过期 1 条，关键词忽略 0 条",
+    "addedEvents": 0,
+    "autoApproved": 1,
+    "droppedFromEvents": 0,
+    "droppedExpired": 1,
+    "ignoredByKeyword": 0
+  },
+  {
+    "time": "2026-06-17T07:47:43.548Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 0 条，反查关闭 0 条，清理过期 0 条，关键词忽略 15 条",
+    "addedEvents": 0,
+    "autoApproved": 0,
+    "droppedFromEvents": 0,
+    "droppedExpired": 0,
+    "ignoredByKeyword": 15
+  },
+  {
+    "time": "2026-06-17T07:44:51.487Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 9 条，反查关闭 0 条，清理过期 9 条，关键词忽略 50 条",
+    "addedEvents": 0,
+    "autoApproved": 9,
+    "droppedFromEvents": 0,
+    "droppedExpired": 9,
+    "ignoredByKeyword": 50
+  },
+  {
+    "time": "2026-06-17T07:42:56.785Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 29 条，反查关闭 0 条，清理过期 28 条",
+    "addedEvents": 0,
+    "autoApproved": 29,
+    "droppedFromEvents": 0,
+    "droppedExpired": 28
+  },
+  {
+    "time": "2026-06-17T07:38:58.261Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 38 条，反查关闭 0 条，清理过期 37 条",
+    "addedEvents": 0,
+    "autoApproved": 38,
+    "droppedFromEvents": 0,
+    "droppedExpired": 37
+  },
+  {
+    "time": "2026-06-17T07:36:57.414Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 38 条，反查关闭 0 条，清理过期 37 条",
+    "addedEvents": 0,
+    "autoApproved": 38,
+    "droppedFromEvents": 0,
+    "droppedExpired": 37
+  },
+  {
     "time": "2026-06-17T07:24:25.611Z",
     "message": "解析公告 301 条，过滤无时间 0 条，自动过审 38 条，反查关闭 0 条，清理过期 37 条",
     "addedEvents": 0,

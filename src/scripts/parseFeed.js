@@ -125,39 +125,51 @@ function main() {
     }
   }
 
-  // === 自动过审规则（无需人工 review） ===
-  // - 大蜡烛 / 双倍 / 复刻：游戏内固定周期事件，规则简单可自动
-  // - 维护：只通过「纯更新时间公告」（标题含「更新时间公告」且不含补偿/延迟/特刊/AR/活动等变种）
-  // 活动 / 季节：保持人工审阅（活动变种多，季节开启/结束边界模糊）
+  // === 自动过审规则 ===
+  // 通过：feed.status 改 approved + events.json 写入
+  //   - 大蜡烛 / 双倍 / 复刻：游戏内固定周期事件
+  //   - 维护：仅「纯 更新时间公告」+ 排除所有变种（补偿/延迟/特刊/AR/活动/投票/联动/纪念品/向导 等）
+  // 不通过（保持 pending）：活动 / 季节 / 维护变种
+  // 关键词检测：先查标题（必查），再查 content 整词匹配（避免「更新内容」「更新结束」误中）
   const MAINTENANCE_SKIP_KEYWORDS = [
     '维护补偿', '延迟开服', '推迟', '王国特刊', 'AR功能',
-    '运营活动', '更新内容公告', '纪念品', '向导',
+    '运营活动', '更新内容公告', '纪念品', '向导', '开服',
+    // 用户新增
+    '投票', '联动', '舞台', '签售', '见面会', '漫展', '票务',
+    '创作激励', '成果展示', '纪录片', '发布会回顾',
   ];
   for (const feed of parsedFeeds) {
     if (feed.status !== 'pending' || !feed.parsedResult) continue;
     const p = feed.parsedResult;
     if (p.type === 'other' || !p.start || !p.end) continue;
+    const title = feed.title || '';
+    const content = feed.content || '';
     let shouldApprove = false;
     if (p.type === 'candle_heap' || p.type === 'bonus' || p.type === 'traveling_spirit') {
+      // 复刻「已到临提醒/已离开」剔除（只保留「即将到临/即将来临」）
+      if (p.type === 'traveling_spirit' && !isTravelingSpiritUpcoming(title, content)) continue;
       shouldApprove = true;
     } else if (p.type === 'maintenance') {
-      const title = feed.title || '';
-      // 纯维护公告：必须含「更新时间公告」+ 命中任何一个补偿/延迟/活动变种关键词就跳过
-      const hasSkip = MAINTENANCE_SKIP_KEYWORDS.some(k => title.includes(k));
+      // skip 关键词：标题必查 + content 整词匹配
+      const hasSkip = MAINTENANCE_SKIP_KEYWORDS.some(k => {
+        if (title.includes(k)) return true;
+        // content 用「完整词组」匹配（k 长度 ≥ 4 才查 content）
+        return k.length >= 4 && content.includes(k);
+      });
       const isPure = title.includes('更新时间公告') && !hasSkip;
       if (isPure) shouldApprove = true;
     }
     if (shouldApprove) {
+      // ✅ 关键修复：一定要改 feed.status，公告页（admin/feed）才不会再显示
+      feed.status = 'approved';
       const existing = eventMap.get(feed.id);
       if (existing) {
-        // 已有 event（历史 enabled=false）：直接翻 enabled=true + 同步最新 parsed
         existing.enabled = true;
         existing.type = p.type;
         existing.title = p.title || existing.title;
         existing.start = p.start;
         existing.end = p.end;
       } else {
-        feed.status = 'approved';
         eventMap.set(feed.id, eventFromFeed(feed, p));
       }
       autoApprovedCount++;
@@ -208,16 +220,46 @@ function main() {
     }
   }
 
+  // === 全局「不感兴趣」关键词 → 直接 status=ignored，从公告页消失 ===
+  // 适用范围：所有 feed（不限于哪种 autoType）
+  // 用户明确说「直接过滤掉」的类型：投票、运营活动、联动、舞台演出、签售、漫展、票务
+  //                  + 成果展示、纪录片、发布会回顾、创作激励 等线下内容
+  //                  + 季节/活动类「更新内容公告」（伴生维护公告，但主体是活动）
+  //                  + 维护变种公告：补偿、延迟、AR、纪念品、向导
+  //                  + 复刻已到临提醒（6月11日 旅行先祖到临提醒之类）
+  //                  + detectType 错判为 maintenance 的季节内容：迁徙季/七夕/彩染季
+  // 注：季节公告（季节开启提醒、季节倒计时）保留 pending 让人工看
+  const GLOBAL_IGNORE_KEYWORDS = [
+    '投票', '运营活动', '运营活动公告', '联动', '舞台', '签售', '见面会', '漫展', '票务',
+    '成果展示', '纪录片', '发布会回顾', '创作激励', '王国特刊',
+    '更新内容公告',  // 季节/活动类伴生维护公告（不是纯 更新时间公告）
+    '维护补偿', '延迟开服', 'AR功能', '纪念品', '向导',  // 维护变种
+    '到临提醒', '到临啦', '重返天空王国',  // 复刻已到临
+    // detectType 错判为 maintenance 的季节公告
+    '迁徙季旅途', '七夕', '彩染季', '云巢染色工坊', '奇妙之旅', '迁徙季',
+    '维护后正式开启', '维护后开启', '更新维护后',
+  ];
+  let ignoredByKeyword = 0;
+  for (const feed of parsedFeeds) {
+    if (feed.status !== 'pending') continue;
+    const t = feed.title || '';
+    if (GLOBAL_IGNORE_KEYWORDS.some(k => t.includes(k))) {
+      feed.status = 'ignored';
+      ignoredByKeyword++;
+    }
+  }
+
   writeJSON('feeds.json', parsedFeeds);
   writeJSON('events.json', finalEvents);
   appendSyncLog({
-    message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条，自动过审 ${autoApprovedCount} 条，反查关闭 ${droppedFromEvents} 条，清理过期 ${droppedExpired} 条`,
+    message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条，自动过审 ${autoApprovedCount} 条，反查关闭 ${droppedFromEvents} 条，清理过期 ${droppedExpired} 条，关键词忽略 ${ignoredByKeyword} 条`,
     addedEvents: parsedCount,
     autoApproved: autoApprovedCount,
     droppedFromEvents,
     droppedExpired,
+    ignoredByKeyword,
   });
-  console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}, autoApproved: ${autoApprovedCount}, droppedFromEvents: ${droppedFromEvents}, droppedExpired: ${droppedExpired}`);
+  console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}, autoApproved: ${autoApprovedCount}, droppedFromEvents: ${droppedFromEvents}, droppedExpired: ${droppedExpired}, ignoredByKeyword: ${ignoredByKeyword}`);
 }
 
 if (require.main === module) main();

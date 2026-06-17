@@ -551,8 +551,8 @@
   {
     "id": "maintenance-68ae66a7bb045e3735fa6a65",
     "enabled": false,
-    "type": "maintenance",
-    "title": "【维护】维护更新",
+    "type": "bonus",
+    "title": "【双倍】双倍爱心",
     "start": "2025-08-27T16:00:00.000Z",
     "end": "2025-09-02T15:59:00.000Z",
     "sourceFeedId": "68ae66a7bb045e3735fa6a65"
