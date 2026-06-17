@@ -125,24 +125,17 @@ function main() {
     }
   }
 
-  // === 自动过审规则（唔需要人工 review） ===
-  // 1. 大蜡烛 / 双倍 / 复刻 / 维护 → 直接过
-  // 2. 活动 → duration ≥ 3 天 + 非线下 → 直接过
-  //    季节 → 唔自动过（季节有「结束」「开启」两类，自动过风险大）
-  // 命中规则 → status=approved，自动入 events.json
-  const AUTO_APPROVE_TYPES = new Set(['candle_heap', 'bonus', 'traveling_spirit', 'maintenance']);
+  // === 自动过审规则（无需人工 review） ===
+  // 仅大蜡烛 / 双倍 / 复刻 这三类「游戏内固定周期事件」自动过
+  // 活动 / 季节 / 维护 / 其他：全部走人工审阅
+  // 原因：活动有"预告"、"预热"、"线下嘉年华"等多种变种；维护 9h 补偿期容易进重复 feed
+  const AUTO_APPROVE_TYPES = new Set(['candle_heap', 'bonus', 'traveling_spirit']);
   for (const feed of parsedFeeds) {
     if (feed.status !== 'pending' || !feed.parsedResult) continue;
     const p = feed.parsedResult;
     if (p.type === 'other' || !p.start || !p.end) continue;
-    const event = { start: p.start, end: p.end };
-    let shouldApprove = false;
-    if (AUTO_APPROVE_TYPES.has(p.type)) {
-      shouldApprove = true;
-    } else if (p.type === 'activity' && isLikelyGameActivity(event) && !isOfflineEvent(feed.title || '', feed.content || '')) {
-      shouldApprove = true;
-    }
-    if (shouldApprove && !eventMap.has(feed.id)) {
+    if (!AUTO_APPROVE_TYPES.has(p.type)) continue;
+    if (!eventMap.has(feed.id)) {
       feed.status = 'approved';
       eventMap.set(feed.id, eventFromFeed(feed, p));
       autoApprovedCount++;
