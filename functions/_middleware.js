@@ -24,6 +24,7 @@ function isProtectedApi(pathname) {
     || pathname.startsWith('/api/events')
     || pathname.startsWith('/api/feed')
     || pathname.startsWith('/api/settings')
+    || pathname.startsWith('/api/spirits')
     || pathname.startsWith('/api/sync');
 }
 
@@ -43,7 +44,11 @@ async function sign(value, secret) {
 async function hasAuth(request, env) {
   const secret = appConfig(env).adminPassword;
   if (!secret) return false;
-  return getCookie(request) === await sign('mo-sky-stones', secret);
+  const token = getCookie(request);
+  const [expiresAt, signature] = token.split('.');
+  const expiresMs = Number(expiresAt);
+  if (!expiresAt || !signature || !Number.isFinite(expiresMs) || Date.now() > expiresMs) return false;
+  return signature === await sign(`mo-sky-stones:${expiresAt}`, secret);
 }
 
 export async function onRequest(context) {
