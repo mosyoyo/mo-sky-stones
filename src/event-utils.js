@@ -449,19 +449,23 @@ function buildReminderEvents(events, options = {}) {
       const endDesc = buildDescription([
         `标题: ${summary}`,
         `结束时间: ${beijingText(end)}`,
+        `提醒: ${reminder.endDesc}（事件开始时响）`,
       ]);
       const endUid = `${id}-end-reminder@sky-stones-ics`;
-      const endStart = addMinutes(end, parseISODurationMinutes(reminder.end));
+      // 事件本体跨度 = end - X ~ end，作为「倒计时占位」显示
+      // VALARM 在事件开始时（0 分钟）触发 = 真实提前 X 提醒
+      // reminder.end 是负 duration（如 -PT1H）= 提前 1 小时，故 endStart = end + (-minutes)
+      const endStart = addMinutes(end, -parseISODurationMinutes(reminder.end));
       blocks.push(createTimedEvent({
         uid: endUid,
         dtstamp,
         start: endStart,
-        end: addMinutes(end, 30),
+        end,
         summary: endTitle,
         description: endDesc,
         location: label,
         category: label,
-        alarm: { trigger: reminder.end, description: reminder.endDesc },
+        alarm: { trigger: '-PT0M', description: reminder.endDesc },
       }));
     }
   }
