@@ -121,18 +121,7 @@
           <label><span>双倍</span><input type="checkbox" data-endonly="bonus"></label>
           <label><span>大蜡烛</span><input type="checkbox" data-endonly="candle_heap"></label>
         </div>
-      </div>
-
-      <div class="group mode">
-        <h2>持续事件标记为全天</h2>
-        <div class="grid">
-          <label><span>复刻先祖</span><input type="checkbox" data-allday="traveling_spirit"></label>
-          <label><span>活动</span><input type="checkbox" data-allday="activity"></label>
-          <label><span>季节</span><input type="checkbox" data-allday="season"></label>
-          <label><span>双倍</span><input type="checkbox" data-allday="bonus"></label>
-          <label><span>大蜡烛</span><input type="checkbox" data-allday="candle_heap"></label>
-          <label><span>维护</span><input type="checkbox" data-allday="maintenance"></label>
-        </div>
+        <p class="tiny">所有持续事件默认以全天格式输出（VALUE=DATE），日历上更直观。</p>
       </div>
 
       <div class="linkbox">
@@ -142,7 +131,7 @@
           <a id="open" class="button ghost" href="#">打开订阅</a>
         </div>
       </div>
-      <p class="muted">红石和黑石默认开启；活动类内容会在后台审核后进入订阅。仅结束时提醒会去掉范围事件，只留结束前 X 小时的提醒。勾选「全天」后该类型事件以全天格式输出。</p>
+      <p class="muted">红石和黑石默认开启；活动类内容会在后台审核后进入订阅。仅结束时提醒会去掉范围事件，只留结束前 X 小时的提醒。</p>
       <p class="tiny" id="preview"></p>
     </section>
   </main>
@@ -151,7 +140,6 @@
     const $$ = (s) => [...document.querySelectorAll(s)];
     const typeChecks = $$('input[data-type]');
     const endOnlyChecks = $$('input[data-endonly]');
-    const allDayChecks = $$('input[data-allday]');
     const endOnlyMaster = $('#endOnlyMaster');
     const urlInput = $('#url');
     const openLink = $('#open');
@@ -164,15 +152,13 @@
     function update() {
       const types = typeChecks.filter(c => c.checked).map(c => c.getAttribute('data-type'));
       const endOnly = getSelected('endonly');
-      const allDay = getSelected('allday');
       const params = new URLSearchParams();
       params.set('types', types.join(','));
       if (endOnly.length) params.set('endOnly', endOnly.join(','));
-      if (allDay.length) params.set('allDay', allDay.join(','));
       const value = `${location.origin}/calendar.ics?${params.toString()}`;
       urlInput.value = value;
       openLink.href = value;
-      preview.textContent = `已选 ${types.length} 种类型 · 结束提醒 ${endOnly.length} 种 · 全天事件 ${allDay.length} 种`;
+      preview.textContent = `已选 ${types.length} 种类型 · 结束提醒 ${endOnly.length} 种`;
     }
 
     // 总开关联动
@@ -191,7 +177,6 @@
 
     typeChecks.forEach(c => c.addEventListener('change', update));
     endOnlyChecks.forEach(c => c.addEventListener('change', () => { syncMaster(); update(); }));
-    allDayChecks.forEach(c => c.addEventListener('change', update));
     $('#copy').addEventListener('click', async () => navigator.clipboard.writeText(urlInput.value));
 
     syncMaster();

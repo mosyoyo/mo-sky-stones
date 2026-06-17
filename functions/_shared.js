@@ -52,12 +52,12 @@ function parseTypes(url) {
   return value.split(',').map(s => s.trim()).filter(Boolean);
 }
 
-// 解析新提醒选项：endOnly + allDay
-// 支持 ?endOnly=traveling_spirit,activity&allDay=season&eventMode=all (向后兼容)
+// 解析新提醒选项：endOnly
+// 支持 ?endOnly=traveling_spirit,activity&eventMode=all (向后兼容)
 function parseReminderOptions(url) {
   const params = new URL(url).searchParams;
   const allTypes = Object.keys(TYPE_LABELS);
-  const result = { endOnly: new Set(), allDay: new Set() };
+  const result = { endOnly: new Set() };
 
   // 1) 新参数：endOnly
   const endOnlyRaw = params.get('endOnly');
@@ -71,22 +71,12 @@ function parseReminderOptions(url) {
     }
   }
 
-  // 2) 新参数：allDay
-  const allDayRaw = params.get('allDay');
-  if (allDayRaw) {
-    allDayRaw.split(',').map(s => s.trim()).filter(Boolean).forEach(t => {
-      if (TYPE_LABELS[t]) result.allDay.add(t);
-    });
-  }
-
-  // 3) 向后兼容旧 eventMode
+  // 2) 向后兼容旧 eventMode
   const eventMode = params.get('eventMode');
   if (eventMode && !endOnlyRaw) {
     if (eventMode === 'end') {
       allTypes.forEach(t => result.endOnly.add(t));
     }
-    // 'range' = 不加 endOnly（无结束提醒）= 默认
-    // 'all'   = 默认
   }
 
   return result;
@@ -119,7 +109,6 @@ function buildCalendar(events, types, options = {}) {
       name: '光遇·活动提醒',
       types: eventTypes,
       endOnly: reminderOpts.endOnly,
-      allDay: reminderOpts.allDay,
     });
     parts.push(...extractVEVENTS(ics));
   }

@@ -11,7 +11,6 @@ export async function onRequestGet(context) {
     name: '光遇·活动提醒',
     types,
     endOnly: reminderOpts.endOnly,
-    allDay: reminderOpts.allDay,
   });
   return new Response(ics, {
     headers: {

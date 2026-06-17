@@ -396,9 +396,6 @@ function buildReminderEvents(events, options = {}) {
   const endOnly = options.endOnly instanceof Set
     ? options.endOnly
     : new Set(Array.isArray(options.endOnly) ? options.endOnly : []);
-  const allDay = options.allDay instanceof Set
-    ? options.allDay
-    : new Set(Array.isArray(options.allDay) ? options.allDay : []);
   const dtstamp = formatUTC(new Date());
   const blocks = [];
 
@@ -412,7 +409,8 @@ function buildReminderEvents(events, options = {}) {
     const start = new Date(event.start);
     const end = new Date(event.end);
     const durationDays = eventDurationDays(event);
-    const useAllDay = allDay.has(event.type) || event.allDay === true;
+    // 连续事件默认全部全天（用户决策：持续事件无明确时间点，用全天更直观）
+    const useAllDay = true;
 
     if (event.type === 'activity' && !isLikelyGameActivity(event)) {
       continue;
@@ -421,7 +419,7 @@ function buildReminderEvents(events, options = {}) {
     const summary = shortSummary(title, label);
     const reminder = REMINDERS[event.type] || REMINDERS.activity;
 
-    // 1) range 事件（持续事件）
+    // 1) range 事件（持续事件，全天格式）
     if (!endOnly.has(event.type)) {
       const rangeDesc = buildDescription([
         `类型: ${label}`,
@@ -430,33 +428,20 @@ function buildReminderEvents(events, options = {}) {
       ]);
       const rangeAlarm = { trigger: reminder.start, description: reminder.startDesc };
       const rangeUid = `${id}-range@sky-stones-ics`;
-      blocks.push(useAllDay
-        ? createAllDayEvent({
-            uid: rangeUid,
-            dtstamp,
-            start,
-            end,
-            summary,
-            description: rangeDesc,
-            location: label,
-            category: label,
-            alarm: rangeAlarm,
-          })
-        : createTimedEvent({
-            uid: rangeUid,
-            dtstamp,
-            start,
-            end,
-            summary,
-            description: rangeDesc,
-            location: label,
-            category: label,
-            alarm: rangeAlarm,
-          }));
+      blocks.push(createAllDayEvent({
+        uid: rangeUid,
+        dtstamp,
+        start,
+        end,
+        summary,
+        description: rangeDesc,
+        location: label,
+        category: label,
+        alarm: rangeAlarm,
+      }));
     }
 
-    // 2) end 提醒（结束前 X 小时/天）
-    // 红石黑石不参与
+    // 2) end 提醒（结束前 X 小时/天，定时事件保留精确时间）
     if (event.type !== 'maintenance' || endOnly.has(event.type)) {
       const endTitle = event.type === 'traveling_spirit'
         ? '复刻先祖即将离开'
@@ -466,31 +451,18 @@ function buildReminderEvents(events, options = {}) {
         `结束时间: ${beijingText(end)}`,
       ]);
       const endUid = `${id}-end-reminder@sky-stones-ics`;
-      // 结束事件：从 end 时间前 N 开始，到 end 后 30min
       const endStart = addMinutes(end, parseISODurationMinutes(reminder.end));
-      blocks.push(useAllDay
-        ? createAllDayEvent({
-            uid: endUid,
-            dtstamp,
-            start: endStart,
-            end: addMinutes(end, 30),
-            summary: endTitle,
-            description: endDesc,
-            location: label,
-            category: label,
-            alarm: { trigger: reminder.end, description: reminder.endDesc },
-          })
-        : createTimedEvent({
-            uid: endUid,
-            dtstamp,
-            start: endStart,
-            end: addMinutes(end, 30),
-            summary: endTitle,
-            description: endDesc,
-            location: label,
-            category: label,
-            alarm: { trigger: reminder.end, description: reminder.endDesc },
-          }));
+      blocks.push(createTimedEvent({
+        uid: endUid,
+        dtstamp,
+        start: endStart,
+        end: addMinutes(end, 30),
+        summary: endTitle,
+        description: endDesc,
+        location: label,
+        category: label,
+        alarm: { trigger: reminder.end, description: reminder.endDesc },
+      }));
     }
   }
 
