@@ -54182,5 +54182,3889 @@
       "start": "2025-07-09T16:00:00.000Z",
       "end": "2025-07-16T15:59:00.000Z"
     }
+  },
+  {
+    "id": "686dcd287fde177cc36422e9",
+    "title": "#Sky光遇##光遇缤纷飞行日##光遇缤纷之下皆美好#\n缤纷虹色绘出夏日斑斓\n共度时光拥抱玩趣童",
+    "content": "#Sky光遇##光遇缤纷飞行日##光遇缤纷之下皆美好#\n缤纷虹色绘出夏日斑斓\n共度时光拥抱玩趣童心\n🌈\n《光·遇》缤纷飞行日将于7月12日开启\n请旅人们仔细阅读更新公告，了解更多活动详情\n📸\n当色彩铺满假日的画布\n7月12日00:00~7月25日23:59\n一起解锁缤纷的快乐吧~",
+    "createTime": 1752026405027,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "686dcd287fde177cc36422e9",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇缤纷飞行日##光遇缤纷之下皆美好#\\n缤纷虹色绘出夏日斑斓\\n共度时光拥抱玩趣童心\\n🌈\\n《光·遇》缤纷飞行日将于7月12日开启\\n请旅人们仔细阅读更新公告，了解更多活动详情\\n📸\\n当色彩铺满假日的画布\\n7月12日00:00~7月25日23:59\\n一起解锁缤纷的快乐吧~\",\"media\":[{\"name\":\"长图1.jpg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250708_b3c5d43dbd52b05f1207e1b28a6f7cba.png\",\"mimeType\":\"image/jpeg\",\"size\":2615044,\"width\":1000,\"height\":3487}]}}",
+      "deleteTime": 0,
+      "createTime": 1752026405027,
+      "updateTime": 1752026408584,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇缤纷飞行日",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇缤纷之下皆美好",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "686dcd287fde177cc36422e9",
+        "repostCount": 0,
+        "commentCount": 100,
+        "likeCount": 117,
+        "shareCount": 40,
+        "favCount": 15,
+        "createTime": 1752026430637
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "686dcd287fde177cc36422e9",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇缤纷飞行日##光遇缤纷之下皆美好#\\n缤纷虹色绘出夏日斑斓\\n共度时光拥抱玩趣童心\\n🌈\\n《光·遇》缤纷飞行日将于7月12日开启\\n请旅人们仔细阅读更新公告，了解更多活动详情\\n📸\\n当色彩铺满假日的画布\\n7月12日00:00~7月25日23:59\\n一起解锁缤纷的快乐吧~\",\"media\":[{\"name\":\"长图1.jpg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250708_b3c5d43dbd52b05f1207e1b28a6f7cba.png\",\"mimeType\":\"image/jpeg\",\"size\":2615044,\"width\":1000,\"height\":3487}]}}",
+            "deleteTime": 0,
+            "createTime": 1752026405027,
+            "updateTime": 1752026408584,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇缤纷飞行日",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇缤纷之下皆美好",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "686dcd287fde177cc36422e9",
+              "repostCount": 0,
+              "commentCount": 100,
+              "likeCount": 117,
+              "shareCount": 40,
+              "favCount": 15,
+              "createTime": 1752026430637
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇缤纷飞行日_光·遇 | 大神",
+            "desc": "Sky光遇,光遇缤纷飞行日,光遇缤纷之下皆美好缤纷虹色绘出夏日斑斓共度时光拥抱玩趣童心🌈《光·遇》缤纷飞行日将于7月12日开启请旅人们仔细阅读更新公告",
+            "keywords": "sky光遇,sky光遇公告活动,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-07-11T16:00:00.000Z",
+      "end": "2025-07-25T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "686c97c9bcba18627b9bedc9",
+    "title": "#Sky光遇##光遇旅行先祖#\n毛绒长尾，耳缀飘带\n本周四早上6:00\n下一位旅行先祖\n即将抵达",
+    "content": "#Sky光遇##光遇旅行先祖#\n毛绒长尾，耳缀飘带\n本周四早上6:00\n下一位旅行先祖\n即将抵达天空王国啦~\n🦝\n未曾与这位先祖见面的旅人们\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦！",
+    "createTime": 1751947205038,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "686c97c9bcba18627b9bedc9",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇旅行先祖#\\n毛绒长尾，耳缀飘带\\n本周四早上6:00\\n下一位旅行先祖\\n即将抵达天空王国啦~\\n🦝\\n未曾与这位先祖见面的旅人们\\n记得在本周四早上6:00至下周一中午12:00\\n与先祖换取喜欢的赠礼哦！\",\"media\":[{\"name\":\"海报.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250707_bc27be7cc2b2a4982d509b609753d7e1.png\",\"mimeType\":\"image/png\",\"size\":1336394,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1751947205038,
+      "updateTime": 1751947209232,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇旅行先祖",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "686c97c9bcba18627b9bedc9",
+        "repostCount": 2,
+        "commentCount": 921,
+        "likeCount": 2216,
+        "shareCount": 122,
+        "favCount": 101,
+        "createTime": 1751947211744
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "686c97c9bcba18627b9bedc9",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇旅行先祖#\\n毛绒长尾，耳缀飘带\\n本周四早上6:00\\n下一位旅行先祖\\n即将抵达天空王国啦~\\n🦝\\n未曾与这位先祖见面的旅人们\\n记得在本周四早上6:00至下周一中午12:00\\n与先祖换取喜欢的赠礼哦！\",\"media\":[{\"name\":\"海报.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250707_bc27be7cc2b2a4982d509b609753d7e1.png\",\"mimeType\":\"image/png\",\"size\":1336394,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1751947205038,
+            "updateTime": 1751947209232,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇旅行先祖",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "686c97c9bcba18627b9bedc9",
+              "repostCount": 2,
+              "commentCount": 921,
+              "likeCount": 2216,
+              "shareCount": 120,
+              "favCount": 101,
+              "createTime": 1751947211744
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇旅行先祖毛绒长尾_光·遇 | 大神",
+            "desc": "Sky光遇,光遇旅行先祖毛绒长尾，耳缀飘带本周四早上6:00下一位旅行先祖即将抵达天空王国啦~🦝未曾与这位先祖见面的旅人们记得在本周四早上6:00至下周一中午12:00与先祖换取喜欢的赠礼哦",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇,sky光遇旅行先祖"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "旅行先祖",
+      "start": "2025-07-09T22:00:00.000Z",
+      "end": "2025-07-14T04:00:00.000Z"
+    }
+  },
+  {
+    "id": "686b2a273db747726cd478b0",
+    "title": "#Sky光遇##光遇缤纷飞行日##缤纷之下皆美好#\n“左……中……右……啊啊啊小光我又看漏了！”",
+    "content": "#Sky光遇##光遇缤纷飞行日##缤纷之下皆美好#\n“左……中……右……啊啊啊小光我又看漏了！”\n“小遇要不我们换一个游……”\n“不行！再来一次！”\n🎉\n7月12日《光·遇》缤纷飞行日开启后\n云野中央神坛将支起三个趣味游戏摊位\n在多彩夏日尽情玩耍吧！",
+    "createTime": 1751853605033,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "686b2a273db747726cd478b0",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇缤纷飞行日##缤纷之下皆美好#\\n“左……中……右……啊啊啊小光我又看漏了！”\\n“小遇要不我们换一个游……”\\n“不行！再来一次！”\\n🎉\\n7月12日《光·遇》缤纷飞行日开启后\\n云野中央神坛将支起三个趣味游戏摊位\\n在多彩夏日尽情玩耍吧！\",\"media\":[{\"name\":\"0707.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250704_b29c9491e12fabed17b71deb52a53e97.png\",\"mimeType\":\"image/png\",\"size\":2710055,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1751853605033,
+      "updateTime": 1751853607975,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇缤纷飞行日",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "缤纷之下皆美好",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "686b2a273db747726cd478b0",
+        "repostCount": 0,
+        "commentCount": 113,
+        "likeCount": 348,
+        "shareCount": 8,
+        "favCount": 17,
+        "createTime": 1751853639489
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "686b2a273db747726cd478b0",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇缤纷飞行日##缤纷之下皆美好#\\n“左……中……右……啊啊啊小光我又看漏了！”\\n“小遇要不我们换一个游……”\\n“不行！再来一次！”\\n🎉\\n7月12日《光·遇》缤纷飞行日开启后\\n云野中央神坛将支起三个趣味游戏摊位\\n在多彩夏日尽情玩耍吧！\",\"media\":[{\"name\":\"0707.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250704_b29c9491e12fabed17b71deb52a53e97.png\",\"mimeType\":\"image/png\",\"size\":2710055,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1751853605033,
+            "updateTime": 1751853607975,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇缤纷飞行日",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "缤纷之下皆美好",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "686b2a273db747726cd478b0",
+              "repostCount": 0,
+              "commentCount": 113,
+              "likeCount": 348,
+              "shareCount": 8,
+              "favCount": 17,
+              "createTime": 1751853639489
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇缤纷飞行日_光·遇 | 大神",
+            "desc": "Sky光遇,光遇缤纷飞行日,缤纷之下皆美好“左……中……右……啊啊啊小光我又看漏了！”“小遇要不我们换一个游……”“不行！再来一次",
+            "keywords": "sky光遇,sky光遇分享讨论,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-07-11T16:00:00.000Z",
+      "end": "2025-07-12T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "686751c736bb412bbae8e2b2",
+    "title": "#SKY光遇##光遇六周年群星盛典#\n晨岛初光指引六年同行\n繁星为笔绘就六载旅程\n📝 \n我们将",
+    "content": "#SKY光遇##光遇六周年群星盛典#\n晨岛初光指引六年同行\n繁星为笔绘就六载旅程\n📝 \n我们将于7月27日 14:00-18:00\n在广州市海珠区广州塔路8号 广州塔广场\n举办《光·遇》游戏主创交流会\n点击https://game.163.com/s/?id=1245 报名参与活动\n报名时间：即日起~7月10日23:59\n抽选结果将于7月18日12点起陆续通知\n📍\n此外，我们将于8月2日14:30-16:30\n在 广州市天河区珠江东路4号 广州图书馆\n开展“同沐星光·遇见妙想”——玩家创作者分享会\n点击https://game.163.com/s/?id=1243 报名参与活动\n报名时间：即日起~7月13日23:59\n抽选结果将于7月21日12点起陆续通知\n✉️\n由于现场承载能力有限，我们将从报名问卷中抽选部分旅人\n参与活动的旅人，请留意查收报名时填写的邮箱，及时回复确认您是否前往线下参与活动\n更多活动详情请点击链接查看",
+    "createTime": 1751601605028,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "686751c736bb412bbae8e2b2",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#SKY光遇##光遇六周年群星盛典#\\n晨岛初光指引六年同行\\n繁星为笔绘就六载旅程\\n📝 \\n我们将于7月27日 14:00-18:00\\n在广州市海珠区广州塔路8号 广州塔广场\\n举办《光·遇》游戏主创交流会\\n点击https://game.163.com/s/?id=1245 报名参与活动\\n报名时间：即日起~7月10日23:59\\n抽选结果将于7月18日12点起陆续通知\\n📍\\n此外，我们将于8月2日14:30-16:30\\n在 广州市天河区珠江东路4号 广州图书馆\\n开展“同沐星光·遇见妙想”——玩家创作者分享会\\n点击https://game.163.com/s/?id=1243 报名参与活动\\n报名时间：即日起~7月13日23:59\\n抽选结果将于7月21日12点起陆续通知\\n✉️\\n由于现场承载能力有限，我们将从报名问卷中抽选部分旅人\\n参与活动的旅人，请留意查收报名时填写的邮箱，及时回复确认您是否前往线下参与活动\\n更多活动详情请点击链接查看\",\"media\":[{\"name\":\"招募.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250703_5d8d5582a6301725e0a0c7a776f49fa5.png\",\"mimeType\":\"image/png\",\"size\":1221049,\"width\":1000,\"height\":1730},{\"name\":\"招募2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250703_45e10c9f7661f2a20f83121473d9ae9e.png\",\"mimeType\":\"image/png\",\"size\":1438097,\"width\":1000,\"height\":1748}]}}",
+      "deleteTime": 0,
+      "createTime": 1751601605028,
+      "updateTime": 1751601607744,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年群星盛典",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "686751c736bb412bbae8e2b2",
+        "repostCount": 1,
+        "commentCount": 3,
+        "likeCount": 26,
+        "shareCount": 1,
+        "favCount": 0,
+        "createTime": 1751602529287
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "686751c736bb412bbae8e2b2",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#SKY光遇##光遇六周年群星盛典#\\n晨岛初光指引六年同行\\n繁星为笔绘就六载旅程\\n📝 \\n我们将于7月27日 14:00-18:00\\n在广州市海珠区广州塔路8号 广州塔广场\\n举办《光·遇》游戏主创交流会\\n点击https://game.163.com/s/?id=1245 报名参与活动\\n报名时间：即日起~7月10日23:59\\n抽选结果将于7月18日12点起陆续通知\\n📍\\n此外，我们将于8月2日14:30-16:30\\n在 广州市天河区珠江东路4号 广州图书馆\\n开展“同沐星光·遇见妙想”——玩家创作者分享会\\n点击https://game.163.com/s/?id=1243 报名参与活动\\n报名时间：即日起~7月13日23:59\\n抽选结果将于7月21日12点起陆续通知\\n✉️\\n由于现场承载能力有限，我们将从报名问卷中抽选部分旅人\\n参与活动的旅人，请留意查收报名时填写的邮箱，及时回复确认您是否前往线下参与活动\\n更多活动详情请点击链接查看\",\"media\":[{\"name\":\"招募.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250703_5d8d5582a6301725e0a0c7a776f49fa5.png\",\"mimeType\":\"image/png\",\"size\":1221049,\"width\":1000,\"height\":1730},{\"name\":\"招募2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250703_45e10c9f7661f2a20f83121473d9ae9e.png\",\"mimeType\":\"image/png\",\"size\":1438097,\"width\":1000,\"height\":1748}]}}",
+            "deleteTime": 0,
+            "createTime": 1751601605028,
+            "updateTime": 1751601607744,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年群星盛典",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "686751c736bb412bbae8e2b2",
+              "repostCount": 1,
+              "commentCount": 3,
+              "likeCount": 26,
+              "shareCount": 0,
+              "favCount": 0,
+              "createTime": 1751602529287
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "SKY光遇_光·遇 | 大神",
+            "desc": "SKY光遇",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇,sky光遇晨岛"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-07-27T06:00:00.000Z",
+      "end": "2025-07-27T10:00:00.000Z"
+    }
+  },
+  {
+    "id": "686741033aa9d01d7a19af26",
+    "title": "#SKY光遇##光遇六周年群星盛典#\n当相伴的脚步迈过第六个年头\n群星指引我们在此处欣然相逢\n7",
+    "content": "#SKY光遇##光遇六周年群星盛典#\n当相伴的脚步迈过第六个年头\n群星指引我们在此处欣然相逢\n7月20日~8月31日\n期待在线下与旅人们相聚\n🎊\n这个夏天，我们准备了丰富有趣的线下活动\n期待与各位光之子共度难忘的时光\n更多活动详情请点击图片查看",
+    "createTime": 1751597312490,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "686741033aa9d01d7a19af26",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#SKY光遇##光遇六周年群星盛典#\\n当相伴的脚步迈过第六个年头\\n群星指引我们在此处欣然相逢\\n7月20日~8月31日\\n期待在线下与旅人们相聚\\n🎊\\n这个夏天，我们准备了丰富有趣的线下活动\\n期待与各位光之子共度难忘的时光\\n更多活动详情请点击图片查看\",\"media\":[{\"name\":\"新2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250704_3f2a7c3d14642d66d2aad7b72742aca4.png\",\"mimeType\":\"image/png\",\"size\":1834380,\"width\":1000,\"height\":3588}]}}",
+      "deleteTime": 0,
+      "createTime": 1751597312490,
+      "updateTime": 1751597315965,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年群星盛典",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "686741033aa9d01d7a19af26",
+        "repostCount": 1,
+        "commentCount": 4,
+        "likeCount": 14,
+        "shareCount": 4,
+        "favCount": 1,
+        "createTime": 1751597806278
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "686741033aa9d01d7a19af26",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#SKY光遇##光遇六周年群星盛典#\\n当相伴的脚步迈过第六个年头\\n群星指引我们在此处欣然相逢\\n7月20日~8月31日\\n期待在线下与旅人们相聚\\n🎊\\n这个夏天，我们准备了丰富有趣的线下活动\\n期待与各位光之子共度难忘的时光\\n更多活动详情请点击图片查看\",\"media\":[{\"name\":\"新2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250704_3f2a7c3d14642d66d2aad7b72742aca4.png\",\"mimeType\":\"image/png\",\"size\":1834380,\"width\":1000,\"height\":3588}]}}",
+            "deleteTime": 0,
+            "createTime": 1751597312490,
+            "updateTime": 1751597315965,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年群星盛典",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "686741033aa9d01d7a19af26",
+              "repostCount": 1,
+              "commentCount": 4,
+              "likeCount": 14,
+              "shareCount": 3,
+              "favCount": 1,
+              "createTime": 1751597806278
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "SKY光遇_光·遇 | 大神",
+            "desc": "SKY光遇,光遇六周年群星盛典当相伴的脚步迈过第六个年头群星指引我们在此处欣然相逢7月20日~8月31日期待在线下与旅人们相聚🎊这个夏天",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-07-19T16:00:00.000Z",
+      "end": "2025-08-31T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "686492da24fc26709d897cd0",
+    "title": "#光遇青鸟季# #光遇幸福就在身边# #光遇演员请就位#\n不再遥望天边远行的羽翼\n幸福已栖落在温",
+    "content": "#光遇青鸟季# #光遇幸福就在身边# #光遇演员请就位#\n不再遥望天边远行的羽翼\n幸福已栖落在温暖的掌心\n🪶\n7月3日~7月9日活动期间\n完成以下任务即可获得对应奖励：\n①完成青鸟季所有季节任务，可获得爱心*2\n②累计收集20根季节蜡烛，可获得体型重塑*2\n③累计登录达到指定天数，可获得淡蓝尾迹*1，彩虹尾迹*1\n④达成青鸟季季节毕业，可获得新季节蜡烛*6\n季节蜡烛将在新季节开启一周内通过邮件发放\n✨️\n《光·遇》青鸟季即将落下帷幕\n带着这份关于幸福的感悟\n在下一段旅程重逢吧\n\n  2025年7月2日\n《光·遇》官方运营团队",
+    "createTime": 1751421605027,
+    "status": "pending",
+    "autoType": "season",
+    "parsed": true,
+    "raw": {
+      "id": "686492da24fc26709d897cd0",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#光遇青鸟季# #光遇幸福就在身边# #光遇演员请就位#\\n不再遥望天边远行的羽翼\\n幸福已栖落在温暖的掌心\\n🪶\\n7月3日~7月9日活动期间\\n完成以下任务即可获得对应奖励：\\n①完成青鸟季所有季节任务，可获得爱心*2\\n②累计收集20根季节蜡烛，可获得体型重塑*2\\n③累计登录达到指定天数，可获得淡蓝尾迹*1，彩虹尾迹*1\\n④达成青鸟季季节毕业，可获得新季节蜡烛*6\\n季节蜡烛将在新季节开启一周内通过邮件发放\\n✨️\\n《光·遇》青鸟季即将落下帷幕\\n带着这份关于幸福的感悟\\n在下一段旅程重逢吧\\n\\n  2025年7月2日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250701_b8824fb072c287b2509bf75cdad78976.png\",\"mimeType\":\"image/png\",\"size\":2439506,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1751421605027,
+      "updateTime": 1751421658160,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "光遇青鸟季",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇幸福就在身边",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇演员请就位",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "686492da24fc26709d897cd0",
+        "repostCount": 0,
+        "commentCount": 18,
+        "likeCount": 32,
+        "shareCount": 2,
+        "favCount": 1,
+        "createTime": 1751421746718
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "686492da24fc26709d897cd0",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#光遇青鸟季# #光遇幸福就在身边# #光遇演员请就位#\\n不再遥望天边远行的羽翼\\n幸福已栖落在温暖的掌心\\n🪶\\n7月3日~7月9日活动期间\\n完成以下任务即可获得对应奖励：\\n①完成青鸟季所有季节任务，可获得爱心*2\\n②累计收集20根季节蜡烛，可获得体型重塑*2\\n③累计登录达到指定天数，可获得淡蓝尾迹*1，彩虹尾迹*1\\n④达成青鸟季季节毕业，可获得新季节蜡烛*6\\n季节蜡烛将在新季节开启一周内通过邮件发放\\n✨️\\n《光·遇》青鸟季即将落下帷幕\\n带着这份关于幸福的感悟\\n在下一段旅程重逢吧\\n\\n  2025年7月2日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250701_b8824fb072c287b2509bf75cdad78976.png\",\"mimeType\":\"image/png\",\"size\":2439506,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1751421605027,
+            "updateTime": 1751421658160,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "光遇青鸟季",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇幸福就在身边",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇演员请就位",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "686492da24fc26709d897cd0",
+              "repostCount": 0,
+              "commentCount": 18,
+              "likeCount": 32,
+              "shareCount": 2,
+              "favCount": 1,
+              "createTime": 1751421746718
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "光遇青鸟季,光遇幸福就在身边_光·遇 | 大神",
+            "desc": "光遇青鸟季,光遇幸福就在身边,光遇演员请就位不再遥望天边远行的羽翼幸福已栖落在温暖的掌心🪶7月3日~7月9日活动期间完成以下任务即可获得对应奖励：①完成青鸟季所有季节任务",
+            "keywords": "sky光遇,sky光遇公告活动,Sky光遇,光遇幸福就在身边,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "season",
+      "title": "【季节】季节",
+      "start": "2025-07-02T16:00:00.000Z",
+      "end": "2025-07-09T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "68609e29b6307b37e6449ae8",
+    "title": "#Sky光遇##光遇六周年##光遇因你而星动#\n《光·遇》主创见面会系列活动招募开启\n璀璨星光指",
+    "content": "#Sky光遇##光遇六周年##光遇因你而星动#\n《光·遇》主创见面会系列活动招募开启\n璀璨星光指引相遇的坐标\n携手启程奔赴欢乐的浪潮\n动画《光遇·双星》暮星篇\n将于7月30日起温暖上映\n📜\n此外，我们将于7月20日和7月27日\n分别在上海、广州举办主创见面会系列活动\n期待与各位旅人的会面\n点击https://game.163.com/s/?id=1242报名参与活动\n报名时间：即日起~7月6日23:59\n由于现场承载能力有限，我们将从报名问卷中抽选部分旅人\n报名参与活动的旅人，请留意查收报名时填写的邮箱，及时回复确认您是否前往线下参与活动\n✨\n期待与你解锁全新的周年回忆~\n更多活动详情请点击链接查看",
+    "createTime": 1751162405028,
+    "status": "ignored",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "68609e29b6307b37e6449ae8",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n《光·遇》主创见面会系列活动招募开启\\n璀璨星光指引相遇的坐标\\n携手启程奔赴欢乐的浪潮\\n动画《光遇·双星》暮星篇\\n将于7月30日起温暖上映\\n📜\\n此外，我们将于7月20日和7月27日\\n分别在上海、广州举办主创见面会系列活动\\n期待与各位旅人的会面\\n点击https://game.163.com/s/?id=1242报名参与活动\\n报名时间：即日起~7月6日23:59\\n由于现场承载能力有限，我们将从报名问卷中抽选部分旅人\\n报名参与活动的旅人，请留意查收报名时填写的邮箱，及时回复确认您是否前往线下参与活动\\n✨\\n期待与你解锁全新的周年回忆~\\n更多活动详情请点击链接查看\",\"media\":[{\"name\":\"主创见面会时间轴.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250628_1466ccfc7cc08806c65cb29a11acbc5a.png\",\"mimeType\":\"image/png\",\"size\":1943733,\"width\":1600,\"height\":1200}]}}",
+      "deleteTime": 0,
+      "createTime": 1751162405028,
+      "updateTime": 1751162409124,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "68609e29b6307b37e6449ae8",
+        "repostCount": 1,
+        "commentCount": 21,
+        "likeCount": 81,
+        "shareCount": 9,
+        "favCount": 5,
+        "createTime": 1751162605380
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "68609e29b6307b37e6449ae8",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n《光·遇》主创见面会系列活动招募开启\\n璀璨星光指引相遇的坐标\\n携手启程奔赴欢乐的浪潮\\n动画《光遇·双星》暮星篇\\n将于7月30日起温暖上映\\n📜\\n此外，我们将于7月20日和7月27日\\n分别在上海、广州举办主创见面会系列活动\\n期待与各位旅人的会面\\n点击https://game.163.com/s/?id=1242报名参与活动\\n报名时间：即日起~7月6日23:59\\n由于现场承载能力有限，我们将从报名问卷中抽选部分旅人\\n报名参与活动的旅人，请留意查收报名时填写的邮箱，及时回复确认您是否前往线下参与活动\\n✨\\n期待与你解锁全新的周年回忆~\\n更多活动详情请点击链接查看\",\"media\":[{\"name\":\"主创见面会时间轴.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250628_1466ccfc7cc08806c65cb29a11acbc5a.png\",\"mimeType\":\"image/png\",\"size\":1943733,\"width\":1600,\"height\":1200}]}}",
+            "deleteTime": 0,
+            "createTime": 1751162405028,
+            "updateTime": 1751162409124,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "68609e29b6307b37e6449ae8",
+              "repostCount": 1,
+              "commentCount": 21,
+              "likeCount": 81,
+              "shareCount": 8,
+              "favCount": 5,
+              "createTime": 1751162605380
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇六周年_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年,光遇因你而星动《光·遇》主创见面会系列活动招募开启璀璨星光指引相遇的坐标携手启程奔赴欢乐的浪潮动画《光遇·双星》暮星篇将于7月30日起温暖上映📜此外",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-07-29T16:00:00.000Z",
+      "end": "2025-07-30T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "685f4ca758da111c64876931",
+    "title": "#Sky光遇##光遇六周年##光遇因你而星动#\n热爱点亮相遇，记录见证时光\n在即将到来的《光·遇",
+    "content": "#Sky光遇##光遇六周年##光遇因你而星动#\n热爱点亮相遇，记录见证时光\n在即将到来的《光·遇》六周年群星盛典\n我们将怀着最诚挚的敬意\n为那些用创意点亮星空、以热忱温暖云端的光遇创作者们\n颁发“2025光遇创作者奖”\n🏆\n本次奖项评选汇聚了国内各内容平台的优秀创作者名单\n由《光·遇》制作人陈星汉老师、那家游戏公司《光·遇》制作团队及《光·遇》官方运营团队共同参与评审\n评选聚焦创作者近一年内在主力内容领域的创作表现、内容质量及创意水平\n平台账号投稿数据、账号影响力及创作时长等不作为唯一评选参考维度\n🌟\n更多相关信息敬请期待\n获奖结果将在8月16日群星颁奖礼现场揭晓\n一起见证为天空王国编织梦想的创作者们\n登上属于他们的荣耀殿堂吧",
+    "createTime": 1751076005023,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "685f4ca758da111c64876931",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n热爱点亮相遇，记录见证时光\\n在即将到来的《光·遇》六周年群星盛典\\n我们将怀着最诚挚的敬意\\n为那些用创意点亮星空、以热忱温暖云端的光遇创作者们\\n颁发“2025光遇创作者奖”\\n🏆\\n本次奖项评选汇聚了国内各内容平台的优秀创作者名单\\n由《光·遇》制作人陈星汉老师、那家游戏公司《光·遇》制作团队及《光·遇》官方运营团队共同参与评审\\n评选聚焦创作者近一年内在主力内容领域的创作表现、内容质量及创意水平\\n平台账号投稿数据、账号影响力及创作时长等不作为唯一评选参考维度\\n🌟\\n更多相关信息敬请期待\\n获奖结果将在8月16日群星颁奖礼现场揭晓\\n一起见证为天空王国编织梦想的创作者们\\n登上属于他们的荣耀殿堂吧\",\"media\":[{\"name\":\"创作者奖预告长图.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250626_2eb103e9199d5c20dbdf985431a09def.png\",\"mimeType\":\"image/png\",\"size\":722776,\"width\":1080,\"height\":1962}]}}",
+      "deleteTime": 0,
+      "createTime": 1751076005023,
+      "updateTime": 1751076007574,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "685f4ca758da111c64876931",
+        "repostCount": 0,
+        "commentCount": 5,
+        "likeCount": 18,
+        "shareCount": 1,
+        "favCount": 1,
+        "createTime": 1751076567763
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685f4ca758da111c64876931",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n热爱点亮相遇，记录见证时光\\n在即将到来的《光·遇》六周年群星盛典\\n我们将怀着最诚挚的敬意\\n为那些用创意点亮星空、以热忱温暖云端的光遇创作者们\\n颁发“2025光遇创作者奖”\\n🏆\\n本次奖项评选汇聚了国内各内容平台的优秀创作者名单\\n由《光·遇》制作人陈星汉老师、那家游戏公司《光·遇》制作团队及《光·遇》官方运营团队共同参与评审\\n评选聚焦创作者近一年内在主力内容领域的创作表现、内容质量及创意水平\\n平台账号投稿数据、账号影响力及创作时长等不作为唯一评选参考维度\\n🌟\\n更多相关信息敬请期待\\n获奖结果将在8月16日群星颁奖礼现场揭晓\\n一起见证为天空王国编织梦想的创作者们\\n登上属于他们的荣耀殿堂吧\",\"media\":[{\"name\":\"创作者奖预告长图.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250626_2eb103e9199d5c20dbdf985431a09def.png\",\"mimeType\":\"image/png\",\"size\":722776,\"width\":1080,\"height\":1962}]}}",
+            "deleteTime": 0,
+            "createTime": 1751076005023,
+            "updateTime": 1751076007574,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "685f4ca758da111c64876931",
+              "repostCount": 0,
+              "commentCount": 5,
+              "likeCount": 18,
+              "shareCount": 1,
+              "favCount": 1,
+              "createTime": 1751076567763
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇六周年,光遇因你而星动热爱点亮相遇_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年,光遇因你而星动热爱点亮相遇",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇,sky光遇账号"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-08-15T16:00:00.000Z",
+      "end": "2025-08-16T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "685e7385c30eaa3627907aa8",
+    "title": "《光·遇》6月27日打击外挂公告及防骗分享",
+    "content": "我发表了一篇大神长文，快来看看吧!",
+    "createTime": 1751020205025,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "685e7385c30eaa3627907aa8",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 6,
+      "content": "{\"type\":6,\"body\":{\"text\":\"我发表了一篇大神长文，快来看看吧!\",\"media\":[{\"name\":\"godlike_kol_1751019259267_33\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250627_63485e91129a89d2edebceedc8580043.png\",\"mimeType\":\"image/png\",\"size\":2034575,\"width\":1600,\"height\":900,\"bgColor\":\"#ffffff\"}],\"subTitle\":\"\",\"title\":\"《光·遇》6月27日打击外挂公告及防骗分享\",\"longText\":\"<p>亲爱的旅人们：</p><p>      我们近期对传播不良信息、广告以及辱骂歧视等造成旅人无法正常游戏的言论进行打击处理，同时，我们打击并封禁一批涉嫌使用第三方辅助软件等非法行为的账号，并同步没收了这些账号的非法所得，本次查处结果为：</p><p>禁言违规账号21<strong>w+</strong>个</p><p>封禁违规账号13<strong>w+</strong>个</p><p>打击非法爱心交易账号26<strong>w+</strong>个</p><p>没收非法爱心（含道具回收）18<strong>w+</strong>颗</p><p><br></p><p align=\\\"justify\\\">在此，我们再次郑重提醒各位：</p><p align=\\\"justify\\\">      1、在游戏内使用非法第三方辅助软件是一种严重破坏游戏环境、极其自私的行为，我们将持续对这种行为进行严厉打击。</p><p align=\\\"justify\\\">      2、针对各类工作室在游戏内的不法行为，我们也同样进行严厉打击；若您因购买工作室提供的非法内容，对您的账号造成了损失，后果需要您自行承担。</p><p align=\\\"justify\\\">      3、请注意保持自身账号安全，防止账号信息泄露被盗。</p><p align=\\\"justify\\\">      4、请旅人们使用正规渠道下载的版本。</p><p align=\\\"justify\\\">      5、请不要通过非法途径购买礼包赠送，以免造成财产损失和账号安全风险。</p><p align=\\\"justify\\\">      6、我们不⽀持旅⼈以任何形式进⾏账号交易，请保护个人信息与财产安全，警惕第三⽅交易，避免财产损失。</p><p align=\\\"justify\\\">      7、如您使用外挂等违规工具导致角色数据毁坏、装扮丢失、无法完成任务等问题，后果需要您自行承担。</p><p align=\\\"justify\\\"><br></p><p>      此外，游戏内举报行为增加【言语歧视】【辱骂言论】维度，旅人们在游戏过程中如遇相关情况，请善用举报工具，维护自身权益。</p><p align=\\\"justify\\\">      我们将不遗余力地对《光·遇》游戏环境进行监测与净化，也由衷希望更多旅人能够加入到共同守护天空王国的努力中来。</p><p align=\\\"justify\\\"><br></p><p align=\\\"right\\\">2025年6月27日</p><p align=\\\"right\\\">《光·遇》官方运营团队</p><p align=\\\"right\\\"><br></p><p align=\\\"center\\\"><img src=\\\"https://ok.166.net/reunionpub/1_kol_20250627_e5916bba9681bb72937a7c5395f21cb6.png\\\" width=\\\"837\\\" height=\\\"3815\\\"></p><p align=\\\"right\\\"><br></p>\"}}",
+      "deleteTime": 0,
+      "createTime": 1751020205025,
+      "updateTime": 1751020421140,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "685e7385c30eaa3627907aa8",
+        "repostCount": 0,
+        "commentCount": 21,
+        "likeCount": 23,
+        "shareCount": 1,
+        "favCount": 1,
+        "createTime": 1751020786571
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685e7385c30eaa3627907aa8",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 6,
+            "content": "{\"type\":6,\"body\":{\"text\":\"我发表了一篇大神长文，快来看看吧!\",\"media\":[{\"name\":\"godlike_kol_1751019259267_33\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250627_63485e91129a89d2edebceedc8580043.png\",\"mimeType\":\"image/png\",\"size\":2034575,\"width\":1600,\"height\":900,\"bgColor\":\"#ffffff\"}],\"subTitle\":\"\",\"title\":\"《光·遇》6月27日打击外挂公告及防骗分享\",\"longText\":\"<p>亲爱的旅人们：</p><p>      我们近期对传播不良信息、广告以及辱骂歧视等造成旅人无法正常游戏的言论进行打击处理，同时，我们打击并封禁一批涉嫌使用第三方辅助软件等非法行为的账号，并同步没收了这些账号的非法所得，本次查处结果为：</p><p>禁言违规账号21<strong>w+</strong>个</p><p>封禁违规账号13<strong>w+</strong>个</p><p>打击非法爱心交易账号26<strong>w+</strong>个</p><p>没收非法爱心（含道具回收）18<strong>w+</strong>颗</p><p><br></p><p align=\\\"justify\\\">在此，我们再次郑重提醒各位：</p><p align=\\\"justify\\\">      1、在游戏内使用非法第三方辅助软件是一种严重破坏游戏环境、极其自私的行为，我们将持续对这种行为进行严厉打击。</p><p align=\\\"justify\\\">      2、针对各类工作室在游戏内的不法行为，我们也同样进行严厉打击；若您因购买工作室提供的非法内容，对您的账号造成了损失，后果需要您自行承担。</p><p align=\\\"justify\\\">      3、请注意保持自身账号安全，防止账号信息泄露被盗。</p><p align=\\\"justify\\\">      4、请旅人们使用正规渠道下载的版本。</p><p align=\\\"justify\\\">      5、请不要通过非法途径购买礼包赠送，以免造成财产损失和账号安全风险。</p><p align=\\\"justify\\\">      6、我们不⽀持旅⼈以任何形式进⾏账号交易，请保护个人信息与财产安全，警惕第三⽅交易，避免财产损失。</p><p align=\\\"justify\\\">      7、如您使用外挂等违规工具导致角色数据毁坏、装扮丢失、无法完成任务等问题，后果需要您自行承担。</p><p align=\\\"justify\\\"><br></p><p>      此外，游戏内举报行为增加【言语歧视】【辱骂言论】维度，旅人们在游戏过程中如遇相关情况，请善用举报工具，维护自身权益。</p><p align=\\\"justify\\\">      我们将不遗余力地对《光·遇》游戏环境进行监测与净化，也由衷希望更多旅人能够加入到共同守护天空王国的努力中来。</p><p align=\\\"justify\\\"><br></p><p align=\\\"right\\\">2025年6月27日</p><p align=\\\"right\\\">《光·遇》官方运营团队</p><p align=\\\"right\\\"><br></p><p align=\\\"center\\\"><img src=\\\"https://ok.166.net/reunionpub/1_kol_20250627_e5916bba9681bb72937a7c5395f21cb6.png\\\" width=\\\"837\\\" height=\\\"3815\\\"></p><p align=\\\"right\\\"><br></p>\"}}",
+            "deleteTime": 0,
+            "createTime": 1751020205025,
+            "updateTime": 1751020421140,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "685e7385c30eaa3627907aa8",
+              "repostCount": 0,
+              "commentCount": 21,
+              "likeCount": 23,
+              "shareCount": 1,
+              "favCount": 1,
+              "createTime": 1751020786571
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "光·遇》6月27日打击外挂公告及防骗分享_光·遇 | 大神",
+            "desc": "亲爱的旅人们： 我们近期对传播不良信息、广告以及辱骂歧视等造成旅人无法正常游戏的言论进行打击处理，同时，我们打击并封禁一批涉嫌使用第三方辅助软件等非法行为的账号，并同步没收了这些账号的非法所得",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇账号,sky光遇辱骂"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "《光·遇》6月27日打击外挂公告及防骗分享",
+      "start": "2025-06-26T16:00:00.000Z",
+      "end": "2025-06-27T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "685e4f87392f132d97c2b2a2",
+    "title": "#Sky光遇# #光遇六周年##光遇因你而星动#\n小光满怀期待静候开场\n生日会精彩节目即将呈现\n",
+    "content": "#Sky光遇# #光遇六周年##光遇因你而星动#\n小光满怀期待静候开场\n生日会精彩节目即将呈现\n🎂\n《光·遇》六周年生日会将于6月28日星期六 20:00正式开播！\n前往@光遇手游 B站、抖音、快手、小红书官方账号预约直播\n一起在欢笑中为光遇六周年庆生吧~",
+    "createTime": 1751011205027,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "685e4f87392f132d97c2b2a2",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇# #光遇六周年##光遇因你而星动#\\n小光满怀期待静候开场\\n生日会精彩节目即将呈现\\n🎂\\n《光·遇》六周年生日会将于6月28日星期六 20:00正式开播！\\n前往@光遇手游 B站、抖音、快手、小红书官方账号预约直播\\n一起在欢笑中为光遇六周年庆生吧~\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250626_389a46be3948345b51c684e0980a3c01.png\",\"mimeType\":\"image/png\",\"size\":4813427,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1751011205027,
+      "updateTime": 1751011207853,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "685e4f87392f132d97c2b2a2",
+        "repostCount": 0,
+        "commentCount": 3,
+        "likeCount": 19,
+        "shareCount": 1,
+        "favCount": 0,
+        "createTime": 1751011890756
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685e4f87392f132d97c2b2a2",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇# #光遇六周年##光遇因你而星动#\\n小光满怀期待静候开场\\n生日会精彩节目即将呈现\\n🎂\\n《光·遇》六周年生日会将于6月28日星期六 20:00正式开播！\\n前往@光遇手游 B站、抖音、快手、小红书官方账号预约直播\\n一起在欢笑中为光遇六周年庆生吧~\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250626_389a46be3948345b51c684e0980a3c01.png\",\"mimeType\":\"image/png\",\"size\":4813427,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1751011205027,
+            "updateTime": 1751011207853,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "685e4f87392f132d97c2b2a2",
+              "repostCount": 0,
+              "commentCount": 3,
+              "likeCount": 19,
+              "shareCount": 1,
+              "favCount": 0,
+              "createTime": 1751011890756
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇六周年_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年,光遇因你而星动小光满怀期待静候开场生日会精彩节目即将呈现🎂《光·遇》六周年生日会将于6月28日星期六 20:00正式开播",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇,sky光遇账号"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-27T16:00:00.000Z",
+      "end": "2025-06-28T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "685dfb28c30eaa36278d7c5b",
+    "title": "#Sky光遇##光遇六周年##光遇因你而星动#\n手捧爆米花桶锁定直播频道\n踏入星动庆典收获周年惊",
+    "content": "#Sky光遇##光遇六周年##光遇因你而星动#\n手捧爆米花桶锁定直播频道\n踏入星动庆典收获周年惊喜\n6月28日~6月29日 19:00前往相应直播间\n与主播团一起玩转庆典吧\n🎉\n《光·遇》星动庆典直播陪你共度六周年\n阅读下方图片了解更多活动详情\n具体直播内容请前往主播主页了解~",
+    "createTime": 1750989605026,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "685dfb28c30eaa36278d7c5b",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n手捧爆米花桶锁定直播频道\\n踏入星动庆典收获周年惊喜\\n6月28日~6月29日 19:00前往相应直播间\\n与主播团一起玩转庆典吧\\n🎉\\n《光·遇》星动庆典直播陪你共度六周年\\n阅读下方图片了解更多活动详情\\n具体直播内容请前往主播主页了解~\",\"media\":[{\"name\":\"周年庆陪玩团直播长图.png\",\"url\":\"https://ok.166.net/reunionpub/2022-06-17/ntesgod_cms/1655456018199_zl4z0w.png\",\"mimeType\":\"image/png\",\"size\":2168629,\"width\":1000,\"height\":2395,\"mediumBlock\":true}]}}",
+      "deleteTime": 0,
+      "createTime": 1750989605026,
+      "updateTime": 1750989608199,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "685dfb28c30eaa36278d7c5b",
+        "repostCount": 0,
+        "commentCount": 13,
+        "likeCount": 12,
+        "shareCount": 1,
+        "favCount": 0,
+        "createTime": 1750989639328
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685dfb28c30eaa36278d7c5b",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n手捧爆米花桶锁定直播频道\\n踏入星动庆典收获周年惊喜\\n6月28日~6月29日 19:00前往相应直播间\\n与主播团一起玩转庆典吧\\n🎉\\n《光·遇》星动庆典直播陪你共度六周年\\n阅读下方图片了解更多活动详情\\n具体直播内容请前往主播主页了解~\",\"media\":[{\"name\":\"周年庆陪玩团直播长图.png\",\"url\":\"https://ok.166.net/reunionpub/2022-06-17/ntesgod_cms/1655456018199_zl4z0w.png\",\"mimeType\":\"image/png\",\"size\":2168629,\"width\":1000,\"height\":2395,\"mediumBlock\":true}]}}",
+            "deleteTime": 0,
+            "createTime": 1750989605026,
+            "updateTime": 1750989608199,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "685dfb28c30eaa36278d7c5b",
+              "repostCount": 0,
+              "commentCount": 13,
+              "likeCount": 12,
+              "shareCount": 1,
+              "favCount": 0,
+              "createTime": 1750989639328
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇六周年_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-27T16:00:00.000Z",
+      "end": "2025-06-29T11:00:00.000Z"
+    }
+  },
+  {
+    "id": "685ddf07c6245c3d1fdda771",
+    "title": "#Sky光遇##光遇六周年##光遇因你而星动#\n镜头前后温暖相遇\n屏幕内外庆典同欢\n群星影院将于",
+    "content": "#Sky光遇##光遇六周年##光遇因你而星动#\n镜头前后温暖相遇\n屏幕内外庆典同欢\n群星影院将于6月28日开始放映\n这个生日，我们与光影同庆\n🎬\n点击图片查收这份群星影院节目单\n一起期待在大银幕中观赏精彩吧~",
+    "createTime": 1750982405027,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "685ddf07c6245c3d1fdda771",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n镜头前后温暖相遇\\n屏幕内外庆典同欢\\n群星影院将于6月28日开始放映\\n这个生日，我们与光影同庆\\n🎬\\n点击图片查收这份群星影院节目单\\n一起期待在大银幕中观赏精彩吧~\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250626_1ab6673083abadf24ef6247d028270e4.png\",\"mimeType\":\"image/png\",\"size\":965864,\"width\":1000,\"height\":1428}]}}",
+      "deleteTime": 0,
+      "createTime": 1750982405027,
+      "updateTime": 1750982407704,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "685ddf07c6245c3d1fdda771",
+        "repostCount": 0,
+        "commentCount": 2,
+        "likeCount": 12,
+        "shareCount": 0,
+        "favCount": 1,
+        "createTime": 1750982442886
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685ddf07c6245c3d1fdda771",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n镜头前后温暖相遇\\n屏幕内外庆典同欢\\n群星影院将于6月28日开始放映\\n这个生日，我们与光影同庆\\n🎬\\n点击图片查收这份群星影院节目单\\n一起期待在大银幕中观赏精彩吧~\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250626_1ab6673083abadf24ef6247d028270e4.png\",\"mimeType\":\"image/png\",\"size\":965864,\"width\":1000,\"height\":1428}]}}",
+            "deleteTime": 0,
+            "createTime": 1750982405027,
+            "updateTime": 1750982407704,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "685ddf07c6245c3d1fdda771",
+              "repostCount": 0,
+              "commentCount": 2,
+              "likeCount": 12,
+              "shareCount": 0,
+              "favCount": 1,
+              "createTime": 1750982442886
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇六周年_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年,光遇因你而星动镜头前后温暖相遇屏幕内外庆典同欢群星影院将于6月28日开始放映这个生日",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-27T16:00:00.000Z",
+      "end": "2025-06-28T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "685ca9a8392f132d97b99e25",
+    "title": "#Sky光遇##光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见",
+    "content": "#Sky光遇##光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n⛰️\n先祖正在圣岛攀登高峰\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
+    "createTime": 1750903205024,
+    "status": "ignored",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "685ca9a8392f132d97b99e25",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇旅行先祖#\\n勤劳的先祖在今天重返天空王国啦~\\n这位先祖将带着多重礼赠与大家见面\\n⛰️\\n先祖正在圣岛攀登高峰\\n曾遗憾与之错过的旅人\\n记得在本周四早上6:00至下周一中午12:00\\n与先祖换取喜欢的赠礼哦~\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250624_5f8f8a13b4ee95b802d50798a28107f4.png\",\"mimeType\":\"image/png\",\"size\":2592868,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1750903205024,
+      "updateTime": 1750903208343,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇旅行先祖",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "685ca9a8392f132d97b99e25",
+        "repostCount": 0,
+        "commentCount": 23,
+        "likeCount": 26,
+        "shareCount": 0,
+        "favCount": 0,
+        "createTime": 1750903330339
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685ca9a8392f132d97b99e25",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇旅行先祖#\\n勤劳的先祖在今天重返天空王国啦~\\n这位先祖将带着多重礼赠与大家见面\\n⛰️\\n先祖正在圣岛攀登高峰\\n曾遗憾与之错过的旅人\\n记得在本周四早上6:00至下周一中午12:00\\n与先祖换取喜欢的赠礼哦~\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250624_5f8f8a13b4ee95b802d50798a28107f4.png\",\"mimeType\":\"image/png\",\"size\":2592868,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1750903205024,
+            "updateTime": 1750903208343,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇旅行先祖",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "685ca9a8392f132d97b99e25",
+              "repostCount": 0,
+              "commentCount": 23,
+              "likeCount": 26,
+              "shareCount": 0,
+              "favCount": 0,
+              "createTime": 1750903330339
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇_光·遇 | 大神",
+            "desc": "Sky光遇",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇先祖,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-25T22:00:00.000Z",
+      "end": "2025-06-30T04:00:00.000Z"
+    }
+  },
+  {
+    "id": "685b5825c30eaa36278051ae",
+    "title": "#Sky光遇##光遇六周年##光遇因你而星动#\n感动与欢笑编织珍贵的纪念​\n相聚将时光酿成温暖的",
+    "content": "#Sky光遇##光遇六周年##光遇因你而星动#\n感动与欢笑编织珍贵的纪念​\n相聚将时光酿成温暖的珍藏\n🎂\n《光·遇》六周年生日会将于6月28日星期六 20:00正式开播！\n前往光遇手游B站、抖音、快手、小红书官方账号预约直播\n在特别的时刻留下最特别的回忆吧~",
+    "createTime": 1750816805028,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "685b5825c30eaa36278051ae",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 3,
+      "content": "{\"type\":3,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n感动与欢笑编织珍贵的纪念​\\n相聚将时光酿成温暖的珍藏\\n🎂\\n《光·遇》六周年生日会将于6月28日星期六 20:00正式开播！\\n前往光遇手游B站、抖音、快手、小红书官方账号预约直播\\n在特别的时刻留下最特别的回忆吧~\",\"media\":[{\"name\":\"六周年预告6.mp4\",\"url\":\"https://vod.cc.163.com/file/685a5cc0b2bcd8a337bc44f8.mp4?client_type=ios&protocol=https\",\"text\":\"《光·遇》六周年生日会直播预告\",\"mimeType\":\"video/mp4\",\"size\":311114195,\"duration\":51850,\"cover\":\"https://ok.166.net/reunionpub/1_kol_20250624_07557a38f66a98287d7e7eac063d1062.png\",\"coverStyle\":{\"style\":0.0,\"width\":1920.0,\"height\":1080.0},\"previewVideoUrl\":\"http://api.cc.163.com/v1/vodapi/preview/0173660a0ca3cb68992668ddec61bf40.mp4\",\"ldPreview\":false,\"videoCheckToken\":0,\"mediaId\":\"685a5cc0b2bcd8a337bc44f8\",\"sourceMediaId\":\"685a5cc0b2bcd8a337bc44f8\"}],\"mediaId\":\"685a5cc0b2bcd8a337bc44f8\"}}",
+      "deleteTime": 0,
+      "createTime": 1750816805028,
+      "updateTime": 1750816805028,
+      "clientType": 72,
+      "tagList": [
+        "5b02c181d545685882af86ee"
+      ],
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "685b5825c30eaa36278051ae",
+        "repostCount": 0,
+        "commentCount": 13,
+        "likeCount": 310,
+        "shareCount": 6,
+        "favCount": 4,
+        "createTime": 1750816955865
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685b5825c30eaa36278051ae",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 3,
+            "content": "{\"type\":3,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n感动与欢笑编织珍贵的纪念​\\n相聚将时光酿成温暖的珍藏\\n🎂\\n《光·遇》六周年生日会将于6月28日星期六 20:00正式开播！\\n前往光遇手游B站、抖音、快手、小红书官方账号预约直播\\n在特别的时刻留下最特别的回忆吧~\",\"media\":[{\"name\":\"六周年预告6.mp4\",\"url\":\"https://vod.cc.163.com/file/685a5cc0b2bcd8a337bc44f8.mp4?client_type=ios&protocol=https\",\"text\":\"《光·遇》六周年生日会直播预告\",\"mimeType\":\"video/mp4\",\"size\":311114195,\"duration\":51850,\"cover\":\"https://ok.166.net/reunionpub/1_kol_20250624_07557a38f66a98287d7e7eac063d1062.png\",\"coverStyle\":{\"style\":0.0,\"width\":1920.0,\"height\":1080.0},\"previewVideoUrl\":\"http://api.cc.163.com/v1/vodapi/preview/0173660a0ca3cb68992668ddec61bf40.mp4\",\"ldPreview\":false,\"videoCheckToken\":0,\"mediaId\":\"685a5cc0b2bcd8a337bc44f8\",\"sourceMediaId\":\"685a5cc0b2bcd8a337bc44f8\"}],\"mediaId\":\"685a5cc0b2bcd8a337bc44f8\"}}",
+            "deleteTime": 0,
+            "createTime": 1750816805028,
+            "updateTime": 1750816805028,
+            "clientType": 72,
+            "tagList": [
+              "5b02c181d545685882af86ee"
+            ],
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "685b5825c30eaa36278051ae",
+              "repostCount": 0,
+              "commentCount": 13,
+              "likeCount": 310,
+              "shareCount": 6,
+              "favCount": 4,
+              "createTime": 1750816955865
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "光·遇》六周年生日会直播预告_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年,光遇因你而星动感动与欢笑编织珍贵的纪念相聚将时光酿成温暖的珍藏🎂《光·遇》六周年生日会将于6月28日星期六 20:00正式开播",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇,sky光遇账号"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-27T16:00:00.000Z",
+      "end": "2025-06-28T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "685a22c7c6245c3d1fc97382",
+    "title": "#Sky光遇##光遇旅行先祖#\n银须雪眉，领结端庄\n本周四早上6:00\n下一位旅行先祖\n即将抵达",
+    "content": "#Sky光遇##光遇旅行先祖#\n银须雪眉，领结端庄\n本周四早上6:00\n下一位旅行先祖\n即将抵达天空王国啦~\n🎀\n未曾与这位先祖见面的旅人们\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦！",
+    "createTime": 1750737605027,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "685a22c7c6245c3d1fc97382",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇旅行先祖#\\n银须雪眉，领结端庄\\n本周四早上6:00\\n下一位旅行先祖\\n即将抵达天空王国啦~\\n🎀\\n未曾与这位先祖见面的旅人们\\n记得在本周四早上6:00至下周一中午12:00\\n与先祖换取喜欢的赠礼哦！\",\"media\":[{\"name\":\"海报.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250623_429a8e1cf4b65ab0fae69ee1529b024b.png\",\"mimeType\":\"image/png\",\"size\":1415583,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1750737605027,
+      "updateTime": 1750737607403,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇旅行先祖",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "685a22c7c6245c3d1fc97382",
+        "repostCount": 8,
+        "commentCount": 683,
+        "likeCount": 958,
+        "shareCount": 137,
+        "favCount": 47,
+        "createTime": 1750737610498
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685a22c7c6245c3d1fc97382",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇旅行先祖#\\n银须雪眉，领结端庄\\n本周四早上6:00\\n下一位旅行先祖\\n即将抵达天空王国啦~\\n🎀\\n未曾与这位先祖见面的旅人们\\n记得在本周四早上6:00至下周一中午12:00\\n与先祖换取喜欢的赠礼哦！\",\"media\":[{\"name\":\"海报.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250623_429a8e1cf4b65ab0fae69ee1529b024b.png\",\"mimeType\":\"image/png\",\"size\":1415583,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1750737605027,
+            "updateTime": 1750737607403,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇旅行先祖",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "685a22c7c6245c3d1fc97382",
+              "repostCount": 8,
+              "commentCount": 683,
+              "likeCount": 958,
+              "shareCount": 129,
+              "favCount": 47,
+              "createTime": 1750737610498
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇旅行先祖银须雪眉_光·遇 | 大神",
+            "desc": "Sky光遇,光遇旅行先祖银须雪眉，领结端庄本周四早上6:00下一位旅行先祖即将抵达天空王国啦~🎀未曾与这位先祖见面的旅人们记得在本周四早上6:00至下周一中午12:00与先祖换取喜欢的赠礼哦",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇,sky光遇旅行先祖"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "旅行先祖",
+      "start": "2025-06-25T22:00:00.000Z",
+      "end": "2025-06-30T04:00:00.000Z"
+    }
+  },
+  {
+    "id": "68560418392f132d97940f98",
+    "title": "#Sky光遇##光遇六周年##光遇因你而星动#\n追随星光降落的轨迹\n共同奔赴周年的约定\n脚步踏响",
+    "content": "#Sky光遇##光遇六周年##光遇因你而星动#\n追随星光降落的轨迹\n共同奔赴周年的约定\n脚步踏响欢乐的节拍\n让时光铭记六载的感动\n《光•遇》多平台创作激励活动现已开启，快来分享你在周年庆记录下的温暖瞬间、趣味玩法视频、以及在生活中与《光·遇》发生的故事等等，带上活动话题投稿内容，一起瓜分丰厚创作奖励吧！\n🌠\n活动时间：2025年6月21日~2025年7月29日\n参与方式：在对应平台带上活动话题#光遇六周年##光遇因你而星动#或#我有遇感#投稿作品，瓜分创作大奖吧，详细活动规则请留意各平台活动页面。\n✨\n更多活动详情，请点击图片查看",
+    "createTime": 1750467605027,
+    "status": "pending",
+    "autoType": "activity",
+    "parsed": true,
+    "raw": {
+      "id": "68560418392f132d97940f98",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n追随星光降落的轨迹\\n共同奔赴周年的约定\\n脚步踏响欢乐的节拍\\n让时光铭记六载的感动\\n《光•遇》多平台创作激励活动现已开启，快来分享你在周年庆记录下的温暖瞬间、趣味玩法视频、以及在生活中与《光·遇》发生的故事等等，带上活动话题投稿内容，一起瓜分丰厚创作奖励吧！\\n🌠\\n活动时间：2025年6月21日~2025年7月29日\\n参与方式：在对应平台带上活动话题#光遇六周年##光遇因你而星动#或#我有遇感#投稿作品，瓜分创作大奖吧，详细活动规则请留意各平台活动页面。\\n✨\\n更多活动详情，请点击图片查看\",\"media\":[{\"name\":\"UGC长图.jpeg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250620_a7ead4ae1c0284a1fb6b3f9da8dc72bc.jpeg\",\"mimeType\":\"image/jpeg\",\"size\":8023246,\"width\":1080,\"height\":15243}]}}",
+      "deleteTime": 0,
+      "createTime": 1750467605027,
+      "updateTime": 1750467608982,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "68560418392f132d97940f98",
+        "repostCount": 0,
+        "commentCount": 5,
+        "likeCount": 20,
+        "shareCount": 2,
+        "favCount": 2,
+        "createTime": 1750467689994
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "68560418392f132d97940f98",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n追随星光降落的轨迹\\n共同奔赴周年的约定\\n脚步踏响欢乐的节拍\\n让时光铭记六载的感动\\n《光•遇》多平台创作激励活动现已开启，快来分享你在周年庆记录下的温暖瞬间、趣味玩法视频、以及在生活中与《光·遇》发生的故事等等，带上活动话题投稿内容，一起瓜分丰厚创作奖励吧！\\n🌠\\n活动时间：2025年6月21日~2025年7月29日\\n参与方式：在对应平台带上活动话题#光遇六周年##光遇因你而星动#或#我有遇感#投稿作品，瓜分创作大奖吧，详细活动规则请留意各平台活动页面。\\n✨\\n更多活动详情，请点击图片查看\",\"media\":[{\"name\":\"UGC长图.jpeg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250620_a7ead4ae1c0284a1fb6b3f9da8dc72bc.jpeg\",\"mimeType\":\"image/jpeg\",\"size\":8023246,\"width\":1080,\"height\":15243}]}}",
+            "deleteTime": 0,
+            "createTime": 1750467605027,
+            "updateTime": 1750467608982,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "68560418392f132d97940f98",
+              "repostCount": 0,
+              "commentCount": 5,
+              "likeCount": 20,
+              "shareCount": 2,
+              "favCount": 2,
+              "createTime": 1750467689994
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇六周年_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年,光遇因你而星动追随星光降落的轨迹共同奔赴周年的约定脚步踏响欢乐的节拍让时光铭记六载的感动《光•遇》多平台创作激励活动现已开启",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "activity",
+      "title": "【活动】活动",
+      "start": "2025-06-20T16:00:00.000Z",
+      "end": "2025-07-29T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "685516e06ee4666335417e5e",
+    "title": "#Sky光遇##光遇绘梦节##光遇绘梦节人均设计师#\n当我们绘制的心意穿越山海\n化作孩子们笔下的",
+    "content": "#Sky光遇##光遇绘梦节##光遇绘梦节人均设计师#\n当我们绘制的心意穿越山海\n化作孩子们笔下的字字句句\n🖊\n《光·遇》绘梦节携手“是光诗歌”\n一同助力乡村儿童诗歌教育\n6月21日一起前往游戏内\n欣赏他们动人的诗歌作品吧\n✨\n青山落拓礼包将于明日起在商店发售\n让我们继续以温暖为笔墨\n共同书写下一段有光的旅程",
+    "createTime": 1750406405023,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "685516e06ee4666335417e5e",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇绘梦节##光遇绘梦节人均设计师#\\n当我们绘制的心意穿越山海\\n化作孩子们笔下的字字句句\\n🖊\\n《光·遇》绘梦节携手“是光诗歌”\\n一同助力乡村儿童诗歌教育\\n6月21日一起前往游戏内\\n欣赏他们动人的诗歌作品吧\\n✨\\n青山落拓礼包将于明日起在商店发售\\n让我们继续以温暖为笔墨\\n共同书写下一段有光的旅程\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_9d905ee2ccb34179482cc30b0e05bf2f.png\",\"mimeType\":\"image/png\",\"size\":392956,\"width\":1000,\"height\":1000},{\"name\":\"2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_3c6c32b110ddf0524163b5d820a234b8.png\",\"mimeType\":\"image/png\",\"size\":373897,\"width\":1000,\"height\":1000},{\"name\":\"3.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_4c91053e07adbd4086aa0ef10fe0e89a.png\",\"mimeType\":\"image/png\",\"size\":375526,\"width\":1000,\"height\":1000}]}}",
+      "deleteTime": 0,
+      "createTime": 1750406405023,
+      "updateTime": 1750406880325,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇绘梦节",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇绘梦节人均设计师",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "685516e06ee4666335417e5e",
+        "repostCount": 0,
+        "commentCount": 25,
+        "likeCount": 28,
+        "shareCount": 1,
+        "favCount": 0,
+        "createTime": 1750407092959
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685516e06ee4666335417e5e",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇绘梦节##光遇绘梦节人均设计师#\\n当我们绘制的心意穿越山海\\n化作孩子们笔下的字字句句\\n🖊\\n《光·遇》绘梦节携手“是光诗歌”\\n一同助力乡村儿童诗歌教育\\n6月21日一起前往游戏内\\n欣赏他们动人的诗歌作品吧\\n✨\\n青山落拓礼包将于明日起在商店发售\\n让我们继续以温暖为笔墨\\n共同书写下一段有光的旅程\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_9d905ee2ccb34179482cc30b0e05bf2f.png\",\"mimeType\":\"image/png\",\"size\":392956,\"width\":1000,\"height\":1000},{\"name\":\"2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_3c6c32b110ddf0524163b5d820a234b8.png\",\"mimeType\":\"image/png\",\"size\":373897,\"width\":1000,\"height\":1000},{\"name\":\"3.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_4c91053e07adbd4086aa0ef10fe0e89a.png\",\"mimeType\":\"image/png\",\"size\":375526,\"width\":1000,\"height\":1000}]}}",
+            "deleteTime": 0,
+            "createTime": 1750406405023,
+            "updateTime": 1750406880325,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇绘梦节",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇绘梦节人均设计师",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "685516e06ee4666335417e5e",
+              "repostCount": 0,
+              "commentCount": 25,
+              "likeCount": 28,
+              "shareCount": 1,
+              "favCount": 0,
+              "createTime": 1750407092959
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇绘梦节_光·遇 | 大神",
+            "desc": "Sky光遇,光遇绘梦节",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇,sky光遇礼包"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-20T16:00:00.000Z",
+      "end": "2025-06-21T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "6854f8e76ee466633540f392",
+    "title": "#Sky光遇##光遇绘梦节##光遇绘梦节人均设计师#\n《光·遇》x 是光诗歌公益活动现已启程\n前",
+    "content": "#Sky光遇##光遇绘梦节##光遇绘梦节人均设计师#\n《光·遇》x 是光诗歌公益活动现已启程\n前往活动页面即可了解活动详情\n📖\n6月21日~7月9日\n在活动页面查看任意三首诗歌，可获得爱心*1\n活动期间，青山落拓礼包将在商店限时发售\n💝\n与《光·遇》一起用诗歌传递温暖\n让每一份善意都化作照亮世界的光芒吧\n\n2025年6月20日\n《光·遇》官方运营团队",
+    "createTime": 1750399205026,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "6854f8e76ee466633540f392",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇绘梦节##光遇绘梦节人均设计师#\\n《光·遇》x 是光诗歌公益活动现已启程\\n前往活动页面即可了解活动详情\\n📖\\n6月21日~7月9日\\n在活动页面查看任意三首诗歌，可获得爱心*1\\n活动期间，青山落拓礼包将在商店限时发售\\n💝\\n与《光·遇》一起用诗歌传递温暖\\n让每一份善意都化作照亮世界的光芒吧\\n\\n2025年6月20日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"海报.jpeg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_1d8599cf847b72b369df2bc752bef634.jpeg\",\"mimeType\":\"image/jpeg\",\"size\":748318,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1750399205026,
+      "updateTime": 1750399207416,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇绘梦节",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇绘梦节人均设计师",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6854f8e76ee466633540f392",
+        "repostCount": 0,
+        "commentCount": 14,
+        "likeCount": 18,
+        "shareCount": 1,
+        "favCount": 0,
+        "createTime": 1750399234300
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6854f8e76ee466633540f392",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇绘梦节##光遇绘梦节人均设计师#\\n《光·遇》x 是光诗歌公益活动现已启程\\n前往活动页面即可了解活动详情\\n📖\\n6月21日~7月9日\\n在活动页面查看任意三首诗歌，可获得爱心*1\\n活动期间，青山落拓礼包将在商店限时发售\\n💝\\n与《光·遇》一起用诗歌传递温暖\\n让每一份善意都化作照亮世界的光芒吧\\n\\n2025年6月20日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"海报.jpeg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_1d8599cf847b72b369df2bc752bef634.jpeg\",\"mimeType\":\"image/jpeg\",\"size\":748318,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1750399205026,
+            "updateTime": 1750399207416,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇绘梦节",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇绘梦节人均设计师",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6854f8e76ee466633540f392",
+              "repostCount": 0,
+              "commentCount": 14,
+              "likeCount": 18,
+              "shareCount": 1,
+              "favCount": 0,
+              "createTime": 1750399234300
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇绘梦节_光·遇 | 大神",
+            "desc": "Sky光遇,光遇绘梦节,光遇绘梦节人均设计师《光·遇》x 是光诗歌公益活动现已启程前往活动页面即可了解活动详情📖6月21日~7月9日在活动页面查看任意三首诗歌，可获得爱心*1活动期间",
+            "keywords": "sky光遇,sky光遇公告活动,Sky光遇,sky光遇光遇,sky光遇礼包"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-20T16:00:00.000Z",
+      "end": "2025-07-09T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "6854c0a7b6307b37e6038262",
+    "title": "#Sky光遇##光遇六周年##光遇因你而星动#\n万千星芒跃入庆典的欢闹\n于汹涌人潮中回望六载时光",
+    "content": "#Sky光遇##光遇六周年##光遇因你而星动#\n万千星芒跃入庆典的欢闹\n于汹涌人潮中回望六载时光\n🎁\n6月21日~7月9日 活动期间\n完成当日嘉年华玩法，即可在以下奖励中随机抽取一个：\n生日蛋糕*1、生日庆典大蛋糕*1、浪漫烟花*1、畅谈长桌*1、蜡烛*1、爱心*1\n🎂\n同时，完成以下任务可以获得对应奖励：\n①开启云巢的影院大门，可获得体型重塑*2\n②点亮影院的全部装饰品，可获得蜡烛*2（6月28日开启）\n③在亲手搭建的影院内观影，可获得留影蜡烛*2（6月28日开启）\n④在活动页面制作并保存一张影院海报，可获得爱心*2\n✨\n相遇的故事仍在延续\n一起携手共庆六周年吧！\n\n 2025年6月20日\n《光·遇》官方运营团队",
+    "createTime": 1750384805027,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "6854c0a7b6307b37e6038262",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n万千星芒跃入庆典的欢闹\\n于汹涌人潮中回望六载时光\\n🎁\\n6月21日~7月9日 活动期间\\n完成当日嘉年华玩法，即可在以下奖励中随机抽取一个：\\n生日蛋糕*1、生日庆典大蛋糕*1、浪漫烟花*1、畅谈长桌*1、蜡烛*1、爱心*1\\n🎂\\n同时，完成以下任务可以获得对应奖励：\\n①开启云巢的影院大门，可获得体型重塑*2\\n②点亮影院的全部装饰品，可获得蜡烛*2（6月28日开启）\\n③在亲手搭建的影院内观影，可获得留影蜡烛*2（6月28日开启）\\n④在活动页面制作并保存一张影院海报，可获得爱心*2\\n✨\\n相遇的故事仍在延续\\n一起携手共庆六周年吧！\\n\\n 2025年6月20日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_058103c770691bd18f6bf3fe7ae3a7e0.png\",\"mimeType\":\"image/png\",\"size\":3344999,\"width\":1920,\"height\":1080},{\"name\":\"2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_9867d1e0e9719350efc6139a7d7ed335.png\",\"mimeType\":\"image/png\",\"size\":2745679,\"width\":1920,\"height\":1080},{\"name\":\"3.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_96cf925cc541195575f5553937fedbb8.png\",\"mimeType\":\"image/png\",\"size\":2983348,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1750384805027,
+      "updateTime": 1750384807746,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6854c0a7b6307b37e6038262",
+        "repostCount": 0,
+        "commentCount": 37,
+        "likeCount": 44,
+        "shareCount": 3,
+        "favCount": 5,
+        "createTime": 1750384914997
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6854c0a7b6307b37e6038262",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n万千星芒跃入庆典的欢闹\\n于汹涌人潮中回望六载时光\\n🎁\\n6月21日~7月9日 活动期间\\n完成当日嘉年华玩法，即可在以下奖励中随机抽取一个：\\n生日蛋糕*1、生日庆典大蛋糕*1、浪漫烟花*1、畅谈长桌*1、蜡烛*1、爱心*1\\n🎂\\n同时，完成以下任务可以获得对应奖励：\\n①开启云巢的影院大门，可获得体型重塑*2\\n②点亮影院的全部装饰品，可获得蜡烛*2（6月28日开启）\\n③在亲手搭建的影院内观影，可获得留影蜡烛*2（6月28日开启）\\n④在活动页面制作并保存一张影院海报，可获得爱心*2\\n✨\\n相遇的故事仍在延续\\n一起携手共庆六周年吧！\\n\\n 2025年6月20日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_058103c770691bd18f6bf3fe7ae3a7e0.png\",\"mimeType\":\"image/png\",\"size\":3344999,\"width\":1920,\"height\":1080},{\"name\":\"2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_9867d1e0e9719350efc6139a7d7ed335.png\",\"mimeType\":\"image/png\",\"size\":2745679,\"width\":1920,\"height\":1080},{\"name\":\"3.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_96cf925cc541195575f5553937fedbb8.png\",\"mimeType\":\"image/png\",\"size\":2983348,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1750384805027,
+            "updateTime": 1750384807746,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6854c0a7b6307b37e6038262",
+              "repostCount": 0,
+              "commentCount": 37,
+              "likeCount": 44,
+              "shareCount": 3,
+              "favCount": 5,
+              "createTime": 1750384914997
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇六周年_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年,光遇因你而星动万千星芒跃入庆典的欢闹于汹涌人潮中回望六载时光🎁6月21日~7月9日 活动期间完成当日嘉年华玩法",
+            "keywords": "sky光遇,sky光遇公告活动,Sky光遇,sky光遇光遇,sky光遇蜡烛"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-20T16:00:00.000Z",
+      "end": "2025-07-09T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "6853fbc7d8c1d52fcee42777",
+    "title": "#Sky光遇##光遇必胜客联动##来光遇吃披萨#\n在云端奏响庆生的序曲\n脚步轻快奔赴美味之约\n阵",
+    "content": "#Sky光遇##光遇必胜客联动##来光遇吃披萨#\n在云端奏响庆生的序曲\n脚步轻快奔赴美味之约\n阵阵香气敲响开饭的信号\n事已至此，先吃个披萨吧！\n《光•遇》多平台创作激励活动现已开启，快来分享你搭配的必胜客联动专属穿搭、在光遇必胜客联动线下门店打卡、聚会的vlog等等，带上活动话题投稿内容，一起瓜分丰厚创作奖励吧！\n🍕\n活动时间：2025年6月19日~2025年7月6日\n参与方式：在对应平台带上活动话题#光遇必胜客联动##来光遇吃披萨#投稿作品，瓜分创作大奖吧，详细活动规则请留意各平台活动页面。\n🍴 \n更多活动详情，请点击图片查看",
+    "createTime": 1750334405026,
+    "status": "ignored",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "6853fbc7d8c1d52fcee42777",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇必胜客联动##来光遇吃披萨#\\n在云端奏响庆生的序曲\\n脚步轻快奔赴美味之约\\n阵阵香气敲响开饭的信号\\n事已至此，先吃个披萨吧！\\n《光•遇》多平台创作激励活动现已开启，快来分享你搭配的必胜客联动专属穿搭、在光遇必胜客联动线下门店打卡、聚会的vlog等等，带上活动话题投稿内容，一起瓜分丰厚创作奖励吧！\\n🍕\\n活动时间：2025年6月19日~2025年7月6日\\n参与方式：在对应平台带上活动话题#光遇必胜客联动##来光遇吃披萨#投稿作品，瓜分创作大奖吧，详细活动规则请留意各平台活动页面。\\n🍴 \\n更多活动详情，请点击图片查看\",\"media\":[{\"name\":\"多平台-必胜客联动激励活动H5-0613.jpg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250617_922be0b77048a28ed578e6c76fae93ad.jpeg\",\"mimeType\":\"image/jpeg\",\"size\":5385504,\"width\":1080,\"height\":10616}]}}",
+      "deleteTime": 0,
+      "createTime": 1750334405026,
+      "updateTime": 1750334407579,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇必胜客联动",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "来光遇吃披萨",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6853fbc7d8c1d52fcee42777",
+        "repostCount": 0,
+        "commentCount": 2,
+        "likeCount": 11,
+        "shareCount": 1,
+        "favCount": 0,
+        "createTime": 1750335138545
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6853fbc7d8c1d52fcee42777",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇必胜客联动##来光遇吃披萨#\\n在云端奏响庆生的序曲\\n脚步轻快奔赴美味之约\\n阵阵香气敲响开饭的信号\\n事已至此，先吃个披萨吧！\\n《光•遇》多平台创作激励活动现已开启，快来分享你搭配的必胜客联动专属穿搭、在光遇必胜客联动线下门店打卡、聚会的vlog等等，带上活动话题投稿内容，一起瓜分丰厚创作奖励吧！\\n🍕\\n活动时间：2025年6月19日~2025年7月6日\\n参与方式：在对应平台带上活动话题#光遇必胜客联动##来光遇吃披萨#投稿作品，瓜分创作大奖吧，详细活动规则请留意各平台活动页面。\\n🍴 \\n更多活动详情，请点击图片查看\",\"media\":[{\"name\":\"多平台-必胜客联动激励活动H5-0613.jpg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250617_922be0b77048a28ed578e6c76fae93ad.jpeg\",\"mimeType\":\"image/jpeg\",\"size\":5385504,\"width\":1080,\"height\":10616}]}}",
+            "deleteTime": 0,
+            "createTime": 1750334405026,
+            "updateTime": 1750334407579,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇必胜客联动",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "来光遇吃披萨",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6853fbc7d8c1d52fcee42777",
+              "repostCount": 0,
+              "commentCount": 2,
+              "likeCount": 11,
+              "shareCount": 1,
+              "favCount": 0,
+              "createTime": 1750335138545
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇必胜客联动_光·遇 | 大神",
+            "desc": "Sky光遇,光遇必胜客联动,来光遇吃披萨在云端奏响庆生的序曲脚步轻快奔赴美味之约阵阵香气敲响开饭的信号事已至此，先吃个披萨吧！《光•遇》多平台创作激励活动现已开启",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-18T16:00:00.000Z",
+      "end": "2025-07-06T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "68537da3bdef854c912a26af",
+    "title": "#sky光遇#\n《光·遇》6月19日 维护补偿公告\n亲爱的旅人们：\n      由于本次更新内容",
+    "content": "#sky光遇#\n《光·遇》6月19日 维护补偿公告\n亲爱的旅人们：\n      由于本次更新内容较多，导致维护时间延长，为旅人们带来的不便，我们深表歉意。现已开服，旅人们可登录游戏进行体验~本次开服延迟的补偿如下：\n      所有已经通过雨林的玩家，在6月19日0:00~6月25日23:59期间，登录游戏即可获得爱心*3，体型重塑*3 。\n      感谢您的理解与支持。\n\n2025年6月19日\n《光·遇》官方运营团队",
+    "createTime": 1750302112707,
+    "status": "ignored",
+    "autoType": "maintenance",
+    "parsed": true,
+    "raw": {
+      "id": "68537da3bdef854c912a26af",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#sky光遇#\\n《光·遇》6月19日 维护补偿公告\\n亲爱的旅人们：\\n      由于本次更新内容较多，导致维护时间延长，为旅人们带来的不便，我们深表歉意。现已开服，旅人们可登录游戏进行体验~本次开服延迟的补偿如下：\\n      所有已经通过雨林的玩家，在6月19日0:00~6月25日23:59期间，登录游戏即可获得爱心*3，体型重塑*3 。\\n      感谢您的理解与支持。\\n\\n2025年6月19日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"0619.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_bd3d64bb300418ab38facb42177be138.png\",\"mimeType\":\"image/png\",\"size\":2391979,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1750302112707,
+      "updateTime": 1750302115268,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "68537da3bdef854c912a26af",
+        "repostCount": 1,
+        "commentCount": 21,
+        "likeCount": 33,
+        "shareCount": 1,
+        "favCount": 1,
+        "createTime": 1750302197035
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "68537da3bdef854c912a26af",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#sky光遇#\\n《光·遇》6月19日 维护补偿公告\\n亲爱的旅人们：\\n      由于本次更新内容较多，导致维护时间延长，为旅人们带来的不便，我们深表歉意。现已开服，旅人们可登录游戏进行体验~本次开服延迟的补偿如下：\\n      所有已经通过雨林的玩家，在6月19日0:00~6月25日23:59期间，登录游戏即可获得爱心*3，体型重塑*3 。\\n      感谢您的理解与支持。\\n\\n2025年6月19日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"0619.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250619_bd3d64bb300418ab38facb42177be138.png\",\"mimeType\":\"image/png\",\"size\":2391979,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1750302112707,
+            "updateTime": 1750302115268,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "68537da3bdef854c912a26af",
+              "repostCount": 1,
+              "commentCount": 21,
+              "likeCount": 33,
+              "shareCount": 0,
+              "favCount": 1,
+              "createTime": 1750302197035
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "sky光遇《光·遇》6月19日 维护补偿公告亲爱的旅人们： _光·遇 | 大神",
+            "desc": "sky光遇《光·遇》6月19日 维护补偿公告亲爱的旅人们： 由于本次更新内容较多，导致维护时间延长，为旅人们带来的不便，我们深表歉意。现已开服",
+            "keywords": "sky光遇,sky光遇公告活动,Sky光遇,sky光遇光遇,sky光遇雨林"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "maintenance",
+      "title": "【维护】维护更新",
+      "start": "2025-06-18T16:00:00.000Z",
+      "end": "2025-06-25T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "685368ecdf6a3452cbddaa0e",
+    "title": "#sky光遇# \n《光·遇》6月19日 延迟开服公告\n亲爱的旅人们： \n由于本次更新内容较多，预",
+    "content": "#sky光遇# \n《光·遇》6月19日 延迟开服公告\n亲爱的旅人们： \n由于本次更新内容较多，预计开服时间将推迟，相关补偿将在开服后统一发放，具体开服时间请留意官方后续通知。给您造成不便，敬请谅解。\n\n感谢您的理解与支持！\n\n2025年6月19日\n《光·遇》官方运营团队",
+    "createTime": 1750296810042,
+    "status": "ignored",
+    "autoType": "maintenance",
+    "parsed": true,
+    "raw": {
+      "id": "685368ecdf6a3452cbddaa0e",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#sky光遇# \\n《光·遇》6月19日 延迟开服公告\\n亲爱的旅人们： \\n由于本次更新内容较多，预计开服时间将推迟，相关补偿将在开服后统一发放，具体开服时间请留意官方后续通知。给您造成不便，敬请谅解。\\n\\n感谢您的理解与支持！\\n\\n2025年6月19日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"12f10201f9d8b4baca46141821cede25_1750296552.278373\",\"url\":\"https://ok.166.net/reunionpub/1_20250619_19785d1c7ac702099.jpeg\",\"mimeType\":\"image/jpeg\",\"size\":173756,\"duration\":0,\"width\":1920,\"height\":1080,\"crop\":{\"x\":0.0,\"y\":8.240454,\"width\":1920.0,\"height\":1063.519},\"generateType\":\"DEFAULT\",\"videoCheckToken\":0,\"mediumBlock\":false}]}}",
+      "deleteTime": 0,
+      "createTime": 1750296810042,
+      "updateTime": 1750296812067,
+      "clientType": 51,
+      "externalInfo": {},
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "displayIpInfo": {
+        "ipLocationName": "广东"
+      },
+      "record": {
+        "id": "685368ecdf6a3452cbddaa0e",
+        "repostCount": 1,
+        "commentCount": 176,
+        "likeCount": 151,
+        "shareCount": 10,
+        "favCount": 12,
+        "createTime": 1750296832194
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "685368ecdf6a3452cbddaa0e",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#sky光遇# \\n《光·遇》6月19日 延迟开服公告\\n亲爱的旅人们： \\n由于本次更新内容较多，预计开服时间将推迟，相关补偿将在开服后统一发放，具体开服时间请留意官方后续通知。给您造成不便，敬请谅解。\\n\\n感谢您的理解与支持！\\n\\n2025年6月19日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"12f10201f9d8b4baca46141821cede25_1750296552.278373\",\"url\":\"https://ok.166.net/reunionpub/1_20250619_19785d1c7ac702099.jpeg\",\"mimeType\":\"image/jpeg\",\"size\":173756,\"duration\":0,\"width\":1920,\"height\":1080,\"crop\":{\"x\":0.0,\"y\":8.240454,\"width\":1920.0,\"height\":1063.519},\"generateType\":\"DEFAULT\",\"videoCheckToken\":0,\"mediumBlock\":false}]}}",
+            "deleteTime": 0,
+            "createTime": 1750296810042,
+            "updateTime": 1750296812067,
+            "clientType": 51,
+            "externalInfo": {},
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "displayIpInfo": {
+              "ipLocationName": "广东"
+            },
+            "record": {
+              "id": "685368ecdf6a3452cbddaa0e",
+              "repostCount": 1,
+              "commentCount": 176,
+              "likeCount": 151,
+              "shareCount": 9,
+              "favCount": 12,
+              "createTime": 1750296832194
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "sky光遇 《光·遇》6月19日 延迟开服公告亲爱的旅人们：_光·遇 | 大神",
+            "desc": "sky光遇 《光·遇》6月19日 延迟开服公告亲爱的旅人们： 由于本次更新内容较多，预计开服时间将推迟，相关补偿将在开服后统一发放，具体开服时间请留意官方后续通知。给您造成不便，敬请谅解",
+            "keywords": "sky光遇,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "maintenance",
+      "title": "【维护】维护更新",
+      "start": "2025-06-18T16:00:00.000Z",
+      "end": "2025-06-19T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "68522da2fd8b611a4fa97498",
+    "title": "#我有遇感# #光遇六周年# #光遇因你而星动#\n遇感，是光遇的感觉，是你的惊喜，惬意，感动，是",
+    "content": "#我有遇感# #光遇六周年# #光遇因你而星动#\n遇感，是光遇的感觉，是你的惊喜，惬意，感动，是你在天空王国的每一种感受。\n遇感，是治愈的感觉，是生活中无数个美好到让人流泪的瞬间。\n遇感，是命定的感觉，是我想将一切期待与幸运都送给我们的明天。\n\n光遇「我有遇感」系列短片6月21日起与你相遇。\n让我们一起看看是哪一种遇感让你怦然心动？",
+    "createTime": 1750215605025,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "68522da2fd8b611a4fa97498",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#我有遇感# #光遇六周年# #光遇因你而星动#\\n遇感，是光遇的感觉，是你的惊喜，惬意，感动，是你在天空王国的每一种感受。\\n遇感，是治愈的感觉，是生活中无数个美好到让人流泪的瞬间。\\n遇感，是命定的感觉，是我想将一切期待与幸运都送给我们的明天。\\n\\n光遇「我有遇感」系列短片6月21日起与你相遇。\\n让我们一起看看是哪一种遇感让你怦然心动？\",\"media\":[{\"name\":\"遇感海报-1秋千.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_9bfae38d5068d78f1ab970b8f97fbf49.png\",\"mimeType\":\"image/png\",\"size\":2640680,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-2酒店.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_59d5278ebd84609c78d5d1f4cf7f7db4.png\",\"mimeType\":\"image/png\",\"size\":3472323,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-3许愿.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_bf8e4fea3696c44013e0a6de760a93e5.png\",\"mimeType\":\"image/png\",\"size\":2996795,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-4巴士.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_52091fc6ce7837d8ad8c621850ea9846.png\",\"mimeType\":\"image/png\",\"size\":3507595,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-5散步.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_349aff2fbcd05541b1946dbd6736834d.png\",\"mimeType\":\"image/png\",\"size\":4272714,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-6喂猫.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_1c5374907dc5744ee43c5cbaec9543cf.png\",\"mimeType\":\"image/png\",\"size\":2867351,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-7钢琴.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_290b14259a8bea8876b06433d2af3d15.png\",\"mimeType\":\"image/png\",\"size\":2805674,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-8机场.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_45242d76a2ac0b4821843b6115b0c534.png\",\"mimeType\":\"image/png\",\"size\":3910059,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-9互动.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_f368270f899e693375662bc80acd8c29.png\",\"mimeType\":\"image/png\",\"size\":2538909,\"width\":1242,\"height\":2208}]}}",
+      "deleteTime": 0,
+      "createTime": 1750215605025,
+      "updateTime": 1750216098862,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "我有遇感",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "68522da2fd8b611a4fa97498",
+        "repostCount": 0,
+        "commentCount": 4,
+        "likeCount": 21,
+        "shareCount": 2,
+        "favCount": 0,
+        "createTime": 1750217086285
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "68522da2fd8b611a4fa97498",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#我有遇感# #光遇六周年# #光遇因你而星动#\\n遇感，是光遇的感觉，是你的惊喜，惬意，感动，是你在天空王国的每一种感受。\\n遇感，是治愈的感觉，是生活中无数个美好到让人流泪的瞬间。\\n遇感，是命定的感觉，是我想将一切期待与幸运都送给我们的明天。\\n\\n光遇「我有遇感」系列短片6月21日起与你相遇。\\n让我们一起看看是哪一种遇感让你怦然心动？\",\"media\":[{\"name\":\"遇感海报-1秋千.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_9bfae38d5068d78f1ab970b8f97fbf49.png\",\"mimeType\":\"image/png\",\"size\":2640680,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-2酒店.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_59d5278ebd84609c78d5d1f4cf7f7db4.png\",\"mimeType\":\"image/png\",\"size\":3472323,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-3许愿.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_bf8e4fea3696c44013e0a6de760a93e5.png\",\"mimeType\":\"image/png\",\"size\":2996795,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-4巴士.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_52091fc6ce7837d8ad8c621850ea9846.png\",\"mimeType\":\"image/png\",\"size\":3507595,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-5散步.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_349aff2fbcd05541b1946dbd6736834d.png\",\"mimeType\":\"image/png\",\"size\":4272714,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-6喂猫.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_1c5374907dc5744ee43c5cbaec9543cf.png\",\"mimeType\":\"image/png\",\"size\":2867351,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-7钢琴.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_290b14259a8bea8876b06433d2af3d15.png\",\"mimeType\":\"image/png\",\"size\":2805674,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-8机场.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_45242d76a2ac0b4821843b6115b0c534.png\",\"mimeType\":\"image/png\",\"size\":3910059,\"width\":1242,\"height\":2208},{\"name\":\"遇感海报-9互动.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250618_f368270f899e693375662bc80acd8c29.png\",\"mimeType\":\"image/png\",\"size\":2538909,\"width\":1242,\"height\":2208}]}}",
+            "deleteTime": 0,
+            "createTime": 1750215605025,
+            "updateTime": 1750216098862,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "我有遇感",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "68522da2fd8b611a4fa97498",
+              "repostCount": 0,
+              "commentCount": 4,
+              "likeCount": 21,
+              "shareCount": 2,
+              "favCount": 0,
+              "createTime": 1750217086285
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "我有遇感,光遇六周年,光遇因你而星动遇感，是光遇的感觉_光·遇 | 大神",
+            "desc": "我有遇感,光遇六周年,光遇因你而星动遇感，是光遇的感觉，是你的惊喜，惬意，感动，是你在天空王国的每一种感受。遇感，是治愈的感觉，是生活中无数个美好到让人流泪的瞬间。遇感，是命定的感觉",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,我有遇感,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-20T16:00:00.000Z",
+      "end": "2025-06-21T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "6850e847df6a3452cbceefea",
+    "title": "#Sky光遇##光遇必胜客联动##来光遇吃披萨#\n披萨香气漫过长长的餐桌\n芝士拉丝牵起六载的欢乐",
+    "content": "#Sky光遇##光遇必胜客联动##来光遇吃披萨#\n披萨香气漫过长长的餐桌\n芝士拉丝牵起六载的欢乐\n🧀\n6月14日~6月27日\n大蜡烛堆将出现在天空王国各地\n🍕\n6月19日~7月6日\n按照“必胜客派对集章卡”的指引完成指定任务\n可收集派对纪念章并获得奖励：\n①在任意场景向身边的光之子分享披萨，可获得必胜客联动分享披萨背饰试用魔法*1、畅谈长桌*1\n②在秘密基地与先祖一起放礼花庆生，可获得必胜客联动装扮试用魔法*1、生日庆典大蛋糕*1\n③在每周三、六、日前往秘密基地，与惊喜拉丝披萨互动，可获得紫色染料*1、 绚丽彩虹*1\n④在秘密基地任意位置进行自拍或与好友合影，可获得白色染料*1、留影蜡烛*1\n⑤累计三天在秘密基地一楼的长桌品尝披萨，可获得蜡烛*2、飞行尾迹*1\n⑥累计三天在秘密基地一楼的长桌享用小食并获得烛火，可获得爱心*2、返老还童*1\n完成以上任务集齐6个纪念章，即可获得体型重塑*1和必胜客联动围巾*1\n🎉\n一口咬下焦香酥脆的饼边\n共同庆祝热闹而盛大的周年吧！\n\n  2025年6月17日\n《光·遇》官方运营团队",
+    "createTime": 1750132805026,
+    "status": "approved",
+    "autoType": "candle_heap",
+    "parsed": true,
+    "raw": {
+      "id": "6850e847df6a3452cbceefea",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇必胜客联动##来光遇吃披萨#\\n披萨香气漫过长长的餐桌\\n芝士拉丝牵起六载的欢乐\\n🧀\\n6月14日~6月27日\\n大蜡烛堆将出现在天空王国各地\\n🍕\\n6月19日~7月6日\\n按照“必胜客派对集章卡”的指引完成指定任务\\n可收集派对纪念章并获得奖励：\\n①在任意场景向身边的光之子分享披萨，可获得必胜客联动分享披萨背饰试用魔法*1、畅谈长桌*1\\n②在秘密基地与先祖一起放礼花庆生，可获得必胜客联动装扮试用魔法*1、生日庆典大蛋糕*1\\n③在每周三、六、日前往秘密基地，与惊喜拉丝披萨互动，可获得紫色染料*1、 绚丽彩虹*1\\n④在秘密基地任意位置进行自拍或与好友合影，可获得白色染料*1、留影蜡烛*1\\n⑤累计三天在秘密基地一楼的长桌品尝披萨，可获得蜡烛*2、飞行尾迹*1\\n⑥累计三天在秘密基地一楼的长桌享用小食并获得烛火，可获得爱心*2、返老还童*1\\n完成以上任务集齐6个纪念章，即可获得体型重塑*1和必胜客联动围巾*1\\n🎉\\n一口咬下焦香酥脆的饼边\\n共同庆祝热闹而盛大的周年吧！\\n\\n  2025年6月17日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"海报.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250616_b5ad165303e932b8337d42213673448c.png\",\"mimeType\":\"image/png\",\"size\":2214148,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1750132805026,
+      "updateTime": 1750132807800,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇必胜客联动",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "来光遇吃披萨",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6850e847df6a3452cbceefea",
+        "repostCount": 0,
+        "commentCount": 27,
+        "likeCount": 49,
+        "shareCount": 13,
+        "favCount": 12,
+        "createTime": 1750132903130
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6850e847df6a3452cbceefea",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇必胜客联动##来光遇吃披萨#\\n披萨香气漫过长长的餐桌\\n芝士拉丝牵起六载的欢乐\\n🧀\\n6月14日~6月27日\\n大蜡烛堆将出现在天空王国各地\\n🍕\\n6月19日~7月6日\\n按照“必胜客派对集章卡”的指引完成指定任务\\n可收集派对纪念章并获得奖励：\\n①在任意场景向身边的光之子分享披萨，可获得必胜客联动分享披萨背饰试用魔法*1、畅谈长桌*1\\n②在秘密基地与先祖一起放礼花庆生，可获得必胜客联动装扮试用魔法*1、生日庆典大蛋糕*1\\n③在每周三、六、日前往秘密基地，与惊喜拉丝披萨互动，可获得紫色染料*1、 绚丽彩虹*1\\n④在秘密基地任意位置进行自拍或与好友合影，可获得白色染料*1、留影蜡烛*1\\n⑤累计三天在秘密基地一楼的长桌品尝披萨，可获得蜡烛*2、飞行尾迹*1\\n⑥累计三天在秘密基地一楼的长桌享用小食并获得烛火，可获得爱心*2、返老还童*1\\n完成以上任务集齐6个纪念章，即可获得体型重塑*1和必胜客联动围巾*1\\n🎉\\n一口咬下焦香酥脆的饼边\\n共同庆祝热闹而盛大的周年吧！\\n\\n  2025年6月17日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"海报.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250616_b5ad165303e932b8337d42213673448c.png\",\"mimeType\":\"image/png\",\"size\":2214148,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1750132805026,
+            "updateTime": 1750132807800,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇必胜客联动",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "来光遇吃披萨",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6850e847df6a3452cbceefea",
+              "repostCount": 0,
+              "commentCount": 27,
+              "likeCount": 49,
+              "shareCount": 13,
+              "favCount": 12,
+              "createTime": 1750132903130
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇必胜客联动_光·遇 | 大神",
+            "desc": "Sky光遇,光遇必胜客联动",
+            "keywords": "sky光遇,sky光遇公告活动,Sky光遇,sky光遇光遇,sky光遇蜡烛"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "candle_heap",
+      "title": "【大蜡烛】大蜡烛",
+      "start": "2025-06-13T16:00:00.000Z",
+      "end": "2025-06-27T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "684f96c7378e9113eb865314",
+    "title": "#Sky光遇##光遇六周年##光遇因你而星动#\n交错的线条勾勒出时光的请柬\n斗篷轻扬再度开启珍贵",
+    "content": "#Sky光遇##光遇六周年##光遇因你而星动#\n交错的线条勾勒出时光的请柬\n斗篷轻扬再度开启珍贵的记忆\n🎁\n6月21日起\n线框斗篷礼包将在秘密基地常驻发售\n通过斗篷即可进入嘉年华场景游玩\n邀请好友共度游趣时光吧~",
+    "createTime": 1750046405076,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "684f96c7378e9113eb865314",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n交错的线条勾勒出时光的请柬\\n斗篷轻扬再度开启珍贵的记忆\\n🎁\\n6月21日起\\n线框斗篷礼包将在秘密基地常驻发售\\n通过斗篷即可进入嘉年华场景游玩\\n邀请好友共度游趣时光吧~\",\"media\":[{\"name\":\"海报.jpg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250616_8a2402b29d8959cc85819d4ab7fda9aa.png\",\"mimeType\":\"image/jpeg\",\"size\":2399313,\"width\":1920,\"height\":1080}]}}",
+      "deleteTime": 0,
+      "createTime": 1750046405076,
+      "updateTime": 1750046407339,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "684f96c7378e9113eb865314",
+        "repostCount": 0,
+        "commentCount": 41,
+        "likeCount": 28,
+        "shareCount": 4,
+        "favCount": 1,
+        "createTime": 1750047198540
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "684f96c7378e9113eb865314",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n交错的线条勾勒出时光的请柬\\n斗篷轻扬再度开启珍贵的记忆\\n🎁\\n6月21日起\\n线框斗篷礼包将在秘密基地常驻发售\\n通过斗篷即可进入嘉年华场景游玩\\n邀请好友共度游趣时光吧~\",\"media\":[{\"name\":\"海报.jpg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250616_8a2402b29d8959cc85819d4ab7fda9aa.png\",\"mimeType\":\"image/jpeg\",\"size\":2399313,\"width\":1920,\"height\":1080}]}}",
+            "deleteTime": 0,
+            "createTime": 1750046405076,
+            "updateTime": 1750046407339,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "684f96c7378e9113eb865314",
+              "repostCount": 0,
+              "commentCount": 41,
+              "likeCount": 28,
+              "shareCount": 4,
+              "favCount": 1,
+              "createTime": 1750047198540
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇六周年_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年",
+            "keywords": "sky光遇,sky光遇新闻资讯,Sky光遇,sky光遇光遇,sky光遇斗篷"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-20T16:00:00.000Z",
+      "end": "2025-06-21T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "684f7aa8b8046c6c20c84578",
+    "title": "#Sky光遇##光遇六周年##光遇因你而星动#\n齐聚云端欢庆六载盛事\n同建影院畅享崭新趣味\n🎞",
+    "content": "#Sky光遇##光遇六周年##光遇因你而星动#\n齐聚云端欢庆六载盛事\n同建影院畅享崭新趣味\n🎞️\n《光·遇》六周年 星动庆典将于6月21日开启\n请旅人们仔细阅读更新公告，了解更多活动详情\n🌟\n当星光汇聚于此刻\n6月21日0:00~7月9日23:59\n一起玩个痛快吧~",
+    "createTime": 1750039205032,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "684f7aa8b8046c6c20c84578",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n齐聚云端欢庆六载盛事\\n同建影院畅享崭新趣味\\n🎞️\\n《光·遇》六周年 星动庆典将于6月21日开启\\n请旅人们仔细阅读更新公告，了解更多活动详情\\n🌟\\n当星光汇聚于此刻\\n6月21日0:00~7月9日23:59\\n一起玩个痛快吧~\",\"media\":[{\"name\":\"内容公告长图.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250613_8d00966df49a30897070b4cb3d20fbb7.png\",\"mimeType\":\"image/png\",\"size\":4624652,\"width\":1080,\"height\":4449},{\"name\":\"活动日历.jpg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250613_839eb006af9a60972c1867a1a31bcf44.png\",\"mimeType\":\"image/jpeg\",\"size\":1236250,\"width\":1920,\"height\":1509}]}}",
+      "deleteTime": 0,
+      "createTime": 1750039205032,
+      "updateTime": 1750039208550,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "sky光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇六周年",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇因你而星动",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "684f7aa8b8046c6c20c84578",
+        "repostCount": 0,
+        "commentCount": 46,
+        "likeCount": 233,
+        "shareCount": 64,
+        "favCount": 53,
+        "topCommentList": "[\"68526ad4e506746826dc8f1a\"]",
+        "createTime": 1750039267810
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "684f7aa8b8046c6c20c84578",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"#Sky光遇##光遇六周年##光遇因你而星动#\\n齐聚云端欢庆六载盛事\\n同建影院畅享崭新趣味\\n🎞️\\n《光·遇》六周年 星动庆典将于6月21日开启\\n请旅人们仔细阅读更新公告，了解更多活动详情\\n🌟\\n当星光汇聚于此刻\\n6月21日0:00~7月9日23:59\\n一起玩个痛快吧~\",\"media\":[{\"name\":\"内容公告长图.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250613_8d00966df49a30897070b4cb3d20fbb7.png\",\"mimeType\":\"image/png\",\"size\":4624652,\"width\":1080,\"height\":4449},{\"name\":\"活动日历.jpg\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250613_839eb006af9a60972c1867a1a31bcf44.png\",\"mimeType\":\"image/jpeg\",\"size\":1236250,\"width\":1920,\"height\":1509}]}}",
+            "deleteTime": 0,
+            "createTime": 1750039205032,
+            "updateTime": 1750039208550,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "sky光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇六周年",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇因你而星动",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "684f7aa8b8046c6c20c84578",
+              "repostCount": 0,
+              "commentCount": 46,
+              "likeCount": 233,
+              "shareCount": 64,
+              "favCount": 53,
+              "topCommentList": "[\"68526ad4e506746826dc8f1a\"]",
+              "createTime": 1750039267810
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "Sky光遇,光遇六周年_光·遇 | 大神",
+            "desc": "Sky光遇,光遇六周年,光遇因你而星动齐聚云端欢庆六载盛事同建影院畅享崭新趣味🎞️《光·遇》六周年 星动庆典将于6月21日开启请旅人们仔细阅读更新公告",
+            "keywords": "sky光遇,sky光遇公告活动,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "其他",
+      "start": "2025-06-20T16:00:00.000Z",
+      "end": "2025-07-09T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "684e0d09378e9113eb7ed695",
+    "title": "《光·遇》6月19日 更新时间公告",
+    "content": "我发表了一篇大神长文，快来看看吧!",
+    "createTime": 1749945605034,
+    "status": "approved",
+    "autoType": "maintenance",
+    "parsed": true,
+    "raw": {
+      "id": "684e0d09378e9113eb7ed695",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 6,
+      "content": "{\"type\":6,\"body\":{\"text\":\"我发表了一篇大神长文，快来看看吧!\",\"media\":[{\"name\":\"godlike_kol_1749808208630_62\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250613_e03e6f78e3b97dc07b68febbf3a56156.png\",\"mimeType\":\"image/png\",\"size\":2773240,\"width\":2000,\"height\":1125,\"bgColor\":\"#ffffff\"}],\"subTitle\":\"\",\"title\":\"《光·遇》6月19日 更新时间公告\",\"longText\":\"<p>#Sky光遇#</p><p>亲爱的旅人们：</p><p>　　感谢各位对《光·遇》的关注与支持！我们将在6月19日 01:00~10:00进行版本更新，预计更新时间为9小时。更新中无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。</p><p>　　此次更新为资源预载，更新结束后：</p><p>\\t《光·遇》× 必胜客联动  6月19日  正式开启</p><p>\\t《光·遇》六周年 星动庆典  6月21日  正式开启</p><p>\\t《光·遇》缤纷飞行日  7月12日  正式开启</p><p>\\t《光·遇》有友节  7月17日  正式开启</p><p>\\t《光·遇》创意挑战日 7月19日  正式开启</p><p><br></p><p>　　更多详细内容请留意官方后续公告。再次感谢旅人们的支持，期待与大家在云端相遇！</p><p> </p><p> </p><p align=\\\"right\\\">2025年6月15日</p><p align=\\\"right\\\">《光·遇》官方运营团队</p><p><br></p>\"}}",
+      "deleteTime": 0,
+      "createTime": 1749945605034,
+      "updateTime": 1749945609166,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "684e0d09378e9113eb7ed695",
+        "repostCount": 2,
+        "commentCount": 83,
+        "likeCount": 137,
+        "shareCount": 13,
+        "favCount": 23,
+        "createTime": 1749945697295
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "684e0d09378e9113eb7ed695",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 6,
+            "content": "{\"type\":6,\"body\":{\"text\":\"我发表了一篇大神长文，快来看看吧!\",\"media\":[{\"name\":\"godlike_kol_1749808208630_62\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250613_e03e6f78e3b97dc07b68febbf3a56156.png\",\"mimeType\":\"image/png\",\"size\":2773240,\"width\":2000,\"height\":1125,\"bgColor\":\"#ffffff\"}],\"subTitle\":\"\",\"title\":\"《光·遇》6月19日 更新时间公告\",\"longText\":\"<p>#Sky光遇#</p><p>亲爱的旅人们：</p><p>　　感谢各位对《光·遇》的关注与支持！我们将在6月19日 01:00~10:00进行版本更新，预计更新时间为9小时。更新中无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。</p><p>　　此次更新为资源预载，更新结束后：</p><p>\\t《光·遇》× 必胜客联动  6月19日  正式开启</p><p>\\t《光·遇》六周年 星动庆典  6月21日  正式开启</p><p>\\t《光·遇》缤纷飞行日  7月12日  正式开启</p><p>\\t《光·遇》有友节  7月17日  正式开启</p><p>\\t《光·遇》创意挑战日 7月19日  正式开启</p><p><br></p><p>　　更多详细内容请留意官方后续公告。再次感谢旅人们的支持，期待与大家在云端相遇！</p><p> </p><p> </p><p align=\\\"right\\\">2025年6月15日</p><p align=\\\"right\\\">《光·遇》官方运营团队</p><p><br></p>\"}}",
+            "deleteTime": 0,
+            "createTime": 1749945605034,
+            "updateTime": 1749945609166,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "684e0d09378e9113eb7ed695",
+              "repostCount": 2,
+              "commentCount": 83,
+              "likeCount": 137,
+              "shareCount": 11,
+              "favCount": 23,
+              "createTime": 1749945697295
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "光·遇》6月19日 更新时间公告_光·遇 | 大神",
+            "desc": "Sky光遇 亲爱的旅人们： 　　感谢各位对《光·遇》的关注与支持！我们将在6月19日 01:00~10:00进行版本更新，预计更新时间为9小时。更新中无法正常游戏，敬请谅解",
+            "keywords": "sky光遇,sky光遇公告活动,Sky光遇,sky光遇光遇"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "maintenance",
+      "title": "【维护】维护更新",
+      "start": "2025-06-18T16:00:00.000Z",
+      "end": "2025-06-19T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "684bfe42a6e9d771be4036d9",
+    "title": "《光·遇》6月13日 打击外挂公告及防骗分享",
+    "content": "我发表了一篇大神长文，快来看看吧!",
+    "createTime": 1749810626389,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "684bfe42a6e9d771be4036d9",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 6,
+      "content": "{\"type\":6,\"body\":{\"text\":\"我发表了一篇大神长文，快来看看吧!\",\"media\":[{\"name\":\"godlike_kol_1749810552717_91\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250613_226e07c7b9b4c1a52651e27c904eda69.png\",\"mimeType\":\"image/png\",\"size\":2007149,\"width\":1590,\"height\":894,\"bgColor\":\"#ffffff\"}],\"subTitle\":\"\",\"title\":\"《光·遇》6月13日 打击外挂公告及防骗分享\",\"longText\":\"<p>亲爱的旅人们：</p><p align=\\\"justify\\\">      我们近期打击并封禁一批涉嫌使用第三方辅助软件等非法行为的账号，并同步没收了这些账号的非法所得，本次查处结果为：</p><p>      · 封禁违规账号34<strong>w+</strong></p><p>      · 打击非法爱心交易账号6<strong>w+</strong>个，没收非法爱心（含道具回收）44<strong>w+</strong>颗</p><p><br></p><p align=\\\"justify\\\">在此，我们再次郑重提醒各位：</p><p align=\\\"justify\\\">      1、在游戏内使用非法第三方辅助软件是一种严重破坏游戏环境、极其自私的行为，我们将持续对这种行为进行严厉打击。</p><p align=\\\"justify\\\">      2、针对各类工作室在游戏内的不法行为，我们也同样进行严厉打击；若您因购买工作室提供的非法内容，对您的账号造成了损失，后果需要您自行承担。</p><p align=\\\"justify\\\">      3、请注意保持自身账号安全，防止账号信息泄露被盗。</p><p align=\\\"justify\\\">      4、请旅人们使用正规渠道下载的版本。</p><p align=\\\"justify\\\">      5、请不要通过非法途径购买礼包赠送，以免造成财产损失和账号安全风险。</p><p align=\\\"justify\\\">      6、我们不⽀持旅⼈以任何形式进⾏账号交易，请保护个人信息与财产安全，警惕第三⽅交易，避免财产损失。</p><p align=\\\"justify\\\"><br></p><p>      此外，我们针对近期天空王国中出现的<strong>拼卡骗局</strong>的现象准备了一期防骗分享，希望旅人们甄别诈骗行为，避免造成自身损失。</p><p align=\\\"justify\\\">      我们将不遗余力地对《光·遇》游戏环境进行监测与净化，也由衷希望更多旅人能够加入到共同守护天空王国的努力中来。</p><p align=\\\"right\\\">2025年6月13日</p><p align=\\\"right\\\">《光·遇》官方运营团队</p><p align=\\\"right\\\"><br></p><p align=\\\"center\\\"><img src=\\\"https://ok.166.net/reunionpub/1_kol_20250613_d6a2d283457773c2a0453e60b043ef1d.png\\\" width=\\\"837\\\" height=\\\"3853\\\"></p><p align=\\\"right\\\"><br></p><p><br></p>\"}}",
+      "deleteTime": 0,
+      "createTime": 1749810626389,
+      "updateTime": 1749810754807,
+      "clientType": 72,
+      "attributeInfoList": [],
+      "topicInfoList": [],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "684bfe42a6e9d771be4036d9",
+        "repostCount": 0,
+        "commentCount": 31,
+        "likeCount": 32,
+        "shareCount": 0,
+        "favCount": 3,
+        "createTime": 1749811059595
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "684bfe42a6e9d771be4036d9",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 6,
+            "content": "{\"type\":6,\"body\":{\"text\":\"我发表了一篇大神长文，快来看看吧!\",\"media\":[{\"name\":\"godlike_kol_1749810552717_91\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20250613_226e07c7b9b4c1a52651e27c904eda69.png\",\"mimeType\":\"image/png\",\"size\":2007149,\"width\":1590,\"height\":894,\"bgColor\":\"#ffffff\"}],\"subTitle\":\"\",\"title\":\"《光·遇》6月13日 打击外挂公告及防骗分享\",\"longText\":\"<p>亲爱的旅人们：</p><p align=\\\"justify\\\">      我们近期打击并封禁一批涉嫌使用第三方辅助软件等非法行为的账号，并同步没收了这些账号的非法所得，本次查处结果为：</p><p>      · 封禁违规账号34<strong>w+</strong></p><p>      · 打击非法爱心交易账号6<strong>w+</strong>个，没收非法爱心（含道具回收）44<strong>w+</strong>颗</p><p><br></p><p align=\\\"justify\\\">在此，我们再次郑重提醒各位：</p><p align=\\\"justify\\\">      1、在游戏内使用非法第三方辅助软件是一种严重破坏游戏环境、极其自私的行为，我们将持续对这种行为进行严厉打击。</p><p align=\\\"justify\\\">      2、针对各类工作室在游戏内的不法行为，我们也同样进行严厉打击；若您因购买工作室提供的非法内容，对您的账号造成了损失，后果需要您自行承担。</p><p align=\\\"justify\\\">      3、请注意保持自身账号安全，防止账号信息泄露被盗。</p><p align=\\\"justify\\\">      4、请旅人们使用正规渠道下载的版本。</p><p align=\\\"justify\\\">      5、请不要通过非法途径购买礼包赠送，以免造成财产损失和账号安全风险。</p><p align=\\\"justify\\\">      6、我们不⽀持旅⼈以任何形式进⾏账号交易，请保护个人信息与财产安全，警惕第三⽅交易，避免财产损失。</p><p align=\\\"justify\\\"><br></p><p>      此外，我们针对近期天空王国中出现的<strong>拼卡骗局</strong>的现象准备了一期防骗分享，希望旅人们甄别诈骗行为，避免造成自身损失。</p><p align=\\\"justify\\\">      我们将不遗余力地对《光·遇》游戏环境进行监测与净化，也由衷希望更多旅人能够加入到共同守护天空王国的努力中来。</p><p align=\\\"right\\\">2025年6月13日</p><p align=\\\"right\\\">《光·遇》官方运营团队</p><p align=\\\"right\\\"><br></p><p align=\\\"center\\\"><img src=\\\"https://ok.166.net/reunionpub/1_kol_20250613_d6a2d283457773c2a0453e60b043ef1d.png\\\" width=\\\"837\\\" height=\\\"3853\\\"></p><p align=\\\"right\\\"><br></p><p><br></p>\"}}",
+            "deleteTime": 0,
+            "createTime": 1749810626389,
+            "updateTime": 1749810754807,
+            "clientType": 72,
+            "attributeInfoList": [],
+            "topicInfoList": [],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "684bfe42a6e9d771be4036d9",
+              "repostCount": 0,
+              "commentCount": 31,
+              "likeCount": 32,
+              "shareCount": 0,
+              "favCount": 3,
+              "createTime": 1749811059595
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2882,
+                "followerCount": 1254428,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511559,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "光·遇》6月13日 打击外挂公告及防骗分享_光·遇 | 大神",
+            "desc": "亲爱的旅人们： 我们近期打击并封禁一批涉嫌使用第三方辅助软件等非法行为的账号，并同步没收了这些账号的非法所得，本次查处结果为： · 封禁违规账号34w+ · 打击非法爱心交易账号6w+个",
+            "keywords": "sky光遇,sky光遇公告活动,Sky光遇,sky光遇账号,sky光遇道具"
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "《光·遇》6月13日 打击外挂公告及防骗分享",
+      "start": "2025-06-12T16:00:00.000Z",
+      "end": "2025-06-13T16:00:00.000Z"
+    }
   }
 ]

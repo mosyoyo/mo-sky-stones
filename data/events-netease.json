@@ -583,5 +583,23 @@
     "start": "2025-07-09T16:00:00.000Z",
     "end": "2025-07-16T15:59:00.000Z",
     "sourceFeedId": "686f0287a882ea659f59efa0"
+  },
+  {
+    "id": "candle_heap-6850e847df6a3452cbceefea",
+    "enabled": false,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2025-06-13T16:00:00.000Z",
+    "end": "2025-06-27T15:59:00.000Z",
+    "sourceFeedId": "6850e847df6a3452cbceefea"
+  },
+  {
+    "id": "maintenance-684e0d09378e9113eb7ed695",
+    "enabled": false,
+    "type": "maintenance",
+    "title": "【维护】维护更新",
+    "start": "2025-06-18T16:00:00.000Z",
+    "end": "2025-06-19T16:00:00.000Z",
+    "sourceFeedId": "684e0d09378e9113eb7ed695"
   }
 ]
