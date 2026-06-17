@@ -1,7 +1,15 @@
 const { buildCalendar, parseReminderOptions, parseTypes, readAssetJSON } = require('./_shared');
 
+// 排除 _source/_group/_names 等内部字段，只保留真正的事件属性
+function cleanEvent(e) {
+  const { _source, _group, _names, ...rest } = e;
+  return rest;
+}
+
 export async function onRequestGet(context) {
-  const events = await readAssetJSON(context, '/data/events.json', []);
+  const rawEvents = await readAssetJSON(context, '/data/events.json', []);
+  // 清洗内部字段，避免泄漏到 ICS
+  const events = rawEvents.map(cleanEvent);
   const types = parseTypes(context.request.url);
   const reminderOpts = parseReminderOptions(context.request.url);
   const ics = buildCalendar(events, types, { reminderOpts });

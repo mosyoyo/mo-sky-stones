@@ -3,3 +3,8 @@
 node_modules/
 *.log
 .wrangler/
+
+# 一次性辅助脚本（spirit-items 数据清洗用）
+scripts/check-old-table.mjs
+scripts/search-spirit.mjs
+spirit-items.json

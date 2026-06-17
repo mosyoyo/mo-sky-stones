@@ -23,6 +23,7 @@ function isProtectedApi(pathname) {
     || pathname.startsWith('/api/feed-batch')
     || pathname.startsWith('/api/events')
     || pathname.startsWith('/api/feed')
+    || pathname.startsWith('/api/settings')
     || pathname.startsWith('/api/sync');
 }
 

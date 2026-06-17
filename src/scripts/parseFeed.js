@@ -21,6 +21,12 @@ const TYPE_TITLE_PREFIX = {
   maintenance: '【维护】',
 };
 
+// 网易大神数据源只保留的 3 类（其余 3 类改从 wiki 抓取）
+// 用户的核心决策：除了维护和大蜡烛双倍，其余全部抓 wiki
+// 注：实际拆分不在这里做，parseFeed.js 保留全部类型，mergeEvents.js 按 config 决定
+const NETEASE_ALLOWED_TYPES = new Set(['maintenance', 'candle_heap', 'bonus']);
+const WIKI_TAKEN_TYPES = new Set(['traveling_spirit', 'season', 'activity']);
+
 function parseFeed(feed) {
   let type = detectType(feed.title, feed.content);
   const baseTime = Number(feed.createTime || 0) > 0 ? new Date(Number(feed.createTime)) : new Date();
@@ -83,7 +89,11 @@ function eventFromFeed(feed, parsed) {
 
 function main() {
   const feeds = readJSON('feeds.json', []);
-  const events = readJSON('events.json', []);
+  // 读 events-netease.json（网易大神事件现状）作为基线。
+  // 旧版读 events.json 会把 wiki 事件当 netease 现状污染了 id 命名空间。
+  // 兼容：events-netease.json 不存在时回退到 events.json
+  let events = readJSON('events-netease.json', null);
+  if (events === null) events = readJSON('events.json', []);
   const eventMap = new Map(events.map(event => [event.sourceFeedId || event.id, event]));
   const parsedFeeds = [];
   let parsedCount = 0;
@@ -196,6 +206,13 @@ function main() {
   }
   const finalEvents = allEvents.filter(e => e.type !== 'traveling_spirit' || keptIds.has(e.id));
 
+  // === 双数据源拆分准备：events-netease.json 保留全部类型作为兜底 ===
+  // 用户的核心决策：维护/大蜡烛/双倍 → 网易大神；旅行先祖/季节/活动 → wiki
+  // events-netease.json 保留全部类型，但由 mergeEvents.js 按 source-config.json
+  // + id 去重决定哪些走网易大神、哪些走 wiki。
+  // 这样 wiki 抓不到时（沙箱被反爬墙挡/未来 wiki API 变更）网易大神兜底不会丢事件。
+  const neteaseEvents = finalEvents;
+
   // 清理已过期 enabled 事件（end < 现在）—— ICS 唔再显示，iOS 也不会堆积历史
   const now = Date.now();
   let droppedExpired = 0;
@@ -250,9 +267,13 @@ function main() {
   }
 
   writeJSON('feeds.json', parsedFeeds);
-  writeJSON('events.json', finalEvents);
+  // events-netease.json：网易大神原始事件（保留全部类型作为兜底）
+  // 供 mergeEvents.js 与 events-wiki.json 合并时去重使用
+  writeJSON('events-netease.json', neteaseEvents);
+  // events.json 不再这里写——syncEvents.js 跑完 parseFeed 后会跑 mergeEvents，
+  // mergeEvents 才是 events.json 的最终写者（按 source-config.json 合并 netease + wiki）
   appendSyncLog({
-    message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条，自动过审 ${autoApprovedCount} 条，反查关闭 ${droppedFromEvents} 条，清理过期 ${droppedExpired} 条，关键词忽略 ${ignoredByKeyword} 条`,
+    message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条，自动过审 ${autoApprovedCount} 条，反查关闭 ${droppedFromEvents} 条，清理过期 ${droppedExpired} 条，关键词忽略 ${ignoredByKeyword} 条（events-netease.json 全量 ${neteaseEvents.length} 条，待 merge）`,
     addedEvents: parsedCount,
     autoApproved: autoApprovedCount,
     droppedFromEvents,
