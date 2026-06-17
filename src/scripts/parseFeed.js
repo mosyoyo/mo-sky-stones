@@ -27,18 +27,18 @@ function parseFeed(feed) {
     type = 'other';
   }
 
-  // 复刻先祖过滤规则：
-  // 1. 只保留「即将到临/即将来临」类预告，过滤「到临提醒/已到来/已离开」
-  // 2. duration < 1 天的全部过滤（短于一天说明不是标准复刻）
-  if (type === 'traveling_spirit') {
-    if (!isTravelingSpiritUpcoming(feed.title || '', feed.content || '')) {
+  // 过滤规则：
+  // 1. 复刻先祖：只保留「即将到临/即将来临」类预告，过滤「到临提醒/已到来/已离开」
+  // 2. 长周期事件（活动/复刻/季节/双倍/大蜡烛）：duration < 1 天全部 drop
+  //    维护通常 < 1 天，保留
+  const LONG_EVENT_TYPES = new Set(['traveling_spirit', 'activity', 'season', 'bonus', 'candle_heap']);
+  if (type === 'traveling_spirit' && !isTravelingSpiritUpcoming(feed.title || '', feed.content || '')) {
+    type = 'other';
+  } else if (LONG_EVENT_TYPES.has(type) && range && range.start && range.end) {
+    const durationMs = new Date(range.end) - new Date(range.start);
+    const oneDayMs = 24 * 60 * 60 * 1000;
+    if (durationMs < oneDayMs) {
       type = 'other';
-    } else if (range && range.start && range.end) {
-      const durationMs = new Date(range.end) - new Date(range.start);
-      const oneDayMs = 24 * 60 * 60 * 1000;
-      if (durationMs < oneDayMs) {
-        type = 'other';
-      }
     }
   }
 
