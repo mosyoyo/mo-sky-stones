@@ -471,9 +471,10 @@ function buildReminderEvents(events, options = {}) {
     //   - 若 end 为北京时间当日 00:00（= 当日 0 点结束），则提前到当日 20:00（= 4 小时前）
     //   - 否则按 reminder.end 提前
     if (event.type !== 'maintenance' || endOnly.has(event.type)) {
+      // end 提醒 SUMMARY 直接带标题，方便 iOS 列表一眼看出
       const endTitle = event.type === 'traveling_spirit'
-        ? '复刻先祖即将离开'
-        : `【${label}】即将结束`;
+        ? `${summary} 即将离开`
+        : `${summary} 即将结束`;
       const { endStart, leadLabel } = computeEndReminderStart(end, reminder);
       const endDesc = buildDescription([
         `标题: ${summary}`,
