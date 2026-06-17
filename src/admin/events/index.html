@@ -5,16 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>事件管理</title>
   <link rel="stylesheet" href="/src/admin/style.css">
+  <script src="/src/admin/nav.js" defer></script>
+  <script src="/src/admin/common.js" defer></script>
 </head>
 <body>
   <main>
-    <nav class="shell-nav">
-      <a href="/">订阅</a>
-      <a href="/src/admin/feed/">公告</a>
-      <a class="active" href="/src/admin/events/">事件</a>
-      <a href="/src/admin/sync/">同步</a>
-      <a href="/src/admin/settings/">数据源</a>
-    </nav>
     <header class="hero">
       <div>
         <h1>事件管理</h1>
@@ -22,126 +17,160 @@
       </div>
       <button id="save">保存事件</button>
     </header>
+    <section>
+      <div class="toolbar">
+        <label class="pill"><input id="hidePast" type="checkbox" checked>隐藏已过期</label>
+        <label class="chip">
+          <span>类型</span>
+          <select id="typeFilter"></select>
+        </label>
+        <label class="chip">
+          <span>排序</span>
+          <select id="sortMode">
+            <option value="start-asc">开始时间近到远</option>
+            <option value="start-desc">开始时间远到近</option>
+          </select>
+        </label>
+      </div>
+    </section>
     <div id="list"></div>
   </main>
   <script>
-    const typeNames = { traveling_spirit: '旅行先祖', season: '季节', activity: '活动', bonus: '双倍活动', maintenance: '维护更新', other: '其他' };
-    const typeKeys = Object.keys(typeNames);
-    const tz = 'Asia/Shanghai';
-    let events = [];
-    const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-    const formatTime = value => value ? new Date(value).toLocaleString('zh-CN', { timeZone: tz, hour12: false }) : '未设置';
-    const splitLocal = value => {
-      if (!value) return { date: '', time: '' };
-      const parts = new Intl.DateTimeFormat('en-US', {
-        timeZone: tz,
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      }).formatToParts(new Date(value));
-      const map = Object.fromEntries(parts.map(part => [part.type, part.value]));
-      return { date: `${map.year}-${map.month}-${map.day}`, time: `${map.hour}:${map.minute}` };
-    };
-    const localToUTC = (datePart, timePart) => {
-      if (!datePart || !timePart) return '';
-      const [year, month, day] = datePart.split('-').map(Number);
-      const [hour, minute] = timePart.split(':').map(Number);
-      return new Date(Date.UTC(year, month - 1, day, hour - 8, minute || 0, 0)).toISOString();
-    };
-    async function load() {
-      const box = document.querySelector('#list');
-      box.innerHTML = '<p class="muted">正在读取事件...</p>';
-      try {
-        const res = await fetch('/api/events');
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        events = await res.json();
-      } catch (err) {
-        box.innerHTML = `<section><strong>事件读取失败</strong><p>${h(err.message)}</p></section>`;
-        return;
-      }
-      render();
-    }
-    function render() {
-      if (!events.length) {
-        document.querySelector('#list').innerHTML = '<section><strong>暂无事件</strong><p>在公告页批准一条公告后，这里会出现可编辑事件。</p></section>';
-        return;
-      }
-      document.querySelector('#list').innerHTML = events.map((event, index) => {
-        const start = splitLocal(event.start);
-        const end = splitLocal(event.end);
-        return `
-        <section class="event-card">
-          <div class="event-head">
-            <label class="event-enabled"><input type="checkbox" data-field="enabled" data-index="${index}" ${event.enabled ? 'checked' : ''}>启用</label>
-            <span class="tag ${h(event.type)}">${h(typeNames[event.type] || event.type || '未知')}</span>
-          </div>
-          <div class="grid">
-            <label class="field">
-              <span>事件标题</span>
-              <input data-field="title" data-index="${index}" value="${h(event.title || '')}" placeholder="标题">
-            </label>
-            <label class="field">
-              <span>类型</span>
-              <select data-field="type" data-index="${index}">
-                ${typeKeys.map(type => `<option value="${type}" ${event.type === type ? 'selected' : ''}>${typeNames[type]}</option>`).join('')}
-              </select>
-            </label>
-            <div class="date-card">
-              <span class="field-label">开始时间</span>
-              <div class="date-grid">
-                <input type="date" data-field="start-date" data-index="${index}" value="${h(start.date)}">
-                <input type="time" data-field="start-time" data-index="${index}" value="${h(start.time)}">
-              </div>
-            </div>
-            <div class="date-card">
-              <span class="field-label">结束时间</span>
-              <div class="date-grid">
-                <input type="date" data-field="end-date" data-index="${index}" value="${h(end.date)}">
-                <input type="time" data-field="end-time" data-index="${index}" value="${h(end.time)}">
-              </div>
-            </div>
-          </div>
-          <p class="muted">北京时间：${h(formatTime(event.start))} - ${h(formatTime(event.end))}</p>
-          <div class="row"><button class="ghost" data-delete="${index}">删除</button></div>
-        </section>`;
-      }).join('');
-      document.querySelectorAll('[data-field]').forEach(el => {
-        el.oninput = () => updateEvent(el);
-        el.onchange = () => updateEvent(el);
-      });
-      document.querySelectorAll('[data-delete]').forEach(el => el.onclick = () => {
-        events.splice(Number(el.dataset.delete), 1);
+    window.addEventListener('DOMContentLoaded', () => {
+      const { fetchJSON, formatFullDate, h, localToUTC, showToast, splitLocal } = window.AdminCommon;
+      const typeNames = { traveling_spirit: '旅行先祖', season: '季节', activity: '活动', bonus: '双倍活动', candle_heap: '大蜡烛', maintenance: '维护更新', other: '其他' };
+      const typeKeys = Object.keys(typeNames);
+      let events = [];
+
+      document.querySelector('#typeFilter').innerHTML = '<option value="all">全部类型</option>' +
+        typeKeys.map(type => `<option value="${type}">${typeNames[type]}</option>`).join('');
+      document.querySelector('#typeFilter').onchange = render;
+      document.querySelector('#sortMode').onchange = render;
+      document.querySelector('#hidePast').onchange = render;
+
+      async function load() {
+        const box = document.querySelector('#list');
+        box.innerHTML = '<p class="muted">正在读取事件...</p>';
+        try {
+          events = await fetchJSON('/api/events');
+        } catch (err) {
+          box.innerHTML = `<section><strong>事件读取失败</strong><p>${h(err.message)}</p></section>`;
+          return;
+        }
         render();
-      });
-    }
-    function updateEvent(el) {
-      const event = events[Number(el.dataset.index)];
-      if (!event) return;
-      if (el.dataset.field === 'enabled') event.enabled = el.checked;
-      else if (el.dataset.field === 'start-date' || el.dataset.field === 'start-time') {
-        const card = el.closest('section');
-        event.start = localToUTC(card.querySelector('[data-field="start-date"]').value, card.querySelector('[data-field="start-time"]').value);
-      } else if (el.dataset.field === 'end-date' || el.dataset.field === 'end-time') {
-        const card = el.closest('section');
-        event.end = localToUTC(card.querySelector('[data-field="end-date"]').value, card.querySelector('[data-field="end-time"]').value);
-      } else {
-        event[el.dataset.field] = el.value;
       }
-    }
-    document.querySelector('#save').onclick = async () => {
-      const btn = document.querySelector('#save');
-      btn.disabled = true;
-      btn.textContent = '保存中...';
-      const res = await fetch('/api/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(events) });
-      const data = await res.json();
-      btn.disabled = false;
-      btn.textContent = '保存事件';
-      alert(data.ok ? '已保存' : (data.error || '保存失败'));
-    };
-    load();
+
+      function visibleEvents() {
+        const type = document.querySelector('#typeFilter').value;
+        const hidePast = document.querySelector('#hidePast').checked;
+        const now = Date.now();
+        const list = events
+          .map((event, index) => ({ event, index }))
+          .filter(({ event }) => type === 'all' || event.type === type)
+          .filter(({ event }) => !hidePast || !event.end || new Date(event.end).getTime() >= now);
+        const dir = document.querySelector('#sortMode').value === 'start-desc' ? -1 : 1;
+        return list.sort((a, b) => dir * (new Date(a.event.start || 0) - new Date(b.event.start || 0)));
+      }
+
+      function render() {
+        const list = visibleEvents();
+        if (!list.length) {
+          document.querySelector('#list').innerHTML = '<section><strong>暂无事件</strong><p>当前筛选条件下没有可编辑事件。</p></section>';
+          return;
+        }
+        document.querySelector('#list').innerHTML = list.map(({ event, index }) => {
+          const start = splitLocal(event.start);
+          const end = splitLocal(event.end);
+          const state = event.end && new Date(event.end) < new Date()
+            ? '<span class="tag other">已过期</span>'
+            : event.start && new Date(event.start) <= new Date()
+              ? '<span class="tag success">进行中</span>'
+              : '<span class="tag warning">即将到来</span>';
+          return `
+          <section class="event-card">
+            <div class="event-head">
+              <label class="event-enabled"><input type="checkbox" data-field="enabled" data-index="${index}" ${event.enabled ? 'checked' : ''}>启用</label>
+              <div class="row">
+                ${state}
+                <span class="tag ${h(event.type)}">${h(typeNames[event.type] || event.type || '未知')}</span>
+              </div>
+            </div>
+            <div class="grid">
+              <label class="field">
+                <span>事件标题</span>
+                <input data-field="title" data-index="${index}" value="${h(event.title || '')}" placeholder="标题">
+              </label>
+              <label class="field">
+                <span>类型</span>
+                <select data-field="type" data-index="${index}">
+                  ${typeKeys.map(type => `<option value="${type}" ${event.type === type ? 'selected' : ''}>${typeNames[type]}</option>`).join('')}
+                </select>
+              </label>
+              <div class="date-card">
+                <span class="field-label">开始时间</span>
+                <div class="date-grid">
+                  <input type="date" data-field="start-date" data-index="${index}" value="${h(start.date)}">
+                  <input type="time" data-field="start-time" data-index="${index}" value="${h(start.time)}">
+                </div>
+              </div>
+              <div class="date-card">
+                <span class="field-label">结束时间</span>
+                <div class="date-grid">
+                  <input type="date" data-field="end-date" data-index="${index}" value="${h(end.date)}">
+                  <input type="time" data-field="end-time" data-index="${index}" value="${h(end.time)}">
+                </div>
+              </div>
+            </div>
+            <p class="muted">北京时间：${h(formatFullDate(event.start))} - ${h(formatFullDate(event.end))}</p>
+            <div class="row"><button class="danger" data-delete="${index}">删除</button></div>
+          </section>`;
+        }).join('');
+        document.querySelectorAll('[data-field]').forEach(el => {
+          el.oninput = () => updateEvent(el);
+          el.onchange = () => updateEvent(el);
+        });
+        document.querySelectorAll('[data-delete]').forEach(el => el.onclick = async () => {
+          events.splice(Number(el.dataset.delete), 1);
+          render();
+          showToast('已从本地列表移除，保存后生效', 'success');
+        });
+      }
+
+      function updateEvent(el) {
+        const event = events[Number(el.dataset.index)];
+        if (!event) return;
+        if (el.dataset.field === 'enabled') event.enabled = el.checked;
+        else if (el.dataset.field === 'start-date' || el.dataset.field === 'start-time') {
+          const card = el.closest('section');
+          event.start = localToUTC(card.querySelector('[data-field="start-date"]').value, card.querySelector('[data-field="start-time"]').value);
+        } else if (el.dataset.field === 'end-date' || el.dataset.field === 'end-time') {
+          const card = el.closest('section');
+          event.end = localToUTC(card.querySelector('[data-field="end-date"]').value, card.querySelector('[data-field="end-time"]').value);
+        } else {
+          event[el.dataset.field] = el.value;
+        }
+      }
+
+      document.querySelector('#save').onclick = async () => {
+        const btn = document.querySelector('#save');
+        btn.disabled = true;
+        btn.textContent = '保存中...';
+        try {
+          const data = await fetchJSON('/api/events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(events),
+          });
+          showToast(data.ok ? '已保存事件' : (data.error || '保存失败'), data.ok ? 'success' : 'error');
+        } catch (err) {
+          showToast(err.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = '保存事件';
+        }
+      };
+      load();
+    });
   </script>
 </body>
 </html>

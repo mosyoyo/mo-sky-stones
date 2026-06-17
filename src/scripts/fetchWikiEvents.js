@@ -112,6 +112,19 @@ function toUTCChina12(dateStr) {
   return new Date(utcMs).toISOString();
 }
 
+function toUTCSpiritWindow(startDateStr) {
+  if (!startDateStr) return { start: null, end: null };
+  const parts = startDateStr.split('-').map(Number);
+  if (parts.length !== 3 || parts.some(Number.isNaN)) return { start: null, end: null };
+  const [year, month, day] = parts;
+  const base = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
+  const weekday = base.getUTCDay();
+  const daysToMonday = (8 - weekday) % 7;
+  const mondayNoonBJ = new Date(Date.UTC(year, month - 1, day + daysToMonday, 4, 0, 0, 0));
+  const thursdaySixBJ = new Date(Date.UTC(year, month - 1, day + daysToMonday - 4, 22, 0, 0, 0));
+  return { start: thursdaySixBJ.toISOString(), end: mondayNoonBJ.toISOString() };
+}
+
 function detectType(title) {
   for (const [prefix, type] of Object.entries(PREFIX_TO_TYPE)) {
     if (title.startsWith(prefix)) return { type, cleanTitle: title.slice(prefix.length) };
@@ -208,13 +221,16 @@ function parseCalendarHTML(html) {
       if (urlMatch) idBase = decodeURIComponent(urlMatch[1]);
 
       const titlePrefix = type === 'season' ? '【季节】' : type === 'traveling_spirit' ? '【复刻】' : '【活动】';
+      const spiritWindow = type === 'traveling_spirit'
+        ? toUTCSpiritWindow(parseMonthDay(year, startMD))
+        : null;
 
       events.push({
         id: `wiki-${type}-${idBase}-${startMD.replace('.', '')}`.replace(/\s+/g, ''),
         type,
         title: `${titlePrefix}${cleanTitle}`,
-        start: toUTCChina12(parseMonthDay(year, startMD)),
-        end:   toUTCChina12(parseMonthDay(year, endMD)),
+        start: spiritWindow ? spiritWindow.start : toUTCChina12(parseMonthDay(year, startMD)),
+        end:   spiritWindow ? spiritWindow.end : toUTCChina12(parseMonthDay(year, endMD)),
         source: 'wiki',
         wikiUrl: url,
       });
@@ -230,13 +246,16 @@ function parseCalendarHTML(html) {
       const { type, cleanTitle } = detectType(rawTitle);
 
       const titlePrefix = type === 'season' ? '【季节】' : type === 'traveling_spirit' ? '【复刻】' : '【活动】';
+      const spiritWindow = type === 'traveling_spirit'
+        ? toUTCSpiritWindow(parseMonthDay(year, startMD))
+        : null;
 
       events.push({
         id: `wiki-${type}-${cleanTitle}-${startMD.replace('.', '')}`.replace(/\s+/g, ''),
         type,
         title: `${titlePrefix}${cleanTitle}`,
-        start: toUTCChina12(parseMonthDay(year, startMD)),
-        end:   toUTCChina12(parseMonthDay(year, endMD)),
+        start: spiritWindow ? spiritWindow.start : toUTCChina12(parseMonthDay(year, startMD)),
+        end:   spiritWindow ? spiritWindow.end : toUTCChina12(parseMonthDay(year, endMD)),
         source: 'wiki',
         wikiUrl: WIKI_CALENDAR_URL,
       });

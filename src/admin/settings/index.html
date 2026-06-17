@@ -5,16 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>数据源设置</title>
   <link rel="stylesheet" href="/src/admin/style.css">
+  <script src="/src/admin/nav.js" defer></script>
+  <script src="/src/admin/common.js" defer></script>
 </head>
 <body>
   <main>
-    <nav class="shell-nav">
-      <a href="/">订阅</a>
-      <a href="/src/admin/feed/">公告</a>
-      <a href="/src/admin/events/">事件</a>
-      <a href="/src/admin/sync/">同步</a>
-      <a class="active" href="/src/admin/settings/">数据源</a>
-    </nav>
     <header class="hero">
       <div>
         <h1>数据源设置</h1>
@@ -23,183 +18,154 @@
       <button id="save">保存设置</button>
     </header>
 
-    <div id="status" class="muted" style="margin-bottom:12px">正在读取配置…</div>
+    <div id="status" class="muted" style="margin-bottom:12px">正在读取配置...</div>
 
     <section>
       <h2>当前抓取数据</h2>
       <p class="muted">从 <code>data/events-netease.json</code> 和 <code>data/events-wiki.json</code> 读到的最新事件数量。</p>
-      <div class="log-grid" id="sources"></div>
+      <div class="grid" id="sources"></div>
     </section>
 
     <section>
-      <h2>事件类型 → 数据源</h2>
-      <p class="muted">旅行先祖 / 季节 / 活动 可在 <strong>网易大神</strong> / <strong>Wiki</strong> 间切换；双倍 / 大蜡烛 / 维护 固定来自网易大神（不可切换）。改完点保存会写入 <code>data/source-config.json</code>，下一次 GitHub Actions 跑 mergeEvents 时生效。</p>
+      <h2>事件类型与数据源</h2>
+      <p class="muted">旅行先祖 / 季节 / 活动可切换；双倍 / 大蜡烛 / 维护固定来自网易大神。</p>
       <div class="log-grid" id="types"></div>
     </section>
 
     <section>
       <h2>抓取流程</h2>
-      <ol style="line-height:1.8;color:var(--text)">
-        <li>每 6 小时：<code>fetchFeeds</code> 抓网易大神 → <code>events-netease.json</code>（全量 60+ 条）</li>
-        <li>同次任务：<code>fetchWikiEvents</code> 抓 wiki 「活动日历」页 → <code>events-wiki.json</code>（约 6-10 条）</li>
-        <li>接着 <code>mergeEvents</code> 按本表配置合并 → <code>events.json</code>
-          <ul style="margin-top:4px">
-            <li>旅行先祖 / 季节 / 活动：首选 wiki，netease 兜底</li>
-            <li>双倍 / 大蜡烛 / 维护：<strong>固定</strong>只取 netease，不参与兜底</li>
-          </ul>
-        </li>
-        <li>同时 <code>events.json</code> 通过 GitHub API 推回仓库</li>
-      </ol>
+      <div class="log-grid">
+        <div class="card"><strong>1. 抓取</strong><p class="muted">每 6 小时抓网易大神官方公告，同时抓 Wiki 活动日历。</p></div>
+        <div class="card"><strong>2. 合并</strong><p class="muted">按本页配置生成 <code>events.json</code>，固定类型只使用网易大神。</p></div>
+        <div class="card"><strong>3. 发布</strong><p class="muted">GitHub Actions 推回数据，Cloudflare Pages 使用同一份订阅输出。</p></div>
+      </div>
     </section>
   </main>
 
   <script>
-    const TYPE_LABELS = {
-      traveling_spirit: '旅行先祖',
-      season:           '季节',
-      activity:         '活动',
-      bonus:            '双倍',
-      candle_heap:      '大蜡烛',
-      maintenance:      '维护',
-    };
-    const TYPE_DESC = {
-      traveling_spirit: '复刻先祖（单个）',
-      season:           '奇妙之旅（赛季）',
-      activity:         '节日/集体复刻',
-      bonus:            '双倍活动（连续）',
-      candle_heap:      '大蜡烛堆（连续）',
-      maintenance:      '停服维护',
-    };
-    // 固定走网易大神，不可切换
-    const LOCKED_TYPES = new Set(['bonus', 'candle_heap', 'maintenance']);
-    const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+    window.addEventListener('DOMContentLoaded', () => {
+      const { fetchJSON, h, showToast } = window.AdminCommon;
+      const TYPE_LABELS = {
+        traveling_spirit: '旅行先祖',
+        season: '季节',
+        activity: '活动',
+        bonus: '双倍',
+        candle_heap: '大蜡烛',
+        maintenance: '维护',
+      };
+      const TYPE_DESC = {
+        traveling_spirit: '复刻先祖（单个）',
+        season: '奇妙之旅（赛季）',
+        activity: '节日 / 集体复刻',
+        bonus: '双倍活动（连续）',
+        candle_heap: '大蜡烛堆（连续）',
+        maintenance: '停服维护',
+      };
+      const LOCKED_TYPES = new Set(['bonus', 'candle_heap', 'maintenance']);
+      let config = null;
+      let wikiEvents = [];
+      let neteaseEvents = [];
 
-    let config = null;        // 当前 source-config
-    let lastUpdated = null;
-    let wikiEvents = [];
-    let neteaseEvents = [];
-
-    async function load() {
-      const status = document.querySelector('#status');
-      try {
-        const [cfgRes, neteaseRes, wikiRes] = await Promise.all([
-          fetch('/api/settings'),
-          fetch('/data/events-netease.json').then(r => r.ok ? r.json() : []),
-          fetch('/data/events-wiki.json').then(r => r.ok ? r.json() : { events: [] }),
-        ]);
-        if (!cfgRes.ok) throw new Error(`HTTP ${cfgRes.status}`);
-        const data = await cfgRes.json();
-        config = data.config;
-        lastUpdated = data.lastUpdated;
-        neteaseEvents = Array.isArray(neteaseRes) ? neteaseRes : [];
-        wikiEvents = Array.isArray(wikiRes) ? wikiRes : (wikiRes.events || []);
-        status.textContent = data.isDefault ? '⚠️ 当前为默认配置（未写过 source-config.json）' : '✅ 已读取配置';
-        render();
-      } catch (err) {
-        status.textContent = `❌ 读取失败：${h(err.message)}`;
+      async function load() {
+        const status = document.querySelector('#status');
+        try {
+          const [cfg, netease, wiki] = await Promise.all([
+            fetchJSON('/api/settings'),
+            fetch('/data/events-netease.json').then(r => r.ok ? r.json() : []),
+            fetch('/data/events-wiki.json').then(r => r.ok ? r.json() : { events: [] }),
+          ]);
+          config = cfg.config;
+          neteaseEvents = Array.isArray(netease) ? netease : [];
+          wikiEvents = Array.isArray(wiki) ? wiki : (wiki.events || []);
+          status.textContent = cfg.isDefault ? '当前为默认配置，尚未写入 source-config.json' : '已读取配置';
+          render();
+        } catch (err) {
+          status.textContent = `读取失败：${err.message}`;
+          showToast(err.message, 'error');
+        }
       }
-    }
 
-    function render() {
-      // 1) 数据源概况
-      const neByType = countByType(neteaseEvents);
-      const wkByType = countByType(wikiEvents);
-      const sources = document.querySelector('#sources');
-      sources.innerHTML = `
-        <div class="log-item">
-          <strong>网易大神 (netease) — ${neteaseEvents.length} 条</strong>
-          <div class="row" style="margin-top:6px">
-            ${Object.entries(TYPE_LABELS).map(([t, label]) => `<span class="tag ${h(t)}">${h(label)} · ${neByType[t] || 0}</span>`).join('')}
-          </div>
-          <p class="muted" style="margin-top:8px">数据源：网易大神官方公告动态</p>
-        </div>
-        <div class="log-item">
-          <strong>Wiki 活动日历 (wiki) — ${wikiEvents.length} 条</strong>
-          <div class="row" style="margin-top:6px">
-            ${Object.entries(TYPE_LABELS).map(([t, label]) => `<span class="tag ${h(t)}">${h(label)} · ${wkByType[t] || 0}</span>`).join('')}
-          </div>
-          <p class="muted" style="margin-top:8px">数据源：<a href="https://wiki.biligame.com/sky/%E6%B4%BB%E5%8A%A8%E6%97%A5%E5%8E%86" target="_blank" rel="noopener">wiki.biligame.com/sky/活动日历</a></p>
-        </div>
-      `;
+      function countByType(events) {
+        const out = {};
+        for (const event of events) out[event.type] = (out[event.type] || 0) + 1;
+        return out;
+      }
 
-      // 2) 事件类型 → 数据源
-      const types = document.querySelector('#types');
-      types.innerHTML = Object.entries(TYPE_LABELS).map(([type, label]) => {
-        const locked = LOCKED_TYPES.has(type);
-        const source = locked ? 'netease' : (config[type] || 'wiki');
-        const radioHtml = locked
-          ? `<span class="pill locked" title="该类型固定来自网易大神"><span>🔒 网易大神（固定）</span></span>`
-          : `
-              <label class="pill">
-                <input type="radio" name="src-${h(type)}" value="netease" ${config[type] === 'netease' ? 'checked' : ''}>
-                <span>网易大神</span>
-              </label>
-              <label class="pill">
-                <input type="radio" name="src-${h(type)}" value="wiki" ${config[type] === 'wiki' ? 'checked' : ''}>
-                <span>Wiki</span>
-              </label>
-            `;
-        const prefLabel = source === 'wiki' ? `Wiki (${wkByType[type] || 0})` : `网易大神 (${neByType[type] || 0})`;
+      function sourceCard(name, key, events, counts) {
         return `
-        <div class="log-item" data-type-row="${h(type)}">
-          <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-            <div>
-              <strong>${h(label)}</strong>
-              <span class="muted" style="margin-left:6px">${h(TYPE_DESC[type] || '')}</span>
-              ${locked ? '<span class="tag maintenance" style="margin-left:6px">🔒 锁定</span>' : ''}
+          <div class="card">
+            <div class="top">
+              <strong>${h(name)} · ${events.length} 条</strong>
+              <span class="tag">${h(key)}</span>
             </div>
-            <div class="row" style="gap:6px">${radioHtml}</div>
-          </div>
-          <p class="muted" style="margin-top:6px">
-            ${locked ? '固定来源' : '首选源'}：${prefLabel}${locked ? ' · <span class="muted">用户核心决策 6/17 晚：只关心网易大神的 双倍/大蜡烛/维护</span>' : ` · 兜底源：${source === 'wiki' ? `网易大神 (${neByType[type] || 0})` : `Wiki (${wkByType[type] || 0})`}`}
-          </p>
-        </div>
-      `;
-      }).join('');
-
-      // 单选变更时实时更新"首选/兜底"预览
-      document.querySelectorAll('[name^="src-"]').forEach(radio => {
-        radio.onchange = () => {
-          const type = radio.name.slice(4);
-          config[type] = radio.value;
-          render();   // 重新渲染，刷新 "首选/兜底" 文字
-          // 但会丢失焦点，所以用 querySelector 恢复
-          const sel = document.querySelector(`input[name="src-${type}"][value="${radio.value}"]`);
-          if (sel) sel.checked = true;
-        };
-      });
-    }
-
-    function countByType(events) {
-      const m = {};
-      for (const e of events) m[e.type] = (m[e.type] || 0) + 1;
-      return m;
-    }
-
-    document.querySelector('#save').onclick = async () => {
-      const btn = document.querySelector('#save');
-      btn.disabled = true;
-      btn.textContent = '保存中…';
-      const status = document.querySelector('#status');
-      status.textContent = '正在写入 data/source-config.json…';
-      try {
-        const res = await fetch('/api/settings', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ config }),
-        });
-        const data = await res.json();
-        if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
-        status.textContent = `✅ 已保存到 source-config.json（commit ${h((data.commit || '').slice(0, 7))}）。下次 mergeEvents 生效。`;
-      } catch (err) {
-        status.textContent = `❌ 保存失败：${h(err.message)}`;
-      } finally {
-        btn.disabled = false;
-        btn.textContent = '保存设置';
+            <div class="row" style="margin-top:10px">
+              ${Object.entries(TYPE_LABELS).map(([type, label]) => `<span class="tag ${h(type)}">${h(label)} · ${counts[type] || 0}</span>`).join('')}
+            </div>
+          </div>`;
       }
-    };
 
-    load();
+      function render() {
+        const neByType = countByType(neteaseEvents);
+        const wkByType = countByType(wikiEvents);
+        document.querySelector('#sources').innerHTML =
+          sourceCard('网易大神', 'netease', neteaseEvents, neByType) +
+          sourceCard('Wiki 活动日历', 'wiki', wikiEvents, wkByType);
+
+        document.querySelector('#types').innerHTML = Object.entries(TYPE_LABELS).map(([type, label]) => {
+          const locked = LOCKED_TYPES.has(type);
+          const source = locked ? 'netease' : (config[type] || 'wiki');
+          const sourceControls = locked
+            ? '<span class="pill locked"><span>锁定网易大神</span></span>'
+            : `
+              <label class="pill"><input type="radio" name="src-${h(type)}" value="netease" ${source === 'netease' ? 'checked' : ''}><span>网易大神</span></label>
+              <label class="pill"><input type="radio" name="src-${h(type)}" value="wiki" ${source === 'wiki' ? 'checked' : ''}><span>Wiki</span></label>
+            `;
+          const primary = source === 'wiki' ? `Wiki (${wkByType[type] || 0})` : `网易大神 (${neByType[type] || 0})`;
+          const fallback = source === 'wiki' ? `网易大神 (${neByType[type] || 0})` : `Wiki (${wkByType[type] || 0})`;
+          return `
+            <div class="card">
+              <div class="top">
+                <div>
+                  <strong>${h(label)}</strong>
+                  <span class="muted" style="margin-left:6px">${h(TYPE_DESC[type] || '')}</span>
+                  ${locked ? '<span class="tag maintenance" style="margin-left:6px">锁定</span>' : ''}
+                </div>
+                <div class="row">${sourceControls}</div>
+              </div>
+              <p class="muted">${locked ? '固定来源' : '首选源'}：${h(primary)}${locked ? '' : ` · 兜底源：${h(fallback)}`}</p>
+            </div>`;
+        }).join('');
+
+        document.querySelectorAll('[name^="src-"]').forEach(radio => {
+          radio.onchange = () => {
+            config[radio.name.slice(4)] = radio.value;
+            render();
+          };
+        });
+      }
+
+      document.querySelector('#save').onclick = async () => {
+        const btn = document.querySelector('#save');
+        btn.disabled = true;
+        btn.textContent = '保存中...';
+        try {
+          const data = await fetchJSON('/api/settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ config }),
+          });
+          showToast(`已保存${data.commit ? `：${data.commit.slice(0, 7)}` : ''}`, 'success');
+          document.querySelector('#status').textContent = '已保存到 source-config.json，下次 mergeEvents 生效。';
+        } catch (err) {
+          showToast(err.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = '保存设置';
+        }
+      };
+
+      load();
+    });
   </script>
 </body>
 </html>

@@ -475,9 +475,14 @@ function buildReminderEvents(events, options = {}) {
     //   - 否则按 reminder.end 提前
     if (event.type !== 'maintenance' || endOnly.has(event.type)) {
       // end 提醒 SUMMARY 直接带标题，方便 iOS 列表一眼看出
+      const endSummary = summary.replace(/^【[^】]+】/, '');
       const endTitle = event.type === 'traveling_spirit'
-        ? `${summary} 即将离开`
-        : `${summary} 即将结束`;
+        ? `【先祖离开】${endSummary}`
+        : event.type === 'season'
+          ? `【季节结束】${endSummary} 明天就要结束了`
+          : event.type === 'activity'
+            ? `【活动结束】${endSummary}`
+            : `${summary} 即将结束`;
       const { endStart, leadLabel } = computeEndReminderStart(end, reminder);
       const endDesc = buildDescription([
         `标题: ${summary}`,

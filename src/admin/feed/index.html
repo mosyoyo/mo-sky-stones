@@ -5,16 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>公告审核</title>
   <link rel="stylesheet" href="/src/admin/style.css">
+  <script src="/src/admin/nav.js" defer></script>
+  <script src="/src/admin/common.js" defer></script>
 </head>
 <body>
   <main>
-    <nav class="shell-nav">
-      <a href="/">订阅</a>
-      <a class="active" href="/src/admin/feed/">公告</a>
-      <a href="/src/admin/events/">事件</a>
-      <a href="/src/admin/sync/">同步</a>
-      <a href="/src/admin/settings/">数据源</a>
-    </nav>
     <header class="hero">
       <div>
         <h1>公告审核</h1>
@@ -147,6 +142,7 @@
       document.querySelector('#typeFilter').onchange = render;
       document.querySelector('#statusFilter').onchange = render;
       document.querySelector('#hideOther').onchange = render;
+      document.querySelector('#hideArrived').onchange = render;
       document.querySelector('#pageSize').onchange = () => {
         currentPage = 1;
         render();
@@ -351,7 +347,11 @@
         body: JSON.stringify({ items: [...drafts.values()] }),
       });
       const data = await res.json();
-      if (!data.ok) alert(data.error || '保存失败');
+      if (!data.ok) {
+        window.AdminCommon?.showToast?.(data.error || '保存失败', 'error');
+      } else {
+        window.AdminCommon?.showToast?.('已提交公告改动', 'success');
+      }
       drafts.clear();
       btn.textContent = '统一提交';
       await load();
