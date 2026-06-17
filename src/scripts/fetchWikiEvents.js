@@ -16,7 +16,8 @@ const RE_EVENT_LINE = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)\s+(\d{1,2}\.\d{1,2})\s
 const RE_PLAIN = /^(.+?)\s{2,}(\d{1,2}\.\d{1,2})\s*[-–]\s*(\d{1,2}\.\d{1,2})/;
 
 // 「最近活动」版块的边界
-const SECTION_START = '**最近活动**';
+// 注意：HTML 里是 <b>最近活动</b>，但解析前会先做 HTML→markdown 转换，所以这里就用纯文字
+const SECTION_START = '最近活动';
 // 「◀YYYY年▶」= 当前年份（活动日历页是真实年份；首页是占位符「◀2333年▶」）
 const RE_YEAR = /◀(\d{4})年▶/;
 
@@ -52,6 +53,50 @@ function fetchHTML(url) {
     });
 }
 
+// 把 Wiki「活动日历」页的 HTML 表格转换为 markdown 风格文本
+// 目的：让现有正则（依赖 [text](url) 格式）能正常匹配
+// 例：
+//   <a href="/sky/狂欢季" title="狂欢季">奇妙之旅：狂欢季</a>&#160;&#160;04.23 - 07.08
+//   <a href="/sky/端午节">端午节</a>&nbsp;&nbsp;06.19 - 07.02<br />
+// 转换为：
+//   [奇妙之旅：狂欢季](https://wiki.biligame.com/sky/狂欢季)  04.23 - 07.08
+//   [端午节](https://wiki.biligame.com/sky/端午节)  06.19 - 07.02
+function htmlToMarkdownLike(html) {
+  // 1. 提取 <a> 标签里的纯文本和 href（避免 href 中含属性顺序差异影响正则）
+  //    <a href="URL" title="...">TEXT</a>  →  [TEXT](https://wiki.biligame.comURL)
+  let s = html.replace(
+    /<a\s+[^>]*?href="([^"]+)"[^>]*>([^<]*)<\/a>/gi,
+    (_m, href, text) => {
+      // 路径 href：补全成绝对 URL（处理以 / 开头的相对路径）
+      const fullUrl = href.startsWith('http')
+        ? href
+        : `https://wiki.biligame.com${href.startsWith('/') ? '' : '/'}${href}`;
+      // 清理 text 里的空白
+      const cleanText = text.trim();
+      return `[${cleanText}](${fullUrl})`;
+    }
+  );
+  // 2. HTML 实体 → 字符
+  s = s
+    .replace(/&#160;/g, '  ')   // 不间断空格 → 两个普通空格
+    .replace(/&nbsp;/g, '  ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+  // 3. <br />、<br> → 换行
+  s = s.replace(/<br\s*\/?>/gi, '\n');
+  // 4. 表格标签 → 换行（让 <td> 里的内容分行处理）
+  s = s
+    .replace(/<\/tr>/gi, '\n')
+    .replace(/<\/td>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
+    .replace(/<\/b>/gi, '\n');
+  // 5. 去掉残留 HTML 标签
+  s = s.replace(/<[^>]+>/g, '');
+  return s;
+}
+
 function parseMonthDay(year, mmdd) {
   // mmdd = "04.23" → "2026-04-23"
   const parts = mmdd.split('.');
@@ -78,6 +123,9 @@ function detectType(title) {
 // ─── 主解析 ──────────────────────────────────────────────────────────────
 
 function parseCalendarHTML(html) {
+  // 0. 先把 HTML 转成 markdown 风格文本（这样现成的正则才能匹配）
+  html = htmlToMarkdownLike(html);
+
   // 1. 找「最近活动」版块
   const startIdx = html.indexOf(SECTION_START);
   if (startIdx < 0) {
@@ -264,4 +312,11 @@ async function main() {
   }
 }
 
-main();
+if (require.main === module) {
+  main().catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+}
+
+module.exports = { main };
