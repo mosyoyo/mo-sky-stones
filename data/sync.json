@@ -1,5 +1,41 @@
 [
   {
+    "time": "2026-06-17T07:24:25.611Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 38 条，反查关闭 0 条，清理过期 37 条",
+    "addedEvents": 0,
+    "autoApproved": 38,
+    "droppedFromEvents": 0,
+    "droppedExpired": 37
+  },
+  {
+    "time": "2026-06-17T07:21:46.455Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 38 条，反查关闭 0 条",
+    "addedEvents": 0,
+    "autoApproved": 38,
+    "droppedFromEvents": 0
+  },
+  {
+    "time": "2026-06-17T07:14:30.353Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 0 条，反查关闭 0 条",
+    "addedEvents": 0,
+    "autoApproved": 0,
+    "droppedFromEvents": 0
+  },
+  {
+    "time": "2026-06-17T07:12:04.975Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 0 条，反查关闭 0 条",
+    "addedEvents": 0,
+    "autoApproved": 0,
+    "droppedFromEvents": 0
+  },
+  {
+    "time": "2026-06-17T07:11:49.573Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 0 条，反查关闭 0 条",
+    "addedEvents": 0,
+    "autoApproved": 0,
+    "droppedFromEvents": 0
+  },
+  {
     "time": "2026-06-17T07:02:41.682Z",
     "message": "解析公告 301 条，过滤无时间 0 条，自动过审 0 条，反查关闭 0 条",
     "addedEvents": 0,

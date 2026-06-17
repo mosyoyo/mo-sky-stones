@@ -126,18 +126,40 @@ function main() {
   }
 
   // === 自动过审规则（无需人工 review） ===
-  // 仅大蜡烛 / 双倍 / 复刻 这三类「游戏内固定周期事件」自动过
-  // 活动 / 季节 / 维护 / 其他：全部走人工审阅
-  // 原因：活动有"预告"、"预热"、"线下嘉年华"等多种变种；维护 9h 补偿期容易进重复 feed
-  const AUTO_APPROVE_TYPES = new Set(['candle_heap', 'bonus', 'traveling_spirit']);
+  // - 大蜡烛 / 双倍 / 复刻：游戏内固定周期事件，规则简单可自动
+  // - 维护：只通过「纯更新时间公告」（标题含「更新时间公告」且不含补偿/延迟/特刊/AR/活动等变种）
+  // 活动 / 季节：保持人工审阅（活动变种多，季节开启/结束边界模糊）
+  const MAINTENANCE_SKIP_KEYWORDS = [
+    '维护补偿', '延迟开服', '推迟', '王国特刊', 'AR功能',
+    '运营活动', '更新内容公告', '纪念品', '向导',
+  ];
   for (const feed of parsedFeeds) {
     if (feed.status !== 'pending' || !feed.parsedResult) continue;
     const p = feed.parsedResult;
     if (p.type === 'other' || !p.start || !p.end) continue;
-    if (!AUTO_APPROVE_TYPES.has(p.type)) continue;
-    if (!eventMap.has(feed.id)) {
-      feed.status = 'approved';
-      eventMap.set(feed.id, eventFromFeed(feed, p));
+    let shouldApprove = false;
+    if (p.type === 'candle_heap' || p.type === 'bonus' || p.type === 'traveling_spirit') {
+      shouldApprove = true;
+    } else if (p.type === 'maintenance') {
+      const title = feed.title || '';
+      // 纯维护公告：必须含「更新时间公告」+ 命中任何一个补偿/延迟/活动变种关键词就跳过
+      const hasSkip = MAINTENANCE_SKIP_KEYWORDS.some(k => title.includes(k));
+      const isPure = title.includes('更新时间公告') && !hasSkip;
+      if (isPure) shouldApprove = true;
+    }
+    if (shouldApprove) {
+      const existing = eventMap.get(feed.id);
+      if (existing) {
+        // 已有 event（历史 enabled=false）：直接翻 enabled=true + 同步最新 parsed
+        existing.enabled = true;
+        existing.type = p.type;
+        existing.title = p.title || existing.title;
+        existing.start = p.start;
+        existing.end = p.end;
+      } else {
+        feed.status = 'approved';
+        eventMap.set(feed.id, eventFromFeed(feed, p));
+      }
       autoApprovedCount++;
     }
   }
@@ -162,6 +184,16 @@ function main() {
   }
   const finalEvents = allEvents.filter(e => e.type !== 'traveling_spirit' || keptIds.has(e.id));
 
+  // 清理已过期 enabled 事件（end < 现在）—— ICS 唔再显示，iOS 也不会堆积历史
+  const now = Date.now();
+  let droppedExpired = 0;
+  for (const e of finalEvents) {
+    if (e.enabled && e.end && new Date(e.end).getTime() < now) {
+      e.enabled = false;
+      droppedExpired++;
+    }
+  }
+
   // === 反向校验：events.json 里 enabled=true 但对应 feed 已被判 other → 关掉 ===
   // 原因：历史上可能手动 enabled 过，但现在解析规则发现呢条系线下/单日/已结束
   let droppedFromEvents = 0;
@@ -179,12 +211,13 @@ function main() {
   writeJSON('feeds.json', parsedFeeds);
   writeJSON('events.json', finalEvents);
   appendSyncLog({
-    message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条，自动过审 ${autoApprovedCount} 条，反查关闭 ${droppedFromEvents} 条`,
+    message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条，自动过审 ${autoApprovedCount} 条，反查关闭 ${droppedFromEvents} 条，清理过期 ${droppedExpired} 条`,
     addedEvents: parsedCount,
     autoApproved: autoApprovedCount,
     droppedFromEvents,
+    droppedExpired,
   });
-  console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}, autoApproved: ${autoApprovedCount}, droppedFromEvents: ${droppedFromEvents}`);
+  console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}, autoApproved: ${autoApprovedCount}, droppedFromEvents: ${droppedFromEvents}, droppedExpired: ${droppedExpired}`);
 }
 
 if (require.main === module) main();
