@@ -601,5 +601,14 @@
     "start": "2025-06-18T16:00:00.000Z",
     "end": "2025-06-19T16:00:00.000Z",
     "sourceFeedId": "684e0d09378e9113eb7ed695"
+  },
+  {
+    "id": "maintenance-6833cb2733d7431dfca66d46",
+    "enabled": false,
+    "type": "maintenance",
+    "title": "【维护】维护更新",
+    "start": "2025-05-28T16:00:00.000Z",
+    "end": "2025-05-29T16:00:00.000Z",
+    "sourceFeedId": "6833cb2733d7431dfca66d46"
   }
 ]
