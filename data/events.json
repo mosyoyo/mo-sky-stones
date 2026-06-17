@@ -11,7 +11,7 @@
   {
     "id": "activity-6a2cc7b5ea7f101c5108ea3e",
     "sourceFeedId": "6a2cc7b5ea7f101c5108ea3e",
-    "enabled": false,
+    "enabled": true,
     "type": "activity",
     "title": "【活动】端午节",
     "start": "2026-06-18T16:00:00.000Z",
