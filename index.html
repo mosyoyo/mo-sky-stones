@@ -8,13 +8,12 @@
     :root {
       color-scheme: light;
       --bg: #f5f5f7;
-      --panel: rgba(255, 255, 255, .82);
+      --card: #fff;
       --text: #1d1d1f;
       --muted: #6e6e73;
-      --line: rgba(0, 0, 0, .08);
-      --blue: #0071e3;
-      --blue-soft: #e8f2ff;
-      --shadow: 0 22px 60px rgba(0, 0, 0, .08);
+      --line: rgba(60, 60, 67, .16);
+      --blue: #007aff;
+      --green: #34c759;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
@@ -23,334 +22,328 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 50% -8%, rgba(255, 255, 255, .98) 0, rgba(255, 255, 255, .42) 34%, rgba(245, 245, 247, 0) 62%),
-        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 60%, #eeeeef 100%);
+      background: var(--bg);
     }
     main {
-      width: min(980px, 100%);
+      width: min(760px, 100%);
       margin: 0 auto;
-      padding: 64px 18px 42px;
+      padding: 28px 14px 24px;
     }
-    .hero {
-      max-width: 720px;
-      margin: 0 auto 30px;
-      text-align: center;
-    }
-    .eyebrow {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 15px;
+    header {
+      padding: 6px 4px 16px;
     }
     h1 {
       margin: 0;
-      font-size: clamp(38px, 7vw, 70px);
-      line-height: 1.04;
+      font-size: clamp(30px, 7vw, 48px);
+      line-height: 1.08;
       letter-spacing: 0;
-      font-weight: 740;
+      font-weight: 760;
     }
     .lead {
-      max-width: 620px;
-      margin: 18px auto 0;
-      color: #515154;
-      font-size: 18px;
-      line-height: 1.55;
-    }
-    section {
-      padding: 26px;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    h2 {
-      margin: 0;
-      font-size: 18px;
-      letter-spacing: 0;
-    }
-    .hint {
-      margin: 6px 0 0;
+      margin: 8px 0 0;
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.65;
+      font-size: 15px;
+      line-height: 1.45;
     }
-    .option-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+    .group-label {
+      margin: 0;
+      padding: 0 16px 7px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: .04em;
     }
-    .option-card {
+    .settings {
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, .04);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .05);
+    }
+    .item {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
-      gap: 14px;
-      min-height: 88px;
-      padding: 16px;
-      border: 1px solid rgba(0, 0, 0, .08);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, .72);
+      min-height: 54px;
+      padding: 9px 12px 9px 16px;
       cursor: pointer;
-      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease;
       user-select: none;
     }
-    .option-card.no-end {
-      grid-template-columns: 1fr;
+    .item + .item {
+      border-top: 1px solid var(--line);
     }
-    .option-card:hover {
-      transform: translateY(-1px);
-      border-color: rgba(0, 113, 227, .24);
-      box-shadow: 0 14px 34px rgba(0, 113, 227, .08);
-    }
-    .option-card.is-on {
-      border-color: rgba(0, 113, 227, .42);
-      background: linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%);
-      box-shadow: 0 16px 44px rgba(0, 113, 227, .12);
-    }
-    .option-title {
+    .item-title {
       display: flex;
       align-items: center;
       gap: 10px;
       min-width: 0;
-      font-size: 17px;
-      font-weight: 680;
+      font-size: 16px;
+      font-weight: 620;
     }
-    .mark {
-      display: inline-grid;
+    .checkmark {
+      display: grid;
       place-items: center;
-      flex: 0 0 auto;
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: #eef0f3;
       color: transparent;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
+      flex: 0 0 auto;
     }
-    .option-card.is-on .mark {
+    .item.is-on .checkmark {
       background: var(--blue);
       color: #fff;
     }
-    .option-desc {
-      margin: 8px 0 0 34px;
+    .item-note {
+      margin: 3px 0 0 32px;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
+      font-size: 12px;
+      line-height: 1.35;
     }
-    .end-toggle {
-      display: inline-flex;
+    .end-control {
+      display: flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
-      min-width: 112px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: #f5f5f7;
-      color: #424245;
+      min-width: 96px;
+      justify-content: flex-end;
+      color: var(--muted);
       font-size: 13px;
       white-space: nowrap;
     }
-    .end-toggle input,
-    .bulk-toggle input {
-      width: 18px;
-      height: 18px;
+    .item:not(.is-on) .end-control {
+      opacity: .45;
+    }
+    input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
       margin: 0;
-      accent-color: var(--blue);
+      accent-color: var(--green);
     }
-    .option-card:not(.is-on) .end-toggle {
-      opacity: .48;
-    }
-    .bulk-row {
+    .bulk {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 14px;
-      margin: 14px 0 18px;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, .62);
-    }
-    .bulk-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: #424245;
+      gap: 12px;
+      margin-top: 10px;
+      padding: 11px 14px 11px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .72);
+      color: var(--muted);
       font-size: 14px;
+    }
+    .bulk label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
       cursor: pointer;
       white-space: nowrap;
     }
-    .linkbox {
+    .link-panel {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .05);
+    }
+    .url-row {
       display: grid;
-      gap: 10px;
-      margin-top: 18px;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 8px;
+      align-items: center;
     }
     input[type="text"] {
       width: 100%;
       min-width: 0;
-      padding: 14px 16px;
-      border: 1px solid rgba(0, 0, 0, .08);
-      border-radius: 16px;
-      background: #fff;
-      color: var(--text);
-      font-size: 14px;
-    }
-    .row {
-      display: flex;
-      gap: 10px;
+      height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f5f5f7;
+      color: #3a3a3c;
+      font-size: 13px;
     }
     button,
     a.button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 42px;
+      min-width: 78px;
       border: 0;
       border-radius: 999px;
       background: var(--blue);
       color: #fff;
-      padding: 12px 20px;
+      padding: 0 16px;
       font: inherit;
       font-size: 15px;
-      text-align: center;
+      font-weight: 650;
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
     }
-    .ghost {
-      background: var(--blue-soft);
+    a.button {
+      background: #e9f2ff;
       color: #0066cc;
     }
-    .preview {
-      margin: 0;
+    .summary {
+      margin: 8px 2px 0;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
+      font-size: 12px;
+      line-height: 1.45;
     }
-    @media (max-width: 720px) {
-      main { padding-top: 46px; }
-      section {
-        padding: 18px;
-        border-radius: 22px;
+    @media (max-width: 640px) {
+      main {
+        padding: 14px 10px 14px;
       }
-      .hero { margin-bottom: 24px; }
-      .lead { font-size: 16px; }
-      .section-head,
-      .bulk-row {
-        align-items: stretch;
-        flex-direction: column;
+      header {
+        padding-bottom: 10px;
       }
-      .option-grid { grid-template-columns: 1fr; }
-      .option-card {
-        min-height: 80px;
-        padding: 14px;
+      h1 {
+        font-size: 30px;
       }
-      .end-toggle { min-width: 104px; }
-      .row { flex-direction: column; }
+      .lead {
+        font-size: 13px;
+      }
+      .group-label {
+        padding-left: 10px;
+      }
+      .settings {
+        border-radius: 16px;
+      }
+      .item {
+        min-height: 47px;
+        padding: 7px 10px 7px 12px;
+      }
+      .item-title {
+        font-size: 15px;
+      }
+      .item-note {
+        display: none;
+      }
+      .end-control {
+        min-width: 86px;
+        font-size: 12px;
+      }
+      .bulk {
+        margin-top: 8px;
+        padding: 9px 10px 9px 12px;
+        font-size: 12px;
+      }
+      .link-panel {
+        margin-top: 10px;
+        padding: 10px;
+      }
+      .url-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      input[type="text"] {
+        grid-column: 1 / -1;
+        height: 38px;
+      }
+      button,
+      a.button {
+        width: 100%;
+        height: 38px;
+        min-width: 0;
+      }
+      .summary {
+        font-size: 11px;
+      }
     }
   </style>
 </head>
 <body>
   <main>
-    <div class="hero">
-      <p class="eyebrow">Sky: Children of the Light</p>
+    <header>
       <h1>光遇日历订阅</h1>
-      <p class="lead">点亮想关注的内容，复制链接后添加到手机日历。需要少打扰的项目，勾上“仅结束”。</p>
+      <p class="lead">选好内容，复制链接，添加到手机日历。</p>
+    </header>
+
+    <p class="group-label">订阅内容</p>
+    <section class="settings" id="options">
+      <div class="item is-on" data-type="red">
+        <div>
+          <div class="item-title"><span class="checkmark">✓</span><span>红石</span></div>
+          <p class="item-note">每天最后一场。</p>
+        </div>
+      </div>
+      <div class="item" data-type="black">
+        <div>
+          <div class="item-title"><span class="checkmark">✓</span><span>黑石</span></div>
+          <p class="item-note">每天最后一场。</p>
+        </div>
+      </div>
+      <div class="item is-on" data-type="traveling_spirit">
+        <div>
+          <div class="item-title"><span class="checkmark">✓</span><span>旅行先祖</span></div>
+          <p class="item-note">默认仅在离开前提醒。</p>
+        </div>
+        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="traveling_spirit" checked></label>
+      </div>
+      <div class="item is-on" data-type="season">
+        <div>
+          <div class="item-title"><span class="checkmark">✓</span><span>季节</span></div>
+          <p class="item-note">默认仅在结束前提醒。</p>
+        </div>
+        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="season" checked></label>
+      </div>
+      <div class="item is-on" data-type="activity">
+        <div>
+          <div class="item-title"><span class="checkmark">✓</span><span>活动</span></div>
+          <p class="item-note">默认仅在结束前提醒。</p>
+        </div>
+        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="activity" checked></label>
+      </div>
+      <div class="item is-on" data-type="bonus">
+        <div>
+          <div class="item-title"><span class="checkmark">✓</span><span>双倍</span></div>
+          <p class="item-note">连续事件。</p>
+        </div>
+        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="bonus"></label>
+      </div>
+      <div class="item is-on" data-type="candle_heap">
+        <div>
+          <div class="item-title"><span class="checkmark">✓</span><span>大蜡烛</span></div>
+          <p class="item-note">连续事件。</p>
+        </div>
+        <label class="end-control"><span>仅结束</span><input type="checkbox" data-endonly="candle_heap"></label>
+      </div>
+      <div class="item is-on" data-type="maintenance">
+        <div>
+          <div class="item-title"><span class="checkmark">✓</span><span>维护</span></div>
+          <p class="item-note">停服升级维护。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="bulk">
+      <span>带“仅结束”的项目</span>
+      <label><span>全部仅结束</span><input id="endOnlyAll" type="checkbox"></label>
     </div>
 
-    <section>
-      <div class="section-head">
-        <div>
-          <h2>订阅内容</h2>
-          <p class="hint">点击卡片选择订阅，右侧勾选表示只保留结束提醒。</p>
-        </div>
-        <p class="preview" id="preview"></p>
-      </div>
-
-      <div class="option-grid" id="options">
-        <div class="option-card no-end is-on" data-type="red">
-          <div>
-            <div class="option-title"><span class="mark">✓</span><span>红石</span></div>
-            <p class="option-desc">每天只取最后一场红石。</p>
-          </div>
-        </div>
-        <div class="option-card no-end is-on" data-type="black">
-          <div>
-            <div class="option-title"><span class="mark">✓</span><span>黑石</span></div>
-            <p class="option-desc">每天只取最后一场黑石。</p>
-          </div>
-        </div>
-        <div class="option-card is-on" data-type="traveling_spirit">
-          <div>
-            <div class="option-title"><span class="mark">✓</span><span>旅行先祖</span></div>
-            <p class="option-desc">复刻开始与离开提醒。</p>
-          </div>
-          <label class="end-toggle"><span>仅结束</span><input type="checkbox" data-endonly="traveling_spirit"></label>
-        </div>
-        <div class="option-card is-on" data-type="season">
-          <div>
-            <div class="option-title"><span class="mark">✓</span><span>季节</span></div>
-            <p class="option-desc">季节开始与结束提醒。</p>
-          </div>
-          <label class="end-toggle"><span>仅结束</span><input type="checkbox" data-endonly="season"></label>
-        </div>
-        <div class="option-card is-on" data-type="activity">
-          <div>
-            <div class="option-title"><span class="mark">✓</span><span>活动</span></div>
-            <p class="option-desc">节日、运营活动和限时内容。</p>
-          </div>
-          <label class="end-toggle"><span>仅结束</span><input type="checkbox" data-endonly="activity"></label>
-        </div>
-        <div class="option-card is-on" data-type="bonus">
-          <div>
-            <div class="option-title"><span class="mark">✓</span><span>双倍</span></div>
-            <p class="option-desc">双倍心火、爱心、烛火等。</p>
-          </div>
-          <label class="end-toggle"><span>仅结束</span><input type="checkbox" data-endonly="bonus"></label>
-        </div>
-        <div class="option-card is-on" data-type="candle_heap">
-          <div>
-            <div class="option-title"><span class="mark">✓</span><span>大蜡烛</span></div>
-            <p class="option-desc">大蜡烛堆相关限时活动。</p>
-          </div>
-          <label class="end-toggle"><span>仅结束</span><input type="checkbox" data-endonly="candle_heap"></label>
-        </div>
-        <div class="option-card no-end" data-type="maintenance">
-          <div>
-            <div class="option-title"><span class="mark">✓</span><span>维护</span></div>
-            <p class="option-desc">停服升级维护公告。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bulk-row">
-        <p class="preview">批量控制上面带“仅结束”的项目。</p>
-        <label class="bulk-toggle"><span>全部仅结束</span><input id="endOnlyAll" type="checkbox"></label>
-      </div>
-
-      <div class="linkbox">
+    <section class="link-panel">
+      <div class="url-row">
         <input id="url" type="text" readonly>
-        <div class="row">
-          <button id="copy" type="button">复制链接</button>
-          <a id="open" class="button ghost" href="#">打开订阅</a>
-        </div>
+        <button id="copy" type="button">复制</button>
+        <a id="open" class="button" href="#">打开</a>
       </div>
+      <p class="summary" id="summary"></p>
     </section>
   </main>
 
   <script>
-    const cards = [...document.querySelectorAll('.option-card')];
+    const items = [...document.querySelectorAll('.item')];
     const endOnlyChecks = [...document.querySelectorAll('input[data-endonly]')];
     const endOnlyAll = document.querySelector('#endOnlyAll');
     const urlInput = document.querySelector('#url');
     const openLink = document.querySelector('#open');
-    const preview = document.querySelector('#preview');
+    const summary = document.querySelector('#summary');
 
     function selectedTypes() {
-      return cards.filter(card => card.classList.contains('is-on')).map(card => card.dataset.type);
+      return items.filter(item => item.classList.contains('is-on')).map(item => item.dataset.type);
     }
 
     function selectedEndOnly() {
@@ -375,14 +368,14 @@
       const value = `${location.origin}/calendar.ics?${params.toString()}`;
       urlInput.value = value;
       openLink.href = value;
-      preview.textContent = `已选 ${types.length} 项 · 仅结束 ${endOnly.length} 项`;
+      summary.textContent = `已选 ${types.length} 项，其中 ${endOnly.length} 项仅结束提醒。`;
       syncEndOnlyAll();
     }
 
-    cards.forEach(card => {
-      card.addEventListener('click', event => {
-        if (event.target.closest('.end-toggle')) return;
-        card.classList.toggle('is-on');
+    items.forEach(item => {
+      item.addEventListener('click', event => {
+        if (event.target.closest('.end-control')) return;
+        item.classList.toggle('is-on');
         update();
       });
     });
