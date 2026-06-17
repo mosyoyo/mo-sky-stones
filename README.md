@@ -100,7 +100,8 @@ Settings -> Environment variables
   "githubToken": "github_pat_xxx",
   "githubOwner": "mosyoyo",
   "githubRepo": "mo-sky-stones",
-  "githubBranch": "main"
+  "githubBranch": "main",
+  "webAnalyticsToken": "Cloudflare Web Analytics token，可选"
 }
 ```
 
@@ -112,6 +113,7 @@ githubToken     后台写入 data/*.json 时使用的 GitHub token
 githubOwner     GitHub 用户名或组织名，这里是 mosyoyo
 githubRepo      仓库名，这里是 mo-sky-stones
 githubBranch    分支名，一般是 main
+webAnalyticsToken  Cloudflare Web Analytics 的 token，填了以后首页会自动加载统计脚本
 ```
 
 也兼容分散变量：
@@ -122,6 +124,8 @@ GITHUB_TOKEN
 GITHUB_OWNER
 GITHUB_REPO
 GITHUB_BRANCH
+CF_WEB_ANALYTICS_TOKEN
+CLOUDFLARE_WEB_ANALYTICS_TOKEN
 ```
 
 新部署建议只用 `APP_CONFIG`，少填几次，不容易漏。

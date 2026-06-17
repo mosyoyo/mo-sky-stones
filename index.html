@@ -165,7 +165,7 @@
       footer { display: grid; justify-items: center; text-align: center; }
     }
   </style>
-  <!-- Cloudflare Web Analytics: paste the dashboard snippet or set __CF_WEB_ANALYTICS_TOKEN__ below -->
+  <script src="/analytics.js" defer></script>
 </head>
 <body>
   <main>
@@ -189,15 +189,6 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
-    window.__CF_WEB_ANALYTICS_TOKEN__ = window.__CF_WEB_ANALYTICS_TOKEN__ || '';
-    if (window.__CF_WEB_ANALYTICS_TOKEN__) {
-      const beacon = document.createElement('script');
-      beacon.defer = true;
-      beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-      beacon.setAttribute('data-cf-beacon', JSON.stringify({ token: window.__CF_WEB_ANALYTICS_TOKEN__ }));
-      document.head.appendChild(beacon);
-    }
-
     const host = 'sky-stones-bni.pages.dev';
     const query = 'types=traveling_spirit,season,activity,bonus,candle_heap,maintenance&endOnly=traveling_spirit,season,activity';
     const httpsUrl = `https://${host}/calendar.ics?${query}`;
