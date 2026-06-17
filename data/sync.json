@@ -1,5 +1,25 @@
 [
   {
+    "time": "2026-06-17T06:52:38.875Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 0 条，反查关闭 0 条",
+    "addedEvents": 0,
+    "autoApproved": 0,
+    "droppedFromEvents": 0
+  },
+  {
+    "time": "2026-06-17T06:51:47.100Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 0 条，反查关闭 1 条",
+    "addedEvents": 0,
+    "autoApproved": 0,
+    "droppedFromEvents": 1
+  },
+  {
+    "time": "2026-06-17T06:50:25.221Z",
+    "message": "解析公告 301 条，过滤无时间 0 条，自动过审 50 条",
+    "addedEvents": 0,
+    "autoApproved": 50
+  },
+  {
     "time": "2026-06-17T06:27:41.039Z",
     "message": "解析公告 301 条，过滤无时间 25 条",
     "addedEvents": 0

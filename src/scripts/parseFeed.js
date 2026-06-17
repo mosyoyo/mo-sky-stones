@@ -72,7 +72,7 @@ function parseFeed(feed) {
 function eventFromFeed(feed, parsed) {
   return {
     id: `${parsed.type}-${uidPart(feed.id)}`,
-    enabled: false,
+    enabled: feed.status === 'approved',
     type: parsed.type,
     title: parsed.title || feed.title || parsed.type,
     start: parsed.start,
@@ -88,6 +88,7 @@ function main() {
   const parsedFeeds = [];
   let parsedCount = 0;
   let droppedCount = 0;
+  let autoApprovedCount = 0;
 
   for (const feed of feeds) {
     if (feed.raw) {
@@ -124,6 +125,30 @@ function main() {
     }
   }
 
+  // === 自动过审规则（唔需要人工 review） ===
+  // 1. 大蜡烛 / 双倍 / 复刻 / 维护 → 直接过
+  // 2. 活动 → duration ≥ 3 天 + 非线下 → 直接过
+  //    季节 → 唔自动过（季节有「结束」「开启」两类，自动过风险大）
+  // 命中规则 → status=approved，自动入 events.json
+  const AUTO_APPROVE_TYPES = new Set(['candle_heap', 'bonus', 'traveling_spirit', 'maintenance']);
+  for (const feed of parsedFeeds) {
+    if (feed.status !== 'pending' || !feed.parsedResult) continue;
+    const p = feed.parsedResult;
+    if (p.type === 'other' || !p.start || !p.end) continue;
+    const event = { start: p.start, end: p.end };
+    let shouldApprove = false;
+    if (AUTO_APPROVE_TYPES.has(p.type)) {
+      shouldApprove = true;
+    } else if (p.type === 'activity' && isLikelyGameActivity(event) && !isOfflineEvent(feed.title || '', feed.content || '')) {
+      shouldApprove = true;
+    }
+    if (shouldApprove && !eventMap.has(feed.id)) {
+      feed.status = 'approved';
+      eventMap.set(feed.id, eventFromFeed(feed, p));
+      autoApprovedCount++;
+    }
+  }
+
   // 复刻先祖按时间窗口去重：同一时间窗口内只保留最早那条
   const allEvents = [...eventMap.values()];
   const spiritEvents = allEvents.filter(e => e.type === 'traveling_spirit' && e.start);
@@ -144,10 +169,29 @@ function main() {
   }
   const finalEvents = allEvents.filter(e => e.type !== 'traveling_spirit' || keptIds.has(e.id));
 
+  // === 反向校验：events.json 里 enabled=true 但对应 feed 已被判 other → 关掉 ===
+  // 原因：历史上可能手动 enabled 过，但现在解析规则发现呢条系线下/单日/已结束
+  let droppedFromEvents = 0;
+  for (const feed of parsedFeeds) {
+    const ev = eventMap.get(feed.id);
+    if (!ev || !ev.enabled) continue;
+    const p = feed.parsedResult;
+    if (!p) continue;
+    if (p.type === 'other' || !p.start || !p.end) {
+      ev.enabled = false;
+      droppedFromEvents++;
+    }
+  }
+
   writeJSON('feeds.json', parsedFeeds);
   writeJSON('events.json', finalEvents);
-  appendSyncLog({ message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条`, addedEvents: parsedCount });
-  console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}`);
+  appendSyncLog({
+    message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条，自动过审 ${autoApprovedCount} 条，反查关闭 ${droppedFromEvents} 条`,
+    addedEvents: parsedCount,
+    autoApproved: autoApprovedCount,
+    droppedFromEvents,
+  });
+  console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}, autoApproved: ${autoApprovedCount}, droppedFromEvents: ${droppedFromEvents}`);
 }
 
 if (require.main === module) main();
