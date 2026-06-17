@@ -106,5 +106,14 @@
     "title": "【大蜡烛】大蜡烛",
     "start": "2026-01-29T16:00:00.000Z",
     "end": "2026-03-05T15:59:00.000Z"
+  },
+  {
+    "id": "activity-6a2a32c3ea7f101c510235bb",
+    "enabled": false,
+    "type": "activity",
+    "title": "【活动】旅行先祖",
+    "start": "2026-06-10T22:00:00.000Z",
+    "end": "2026-06-15T04:00:00.000Z",
+    "sourceFeedId": "6a2a32c3ea7f101c510235bb"
   }
 ]
