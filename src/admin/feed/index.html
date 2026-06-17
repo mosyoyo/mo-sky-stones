@@ -95,33 +95,10 @@
     let feeds = [];
     let activeId = '';
     let currentPage = 1;
-    const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-    const tz = 'Asia/Shanghai';
-    const formatDate = value => value ? new Date(value).toLocaleDateString('zh-CN', { timeZone: tz }) : '';
-    const formatClock = value => value ? new Date(value).toLocaleTimeString('zh-CN', { timeZone: tz, hour12: false, hour: '2-digit', minute: '2-digit' }) : '';
-    const formatTime = value => value ? `${formatDate(value)} ${formatClock(value)}` : '未识别';
-    const splitLocal = value => {
-      if (!value) return { date: '', time: '' };
-      const date = new Date(value);
-      const parts = new Intl.DateTimeFormat('en-US', {
-        timeZone: tz,
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      }).formatToParts(date);
-      const map = Object.fromEntries(parts.map(part => [part.type, part.value]));
-      return { date: `${map.year}-${map.month}-${map.day}`, time: `${map.hour}:${map.minute}` };
-    };
-    const localToUTC = (datePart, timePart) => {
-      if (!datePart || !timePart) return '';
-      const [year, month, day] = datePart.split('-').map(Number);
-      const [hour, minute] = timePart.split(':').map(Number);
-      return new Date(Date.UTC(year, month - 1, day, hour - 8, minute || 0, 0)).toISOString();
-    };
-    const splitDraft = value => splitLocal(value);
+    const h = value => window.AdminCommon.h(value);
+    const formatTime = value => window.AdminCommon.formatFullDate(value, '未识别');
+    const splitDraft = value => window.AdminCommon.splitLocal(value);
+    const localToUTC = (datePart, timePart) => window.AdminCommon.localToUTC(datePart, timePart);
     async function load() {
       const box = document.querySelector('#list');
       box.innerHTML = '<p class="muted">正在读取公告...</p>';
@@ -356,8 +333,10 @@
       btn.textContent = '统一提交';
       await load();
     }
-    document.querySelector('#commit').onclick = commitDrafts;
-    load();
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('#commit').onclick = commitDrafts;
+      load();
+    });
   </script>
 </body>
 </html>
