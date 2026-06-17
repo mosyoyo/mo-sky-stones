@@ -22,7 +22,7 @@
     main { max-width: 920px; margin: 0 auto; padding: 72px 20px 44px; }
     .hero { text-align: center; margin: 0 auto 34px; max-width: 720px; }
     .eyebrow { color: #6e6e73; font-size: 15px; margin: 0 0 12px; }
-    h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.02; letter-spacing: 0; margin: 0; font-weight: 700; }
+    h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.02; letter-height: 0; margin: 0; font-weight: 700; }
     .lead { color: #515154; font-size: 19px; line-height: 1.55; margin: 18px auto 0; max-width: 620px; }
     section {
       background: rgba(255,255,255,.82);
@@ -35,25 +35,66 @@
     .group { display: grid; gap: 14px; margin-bottom: 18px; }
     .group h2 { margin: 0; font-size: 16px; }
     .group h3 { margin: 8px 0 0; font-size: 14px; color: #515154; font-weight: 500; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
-    label {
-      display: flex;
+    /* 选项卡 */
+    .tabs { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tab {
+      position: relative;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-      min-height: 52px;
-      padding: 13px 15px;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 18px;
       background: #f5f5f7;
       border: 1px solid rgba(0,0,0,.06);
-      border-radius: 16px;
+      border-radius: 999px;
       font-size: 15px;
-      color: #1d1d1f;
+      cursor: pointer;
+      user-select: none;
+      transition: all .15s ease;
     }
-    .mode label { justify-content: space-between; }
-    .master { background: #e8f2ff; border-color: rgba(0,113,227,.25); }
-    input[type="checkbox"] { width: 19px; height: 19px; accent-color: #0071e3; }
+    .tab:hover { background: #ececef; }
+    .tab.is-on {
+      background: #0071e3;
+      color: #fff;
+      border-color: #0071e3;
+      box-shadow: 0 4px 14px rgba(0,113,227,.28);
+    }
+    .tab .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(0,0,0,.18);
+    }
+    .tab.is-on .dot { background: #fff; }
+    /* 仅结束时提醒的标签下拉内容 */
+    .tab-wrap { position: relative; }
+    .tab-wrap .dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      z-index: 10;
+      display: none;
+      min-width: 240px;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.1);
+      border-radius: 18px;
+      box-shadow: 0 18px 44px rgba(0,0,0,.14);
+    }
+    .tab-wrap.open .dropdown { display: block; }
+    .dropdown-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 10px; border-radius: 10px;
+      font-size: 15px; cursor: pointer;
+    }
+    .dropdown-row:hover { background: #f5f5f7; }
+    .dropdown-row.master {
+      background: #e8f2ff;
+      margin-bottom: 6px;
+      border: 1px solid rgba(0,113,227,.2);
+    }
+    .dropdown-row input { width: 18px; height: 18px; accent-color: #0071e3; }
+    .dropdown-divider { height: 1px; background: rgba(0,0,0,.08); margin: 6px 0; }
     input[type="text"] {
-      width: 100%;
-      min-width: 0;
+      width: 100%; min-width: 0;
       padding: 14px 16px;
       border: 1px solid rgba(0,0,0,.08);
       border-radius: 16px;
@@ -77,12 +118,12 @@
     .muted { color: #6e6e73; font-size: 14px; line-height: 1.7; margin: 18px 0 0; }
     .linkbox { display: grid; gap: 10px; }
     .tiny { color: #6e6e73; font-size: 13px; }
-    .divider { height: 1px; background: rgba(0,0,0,.08); margin: 6px 0; }
     @media (max-width: 640px) {
       main { padding-top: 48px; }
       section { border-radius: 22px; padding: 18px; }
       .row { flex-direction: column; }
       button, a.button { text-align: center; }
+      .tab-wrap .dropdown { left: auto; right: 0; }
     }
   </style>
 </head>
@@ -91,37 +132,42 @@
     <div class="hero">
       <p class="eyebrow">Sky: Children of the Light</p>
       <h1>光遇日历订阅</h1>
-      <p class="lead">选择想关注的内容，生成一个干净的 iCalendar 订阅链接。</p>
+      <p class="lead">点击下方选项卡选择要订阅的内容，生成一个干净的 iCalendar 链接。</p>
     </div>
     <section>
       <div class="group">
-        <h2>订阅内容</h2>
-        <div class="grid">
-          <label><input type="checkbox" data-type="red" checked>红石</label>
-          <label><input type="checkbox" data-type="black" checked>黑石</label>
-          <label><input type="checkbox" data-type="traveling_spirit">复刻先祖</label>
-          <label><input type="checkbox" data-type="season">季节</label>
-          <label><input type="checkbox" data-type="activity">活动</label>
-          <label><input type="checkbox" data-type="bonus">双倍</label>
-          <label><input type="checkbox" data-type="candle_heap">大蜡烛</label>
-          <label><input type="checkbox" data-type="maintenance">维护</label>
-        </div>
-      </div>
+        <h2>订阅内容（点击选项卡选中 / 取消）</h2>
+        <div class="tabs" id="typeTabs">
+          <!-- 默认开启：红石/先祖/活动/季节 — 仅结束时提醒 -->
+          <span class="tab is-on" data-type="red"><span class="dot"></span>红石</span>
+          <span class="tab is-on" data-type="black"><span class="dot"></span>黑石</span>
+          <span class="tab is-on" data-type="traveling_spirit"><span class="dot"></span>复刻先祖</span>
+          <span class="tab is-on" data-type="season"><span class="dot"></span>季节</span>
+          <span class="tab is-on" data-type="activity"><span class="dot"></span>活动</span>
+          <span class="tab is-on" data-type="bonus"><span class="dot"></span>双倍</span>
+          <span class="tab is-on" data-type="candle_heap"><span class="dot"></span>大蜡烛</span>
+          <span class="tab" data-type="maintenance"><span class="dot"></span>维护</span>
 
-      <div class="group mode">
-        <h2>仅结束时提醒（排除范围事件）</h2>
-        <label class="master">
-          <span>全部应用（总开关）</span>
-          <input type="checkbox" id="endOnlyMaster">
-        </label>
-        <div class="grid">
-          <label><span>复刻先祖</span><input type="checkbox" data-endonly="traveling_spirit"></label>
-          <label><span>活动</span><input type="checkbox" data-endonly="activity"></label>
-          <label><span>季节</span><input type="checkbox" data-endonly="season"></label>
-          <label><span>双倍</span><input type="checkbox" data-endonly="bonus"></label>
-          <label><span>大蜡烛</span><input type="checkbox" data-endonly="candle_heap"></label>
+          <!-- 仅结束时提醒的 tab：内嵌下拉复选框 -->
+          <div class="tab-wrap" id="endOnlyTabWrap">
+            <span class="tab" id="endOnlyTab" title="点击展开要『仅结束时提醒』的类型">
+              <span class="dot"></span>仅结束时提醒 ▾
+            </span>
+            <div class="dropdown" id="endOnlyDropdown">
+              <label class="dropdown-row master">
+                <span>全选</span>
+                <input type="checkbox" id="endOnlyMaster">
+              </label>
+              <div class="dropdown-divider"></div>
+              <label class="dropdown-row"><span>复刻先祖</span><input type="checkbox" data-endonly="traveling_spirit" checked></label>
+              <label class="dropdown-row"><span>活动</span><input type="checkbox" data-endonly="activity" checked></label>
+              <label class="dropdown-row"><span>季节</span><input type="checkbox" data-endonly="season" checked></label>
+              <label class="dropdown-row"><span>双倍</span><input type="checkbox" data-endonly="bonus"></label>
+              <label class="dropdown-row"><span>大蜡烛</span><input type="checkbox" data-endonly="candle_heap"></label>
+            </div>
+          </div>
         </div>
-        <p class="tiny">所有持续事件默认以全天格式输出（VALUE=DATE），日历上更直观。</p>
+        <p class="tiny">默认：红石、黑石、复刻先祖、活动、季节仅在结束前提醒；大蜡烛、双倍、复刻先祖在开始前 + 结束前都提醒。点击「仅结束时提醒 ▾」展开内嵌复选框自定义。结束时间若为北京时间 0 点，自动提前到当日 20:00 提醒。</p>
       </div>
 
       <div class="linkbox">
@@ -131,27 +177,56 @@
           <a id="open" class="button ghost" href="#">打开订阅</a>
         </div>
       </div>
-      <p class="muted">红石和黑石默认开启；活动类内容会在后台审核后进入订阅。仅结束时提醒会去掉范围事件，只留结束前 X 小时的提醒。</p>
       <p class="tiny" id="preview"></p>
     </section>
   </main>
   <script>
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => [...document.querySelectorAll(s)];
-    const typeChecks = $$('input[data-type]');
+
+    const typeTabs = $$('#typeTabs .tab[data-type]');
     const endOnlyChecks = $$('input[data-endonly]');
     const endOnlyMaster = $('#endOnlyMaster');
+    const endOnlyTabWrap = $('#endOnlyTabWrap');
+    const endOnlyTab = $('#endOnlyTab');
     const urlInput = $('#url');
     const openLink = $('#open');
     const preview = $('#preview');
 
-    function getSelected(attr) {
-      return $$(`input[data-${attr}]:checked`).map(c => c.getAttribute(`data-${attr}`));
+    // —— 选项卡点击切换
+    typeTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tab.classList.toggle('is-on');
+        update();
+      });
+    });
+
+    // —— 「仅结束时提醒」下拉：点 tab 展开 / 点击外部关闭
+    endOnlyTab.addEventListener('click', (e) => {
+      e.stopPropagation();
+      endOnlyTabWrap.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!endOnlyTabWrap.contains(e.target)) endOnlyTabWrap.classList.remove('open');
+    });
+
+    // —— 全选/子项联动
+    endOnlyChecks.forEach(c => c.addEventListener('change', () => { syncMaster(); update(); }));
+    endOnlyMaster.addEventListener('change', () => {
+      endOnlyChecks.forEach(c => { c.checked = endOnlyMaster.checked; });
+      update();
+    });
+
+    function syncMaster() {
+      const all = endOnlyChecks.length;
+      const checked = endOnlyChecks.filter(c => c.checked).length;
+      endOnlyMaster.checked = all > 0 && checked === all;
+      endOnlyMaster.indeterminate = checked > 0 && checked < all;
     }
 
     function update() {
-      const types = typeChecks.filter(c => c.checked).map(c => c.getAttribute('data-type'));
-      const endOnly = getSelected('endonly');
+      const types = typeTabs.filter(t => t.classList.contains('is-on')).map(t => t.dataset.type);
+      const endOnly = endOnlyChecks.filter(c => c.checked).map(c => c.dataset.endonly);
       const params = new URLSearchParams();
       params.set('types', types.join(','));
       if (endOnly.length) params.set('endOnly', endOnly.join(','));
@@ -160,24 +235,6 @@
       openLink.href = value;
       preview.textContent = `已选 ${types.length} 种类型 · 结束提醒 ${endOnly.length} 种`;
     }
-
-    // 总开关联动
-    function syncMaster() {
-      const all = endOnlyChecks.length;
-      const checked = endOnlyChecks.filter(c => c.checked).length;
-      endOnlyMaster.checked = all > 0 && checked === all;
-      endOnlyMaster.indeterminate = checked > 0 && checked < all;
-    }
-
-    endOnlyMaster.addEventListener('change', () => {
-      endOnlyChecks.forEach(c => { c.checked = endOnlyMaster.checked; });
-      syncMaster();
-      update();
-    });
-
-    typeChecks.forEach(c => c.addEventListener('change', update));
-    endOnlyChecks.forEach(c => c.addEventListener('change', () => { syncMaster(); update(); }));
-    $('#copy').addEventListener('click', async () => navigator.clipboard.writeText(urlInput.value));
 
     syncMaster();
     update();

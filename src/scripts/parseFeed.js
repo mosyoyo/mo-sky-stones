@@ -5,6 +5,7 @@ const {
   extractDateRange,
   extractTravelingSpiritLabel,
   isLikelyGameActivity,
+  isOfflineEvent,
   isTravelingSpiritUpcoming,
   normalizeFeed,
   uidPart,
@@ -31,9 +32,12 @@ function parseFeed(feed) {
   // 过滤规则：
   // 1. 复刻先祖：只保留「即将到临/即将来临」类预告，过滤「到临提醒/已到来/已离开」
   // 2. 长周期事件（活动/复刻/季节/双倍/大蜡烛）：duration < 1 天全部 drop
+  // 3. 线下活动（见面会/签售/漫展/票务/现场/舞台/演出…）一律 drop
   //    维护通常 < 1 天，保留
   const LONG_EVENT_TYPES = new Set(['traveling_spirit', 'activity', 'season', 'bonus', 'candle_heap']);
-  if (type === 'traveling_spirit' && !isTravelingSpiritUpcoming(feed.title || '', feed.content || '')) {
+  if (isOfflineEvent(feed.title || '', feed.content || '')) {
+    type = 'other';
+  } else if (type === 'traveling_spirit' && !isTravelingSpiritUpcoming(feed.title || '', feed.content || '')) {
     type = 'other';
   } else if (LONG_EVENT_TYPES.has(type) && range && range.start && range.end) {
     const durationMs = new Date(range.end) - new Date(range.start);

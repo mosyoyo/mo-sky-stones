@@ -204,6 +204,31 @@ function extractBonusLabel(text = '') {
   return '';
 }
 
+// 线下活动关键词（粉丝见面会、签售、舞台剧、COSPLAY 集会、漫展等 → 视作 non-game event）
+const OFFLINE_KEYWORDS = [
+  '见面会', '签售', '签售会', '舞台剧', '音乐会', '演唱会', '展览', '漫展',
+  '粉丝见面', '线下活动', '线下见面', '线下面基', '面基', '参展', '展会',
+  '签到', '现场', '主办方', '票务', '门票', '售票', '预约报名',
+  '到场', '出席', '签到', '舞台', '演出',
+];
+
+function isOfflineEvent(title = '', content = '') {
+  const text = `${title}\n${content}`;
+  return OFFLINE_KEYWORDS.some(k => text.includes(k));
+}
+
+// 单日期事件 = start 到 end 横跨 ≤ 1 自然日（不是「24h 时长」）
+// 适用于：复刻/季节/活动/双倍/大蜡烛等持续型事件；维护除外
+function isSingleDayEvent(event) {
+  if (!event || !event.start || !event.end) return false;
+  const s = beijingDateParts(event.start);
+  const e = beijingDateParts(event.end);
+  if (!s.year || !e.year) return false;
+  // 跨自然日数
+  const dayDiff = Math.floor((Date.UTC(e.year, e.month - 1, e.day) - Date.UTC(s.year, s.month - 1, s.day)) / 86400000);
+  return dayDiff <= 0;
+}
+
 function isLikelyGameActivity(event) {
   const start = new Date(event.start);
   const end = new Date(event.end);
@@ -441,21 +466,21 @@ function buildReminderEvents(events, options = {}) {
       }));
     }
 
-    // 2) end 提醒（结束前 X 小时/天，定时事件保留精确时间）
+    // 2) end 提醒（结束前 X 小时/天）
+    // 智能提前量：
+    //   - 若 end 为北京时间当日 00:00（= 当日 0 点结束），则提前到当日 20:00（= 4 小时前）
+    //   - 否则按 reminder.end 提前
     if (event.type !== 'maintenance' || endOnly.has(event.type)) {
       const endTitle = event.type === 'traveling_spirit'
         ? '复刻先祖即将离开'
         : `【${label}】即将结束`;
+      const { endStart, leadLabel } = computeEndReminderStart(end, reminder);
       const endDesc = buildDescription([
         `标题: ${summary}`,
         `结束时间: ${beijingText(end)}`,
-        `提醒: ${reminder.endDesc}（事件开始时响）`,
+        `提醒: ${leadLabel}（事件开始时响）`,
       ]);
       const endUid = `${id}-end-reminder@sky-stones-ics`;
-      // 事件本体跨度 = end - X ~ end，作为「倒计时占位」显示
-      // VALARM 在事件开始时（0 分钟）触发 = 真实提前 X 提醒
-      // reminder.end 是负 duration（如 -PT1H）= 提前 1 小时，故 endStart = end + (-minutes)
-      const endStart = addMinutes(end, -parseISODurationMinutes(reminder.end));
       blocks.push(createTimedEvent({
         uid: endUid,
         dtstamp,
@@ -465,12 +490,46 @@ function buildReminderEvents(events, options = {}) {
         description: endDesc,
         location: label,
         category: label,
-        alarm: { trigger: '-PT0M', description: reminder.endDesc },
+        alarm: { trigger: '-PT0M', description: leadLabel },
       }));
     }
   }
 
   return blocks;
+}
+
+// 计算 end 提醒事件 DTSTART：
+//   - 算 end 当日 20:00 北京嘅时间点 = endBeijing8pm
+//   - 若 leadMinutes (按 reminder.end 提前) 对应嘅时间点 < endBeijing8pm
+//     （即「正常提前」会响 8 点之后），就改用 endBeijing8pm
+//   - 否则按 reminder.end
+function computeEndReminderStart(end, reminder) {
+  const baseLabel = reminder.endDesc;
+  const leadMinutes = parseISODurationMinutes(reminder.end);
+
+  // 拎 end 北京时间部分（年月日时分）
+  const beijingParts = new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hour12: false,
+  }).formatToParts(end);
+  const get = (t) => Number(beijingParts.find(p => p.type === t)?.value);
+
+  // endBeijing8pm = end 当日 20:00 北京
+  const endBJ8pm = new Date(Date.UTC(get('year'), get('month') - 1, get('day'), 20 - 8, 0, 0));
+  // UTC = 北京 - 8h，所以 20:00 北京 = 12:00 UTC（同日）
+
+  // 按 reminder 提前后嘅时间点
+  const leadStart = addMinutes(end, -leadMinutes);
+
+  // 如果 leadStart 晚过 20:00（响 20:00 之后），就提前到 20:00
+  if (leadStart.getTime() > endBJ8pm.getTime()) {
+    return {
+      endStart: endBJ8pm,
+      leadLabel: `${baseLabel}（已提前到 20:00 提醒）`,
+    };
+  }
+  return { endStart: leadStart, leadLabel: baseLabel };
 }
 
 // 把 ISO 8601 duration (e.g. -PT1H, -P1D) 转成分钟数（取绝对值用于计算时间偏移）
@@ -539,6 +598,8 @@ module.exports = {
   formatUTC,
   generateEventsICS,
   isLikelyGameActivity,
+  isOfflineEvent,
+  isSingleDayEvent,
   isTravelingSpiritUpcoming,
   normalizeFeed,
   parseISODurationMinutes,
