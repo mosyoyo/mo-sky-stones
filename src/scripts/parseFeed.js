@@ -1,6 +1,7 @@
 const {
   cleanEventTitle,
   detectType,
+  extractBonusLabel,
   extractDateRange,
   extractTravelingSpiritLabel,
   isLikelyGameActivity,
@@ -45,12 +46,17 @@ function parseFeed(feed) {
   const spiritLabel = type === 'traveling_spirit'
     ? extractTravelingSpiritLabel(`${feed.title || ''}\n${feed.content || ''}`)
     : '';
+  const bonusLabel = type === 'bonus'
+    ? extractBonusLabel(`${feed.title || ''}\n${feed.content || ''}`)
+    : '';
   const prefix = TYPE_TITLE_PREFIX[type] || '';
   const baseTitle = spiritLabel
     ? `${prefix}${spiritLabel}`
-    : (cleanEventTitle(feed.title, feed.content, type) && prefix
-        ? `${prefix}${cleanEventTitle(feed.title, feed.content, type).replace(/^[《【].+?[》】]\s*/, '')}`
-        : cleanEventTitle(feed.title, feed.content, type));
+    : bonusLabel
+      ? `${prefix}${bonusLabel}`
+      : (cleanEventTitle(feed.title, feed.content, type) && prefix
+          ? `${prefix}${cleanEventTitle(feed.title, feed.content, type).replace(/^[《【].+?[》】]\s*/, '')}`
+          : cleanEventTitle(feed.title, feed.content, type));
   return {
     type,
     title: baseTitle,

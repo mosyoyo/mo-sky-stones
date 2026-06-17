@@ -194,6 +194,16 @@ function extractTravelingSpiritLabel(text = '') {
   return '';
 }
 
+function extractBonusLabel(text = '') {
+  const t = cleanText(text);
+  if (/双倍爱心/.test(t)) return '双倍爱心';
+  if (/双倍心火/.test(t)) return '双倍心火';
+  if (/双倍烛火/.test(t)) return '双倍烛火';
+  if (/双倍季蜡/.test(t)) return '双倍季蜡';
+  if (/双倍蜡烛/.test(t)) return '双倍蜡烛';
+  return '';
+}
+
 function isLikelyGameActivity(event) {
   const start = new Date(event.start);
   const end = new Date(event.end);
@@ -547,6 +557,7 @@ module.exports = {
   cleanEventTitle,
   detectType,
   escapeICS,
+  extractBonusLabel,
   extractTravelingSpiritLabel,
   extractDateRange,
   formatUTC,
