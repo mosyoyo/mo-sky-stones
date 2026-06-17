@@ -1,14 +1,18 @@
 const { appendSyncLog, readJSON, writeJSON } = require('./common');
 
 // 数据源偏好（与 admin 设置页保持一致）
-// 6 类事件各自选择 netease 或 wiki 数据源
+// 用户核心决策 6/17 晚：只关心网易大神的 双倍/大蜡烛/维护 三类
+//  - 这三类**固定走 netease**，不可切换，且不参与 wiki 兜底
+//  - 其他三类（旅行先祖/季节/活动）走 wiki，netease 作为兜底
+const NETEASE_LOCKED_TYPES = new Set(['bonus', 'candle_heap', 'maintenance']);
+
 const DEFAULT_SOURCE_CONFIG = {
   traveling_spirit: 'wiki',
   season:           'wiki',
   activity:         'wiki',
-  bonus:            'netease',
-  candle_heap:      'netease',
-  maintenance:      'netease',
+  bonus:            'netease',  // 锁定
+  candle_heap:      'netease',  // 锁定
+  maintenance:      'netease',  // 锁定
 };
 
 // 过滤「国际服」相关事件（user 决策 6/17 晚：只关心国服）
@@ -76,7 +80,9 @@ function merge() {
 
   // 2) 兜底：另一数据源有但首选源没有的，按 wiki > netease 优先级补
   //    防止 wiki 抓不到时网易大神的同 type 事件被吃掉
+  //    **例外**：NETEASE_LOCKED_TYPES（双倍/大蜡烛/维护）固定只走 netease，跳过兜底
   for (const type of typeOrder) {
+    if (NETEASE_LOCKED_TYPES.has(type)) continue;
     const source = config[type] || DEFAULT_SOURCE_CONFIG[type];
     const fallbackList = source === 'wiki' ? (neByType.get(type) || []) : (wkByType.get(type) || []);
     for (const e of fallbackList) {

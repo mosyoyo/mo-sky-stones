@@ -207,10 +207,10 @@ function main() {
   const finalEvents = allEvents.filter(e => e.type !== 'traveling_spirit' || keptIds.has(e.id));
 
   // === 双数据源拆分准备：events-netease.json 保留全部类型作为兜底 ===
-  // 用户的核心决策：维护/大蜡烛/双倍 → 网易大神；旅行先祖/季节/活动 → wiki
+  // 用户的核心决策：维护/大蜡烛/双倍 → 网易大神（锁定，仅此源）；旅行先祖/季节/活动 → wiki（netease 兜底）
   // events-netease.json 保留全部类型，但由 mergeEvents.js 按 source-config.json
-  // + id 去重决定哪些走网易大神、哪些走 wiki。
-  // 这样 wiki 抓不到时（沙箱被反爬墙挡/未来 wiki API 变更）网易大神兜底不会丢事件。
+  // 决定哪些走网易大神、哪些走 wiki。锁定类型不参与兜底。
+  // 这样 wiki 抓不到时（沙箱被反爬墙挡/未来 wiki API 变更）可切换类型的网易大神兜底不会丢事件。
   const neteaseEvents = finalEvents;
 
   // 清理已过期 enabled 事件（end < 现在）—— ICS 唔再显示，iOS 也不会堆积历史

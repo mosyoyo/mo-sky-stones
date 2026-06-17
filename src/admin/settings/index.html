@@ -33,7 +33,7 @@
 
     <section>
       <h2>事件类型 → 数据源</h2>
-      <p class="muted">每个类型独立选 <strong>网易大神</strong> / <strong>Wiki</strong>。改完点保存会写入 <code>data/source-config.json</code>，下一次 GitHub Actions 跑 mergeEvents 时生效。</p>
+      <p class="muted">旅行先祖 / 季节 / 活动 可在 <strong>网易大神</strong> / <strong>Wiki</strong> 间切换；双倍 / 大蜡烛 / 维护 固定来自网易大神（不可切换）。改完点保存会写入 <code>data/source-config.json</code>，下一次 GitHub Actions 跑 mergeEvents 时生效。</p>
       <div class="log-grid" id="types"></div>
     </section>
 
@@ -41,8 +41,13 @@
       <h2>抓取流程</h2>
       <ol style="line-height:1.8;color:var(--text)">
         <li>每 6 小时：<code>fetchFeeds</code> 抓网易大神 → <code>events-netease.json</code>（全量 60+ 条）</li>
-        <li>同次任务：<code>fetchWikiEvents</code> 抓 wiki 首页「光遇日历」→ <code>events-wiki.json</code>（约 6-10 条）</li>
-        <li>接着 <code>mergeEvents</code> 按本表配置 + 兜底合并 → <code>events.json</code></li>
+        <li>同次任务：<code>fetchWikiEvents</code> 抓 wiki 「活动日历」页 → <code>events-wiki.json</code>（约 6-10 条）</li>
+        <li>接着 <code>mergeEvents</code> 按本表配置合并 → <code>events.json</code>
+          <ul style="margin-top:4px">
+            <li>旅行先祖 / 季节 / 活动：首选 wiki，netease 兜底</li>
+            <li>双倍 / 大蜡烛 / 维护：<strong>固定</strong>只取 netease，不参与兜底</li>
+          </ul>
+        </li>
         <li>同时 <code>events.json</code> 通过 GitHub API 推回仓库</li>
       </ol>
     </section>
@@ -65,6 +70,8 @@
       candle_heap:      '大蜡烛堆（连续）',
       maintenance:      '停服维护',
     };
+    // 固定走网易大神，不可切换
+    const LOCKED_TYPES = new Set(['bonus', 'candle_heap', 'maintenance']);
     const h = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 
     let config = null;        // 当前 source-config
@@ -107,24 +114,22 @@
           <p class="muted" style="margin-top:8px">数据源：网易大神官方公告动态</p>
         </div>
         <div class="log-item">
-          <strong>Wiki 首页「光遇日历」(wiki) — ${wikiEvents.length} 条</strong>
+          <strong>Wiki 活动日历 (wiki) — ${wikiEvents.length} 条</strong>
           <div class="row" style="margin-top:6px">
             ${Object.entries(TYPE_LABELS).map(([t, label]) => `<span class="tag ${h(t)}">${h(label)} · ${wkByType[t] || 0}</span>`).join('')}
           </div>
-          <p class="muted" style="margin-top:8px">数据源：<a href="https://wiki.biligame.com/sky/首页" target="_blank" rel="noopener">wiki.biligame.com/sky/首页</a></p>
+          <p class="muted" style="margin-top:8px">数据源：<a href="https://wiki.biligame.com/sky/%E6%B4%BB%E5%8A%A8%E6%97%A5%E5%8E%86" target="_blank" rel="noopener">wiki.biligame.com/sky/活动日历</a></p>
         </div>
       `;
 
       // 2) 事件类型 → 数据源
       const types = document.querySelector('#types');
-      types.innerHTML = Object.entries(TYPE_LABELS).map(([type, label]) => `
-        <div class="log-item" data-type-row="${h(type)}">
-          <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-            <div>
-              <strong>${h(label)}</strong>
-              <span class="muted" style="margin-left:6px">${h(TYPE_DESC[type] || '')}</span>
-            </div>
-            <div class="row" style="gap:6px">
+      types.innerHTML = Object.entries(TYPE_LABELS).map(([type, label]) => {
+        const locked = LOCKED_TYPES.has(type);
+        const source = locked ? 'netease' : (config[type] || 'wiki');
+        const radioHtml = locked
+          ? `<span class="pill locked" title="该类型固定来自网易大神"><span>🔒 网易大神（固定）</span></span>`
+          : `
               <label class="pill">
                 <input type="radio" name="src-${h(type)}" value="netease" ${config[type] === 'netease' ? 'checked' : ''}>
                 <span>网易大神</span>
@@ -133,14 +138,24 @@
                 <input type="radio" name="src-${h(type)}" value="wiki" ${config[type] === 'wiki' ? 'checked' : ''}>
                 <span>Wiki</span>
               </label>
+            `;
+        const prefLabel = source === 'wiki' ? `Wiki (${wkByType[type] || 0})` : `网易大神 (${neByType[type] || 0})`;
+        return `
+        <div class="log-item" data-type-row="${h(type)}">
+          <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+            <div>
+              <strong>${h(label)}</strong>
+              <span class="muted" style="margin-left:6px">${h(TYPE_DESC[type] || '')}</span>
+              ${locked ? '<span class="tag maintenance" style="margin-left:6px">🔒 锁定</span>' : ''}
             </div>
+            <div class="row" style="gap:6px">${radioHtml}</div>
           </div>
           <p class="muted" style="margin-top:6px">
-            首选源：${config[type] === 'wiki' ? `Wiki (${wkByType[type] || 0})` : `网易大神 (${neByType[type] || 0})`} ·
-            兜底源：${config[type] === 'wiki' ? `网易大神 (${neByType[type] || 0})` : `Wiki (${wkByType[type] || 0})`}
+            ${locked ? '固定来源' : '首选源'}：${prefLabel}${locked ? ' · <span class="muted">用户核心决策 6/17 晚：只关心网易大神的 双倍/大蜡烛/维护</span>' : ` · 兜底源：${source === 'wiki' ? `网易大神 (${neByType[type] || 0})` : `Wiki (${wkByType[type] || 0})`}`}
           </p>
         </div>
-      `).join('');
+      `;
+      }).join('');
 
       // 单选变更时实时更新"首选/兜底"预览
       document.querySelectorAll('[name^="src-"]').forEach(radio => {

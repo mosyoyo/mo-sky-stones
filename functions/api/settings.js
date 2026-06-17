@@ -4,10 +4,12 @@
 //   "traveling_spirit": "wiki",
 //   "season": "wiki",
 //   "activity": "wiki",
-//   "bonus": "netease",
-//   "candle_heap": "netease",
-//   "maintenance": "netease"
+//   "bonus": "netease",       // 锁定：仅来自网易大神
+//   "candle_heap": "netease", // 锁定：仅来自网易大神
+//   "maintenance": "netease"  // 锁定：仅来自网易大神
 // }
+// 用户核心决策 6/17 晚：双倍/大蜡烛/维护 这三类**固定来自网易大神**，
+// admin 设置页只能切换另外三类（旅行先祖/季节/活动）。
 
 const { json, githubPutJSON } = require('../_shared');
 
@@ -22,6 +24,9 @@ const DEFAULT_CONFIG = {
   maintenance:      'netease',
 };
 
+// 这三类固定走 netease，admin 无法切换
+const NETEASE_LOCKED_TYPES = new Set(['bonus', 'candle_heap', 'maintenance']);
+
 const ALLOWED_TYPES = new Set(Object.keys(DEFAULT_CONFIG));
 const ALLOWED_SOURCES = new Set(['netease', 'wiki']);
 
@@ -31,6 +36,11 @@ function validateConfig(input) {
   for (const [type, source] of Object.entries(input)) {
     if (!ALLOWED_TYPES.has(type)) throw new Error(`未知类型: ${type}`);
     if (!ALLOWED_SOURCES.has(source)) throw new Error(`类型 ${type} 的值必须是 netease / wiki，得到: ${source}`);
+    // 锁定类型：忽略客户端提交的值，强制 netease
+    if (NETEASE_LOCKED_TYPES.has(type)) {
+      out[type] = 'netease';
+      continue;
+    }
     out[type] = source;
   }
   // 补全缺省项
