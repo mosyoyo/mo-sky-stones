@@ -1,4 +1,5 @@
 const { detectType, extractDateRange, uidPart } = require('../../src/event-utils');
+const { disableFeedEvents } = require('../../src/feed-events');
 const { githubPutJSON, json, readAssetJSON } = require('../_shared');
 
 export async function onRequestPost(context) {
@@ -27,6 +28,8 @@ export async function onRequestPost(context) {
         });
         if (!existing) events.push(event);
       }
+    } else if (feed.status === 'ignored') {
+      disableFeedEvents(events, feed.id);
     }
 
     await githubPutJSON(context.env, 'data/feeds.json', feeds, `chore: ${feed.status} feed ${feed.id}`);

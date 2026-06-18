@@ -1,4 +1,5 @@
 const { cleanEventTitle, detectType, extractDateRange, uidPart } = require('../../src/event-utils');
+const { disableFeedEvents } = require('../../src/feed-events');
 const { githubPutJSONFiles, json, readAssetJSON } = require('../_shared');
 
 function upsertEvent(events, feed, item) {
@@ -45,6 +46,7 @@ export async function onRequestPost(context) {
         upsertEvent(events, feed, item);
       } else if (feed.status === 'ignored') {
         ignored++;
+        disableFeedEvents(events, feed.id);
       }
     }
 

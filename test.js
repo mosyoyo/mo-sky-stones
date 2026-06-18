@@ -3,6 +3,7 @@
 
 const { generateICS } = require('./ics-generator');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
+const { disableFeedEvents } = require('./src/feed-events');
 const fs = require('fs');
 const path = require('path');
 
@@ -85,3 +86,13 @@ assert(eventReminderOptions.endOnly.size === 0, 'events.ics 默认不套用首�
 const defaultCalendar = buildCalendar([], defaultTypes, { reminderOpts: { endOnly: new Set(['traveling_spirit', 'season', 'activity']) } });
 assert(defaultCalendar.includes('SUMMARY:【红石】'), 'calendar.ics 默认组合能生成红石事件');
 assert(defaultCalendar.includes('END:VCALENDAR'), 'calendar.ics 默认组合结构完整');
+
+console.log('');
+console.log('=== 公告隐藏一致性验证 ===');
+const ignoredEvents = [
+  { id: 'a', sourceFeedId: 'feed-1', enabled: true },
+  { id: 'b', sourceFeedId: 'feed-2', enabled: true },
+];
+disableFeedEvents(ignoredEvents, 'feed-1');
+assert(ignoredEvents[0].enabled === false, '忽略公告会关闭对应日历事件');
+assert(ignoredEvents[1].enabled === true, '忽略公告不会影响其他事件');
