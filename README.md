@@ -15,6 +15,7 @@ https://sky-ics.pages.dev/red.ics
 https://sky-ics.pages.dev/black.ics
 https://sky-ics.pages.dev/events.ics
 https://sky-ics.pages.dev/spirit-events.ics
+https://sky-ics.pages.dev/spirits.html
 https://sky-ics.pages.dev/calendar.ics
 https://sky-ics.pages.dev/calendar.ics?types=red,traveling_spirit,season,activity,bonus,candle_heap,maintenance&endOnly=traveling_spirit,season,activity
 ```
@@ -40,6 +41,20 @@ maintenance         维护
 ?types=red,activity&endOnly=activity
 ```
 
+指定先祖订阅页面：
+
+```text
+https://sky-ics.pages.dev/spirits.html
+```
+
+页面会读取 `data/soul-spirits.json`，最多选择 3 个先祖，然后生成独立订阅链接：
+
+```text
+https://sky-ics.pages.dev/spirit-events.ics?spirits=希望之种,致敬钢琴家
+```
+
+复制时保留 HTTPS 链接；点击“添加”时使用 `webcal://` 唤起手机日历。
+
 ## 当前规则
 
 红石和黑石每天只保留最后一场。如果当天最后一场超过 23 点，就改用前一场。
@@ -51,6 +66,7 @@ maintenance         维护
 - 旅行先祖、季节、活动：默认可以生成持续事件和结束提醒；订阅页可选“仅结束”。
 - 双倍、大蜡烛：无论持续多少天，都按连续事件显示。
 - 维护：按维护时间显示。
+- 指定先祖订阅：只在所选先祖出现在复刻事件里时生成日程。
 - 解析不到开始/结束时间的公告会被过滤掉。
 - 识别为活动但只有 1 天的动态会过滤成 `other`，减少噪音。
 
@@ -154,6 +170,7 @@ data/feeds.json
 data/events.json
 data/event-overrides.json
 data/source-config.json
+data/soul-spirits.json
 data/spirit-subscriptions.json
 data/sync.json
 ```
@@ -162,7 +179,7 @@ data/sync.json
 
 ## 自动同步
 
-GitHub Action 每 6 小时抓一次网易大神官方动态：
+GitHub Action 每 6 小时同步一次：
 
 ```text
 .github/workflows/sync-events.yml
@@ -172,6 +189,15 @@ GitHub Action 每 6 小时抓一次网易大神官方动态：
 
 ```bash
 npm run sync
+```
+
+同步内容包括：
+
+```text
+网易大神公告 -> data/feeds.json / data/events-netease.json
+BWiki 活动日历 -> data/events-wiki.json
+双数据源合并 -> data/events.json
+BWiki 旅行先祖回归记录 -> data/soul-spirits.json
 ```
 
 然后提交 `data/` 的变化。也可以在 GitHub Actions 页面手动点 `Run workflow`。
@@ -187,6 +213,8 @@ npm run sync
 ```bash
 npm run fetch
 npm run parse
+npm run fetch:souls
+npm run verify:souls
 npm run build:events
 ```
 
@@ -211,6 +239,7 @@ npm run fetch
 
 ```bash
 npm test
+npm run verify:souls
 npm run build:events
 ```
 
@@ -249,6 +278,7 @@ data/feeds.json          抓到并能解析时间的公告
 data/events.json         已进入日历的事件
 data/event-overrides.json 事件页的人工修改和删除记录
 data/source-config.json  数据源偏好
+data/soul-spirits.json   BWiki 抓取的完整复刻先祖目录
 data/spirit-subscriptions.json 指定先祖订阅配置
 data/sync.json           同步日志
 ```
