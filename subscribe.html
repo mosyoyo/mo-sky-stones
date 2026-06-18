@@ -103,17 +103,17 @@
     <section class="settings" id="options">
       <div class="item is-on" data-type="red"><div><div class="item-title"><span class="checkmark">✓</span><span>红石</span></div><p class="item-note">每天最后一场。</p></div></div>
       <div class="item" data-type="black"><div><div class="item-title"><span class="checkmark">✓</span><span>黑石</span></div><p class="item-note">每天最后一场。</p></div></div>
-      <div class="item is-on" data-type="traveling_spirit"><div><div class="item-title"><span class="checkmark">✓</span><span>旅行先祖</span></div><p class="item-note">默认仅在离开前提醒。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="traveling_spirit" checked></label></div>
-      <div class="item is-on" data-type="season"><div><div class="item-title"><span class="checkmark">✓</span><span>季节</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="season" checked></label></div>
-      <div class="item is-on" data-type="activity"><div><div class="item-title"><span class="checkmark">✓</span><span>活动</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="activity" checked></label></div>
-      <div class="item is-on" data-type="bonus"><div><div class="item-title"><span class="checkmark">✓</span><span>双倍</span></div><p class="item-note">连续事件。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="bonus"></label></div>
-      <div class="item is-on" data-type="candle_heap"><div><div class="item-title"><span class="checkmark">✓</span><span>大蜡烛</span></div><p class="item-note">连续事件。</p></div><label class="end-control"><span>仅结束</span><input class="switch" type="checkbox" data-endonly="candle_heap"></label></div>
+      <div class="item is-on" data-type="traveling_spirit"><div><div class="item-title"><span class="checkmark">✓</span><span>旅行先祖</span></div><p class="item-note">默认仅在离开前提醒。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="traveling_spirit" checked></label></div>
+      <div class="item is-on" data-type="season"><div><div class="item-title"><span class="checkmark">✓</span><span>季节</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="season" checked></label></div>
+      <div class="item is-on" data-type="activity"><div><div class="item-title"><span class="checkmark">✓</span><span>活动</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="activity" checked></label></div>
+      <div class="item is-on" data-type="bonus"><div><div class="item-title"><span class="checkmark">✓</span><span>双倍</span></div><p class="item-note">连续事件。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="bonus"></label></div>
+      <div class="item is-on" data-type="candle_heap"><div><div class="item-title"><span class="checkmark">✓</span><span>大蜡烛</span></div><p class="item-note">连续事件。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="candle_heap"></label></div>
       <div class="item is-on" data-type="maintenance"><div><div class="item-title"><span class="checkmark">✓</span><span>维护</span></div><p class="item-note">停服升级维护。</p></div></div>
     </section>
 
     <div class="bulk">
-      <span>带“仅结束”的项目</span>
-      <label><span>全部仅结束</span><input id="endOnlyAll" class="switch" type="checkbox"></label>
+      <span>结束提醒设置</span>
+      <label><span>全部仅结束时提醒</span><input id="endOnlyAll" class="switch" type="checkbox"></label>
     </div>
 
     <section class="link-panel">
@@ -160,7 +160,7 @@
       const value = `${location.origin}/calendar.ics?${params.toString()}`;
       urlInput.value = value;
       openLink.href = value.replace(/^https?:\/\//, 'webcal://');
-      summary.textContent = `已选 ${types.length} 项，其中 ${endOnly.length} 项仅结束提醒。`;
+      summary.textContent = `已选 ${types.length} 项，其中 ${endOnly.length} 项仅在结束时提醒。`;
       syncEndOnlyAll();
     }
 
@@ -185,6 +185,15 @@
     document.querySelector('#copy').addEventListener('click', async () => {
       await navigator.clipboard.writeText(urlInput.value);
       summary.textContent = '已复制订阅链接。';
+    });
+
+    openLink.addEventListener('click', async event => {
+      const ua = navigator.userAgent || '';
+      const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
+      if (isAppleMobile) return;
+      event.preventDefault();
+      await navigator.clipboard.writeText(urlInput.value);
+      summary.textContent = '已复制 HTTPS 订阅链接，请粘贴到日历 App。';
     });
 
     update();

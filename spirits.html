@@ -39,7 +39,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 10px 0 14px;
+      padding: 10px 0 10px;
       background: rgba(245, 245, 247, .78);
       backdrop-filter: blur(18px);
     }
@@ -73,12 +73,12 @@
     }
     .filters {
       position: sticky;
-      top: 54px;
+      top: 44px;
       z-index: 2;
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(150px, .45fr);
       gap: 10px;
-      padding: 0 0 12px;
+      padding: 8px 0 12px;
       background: rgba(245, 245, 247, .78);
       backdrop-filter: blur(18px);
     }
@@ -261,7 +261,7 @@
       h1 { font-size: 32px; }
       .lead { font-size: 13px; }
       .filters {
-        top: 48px;
+        top: 42px;
         grid-template-columns: 1fr;
         gap: 8px;
       }
@@ -495,7 +495,21 @@
       }
     });
     openLink.addEventListener('click', event => {
-      if (!subscriptionUrl()) event.preventDefault();
+      const url = subscriptionUrl();
+      if (!url) {
+        event.preventDefault();
+        return;
+      }
+      const ua = navigator.userAgent || '';
+      const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
+      if (isAppleMobile) return;
+      event.preventDefault();
+      navigator.clipboard.writeText(url)
+        .then(() => showToast('已复制 HTTPS 订阅链接，请粘贴到日历 App'))
+        .catch(() => {
+          urlInput.select();
+          showToast('请手动复制 HTTPS 订阅链接');
+        });
     });
 
     load();
