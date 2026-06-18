@@ -7,15 +7,30 @@ function publicEvent(event) {
   return rest;
 }
 
+function stableJSON(value) {
+  if (Array.isArray(value)) return `[${value.map(stableJSON).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${stableJSON(value[key])}`).join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
+function samePublicEvent(a, b) {
+  return stableJSON(publicEvent(a)) === stableJSON(publicEvent(b));
+}
+
 function updateEventOverrides(existingOverrides, beforeEvents, afterEvents) {
   const overrides = new Map((existingOverrides || []).map(event => [eventKey(event), publicEvent(event)]).filter(([key]) => key));
-  const beforeKeys = new Set((beforeEvents || []).map(eventKey).filter(Boolean));
+  const beforeMap = new Map((beforeEvents || []).map(event => [eventKey(event), publicEvent(event)]).filter(([key]) => key));
+  const beforeKeys = new Set(beforeMap.keys());
   const afterKeys = new Set((afterEvents || []).map(eventKey).filter(Boolean));
 
   for (const event of afterEvents || []) {
     const key = eventKey(event);
     if (!key) continue;
-    overrides.set(key, publicEvent(event));
+    if (!beforeMap.has(key) || !samePublicEvent(beforeMap.get(key), event)) {
+      overrides.set(key, publicEvent(event));
+    }
   }
 
   for (const key of beforeKeys) {
@@ -56,5 +71,6 @@ module.exports = {
   applyEventOverrides,
   eventKey,
   publicEvent,
+  samePublicEvent,
   updateEventOverrides,
 };

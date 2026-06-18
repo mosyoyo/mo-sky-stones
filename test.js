@@ -123,3 +123,7 @@ const mergedEvents = applyEventOverrides(generatedEvents, overrides);
 assert(mergedEvents.some(event => event.id === 'event-a' && event.title === '人工标题'), '事件页修改会在同步后保留');
 assert(!mergedEvents.some(event => event.id === 'event-b'), '事件页删除会在同步后保留');
 assert(mergedEvents.some(event => event.id === 'manual-c' && event._source === 'manual'), '事件页手动新增会在同步后保留');
+const unchangedOverrides = updateEventOverrides([], generatedEvents, generatedEvents);
+assert(unchangedOverrides.length === 0, '事件页未改动保存不会冻结所有自动事件');
+const keptOverrides = updateEventOverrides(overrides, savedEvents, savedEvents);
+assert(keptOverrides.length === overrides.length, '已有人工覆盖在再次保存时会保留');
