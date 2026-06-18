@@ -11,6 +11,7 @@ const { handleIcsRequest } = require('./functions/_ics-response');
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
 const { toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
+const { stableJSON: stableSpiritJSON } = require('./src/scripts/fetchSoulSpirits');
 const { verifySoulSpirits } = require('./src/scripts/verifySoulSpirits');
 const fs = require('fs');
 const path = require('path');
@@ -201,3 +202,4 @@ assert(selectedFallback.length === 1 && selectedFallback[0] === '希望之种', 
 const soulSpirits = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'soul-spirits.json'), 'utf8'));
 assert(verifySoulSpirits(soulSpirits).length === 0, '完整先祖列表通过结构校验');
 assert(soulSpirits.spirits.length >= 50, '完整先祖列表包含 50 个以上先祖');
+assert(stableSpiritJSON({ b: 2, a: 1 }) === stableSpiritJSON({ a: 1, b: 2 }), '完整先祖同步 no-op 判断不受字段顺序影响');

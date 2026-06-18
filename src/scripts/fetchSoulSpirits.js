@@ -1,4 +1,4 @@
-const { writeJSON } = require('./common');
+const { readJSON, writeJSON } = require('./common');
 
 const SOURCE_URL = 'https://wiki.biligame.com/sky/旅行先祖回归记录';
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
@@ -142,8 +142,21 @@ async function main() {
   if (data.spirits.length < 50) {
     throw new Error(`先祖数量异常：${data.spirits.length}，期望至少 50`);
   }
+  const current = readJSON('soul-spirits.json', null);
+  if (current && stableJSON(current.spirits) === stableJSON(data.spirits)) {
+    console.log(`soul-spirits.json unchanged: ${data.spirits.length} spirits`);
+    return;
+  }
   writeJSON('soul-spirits.json', data);
   console.log(`soul-spirits.json written: ${data.spirits.length} spirits`);
+}
+
+function stableJSON(value) {
+  if (Array.isArray(value)) return `[${value.map(stableJSON).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${stableJSON(value[key])}`).join(',')}}`;
+  }
+  return JSON.stringify(value);
 }
 
 if (require.main === module) {
@@ -153,4 +166,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { main, parseSoulSpiritsHTML, SOURCE_URL };
+module.exports = { main, parseSoulSpiritsHTML, SOURCE_URL, stableJSON };
