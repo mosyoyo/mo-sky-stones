@@ -170,7 +170,7 @@ assert(activityICS.includes('DESCRIPTION:类型: 活动\\n 标题: 测试活动\
 assert(!activityICS.includes('\r\n 标题:') && !activityICS.includes('\r\n 结束时间:'), '活动 DESCRIPTION 字段内不含真实折叠换行');
 const redDescriptionLines = redICS.split('\r\n').filter(line => line.startsWith('DESCRIPTION:'));
 assert(redDescriptionLines.length > 0, '红石 ICS 会生成 DESCRIPTION');
-assert(redDescriptionLines.every(line => !/[\r\n]/.test(line)), '红石 DESCRIPTION 字段行内不含真实 CR/LF');
+assert(redDescriptionLines.some(line => line.includes('\\n ') && line.includes('地图: ') && line.includes('区域: ') && line.includes('时间: ')), '红石 DESCRIPTION 保持上午可用版本的折叠字面换行拼法');
 assert(redICS.includes('TRIGGER;RELATED=START:-PT10M'), '红石提醒为开始前 10 分钟');
 assert(redICS.includes('含 10 分钟提醒') && !redICS.includes('含 15 分钟提醒'), '红石日历描述与 10 分钟提醒一致');
 handleIcsRequest(

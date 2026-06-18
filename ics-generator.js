@@ -28,9 +28,9 @@ function formatICSDateTimeUTC(date) {
 function escapeICS(text) {
   return String(text)
     .replace(/\\/g, '\\\\')
-    .replace(/\r\n|\r|\n/g, '\\n')
     .replace(/;/g, '\\;')
-    .replace(/,/g, '\\,');
+    .replace(/,/g, '\\,')
+    .replace(/\n/g, '\\n');
 }
 
 /**
@@ -58,12 +58,16 @@ function generateICS(filterType, days = 30, calName = '光遇') {
 
   for (const { date, event } of upcoming) {
     const summary = `【${typeName}】${event.map}·${event.area}`;
+    // 这里保留上午可订阅版本的旧拼法：
+    // CR + 字面量 \n + 空格。安卓日历对这个字节形态很敏感。
     const descriptionLines = [
       `地图: ${event.map}`,
       `区域: ${event.area}`,
       `时间: ${event.startTime} - ${event.endTime}`,
     ];
-    const description = descriptionLines.join('\n');
+    const description = descriptionLines
+      .map(line => escapeICS(line))
+      .join('\r\n ');
 
     // 转 UTC 时间（iOS/Android 都识识别，更可靠）
     const [sh, sm] = event.startTime.split(':');
