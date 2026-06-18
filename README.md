@@ -55,6 +55,8 @@ https://sky-ics.pages.dev/spirit-events.ics?spirits=希望之种,致敬钢琴家
 
 复制时保留 HTTPS 链接；点击“添加”时使用 `webcal://` 唤起手机日历。
 
+公开自选链接不依赖后台保存，每个用户可以生成自己的 `?spirits=` 订阅地址。后台的先祖页面只用于维护“不带 URL 参数时”的默认配置。
+
 ## 当前规则
 
 红石和黑石每天只保留最后一场。如果当天最后一场超过 23 点，就改用前一场。
@@ -83,7 +85,7 @@ https://sky-ics.pages.dev/admin/login/
 ```text
 /admin/feed/    公告审核
 /admin/events/  事件管理
-/admin/spirits/ 特定先祖
+/admin/spirits/ 默认先祖配置
 /admin/sync/    同步日志
 /admin/settings/数据源设置
 ```
@@ -279,7 +281,7 @@ data/events.json         已进入日历的事件
 data/event-overrides.json 事件页的人工修改和删除记录
 data/source-config.json  数据源偏好
 data/soul-spirits.json   BWiki 抓取的完整复刻先祖目录
-data/spirit-subscriptions.json 指定先祖订阅配置
+data/spirit-subscriptions.json 默认先祖配置
 data/sync.json           同步日志
 ```
 
