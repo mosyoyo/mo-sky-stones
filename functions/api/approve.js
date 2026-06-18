@@ -1,4 +1,5 @@
 const { detectType, extractDateRange, uidPart } = require('../../src/event-utils');
+const { updateEventOverrides } = require('../../src/event-overrides');
 const { disableFeedEvents } = require('../../src/feed-events');
 const { githubPutJSONFiles, json, readAssetJSON } = require('../_shared');
 
@@ -7,6 +8,8 @@ export async function onRequestPost(context) {
     const body = await context.request.json();
     const feeds = await readAssetJSON(context, '/data/feeds.json', []);
     const events = await readAssetJSON(context, '/data/events.json', []);
+    const beforeEvents = events.map(event => ({ ...event }));
+    const beforeOverrides = await readAssetJSON(context, '/data/event-overrides.json', []);
     const feed = feeds.find(item => item.id === body.feedId);
     if (!feed) return json({ error: 'feed not found' }, 404);
 
@@ -32,9 +35,11 @@ export async function onRequestPost(context) {
       disableFeedEvents(events, feed.id);
     }
 
+    const overrides = updateEventOverrides(beforeOverrides, beforeEvents, events);
     await githubPutJSONFiles(context.env, {
       'data/feeds.json': feeds,
       'data/events.json': events,
+      'data/event-overrides.json': overrides,
     }, `chore: ${feed.status} feed ${feed.id}`);
     return json({ ok: true, feed, events });
   } catch (err) {

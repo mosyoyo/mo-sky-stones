@@ -1,4 +1,5 @@
 const { cleanEventTitle, detectType, extractDateRange, uidPart } = require('../../src/event-utils');
+const { updateEventOverrides } = require('../../src/event-overrides');
 const { disableFeedEvents } = require('../../src/feed-events');
 const { githubPutJSONFiles, json, readAssetJSON } = require('../_shared');
 
@@ -29,6 +30,8 @@ export async function onRequestPost(context) {
 
     const feeds = await readAssetJSON(context, '/data/feeds.json', []);
     const events = await readAssetJSON(context, '/data/events.json', []);
+    const beforeEvents = events.map(event => ({ ...event }));
+    const beforeOverrides = await readAssetJSON(context, '/data/event-overrides.json', []);
     const feedMap = new Map(feeds.map(feed => [feed.id, feed]));
     const missing = [];
     let approved = 0;
@@ -50,9 +53,11 @@ export async function onRequestPost(context) {
       }
     }
 
+    const overrides = updateEventOverrides(beforeOverrides, beforeEvents, events);
     await githubPutJSONFiles(context.env, {
       'data/feeds.json': feeds,
       'data/events.json': events,
+      'data/event-overrides.json': overrides,
     }, `chore: batch review ${items.length} feeds`);
     return json({ ok: true, approved, ignored, missing });
   } catch (err) {
