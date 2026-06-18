@@ -33,6 +33,7 @@ function appConfig(env) {
     githubOwner: merged.githubOwner || env.GITHUB_OWNER,
     githubRepo: merged.githubRepo || env.GITHUB_REPO,
     githubBranch: merged.githubBranch || env.GITHUB_BRANCH || 'main',
+    webAnalyticsToken: merged.webAnalyticsToken || env.CF_WEB_ANALYTICS_TOKEN || env.CLOUDFLARE_WEB_ANALYTICS_TOKEN,
   };
 }
 

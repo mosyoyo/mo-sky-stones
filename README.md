@@ -63,7 +63,9 @@ https://sky-ics.pages.dev/admin/login/
 ```text
 /admin/feed/    公告审核
 /admin/events/  事件管理
+/admin/spirits/ 特定先祖
 /admin/sync/    同步日志
+/admin/settings/数据源设置
 ```
 
 公告页支持搜索、分页、类型筛选和批量提交。后台提交会写入 GitHub，然后触发 Cloudflare Pages 重新部署。
@@ -73,7 +75,7 @@ https://sky-ics.pages.dev/admin/login/
 Cloudflare Pages 项目字段：
 
 ```text
-Project name: sky-stones-bni
+Project name: sky-ics
 Production branch: main
 Root directory: /
 Build command: npm run build:events
@@ -170,15 +172,15 @@ npm run sync
 本地手动同步：
 
 ```bash
+npm run sync
+```
+
+单独调试网易大神抓取和解析时可以拆开跑：
+
+```bash
 npm run fetch
 npm run parse
 npm run build:events
-```
-
-或者一次跑完：
-
-```bash
-npm run sync
 ```
 
 抓更多历史公告时可以临时指定：
