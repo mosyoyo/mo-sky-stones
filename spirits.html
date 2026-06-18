@@ -278,7 +278,7 @@
       <button id="copy" class="button" type="button" disabled>复制</button>
       <a id="open" class="button secondary" href="#" aria-disabled="true">打开</a>
     </div>
-    <p class="hint" id="hint">最多选择 3 个。当前列表来自已经抓到的复刻事件。</p>
+    <p class="hint" id="hint">最多选择 3 个。订阅会在这些先祖返场时显示日程。</p>
   </section>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -302,6 +302,7 @@
     }
 
     function beijingDate(iso) {
+      if (!iso) return '';
       return new Intl.DateTimeFormat('zh-CN', {
         timeZone: 'Asia/Shanghai',
         month: 'numeric',
@@ -349,7 +350,7 @@
         urlInput.value = '选择先祖后生成链接';
         openLink.href = '#';
         openLink.setAttribute('aria-disabled', 'true');
-        hint.textContent = '最多选择 3 个。当前列表来自已经抓到的复刻事件。';
+        hint.textContent = '最多选择 3 个。订阅会在这些先祖返场时显示日程。';
       }
     }
 
@@ -368,7 +369,7 @@
           <button class="spirit ${on ? 'is-selected' : ''} ${disabled ? 'is-disabled' : ''}" type="button" data-name="${h(item.name)}">
             <span>
               <span class="name">${h(item.name)}</span>
-              <span class="meta">${h(beijingDate(item.start))} 到来 · ${h(beijingDate(item.end))} 离开</span>
+              <span class="meta">${h(item.meta)}</span>
             </span>
             <span class="mark">✓</span>
           </button>`;
@@ -387,15 +388,40 @@
 
     async function load() {
       try {
-        const res = await fetch('/data/events.json', { cache: 'no-store' });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const events = await res.json();
-        const seen = new Set();
-        spirits = (Array.isArray(events) ? events : [])
+        const [eventsRes, soulsRes] = await Promise.all([
+          fetch('/data/events.json', { cache: 'no-store' }),
+          fetch('/data/soul-spirits.json', { cache: 'no-store' }),
+        ]);
+        if (!eventsRes.ok) throw new Error(`events HTTP ${eventsRes.status}`);
+        const events = await eventsRes.json();
+        const soulData = soulsRes.ok ? await soulsRes.json() : null;
+        const activeMap = new Map((Array.isArray(events) ? events : [])
           .filter(event => event.enabled !== false && event.type === 'traveling_spirit')
-          .map(event => ({ name: spiritName(event), start: event.start, end: event.end }))
-          .filter(item => item.name && item.start && item.end && !seen.has(item.name) && seen.add(item.name))
-          .sort((a, b) => new Date(b.start) - new Date(a.start));
+          .map(event => [spiritName(event), event]));
+        const seen = new Set();
+        const source = Array.isArray(soulData?.spirits) && soulData.spirits.length
+          ? soulData.spirits.map(item => {
+            const active = activeMap.get(item.spiritName);
+            return {
+              name: item.spiritName,
+              start: active?.start || '',
+              end: active?.end || '',
+              lastRevisit: item.lastRevisit || '',
+              meta: active
+                ? `${beijingDate(active.start)} 到来 · ${beijingDate(active.end)} 离开`
+                : `${item.season || '未知季节'} · 上次 ${item.lastRevisit || '未知'}`,
+            };
+          })
+          : [...activeMap.values()].map(event => ({
+            name: spiritName(event),
+            start: event.start,
+            end: event.end,
+            lastRevisit: event.start || '',
+            meta: `${beijingDate(event.start)} 到来 · ${beijingDate(event.end)} 离开`,
+          }));
+        spirits = source
+          .filter(item => item.name && !seen.has(item.name) && seen.add(item.name))
+          .sort((a, b) => String(b.lastRevisit || b.start).localeCompare(String(a.lastRevisit || a.start)));
         render();
       } catch (err) {
         list.innerHTML = `<div class="empty">读取复刻列表失败：${err.message}</div>`;

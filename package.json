@@ -6,6 +6,8 @@
   "scripts": {
     "fetch": "node src/scripts/fetchFeeds.js",
     "parse": "node src/scripts/parseFeed.js",
+    "fetch:souls": "node src/scripts/fetchSoulSpirits.js",
+    "verify:souls": "node src/scripts/verifySoulSpirits.js",
     "build:events": "node src/scripts/buildEvents.js",
     "sync": "node src/scripts/syncEvents.js",
     "preview": "node test.js",

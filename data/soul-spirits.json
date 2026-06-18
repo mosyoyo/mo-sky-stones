@@ -1,0 +1,1110 @@
+{
+  "_meta": {
+    "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
+    "fetchedAt": "2026-06-18T08:23:18.853Z",
+    "spiritCount": 84
+  },
+  "spirits": [
+    {
+      "id": "e5b88ce69c9be4b98be7a78d",
+      "spiritName": "希望之种",
+      "season": "欧若拉季",
+      "lastRevisit": "2026-06-18",
+      "visitCount": 1,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%B8%8C%E6%9C%9B%E4%B9%8B%E7%A7%8D"
+    },
+    {
+      "id": "e887b4e695ace992a2e790b4e5aeb6",
+      "spiritName": "致敬钢琴家",
+      "season": "音韵季",
+      "lastRevisit": "2026-06-11",
+      "visitCount": 5,
+      "items": [
+        "面具",
+        "发型",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%87%B4%E6%95%AC%E9%92%A2%E7%90%B4%E5%AE%B6"
+    },
+    {
+      "id": "e5bfa7e98381e887aae889bee88085",
+      "spiritName": "忧郁自艾者",
+      "season": "夜行季",
+      "lastRevisit": "2026-05-28",
+      "visitCount": 1,
+      "items": [
+        "发型",
+        "耳饰",
+        "裤子"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%BF%A7%E9%83%81%E8%87%AA%E8%89%BE%E8%80%85"
+    },
+    {
+      "id": "e9a38ee99383e4bfaee8a1a5e58ca0",
+      "spiritName": "风铃修补匠",
+      "season": "风行季",
+      "lastRevisit": "2026-05-14",
+      "visitCount": 3,
+      "items": [
+        "裤子",
+        "发饰",
+        "发型",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%A3%8E%E9%93%83%E4%BF%AE%E8%A1%A5%E5%8C%A0"
+    },
+    {
+      "id": "e781abe58588e79fa5",
+      "spiritName": "火先知",
+      "season": "预言季",
+      "lastRevisit": "2026-04-30",
+      "visitCount": 4,
+      "items": [
+        "裤子",
+        "面具",
+        "发型",
+        "大型家具",
+        "小型家具",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%81%AB%E5%85%88%E7%9F%A5"
+    },
+    {
+      "id": "e6af8de8afade88085",
+      "spiritName": "母语者",
+      "season": "圣岛季",
+      "lastRevisit": "2026-04-16",
+      "visitCount": 4,
+      "items": [
+        "裤子",
+        "发型",
+        "大型家具",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%AF%8D%E8%AF%AD%E8%80%85"
+    },
+    {
+      "id": "e799bde697a5e6a2a6e6a3aee69e97e4baba",
+      "spiritName": "白日梦森林人",
+      "season": "集结季",
+      "lastRevisit": "2026-04-04",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%99%BD%E6%97%A5%E6%A2%A6%E6%A3%AE%E6%9E%97%E4%BA%BA"
+    },
+    {
+      "id": "e88386e5b08fe9acbce5ada6e59198",
+      "spiritName": "胆小鬼学员",
+      "season": "集结季",
+      "lastRevisit": "2026-04-04",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "大型家具",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%83%86%E5%B0%8F%E9%AC%BC%E5%AD%A6%E5%91%98"
+    },
+    {
+      "id": "e7aea1e4ba8be5b08fe9989fe995bf",
+      "spiritName": "管事小队长",
+      "season": "集结季",
+      "lastRevisit": "2026-04-04",
+      "visitCount": 3,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%AE%A1%E4%BA%8B%E5%B0%8F%E9%98%9F%E9%95%BF"
+    },
+    {
+      "id": "e88cabe784b6e6a48de789a9e5ada6e5aeb6",
+      "spiritName": "茫然植物学家",
+      "season": "集结季",
+      "lastRevisit": "2026-04-04",
+      "visitCount": 3,
+      "items": [
+        "面具",
+        "发型",
+        "大型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%8C%AB%E7%84%B6%E6%A4%8D%E7%89%A9%E5%AD%A6%E5%AE%B6"
+    },
+    {
+      "id": "e582bbe7ac91e7aba5e5ad90e5869b",
+      "spiritName": "傻笑童子军",
+      "season": "集结季",
+      "lastRevisit": "2026-04-04",
+      "visitCount": 2,
+      "items": [
+        "裤子",
+        "面具",
+        "大型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%82%BB%E7%AC%91%E7%AB%A5%E5%AD%90%E5%86%9B"
+    },
+    {
+      "id": "e6ada3e6ada5e58692e999a9e5aeb6",
+      "spiritName": "正步冒险家",
+      "season": "集结季",
+      "lastRevisit": "2026-04-04",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "大型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%AD%A3%E6%AD%A5%E5%86%92%E9%99%A9%E5%AE%B6"
+    },
+    {
+      "id": "e5a881e4b8a5e888b0e995bf",
+      "spiritName": "威严舰长",
+      "season": "潜海季",
+      "lastRevisit": "2026-04-02",
+      "visitCount": 2,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%A8%81%E4%B8%A5%E8%88%B0%E9%95%BF"
+    },
+    {
+      "id": "e7bb86e5bf83e79fbfe5b7a5",
+      "spiritName": "细心矿工",
+      "season": "欧若拉季",
+      "lastRevisit": "2026-03-19",
+      "visitCount": 1,
+      "items": [
+        "裤子",
+        "面具",
+        "发型",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%BB%86%E5%BF%83%E7%9F%BF%E5%B7%A5"
+    },
+    {
+      "id": "e8b59ee8aeb8e5a381e794bbe5aeb6",
+      "spiritName": "赞许壁画家",
+      "season": "魔法季",
+      "lastRevisit": "2026-03-05",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%B5%9E%E8%AE%B8%E5%A3%81%E7%94%BB%E5%AE%B6"
+    },
+    {
+      "id": "e5bda9e7bab8e8a1a8e4bab2",
+      "spiritName": "彩纸表亲",
+      "season": "归属季",
+      "lastRevisit": "2026-02-19",
+      "visitCount": 5,
+      "items": [
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%BD%A9%E7%BA%B8%E8%A1%A8%E4%BA%B2"
+    },
+    {
+      "id": "e5a49ce8a18ce9b89fe8afade88085",
+      "spiritName": "夜行鸟语者",
+      "season": "拾光季",
+      "lastRevisit": "2026-02-14",
+      "visitCount": 1,
+      "items": [
+        "裤子",
+        "鞋子",
+        "发型",
+        "发饰"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%A4%9C%E8%A1%8C%E9%B8%9F%E8%AF%AD%E8%80%85"
+    },
+    {
+      "id": "e8b7b3e8889ee889bae4baba",
+      "spiritName": "跳舞艺人",
+      "season": "梦想季",
+      "lastRevisit": "2026-02-05",
+      "visitCount": 2,
+      "items": [
+        "面具",
+        "斗篷",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%B7%B3%E8%88%9E%E8%89%BA%E4%BA%BA"
+    },
+    {
+      "id": "e8b88fe8889ee5ada9e7aba5",
+      "spiritName": "踏舞孩童",
+      "season": "归属季",
+      "lastRevisit": "2026-01-22",
+      "visitCount": 5,
+      "items": [
+        "裤子",
+        "面具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%B8%8F%E8%88%9E%E5%AD%A9%E7%AB%A5"
+    },
+    {
+      "id": "e781abe88ab1e5aeb6e995bf",
+      "spiritName": "火花家长",
+      "season": "归属季",
+      "lastRevisit": "2026-01-08",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%81%AB%E8%8A%B1%E5%AE%B6%E9%95%BF"
+    },
+    {
+      "id": "e8bf8ee5aebee4be8de88085",
+      "spiritName": "迎宾侍者",
+      "season": "音韵季",
+      "lastRevisit": "2025-12-25",
+      "visitCount": 4,
+      "items": [
+        "裤子",
+        "面具",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%BF%8E%E5%AE%BE%E4%BE%8D%E8%80%85"
+    },
+    {
+      "id": "e88081e7bb83e99fb3e4b990e5aeb6",
+      "spiritName": "老练音乐家",
+      "season": "表演季",
+      "lastRevisit": "2025-12-18",
+      "visitCount": 2,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%80%81%E7%BB%83%E9%9F%B3%E4%B9%90%E5%AE%B6"
+    },
+    {
+      "id": "e5bf99e7a28ce8889ee58fb0e7aea1e79086e591",
+      "spiritName": "忙碌舞台管理员",
+      "season": "表演季",
+      "lastRevisit": "2025-12-18",
+      "visitCount": 2,
+      "items": [
+        "裤子",
+        "面具",
+        "发型",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%BF%99%E7%A2%8C%E8%88%9E%E5%8F%B0%E7%AE%A1%E7%90%86%E5%91%98"
+    },
+    {
+      "id": "e581b7e7aaa5e982aee5b7ae",
+      "spiritName": "偷窥邮差",
+      "season": "梦想季",
+      "lastRevisit": "2025-12-18",
+      "visitCount": 4,
+      "items": [
+        "裤子",
+        "面具",
+        "斗篷",
+        "鞋子",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%81%B7%E7%AA%A5%E9%82%AE%E5%B7%AE"
+    },
+    {
+      "id": "e7868ae68ab1e99baae4baba",
+      "spiritName": "熊抱雪人",
+      "season": "梦想季",
+      "lastRevisit": "2025-12-18",
+      "visitCount": 3,
+      "items": [
+        "耳饰",
+        "发型",
+        "裤子"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%86%8A%E6%8A%B1%E9%9B%AA%E4%BA%BA"
+    },
+    {
+      "id": "e79e8ce79da1e69ca8e58ca0",
+      "spiritName": "瞌睡木匠",
+      "season": "魔法季",
+      "lastRevisit": "2025-12-11",
+      "visitCount": 4,
+      "items": [
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%9E%8C%E7%9D%A1%E6%9C%A8%E5%8C%A0"
+    },
+    {
+      "id": "e4b88de8888de5aeb6e995bf",
+      "spiritName": "不舍家长",
+      "season": "归属季",
+      "lastRevisit": "2025-11-27",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "斗篷",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E4%B8%8D%E8%88%8D%E5%AE%B6%E9%95%BF"
+    },
+    {
+      "id": "e7a8bbe88d89e4babae5869ce5a4ab",
+      "spiritName": "稻草人农夫",
+      "season": "魔法季",
+      "lastRevisit": "2025-11-13",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%A8%BB%E8%8D%89%E4%BA%BA%E5%86%9C%E5%A4%AB"
+    },
+    {
+      "id": "e88ba6e4bfaee8a18ce88085",
+      "spiritName": "苦修行者",
+      "season": "拾光季",
+      "lastRevisit": "2025-10-30",
+      "visitCount": 1,
+      "items": [
+        "面具",
+        "发型",
+        "裤子"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%8B%A6%E4%BF%AE%E8%A1%8C%E8%80%85"
+    },
+    {
+      "id": "e58881e89baee6b5aae88085",
+      "spiritName": "刁蛮浪者",
+      "season": "感恩季",
+      "lastRevisit": "2025-10-16",
+      "visitCount": 6,
+      "items": [
+        "面具",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%88%81%E8%9B%AE%E6%B5%AA%E8%80%85"
+    },
+    {
+      "id": "e58685e7a780e4b9a6e899ab",
+      "spiritName": "内秀书虫",
+      "season": "圣岛季",
+      "lastRevisit": "2025-10-02",
+      "visitCount": 4,
+      "items": [
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%86%85%E7%A7%80%E4%B9%A6%E8%99%AB"
+    },
+    {
+      "id": "e68489e682a6e59cb0e79086e5ada6e5aeb6",
+      "spiritName": "愉悦地理学家",
+      "season": "拾光季",
+      "lastRevisit": "2025-09-27",
+      "visitCount": 1,
+      "items": [
+        "面饰",
+        "发型",
+        "小型家具",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%84%89%E6%82%A6%E5%9C%B0%E7%90%86%E5%AD%A6%E5%AE%B6"
+    },
+    {
+      "id": "e58589e4b98be4bd8ee8afade88085",
+      "spiritName": "光之低语者",
+      "season": "风行季",
+      "lastRevisit": "2025-09-18",
+      "visitCount": 2,
+      "items": [
+        "裤子",
+        "发型",
+        "发饰",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%85%89%E4%B9%8B%E4%BD%8E%E8%AF%AD%E8%80%85"
+    },
+    {
+      "id": "e6978be8bdace8889ee88085",
+      "spiritName": "旋转舞者",
+      "season": "音韵季",
+      "lastRevisit": "2025-09-04",
+      "visitCount": 4,
+      "items": [
+        "裤子",
+        "发型",
+        "大型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%97%8B%E8%BD%AC%E8%88%9E%E8%80%85"
+    },
+    {
+      "id": "e5ac89e7ac91e782aee6898b",
+      "spiritName": "嬉笑炮手",
+      "season": "潜海季",
+      "lastRevisit": "2025-08-21",
+      "visitCount": 2,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%AC%89%E7%AC%91%E7%82%AE%E6%89%8B"
+    },
+    {
+      "id": "e7aca8e68b99e6b0b4e6898b",
+      "spiritName": "笨拙水手",
+      "season": "潜海季",
+      "lastRevisit": "2025-08-18",
+      "visitCount": 2,
+      "items": [
+        "面具",
+        "发饰",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%AC%A8%E6%8B%99%E6%B0%B4%E6%89%8B"
+    },
+    {
+      "id": "e8b49fe4bca4e68898e5a3ab",
+      "spiritName": "负伤战士",
+      "season": "追忆季",
+      "lastRevisit": "2025-08-18",
+      "visitCount": 1,
+      "items": [
+        "裤子",
+        "面具",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%B4%9F%E4%BC%A4%E6%88%98%E5%A3%AB"
+    },
+    {
+      "id": "e784a6e89991e6b894e5a4ab",
+      "spiritName": "焦虑渔夫",
+      "season": "潜海季",
+      "lastRevisit": "2025-08-18",
+      "visitCount": 2,
+      "items": [
+        "裤子",
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%84%A6%E8%99%91%E6%B8%94%E5%A4%AB"
+    },
+    {
+      "id": "e8b991e8b6b3e6b28fe88cb6e5b888",
+      "spiritName": "蹑足沏茶师",
+      "season": "追忆季",
+      "lastRevisit": "2025-08-18",
+      "visitCount": 1,
+      "items": [
+        "裤子",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%B9%91%E8%B6%B3%E6%B2%8F%E8%8C%B6%E5%B8%88"
+    },
+    {
+      "id": "e7bfbbe6bb9ae68da3e89b8be9acbc",
+      "spiritName": "翻滚捣蛋鬼",
+      "season": "夜行季",
+      "lastRevisit": "2025-07-10",
+      "visitCount": 1,
+      "items": [
+        "发型",
+        "耳饰",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%BF%BB%E6%BB%9A%E6%8D%A3%E8%9B%8B%E9%AC%BC"
+    },
+    {
+      "id": "e59bbae689a7e799bbe5b1b1e88085",
+      "spiritName": "固执登山者",
+      "season": "圣岛季",
+      "lastRevisit": "2025-06-26",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "颈饰",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%9B%BA%E6%89%A7%E7%99%BB%E5%B1%B1%E8%80%85"
+    },
+    {
+      "id": "e5a4a9e6898de5bbbae7ad91e5b888",
+      "spiritName": "天才建筑师",
+      "season": "风行季",
+      "lastRevisit": "2025-06-12",
+      "visitCount": 2,
+      "items": [
+        "裤子",
+        "颈饰",
+        "发型",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%A4%A9%E6%89%8D%E5%BB%BA%E7%AD%91%E5%B8%88"
+    },
+    {
+      "id": "e9a38ee8a18ce9a286e888aae59198",
+      "spiritName": "风行领航员",
+      "season": "风行季",
+      "lastRevisit": "2025-05-29",
+      "visitCount": 2,
+      "items": [
+        "发型",
+        "发饰",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%A3%8E%E8%A1%8C%E9%A2%86%E8%88%AA%E5%91%98"
+    },
+    {
+      "id": "e9b8a3e8b0a2e694b6e8978fe5aeb6",
+      "spiritName": "鸣谢收藏家",
+      "season": "圣岛季",
+      "lastRevisit": "2025-05-01",
+      "visitCount": 4,
+      "items": [
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%B8%A3%E8%B0%A2%E6%94%B6%E8%97%8F%E5%AE%B6"
+    },
+    {
+      "id": "e99a8fe680a7e68b93e88d92e88085",
+      "spiritName": "随性拓荒者",
+      "season": "追光季",
+      "lastRevisit": "2025-04-26",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "手持",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%9A%8F%E6%80%A7%E6%8B%93%E8%8D%92%E8%80%85"
+    },
+    {
+      "id": "e8a2abe980bce697a0e5a588e79a84e68e8ce781",
+      "spiritName": "被逼无奈的掌灯人",
+      "season": "小王子季",
+      "lastRevisit": "2025-04-08",
+      "visitCount": 3,
+      "items": [
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%A2%AB%E9%80%BC%E6%97%A0%E5%A5%88%E7%9A%84%E6%8E%8C%E7%81%AF%E4%BA%BA"
+    },
+    {
+      "id": "e68993e596b7e59a8fe79a84e59cb0e79086e5ad",
+      "spiritName": "打喷嚏的地理学家",
+      "season": "小王子季",
+      "lastRevisit": "2025-04-08",
+      "visitCount": 2,
+      "items": [
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%89%93%E5%96%B7%E5%9A%8F%E7%9A%84%E5%9C%B0%E7%90%86%E5%AD%A6%E5%AE%B6"
+    },
+    {
+      "id": "e591bce9a38ee594a4e99ba8e79a84e7bb9fe6b2",
+      "spiritName": "呼风唤雨的统治者",
+      "season": "小王子季",
+      "lastRevisit": "2025-04-08",
+      "visitCount": 3,
+      "items": [
+        "面具",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%91%BC%E9%A3%8E%E5%94%A4%E9%9B%A8%E7%9A%84%E7%BB%9F%E6%B2%BB%E8%80%85"
+    },
+    {
+      "id": "e8908ee99da1e4b88de68cafe79a84e5a3abe585",
+      "spiritName": "萎靡不振的士兵",
+      "season": "小王子季",
+      "lastRevisit": "2025-04-08",
+      "visitCount": 2,
+      "items": [
+        "发型",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%90%8E%E9%9D%A1%E4%B8%8D%E6%8C%AF%E7%9A%84%E5%A3%AB%E5%85%B5"
+    },
+    {
+      "id": "e6989fe58589e694b6e8978fe5aeb6",
+      "spiritName": "星光收藏家",
+      "season": "小王子季",
+      "lastRevisit": "2025-04-08",
+      "visitCount": 2,
+      "items": [
+        "颈饰",
+        "斗篷",
+        "大型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%98%9F%E5%85%89%E6%94%B6%E8%97%8F%E5%AE%B6"
+    },
+    {
+      "id": "e6b2bee6b2bee887aae5969ce79a84e887aae681",
+      "spiritName": "沾沾自喜的自恋者",
+      "season": "小王子季",
+      "lastRevisit": "2025-04-08",
+      "visitCount": 3,
+      "items": [
+        "裤子",
+        "发型",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%B2%BE%E6%B2%BE%E8%87%AA%E5%96%9C%E7%9A%84%E8%87%AA%E6%81%8B%E8%80%85"
+    },
+    {
+      "id": "e68c91e8a185e889bae4bc8e",
+      "spiritName": "挑衅艺伎",
+      "season": "感恩季",
+      "lastRevisit": "2025-04-03",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%8C%91%E8%A1%85%E8%89%BA%E4%BC%8E"
+    },
+    {
+      "id": "e882a9e8838ce8bfbde58589",
+      "spiritName": "肩背追光",
+      "season": "追光季",
+      "lastRevisit": "2025-03-20",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%82%A9%E8%83%8C%E8%BF%BD%E5%85%89"
+    },
+    {
+      "id": "e788b1e4b98be68898e5a3ab",
+      "spiritName": "爱之战士",
+      "season": "欧若拉季",
+      "lastRevisit": "2025-02-20",
+      "visitCount": 1,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%88%B1%E4%B9%8B%E6%88%98%E5%A3%AB"
+    },
+    {
+      "id": "e68bb3e7a4bce6ada6e583a7",
+      "spiritName": "拳礼武僧",
+      "season": "感恩季",
+      "lastRevisit": "2025-02-06",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%8B%B3%E7%A4%BC%E6%AD%A6%E5%83%A7"
+    },
+    {
+      "id": "e581a5e5bf98e58f99e4ba8be88085",
+      "spiritName": "健忘叙事者",
+      "season": "表演季",
+      "lastRevisit": "2025-01-28",
+      "visitCount": 1,
+      "items": [
+        "裤子",
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%81%A5%E5%BF%98%E5%8F%99%E4%BA%8B%E8%80%85"
+    },
+    {
+      "id": "e59b9ee6978be5a4a7e5b888",
+      "spiritName": "回旋大师",
+      "season": "梦想季",
+      "lastRevisit": "2025-01-23",
+      "visitCount": 3,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%9B%9E%E6%97%8B%E5%A4%A7%E5%B8%88"
+    },
+    {
+      "id": "e6b289e6809de7bc96e5afbc",
+      "spiritName": "沉思编导",
+      "season": "音韵季",
+      "lastRevisit": "2025-01-09",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "斗篷",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%B2%89%E6%80%9D%E7%BC%96%E5%AF%BC"
+    },
+    {
+      "id": "e58fa4e680aae8beb9e7bc98e4baba",
+      "spiritName": "古怪边缘人",
+      "season": "夜行季",
+      "lastRevisit": "2025-01-09",
+      "visitCount": 1,
+      "items": [
+        "裤子",
+        "颈饰",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%8F%A4%E6%80%AA%E8%BE%B9%E7%BC%98%E4%BA%BA"
+    },
+    {
+      "id": "e68a9be79083e69d82e8808d",
+      "spiritName": "抛球杂耍",
+      "season": "音韵季",
+      "lastRevisit": "2025-01-09",
+      "visitCount": 4,
+      "items": [
+        "裤子",
+        "发型",
+        "斗篷",
+        "大型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%8A%9B%E7%90%83%E6%9D%82%E8%80%8D"
+    },
+    {
+      "id": "e4b99ee6b182e5ada9e7aba5",
+      "spiritName": "乞求孩童",
+      "season": "追忆季",
+      "lastRevisit": "2025-01-09",
+      "visitCount": 1,
+      "items": [
+        "裤子",
+        "鞋子",
+        "颈饰",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E4%B9%9E%E6%B1%82%E5%AD%A9%E7%AB%A5"
+    },
+    {
+      "id": "e8b0a6e8999ae8889ee88085",
+      "spiritName": "谦虚舞者",
+      "season": "表演季",
+      "lastRevisit": "2025-01-09",
+      "visitCount": 1,
+      "items": [
+        "裤子",
+        "面具",
+        "发型",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%B0%A6%E8%99%9A%E8%88%9E%E8%80%85"
+    },
+    {
+      "id": "e699bae685a7e995bfe88085",
+      "spiritName": "智慧长者",
+      "season": "归属季",
+      "lastRevisit": "2024-12-21",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%99%BA%E6%85%A7%E9%95%BF%E8%80%85"
+    },
+    {
+      "id": "e59c9fe58588e79fa5",
+      "spiritName": "土先知",
+      "season": "预言季",
+      "lastRevisit": "2024-10-17",
+      "visitCount": 3,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷",
+        "小型家具",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%9C%9F%E5%85%88%E7%9F%A5"
+    },
+    {
+      "id": "e8bf9ce58fa4e58589e6988ee8aeb0e5bf86efbc",
+      "spiritName": "远古光明记忆（水母）",
+      "season": "破晓季",
+      "lastRevisit": "2024-10-08",
+      "visitCount": 1,
+      "items": [
+        "发型",
+        "发饰",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%BF%9C%E5%8F%A4%E5%85%89%E6%98%8E%E8%AE%B0%E5%BF%86%EF%BC%88%E6%B0%B4%E6%AF%8D%EF%BC%89"
+    },
+    {
+      "id": "e8bf9ce58fa4e58589e6988ee8aeb0e5bf86efbc-2",
+      "spiritName": "远古光明记忆（遥鲲）",
+      "season": "破晓季",
+      "lastRevisit": "2024-10-08",
+      "visitCount": 1,
+      "items": [
+        "裤子",
+        "发型",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/index.php"
+    },
+    {
+      "id": "e8bf9ce58fa4e9bb91e69a97e8aeb0e5bf86efbc",
+      "spiritName": "远古黑暗记忆（暗花）",
+      "season": "破晓季",
+      "lastRevisit": "2024-10-08",
+      "visitCount": 1,
+      "items": [
+        "面具",
+        "发饰",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/index.php"
+    },
+    {
+      "id": "e8bf9ce58fa4e9bb91e69a97e8aeb0e5bf86efbc-2",
+      "spiritName": "远古黑暗记忆（冥龙）",
+      "season": "破晓季",
+      "lastRevisit": "2024-10-08",
+      "visitCount": 1,
+      "items": [
+        "颈饰",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/index.php"
+    },
+    {
+      "id": "e695ace7a4bce68aa4e58dab",
+      "spiritName": "敬礼护卫",
+      "season": "感恩季",
+      "lastRevisit": "2024-10-03",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%95%AC%E7%A4%BC%E6%8A%A4%E5%8D%AB"
+    },
+    {
+      "id": "e6b0b4e58588e79fa5",
+      "spiritName": "水先知",
+      "season": "预言季",
+      "lastRevisit": "2024-09-18",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷",
+        "小型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%B0%B4%E5%85%88%E7%9F%A5"
+    },
+    {
+      "id": "e68385e7bbaae88d89e88dafe5b888",
+      "spiritName": "情绪草药师",
+      "season": "魔法季",
+      "lastRevisit": "2024-08-08",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%83%85%E7%BB%AA%E8%8D%89%E8%8D%AF%E5%B8%88"
+    },
+    {
+      "id": "e783ade8a180e8bf90e58aa8e59198",
+      "spiritName": "热血运动员",
+      "season": "圣岛季",
+      "lastRevisit": "2024-07-25",
+      "visitCount": 3,
+      "items": [
+        "裤子",
+        "发型"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%83%AD%E8%A1%80%E8%BF%90%E5%8A%A8%E5%91%98"
+    },
+    {
+      "id": "e9a38ee58588e79fa5",
+      "spiritName": "风先知",
+      "season": "预言季",
+      "lastRevisit": "2024-07-11",
+      "visitCount": 3,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷",
+        "小型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%A3%8E%E5%85%88%E7%9F%A5"
+    },
+    {
+      "id": "e99d99e58589e5ada6e88085",
+      "spiritName": "静光学者",
+      "season": "追光季",
+      "lastRevisit": "2024-05-16",
+      "visitCount": 3,
+      "items": [
+        "面具",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%9D%99%E5%85%89%E5%AD%A6%E8%80%85"
+    },
+    {
+      "id": "e78caee68385e6bc94e59198",
+      "spiritName": "献情演员",
+      "season": "音韵季",
+      "lastRevisit": "2024-05-02",
+      "visitCount": 3,
+      "items": [
+        "裤子",
+        "面具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%8C%AE%E6%83%85%E6%BC%94%E5%91%98"
+    },
+    {
+      "id": "e88892e5b195e5a4a7e5b888",
+      "spiritName": "舒展大师",
+      "season": "感恩季",
+      "lastRevisit": "2024-03-21",
+      "visitCount": 4,
+      "items": [
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%88%92%E5%B1%95%E5%A4%A7%E5%B8%88"
+    },
+    {
+      "id": "e586b7e6bca0e69cafe5a3ab",
+      "spiritName": "冷漠术士",
+      "season": "魔法季",
+      "lastRevisit": "2024-03-12",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%86%B7%E6%BC%A0%E6%9C%AF%E5%A3%AB"
+    },
+    {
+      "id": "e893ace5a4b4e99d92e5b9b4",
+      "spiritName": "蓬头青年",
+      "season": "归属季",
+      "lastRevisit": "2024-02-15",
+      "visitCount": 4,
+      "items": [
+        "耳饰",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%93%AC%E5%A4%B4%E9%9D%92%E5%B9%B4"
+    },
+    {
+      "id": "e694bee69dbee697a5e6b5b4e88085",
+      "spiritName": "放松日浴者",
+      "season": "圣岛季",
+      "lastRevisit": "2023-11-16",
+      "visitCount": 3,
+      "items": [
+        "面饰",
+        "发饰",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%94%BE%E6%9D%BE%E6%97%A5%E6%B5%B4%E8%80%85"
+    },
+    {
+      "id": "e89fb9e8afade88085",
+      "spiritName": "蟹语者",
+      "season": "追光季",
+      "lastRevisit": "2023-09-21",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%9F%B9%E8%AF%AD%E8%80%85"
+    },
+    {
+      "id": "e8b7b3e8b783e8889ee88085",
+      "spiritName": "跳跃舞者",
+      "season": "感恩季",
+      "lastRevisit": "2023-08-10",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%B7%B3%E8%B7%83%E8%88%9E%E8%80%85"
+    },
+    {
+      "id": "e587bbe68e8ce58589e5869c",
+      "spiritName": "击掌光农",
+      "season": "追光季",
+      "lastRevisit": "2023-03-09",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "发型",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%87%BB%E6%8E%8C%E5%85%89%E5%86%9C"
+    },
+    {
+      "id": "e89ebae6978be6ada6e586a0",
+      "spiritName": "螺旋武冠",
+      "season": "追光季",
+      "lastRevisit": "2021-05-06",
+      "visitCount": 1,
+      "items": [
+        "面具",
+        "发型",
+        "手持"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%9E%BA%E6%97%8B%E6%AD%A6%E5%86%A0"
+    },
+    {
+      "id": "e89fb9e8889ee88085",
+      "spiritName": "蟹舞者",
+      "season": "魔法季",
+      "lastRevisit": "2021-04-08",
+      "visitCount": 1,
+      "items": [
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%9F%B9%E8%88%9E%E8%80%85"
+    }
+  ]
+}

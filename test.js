@@ -10,6 +10,7 @@ const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
 const { toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
+const { verifySoulSpirits } = require('./src/scripts/verifySoulSpirits');
 const fs = require('fs');
 const path = require('path');
 
@@ -176,3 +177,6 @@ const selectedFromUrl = parseSelectedSpirits('https://sky-ics.pages.dev/spirit-e
 assert(selectedFromUrl.length === 3 && selectedFromUrl[0] === '希望之种' && selectedFromUrl[1] === '致敬钢琴家', '指定先祖订阅优先使用 URL 参数并限制最多 3 个');
 const selectedFallback = parseSelectedSpirits('https://sky-ics.pages.dev/spirit-events.ics', { selected: ['希望之种'] });
 assert(selectedFallback.length === 1 && selectedFallback[0] === '希望之种', '指定先祖订阅无 URL 参数时兼容后台保存配置');
+const soulSpirits = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'soul-spirits.json'), 'utf8'));
+assert(verifySoulSpirits(soulSpirits).length === 0, '完整先祖列表通过结构校验');
+assert(soulSpirits.spirits.length >= 50, '完整先祖列表包含 50 个以上先祖');
