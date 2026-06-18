@@ -176,6 +176,13 @@ const summaryICS = generateEventsICS([
 assert(summaryICS.includes('SUMMARY:【季节结束】狂欢季 明天就要结束了'), '季节结束提醒 SUMMARY 与连续事件区分');
 assert(summaryICS.includes('SUMMARY:【活动结束】端午节'), '活动结束提醒 SUMMARY 与连续事件区分');
 assert(summaryICS.includes('SUMMARY:【先祖离开】希望之种'), '先祖离开提醒 SUMMARY 与连续事件区分');
+const chineseUidICS = generateEventsICS([
+  { enabled: true, type: 'traveling_spirit', title: '【复刻】希望之种', id: 'wiki-traveling_spirit-希望之种-0618', start: '2026-06-17T22:00:00.000Z', end: '2026-06-22T04:00:00.000Z' },
+  { enabled: true, type: 'traveling_spirit', title: '【复刻】致敬钢琴家', id: 'wiki-traveling_spirit-致敬钢琴家-0618', start: '2026-06-17T22:00:00.000Z', end: '2026-06-22T04:00:00.000Z' },
+]);
+const uidLines = chineseUidICS.split('\r\n').filter(line => line.startsWith('UID:') && line.includes('-range@'));
+assert(uidLines.length === 2 && new Set(uidLines).size === 2, '中文事件 UID 会保留稳定区分信息');
+assert(uidLines.every(line => !line.includes('---0618')), '中文事件 UID 不会退化成空标题');
 
 console.log('');
 console.log('=== 指定先祖匹配验证 ===');

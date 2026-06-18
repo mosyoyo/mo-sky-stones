@@ -341,7 +341,19 @@ function extractDateRange(title = '', content = '', now = new Date()) {
 }
 
 function uidPart(value) {
-  return String(value || 'event').replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '') || 'event';
+  const text = String(value || 'event');
+  const ascii = text.replace(/[^A-Za-z0-9_-]+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
+  const hash = fnv1a(text);
+  return ascii ? `${ascii}-${hash}` : `event-${hash}`;
+}
+
+function fnv1a(value) {
+  let hash = 0x811c9dc5;
+  for (const ch of String(value || '')) {
+    hash ^= ch.codePointAt(0);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return hash.toString(36);
 }
 
 function compactUid(value) {
