@@ -213,6 +213,19 @@ preview-black.ics
 
 这些 `.ics` 文件只用于本地预览，`.gitignore` 已经忽略，不要提交到 GitHub。
 
+`npm run build:events` 默认只校验活动 ICS 能否生成，不会在根目录写出 `events.ics`，避免部署时静态文件和 Cloudflare Function 路由冲突。需要本地导出时再临时执行：
+
+```bash
+WRITE_STATIC_ICS=1 npm run build:events
+```
+
+PowerShell：
+
+```powershell
+$env:WRITE_STATIC_ICS='1'
+npm run build:events
+```
+
 ## 文件结构
 
 ```text
