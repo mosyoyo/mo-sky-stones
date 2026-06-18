@@ -2,8 +2,19 @@
 // 红石、黑石分开生成
 
 const { generateICS } = require('./ics-generator');
+const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
 const fs = require('fs');
 const path = require('path');
+
+function assert(condition, message) {
+  if (!condition) {
+    console.log(`❌ ${message}`);
+    process.exitCode = 1;
+    return false;
+  }
+  console.log(`✅ ${message}`);
+  return true;
+}
 
 // 生成红石
 const redICS = generateICS('red', 30);
@@ -60,3 +71,17 @@ if (maxPerDay === 1) {
   console.log('❌ 验证失败');
   process.exitCode = 1;
 }
+
+console.log('');
+console.log('=== 默认订阅参数验证 ===');
+const defaultTypes = parseTypes('https://sky-ics.pages.dev/calendar.ics');
+assert(defaultTypes.includes('red'), 'calendar.ics 默认包含红石');
+assert(!defaultTypes.includes('black'), 'calendar.ics 默认不包含黑石');
+assert(defaultTypes.includes('traveling_spirit') && defaultTypes.includes('maintenance'), 'calendar.ics 默认包含公告事件类型');
+
+const eventReminderOptions = parseReminderOptions('https://sky-ics.pages.dev/events.ics');
+assert(eventReminderOptions.endOnly.size === 0, 'events.ics 默认不套用首页 endOnly');
+
+const defaultCalendar = buildCalendar([], defaultTypes, { reminderOpts: { endOnly: new Set(['traveling_spirit', 'season', 'activity']) } });
+assert(defaultCalendar.includes('SUMMARY:【红石】'), 'calendar.ics 默认组合能生成红石事件');
+assert(defaultCalendar.includes('END:VCALENDAR'), 'calendar.ics 默认组合结构完整');
