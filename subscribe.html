@@ -120,7 +120,7 @@
       <div class="url-row">
         <input id="url" type="text" readonly>
         <button id="copy" type="button">复制</button>
-        <a id="open" class="button" href="#">打开</a>
+        <a id="open" class="button" href="#">添加</a>
       </div>
       <p class="summary" id="summary"></p>
     </section>
@@ -167,7 +167,7 @@
       if (endOnly.length) params.set('endOnly', endOnly.join(','));
       const value = `${location.origin}/calendar.ics?${params.toString()}`;
       urlInput.value = value;
-      openLink.href = value;
+      openLink.href = value.replace(/^https?:\/\//, 'webcal://');
       summary.textContent = `已选 ${types.length} 项，其中 ${endOnly.length} 项仅结束提醒。`;
       syncEndOnlyAll();
     }

@@ -276,7 +276,7 @@
     <div class="dock-row">
       <input id="url" type="text" readonly value="选择先祖后生成链接">
       <button id="copy" class="button" type="button" disabled>复制</button>
-      <a id="open" class="button secondary" href="#" aria-disabled="true">打开</a>
+      <a id="open" class="button secondary" href="#" aria-disabled="true">添加</a>
     </div>
     <p class="hint" id="hint">最多选择 3 个。订阅会在这些先祖返场时显示日程。</p>
   </section>
@@ -337,13 +337,17 @@
       return `${location.origin}/spirit-events.ics?${params.toString()}`;
     }
 
+    function webcalUrl(url) {
+      return url.replace(/^https?:\/\//, 'webcal://');
+    }
+
     function updateLink() {
       const url = subscriptionUrl();
       count.textContent = `已选 ${selected.size} / 3`;
       copyButton.disabled = !url;
       if (url) {
         urlInput.value = url;
-        openLink.href = url;
+        openLink.href = webcalUrl(url);
         openLink.removeAttribute('aria-disabled');
         hint.textContent = `已选择：${[...selected].join('、')}`;
       } else {
