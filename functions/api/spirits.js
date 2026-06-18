@@ -14,7 +14,7 @@ function normalizePayload(body) {
 }
 
 export async function onRequestGet(context) {
-  const items = await readAssetJSON(context, '/data/spirit-items.json', { spirits: [] });
+  const items = await readAssetJSON(context, '/data/soul-spirits.json', { spirits: [] });
   const saved = await readAssetJSON(context, `/${SUBSCRIPTIONS_PATH}`, { selected: [] });
   return json({
     items: Array.isArray(items.spirits) ? items.spirits : [],

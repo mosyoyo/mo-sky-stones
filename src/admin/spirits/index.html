@@ -12,14 +12,15 @@
   <main>
     <header class="hero">
       <div>
-        <h1>先祖订阅</h1>
-        <p class="muted">选择你关心的复刻先祖，保存后会写入订阅配置。</p>
+        <h1>默认先祖订阅</h1>
+        <p class="muted">这里保存的是不带 URL 参数时的默认指定先祖配置。普通用户自选请使用公开页面。</p>
       </div>
       <button id="save">保存订阅</button>
     </header>
     <section>
       <div class="toolbar">
         <span class="muted" id="status">正在读取先祖列表...</span>
+        <a class="pill" href="/spirits.html">打开公开选择页</a>
         <label class="pill"><input id="onlySelected" type="checkbox">仅看已订阅</label>
       </div>
     </section>
@@ -39,6 +40,10 @@
         return item.englishName ? `${item.spiritName} · ${item.englishName}` : item.spiritName;
       }
 
+      function spiritMeta(item) {
+        return [item.season, item.lastRevisit ? `上次 ${item.lastRevisit}` : '', item.map].filter(Boolean).join(' · ');
+      }
+
       function render() {
         const visible = items.filter(item => !onlySelected.checked || selected.has(item.spiritName));
         document.querySelector('#list').innerHTML = visible.map(item => {
@@ -48,7 +53,7 @@
               <div class="top">
                 <div>
                   <strong>${h(spiritLabel(item))}</strong>
-                  <span class="muted" style="margin-left:6px">${h(item.season || '')}${item.map ? ` · ${item.map}` : ''}</span>
+                  <span class="muted" style="margin-left:6px">${h(spiritMeta(item))}</span>
                 </div>
                 <label class="event-enabled">
                   <input type="checkbox" data-spirit="${h(item.spiritName)}" ${on ? 'checked' : ''}>
@@ -56,7 +61,7 @@
                 </label>
               </div>
               <div class="row" style="margin-top:10px">
-                ${(item.aliases || []).slice(0, 4).map(alias => `<span class="tag other">${h(alias)}</span>`).join('')}
+                ${(item.items || item.aliases || []).slice(0, 4).map(alias => `<span class="tag other">${h(alias)}</span>`).join('')}
               </div>
             </section>`;
         }).join('');
@@ -69,7 +74,7 @@
             render();
           };
         });
-        status.textContent = `共 ${items.length} 个先祖，已订阅 ${selected.size} 个。`;
+          status.textContent = `共 ${items.length} 个先祖，默认订阅 ${selected.size} 个。`;
       }
 
       async function load() {
@@ -94,7 +99,7 @@
             body: JSON.stringify({ selected: [...selected] }),
           });
           showToast(`已保存${data.commit ? `：${data.commit.slice(0, 7)}` : ''}`, 'success');
-          status.textContent = `已保存，订阅 ${selected.size} 个先祖。`;
+          status.textContent = `已保存，默认订阅 ${selected.size} 个先祖。`;
         } catch (err) {
           showToast(err.message, 'error');
         } finally {
