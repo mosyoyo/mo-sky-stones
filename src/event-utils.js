@@ -373,7 +373,7 @@ function shortSummary(title, label) {
 
 function buildDescription(lines) {
   const chunks = Array.isArray(lines) ? lines : [lines];
-  return chunks.map(line => escapeICSLine(line)).join('\n');
+  return chunks.map(line => escapeICSLine(line)).join('\r\n ');
 }
 
 function createTimedEvent({ uid, dtstamp, start, end, summary, description, location, category, alarm }) {
@@ -602,12 +602,12 @@ function generateSpiritEventsICS(events, options = {}) {
     const items = Array.isArray(info.items) ? info.items.filter(Boolean).slice(0, 8) : [];
     const start = new Date(event.start);
     const end = new Date(event.end);
-    const desc = [
+    const desc = buildDescription([
       `${spiritName}返场`,
       `开始: ${beijingText(start)}`,
       `离开: ${beijingText(end)}`,
       items.length ? `物品: ${items.join('、')}` : '',
-    ].filter(Boolean).join('\n');
+    ].filter(Boolean));
     const id = compactUid(event.id || event.sourceFeedId || spiritName);
 
     blocks.push(createTimedEvent({
