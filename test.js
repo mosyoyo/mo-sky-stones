@@ -137,3 +137,6 @@ const activityICS = generateEventsICS([
 const descriptionLines = activityICS.split('\r\n').filter(line => line.startsWith('DESCRIPTION:'));
 assert(descriptionLines.length > 0, '活动 ICS 会生成 DESCRIPTION');
 assert(descriptionLines.every(line => !/[\r\n]/.test(line)), 'DESCRIPTION 字段行内不含真实 CR/LF');
+const redDescriptionLines = redICS.split('\r\n').filter(line => line.startsWith('DESCRIPTION:'));
+assert(redDescriptionLines.length > 0, '红石 ICS 会生成 DESCRIPTION');
+assert(redDescriptionLines.every(line => !/[\r\n]/.test(line)), '红石 DESCRIPTION 字段行内不含真实 CR/LF');
