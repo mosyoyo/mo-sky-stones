@@ -189,16 +189,19 @@ npm run build:events
 抓更多历史公告时可以临时指定：
 
 ```bash
-FEED_TARGET_COUNT=300 FEED_MAX_PAGES=30 npm run fetch
+FEED_FETCH_OLDER=1 FEED_TARGET_COUNT=300 FEED_MAX_PAGES=30 npm run fetch
 ```
 
 PowerShell 写法：
 
 ```powershell
+$env:FEED_FETCH_OLDER='1'
 $env:FEED_TARGET_COUNT='300'
 $env:FEED_MAX_PAGES='30'
 npm run fetch
 ```
+
+默认同步会从最新公告开始抓，避免漏掉新动态。只有需要继续往前补历史时才设置 `FEED_FETCH_OLDER=1`。
 
 ## 本地检查
 

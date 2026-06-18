@@ -4,6 +4,7 @@
 const { generateICS } = require('./ics-generator');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
 const { disableFeedEvents } = require('./src/feed-events');
+const { initialMaxTime } = require('./src/scripts/fetchFeeds');
 const fs = require('fs');
 const path = require('path');
 
@@ -96,3 +97,9 @@ const ignoredEvents = [
 disableFeedEvents(ignoredEvents, 'feed-1');
 assert(ignoredEvents[0].enabled === false, '忽略公告会关闭对应日历事件');
 assert(ignoredEvents[1].enabled === true, '忽略公告不会影响其他事件');
+
+console.log('');
+console.log('=== 公告抓取游标验证 ===');
+const oldFeeds = [{ createTime: 1000 }, { createTime: 3000 }];
+assert(initialMaxTime(oldFeeds, true) === 999, '补历史模式从最旧公告之前继续抓');
+assert(initialMaxTime(oldFeeds, false) > Date.now(), '默认同步从最新公告开始抓');

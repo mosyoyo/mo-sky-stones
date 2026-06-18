@@ -6,6 +6,7 @@ const DETAIL_URL = 'https://inf.ds.163.com/v1/web/feed/basic/facade';
 const FEED_TYPES = '1,2,3,4,6,7,10,11';
 const TARGET_COUNT = Number(process.env.FEED_TARGET_COUNT || 100);
 const MAX_PAGES = Number(process.env.FEED_MAX_PAGES || 10);
+const FETCH_OLDER = process.env.FEED_FETCH_OLDER === '1';
 
 function collectFeeds(payload) {
   const found = [];
@@ -79,11 +80,7 @@ async function main() {
   const current = readJSON('feeds.json', []);
   const currentMap = new Map(current.map(feed => [feed.id, feed]));
   const list = [];
-  const oldestTime = current
-    .map(feed => Number(feed.createTime || 0))
-    .filter(Boolean)
-    .sort((a, b) => a - b)[0];
-  let maxTime = oldestTime ? oldestTime - 1 : Date.now() + 24 * 60 * 60 * 1000;
+  let maxTime = initialMaxTime(current, FETCH_OLDER);
   let minTime = 0;
   let page = 0;
 
@@ -140,6 +137,15 @@ async function main() {
   console.log(`feeds: ${feeds.length}, new: ${newFeeds.length}`);
 }
 
+function initialMaxTime(current, fetchOlder = false) {
+  if (!fetchOlder) return Date.now() + 24 * 60 * 60 * 1000;
+  const oldestTime = current
+    .map(feed => Number(feed.createTime || 0))
+    .filter(Boolean)
+    .sort((a, b) => a - b)[0];
+  return oldestTime ? oldestTime - 1 : Date.now() + 24 * 60 * 60 * 1000;
+}
+
 if (require.main === module) {
   main().catch(err => {
     appendSyncLog({ message: '抓取失败', error: err.message });
@@ -148,4 +154,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { collectFeeds, main };
+module.exports = { collectFeeds, initialMaxTime, main };
