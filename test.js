@@ -95,6 +95,8 @@ assert(eventReminderOptions.endOnly.size === 0, 'events.ics 默认不套用首�
 const defaultCalendar = buildCalendar([], defaultTypes, { reminderOpts: { endOnly: new Set(['traveling_spirit', 'season', 'activity']) } });
 assert(defaultCalendar.includes('SUMMARY:【红石】'), 'calendar.ics 默认组合能生成红石事件');
 assert(defaultCalendar.includes('END:VCALENDAR'), 'calendar.ics 默认组合结构完整');
+assert(defaultCalendar.includes('REFRESH-INTERVAL;VALUE=DURATION:PT1H'), 'calendar.ics 默认组合包含订阅刷新间隔');
+assert(defaultCalendar.includes('X-PUBLISHED-TTL:PT1H'), 'calendar.ics 默认组合包含发布 TTL');
 
 console.log('');
 console.log('=== 公告隐藏一致性验证 ===');

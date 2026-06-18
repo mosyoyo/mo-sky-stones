@@ -108,6 +108,8 @@ function buildCalendar(events, types, options = {}) {
     'X-WR-CALNAME:光遇·自选日历',
     'X-WR-CALDESC:光遇国服自选日历',
     'X-WR-TIMEZONE:Asia/Shanghai',
+    'REFRESH-INTERVAL;VALUE=DURATION:PT1H',
+    'X-PUBLISHED-TTL:PT1H',
   ];
 
   if (include.has('red')) parts.push(...extractVEVENTS(generateStoneICS('red', 60, '光遇·红石(最后一场)')));
