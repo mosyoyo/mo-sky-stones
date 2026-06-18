@@ -52,7 +52,7 @@ function generateICS(filterType, days = 30, calName = '光遇') {
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     `X-WR-CALNAME:${calName}`,
-    `X-WR-CALDESC:光遇国服${typeName}降落时间表（仅含每日最后一场，含 15 分钟提醒）`,
+    `X-WR-CALDESC:光遇国服${typeName}降落时间表（仅含每日最后一场，含 10 分钟提醒）`,
     'X-WR-TIMEZONE:Asia/Shanghai',
   ];
 
