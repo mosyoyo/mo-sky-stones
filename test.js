@@ -10,6 +10,7 @@ const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions
 const { handleIcsRequest } = require('./functions/_ics-response');
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
+const { shouldAutoIgnoreParsedFeed } = require('./src/scripts/parseFeed');
 const { stableJSON: stableWikiJSON, toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
 const { stableJSON: stableSpiritJSON } = require('./src/scripts/fetchSoulSpirits');
 const { verifySoulSpirits } = require('./src/scripts/verifySoulSpirits');
@@ -110,6 +111,9 @@ assert(ignoredEvents[1].enabled === true, '忽略公告不会影响其他事件'
 assert(shouldKeepFeedEvent({ status: 'approved' }, { type: 'bonus', start: '2026-01-01', end: '2026-01-02' }), '同步只保留已批准公告事件');
 assert(!shouldKeepFeedEvent({ status: 'ignored' }, { type: 'bonus', start: '2026-01-01', end: '2026-01-02' }), '同步不会让已忽略公告复活');
 assert(!shouldKeepFeedEvent({ status: 'pending' }, { type: 'bonus', start: '2026-01-01', end: '2026-01-02' }), '同步不会让待审核公告提前进日历');
+assert(shouldAutoIgnoreParsedFeed({ status: 'pending', parsedResult: { type: 'other' } }), '解析为其他的待审核公告会自动忽略');
+assert(!shouldAutoIgnoreParsedFeed({ status: 'approved', parsedResult: { type: 'other' } }), '已批准公告不会被其他类型规则自动忽略');
+assert(!shouldAutoIgnoreParsedFeed({ status: 'pending', parsedResult: { type: 'bonus' } }), '可进入日历的公告不会被其他类型规则自动忽略');
 
 console.log('');
 console.log('=== 公告抓取游标验证 ===');

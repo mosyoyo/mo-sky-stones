@@ -28,6 +28,10 @@ const TYPE_TITLE_PREFIX = {
 const NETEASE_ALLOWED_TYPES = new Set(['maintenance', 'candle_heap', 'bonus']);
 const WIKI_TAKEN_TYPES = new Set(['traveling_spirit', 'season', 'activity']);
 
+function shouldAutoIgnoreParsedFeed(feed) {
+  return feed?.status === 'pending' && feed?.parsedResult?.type === 'other';
+}
+
 function parseFeed(feed) {
   let type = detectType(feed.title, feed.content);
   const baseTime = Number(feed.createTime || 0) > 0 ? new Date(Number(feed.createTime)) : new Date();
@@ -265,6 +269,13 @@ function main() {
     }
   }
 
+  let ignoredOther = 0;
+  for (const feed of parsedFeeds) {
+    if (!shouldAutoIgnoreParsedFeed(feed)) continue;
+    feed.status = 'ignored';
+    ignoredOther++;
+  }
+
   writeJSON('feeds.json', parsedFeeds);
   // events-netease.json：只保留锁定类型（双倍/大蜡烛/维护），供 mergeEvents.js 使用
   // 其他类型不写入，避免 mergeEvents 兜底时混入
@@ -272,16 +283,17 @@ function main() {
   // events.json 不再这里写——syncEvents.js 跑完 parseFeed 后会跑 mergeEvents，
   // mergeEvents 才是 events.json 的最终写者（按 source-config.json 合并 netease + wiki）
   appendSyncLog({
-    message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条，自动过审 ${autoApprovedCount} 条，反查关闭 ${droppedFromEvents} 条，清理过期 ${droppedExpired} 条，关键词忽略 ${ignoredByKeyword} 条（events-netease.json 全量 ${neteaseEvents.length} 条，待 merge）`,
+    message: `解析公告 ${parsedFeeds.length} 条，过滤无时间 ${droppedCount} 条，自动过审 ${autoApprovedCount} 条，反查关闭 ${droppedFromEvents} 条，清理过期 ${droppedExpired} 条，关键词忽略 ${ignoredByKeyword} 条，其他忽略 ${ignoredOther} 条（events-netease.json 全量 ${neteaseEvents.length} 条，待 merge）`,
     addedEvents: parsedCount,
     autoApproved: autoApprovedCount,
     droppedFromEvents,
     droppedExpired,
     ignoredByKeyword,
+    ignoredOther,
   });
-  console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}, autoApproved: ${autoApprovedCount}, droppedFromEvents: ${droppedFromEvents}, droppedExpired: ${droppedExpired}, ignoredByKeyword: ${ignoredByKeyword}`);
+  console.log(`parsed feeds: ${parsedFeeds.length}, dropped: ${droppedCount}, new events: ${parsedCount}, autoApproved: ${autoApprovedCount}, droppedFromEvents: ${droppedFromEvents}, droppedExpired: ${droppedExpired}, ignoredByKeyword: ${ignoredByKeyword}, ignoredOther: ${ignoredOther}`);
 }
 
 if (require.main === module) main();
 
-module.exports = { eventFromFeed, main, parseFeed };
+module.exports = { eventFromFeed, main, parseFeed, shouldAutoIgnoreParsedFeed };
