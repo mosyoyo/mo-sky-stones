@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { appendSyncLog, writeJSON } = require('./common');
+const { appendSyncLog, readJSON, writeJSON } = require('./common');
 
 // ─── 配置 ─────────────────────────────────────────────────────────────────
 
@@ -286,7 +286,6 @@ const MOCK_HTML = `
 
 async function main() {
   const useMock = process.argv.includes('--mock');
-  const syncLog = [];
 
   try {
     appendSyncLog({ message: '开始抓取 Wiki 活动日历…', source: 'wiki' });
@@ -321,6 +320,13 @@ async function main() {
       events: events.map(({ _group, _names, ...rest }) => rest),
     };
 
+    const current = readJSON('events-wiki.json', null);
+    if (current && stableJSON(current.events) === stableJSON(output.events)) {
+      appendSyncLog({ message: `Wiki 活动日历无变化: ${events.length} 条事件`, source: 'wiki' });
+      console.log(`\n📦 data/events-wiki.json 无变化 (${events.length} 条)`);
+      return;
+    }
+
     writeJSON('events-wiki.json', output);
     appendSyncLog({ message: `Wiki 活动日历抓取完成: ${events.length} 条事件`, source: 'wiki' });
     console.log(`\n📦 已写入 data/events-wiki.json (${events.length} 条)`);
@@ -331,6 +337,14 @@ async function main() {
   }
 }
 
+function stableJSON(value) {
+  if (Array.isArray(value)) return `[${value.map(stableJSON).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${stableJSON(value[key])}`).join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
 if (require.main === module) {
   main().catch(err => {
     console.error(err);
@@ -338,4 +352,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { main, parseCalendarHTML, toUTCSpiritWindow };
+module.exports = { main, parseCalendarHTML, stableJSON, toUTCSpiritWindow };

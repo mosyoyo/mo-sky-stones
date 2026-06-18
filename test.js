@@ -10,7 +10,7 @@ const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions
 const { handleIcsRequest } = require('./functions/_ics-response');
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
-const { toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
+const { stableJSON: stableWikiJSON, toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
 const { stableJSON: stableSpiritJSON } = require('./src/scripts/fetchSoulSpirits');
 const { verifySoulSpirits } = require('./src/scripts/verifySoulSpirits');
 const fs = require('fs');
@@ -114,6 +114,7 @@ console.log('=== 公告抓取游标验证 ===');
 const oldFeeds = [{ createTime: 1000 }, { createTime: 3000 }];
 assert(initialMaxTime(oldFeeds, true) === 999, '补历史模式从最旧公告之前继续抓');
 assert(initialMaxTime(oldFeeds, false) > Date.now(), '默认同步从最新公告开始抓');
+assert(stableWikiJSON({ b: 2, a: 1 }) === stableWikiJSON({ a: 1, b: 2 }), 'Wiki 活动同步 no-op 判断不受字段顺序影响');
 const hopeSeedWindow = toUTCSpiritWindow('2026-06-18');
 assert(hopeSeedWindow.start === '2026-06-17T22:00:00.000Z', 'Wiki 复刻开始时间为周四 06:00 北京');
 assert(hopeSeedWindow.end === '2026-06-22T04:00:00.000Z', 'Wiki 复刻结束时间为周一 12:00 北京');
