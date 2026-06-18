@@ -1,11 +1,11 @@
 (function () {
   const items = [
     ['/', '订阅'],
-    ['/src/admin/feed/', '公告'],
-    ['/src/admin/events/', '事件'],
-    ['/src/admin/spirits/', '先祖'],
-    ['/src/admin/sync/', '同步'],
-    ['/src/admin/settings/', '数据源'],
+    ['/admin/feed/', '公告'],
+    ['/admin/events/', '事件'],
+    ['/admin/spirits/', '先祖'],
+    ['/admin/sync/', '同步'],
+    ['/admin/settings/', '数据源'],
   ];
   const main = document.querySelector('main');
   if (!main || document.querySelector('.shell-nav')) return;

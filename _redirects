@@ -1,0 +1,12 @@
+/admin /src/admin/feed/ 200
+/admin/ /src/admin/feed/ 200
+/admin/feed /src/admin/feed/ 200
+/admin/feed/ /src/admin/feed/ 200
+/admin/events /src/admin/events/ 200
+/admin/events/ /src/admin/events/ 200
+/admin/spirits /src/admin/spirits/ 200
+/admin/spirits/ /src/admin/spirits/ 200
+/admin/sync /src/admin/sync/ 200
+/admin/sync/ /src/admin/sync/ 200
+/admin/settings /src/admin/settings/ 200
+/admin/settings/ /src/admin/settings/ 200
