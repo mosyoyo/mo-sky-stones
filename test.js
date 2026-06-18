@@ -2,7 +2,7 @@
 // 红石、黑石分开生成
 
 const { generateICS } = require('./ics-generator');
-const { applyEventOverrides, updateEventOverrides } = require('./src/event-overrides');
+const { applyEventOverrides, stableJSON, updateEventOverrides } = require('./src/event-overrides');
 const { generateEventsICS } = require('./src/event-utils');
 const { matchSpirit } = require('./src/spirit-match');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
@@ -129,6 +129,7 @@ const unchangedOverrides = updateEventOverrides([], generatedEvents, generatedEv
 assert(unchangedOverrides.length === 0, '事件页未改动保存不会冻结所有自动事件');
 const keptOverrides = updateEventOverrides(overrides, savedEvents, savedEvents);
 assert(keptOverrides.length === overrides.length, '已有人工覆盖在再次保存时会保留');
+assert(stableJSON({ b: 2, a: 1 }) === stableJSON({ a: 1, b: 2 }), '后台保存 no-op 判断不受对象字段顺序影响');
 
 console.log('');
 console.log('=== ICS DESCRIPTION 格式验证 ===');

@@ -26,6 +26,10 @@ export async function onRequestGet(context) {
 export async function onRequestPost(context) {
   try {
     const payload = normalizePayload(await context.request.json());
+    const current = await readAssetJSON(context, `/${SUBSCRIPTIONS_PATH}`, { selected: [] });
+    if (normalizeList(current.selected).join('\n') === payload.selected.join('\n')) {
+      return json({ ok: true, selected: payload.selected, updatedAt: current.updatedAt || null, unchanged: true });
+    }
     const next = {
       selected: payload.selected,
       updatedAt: new Date().toISOString(),

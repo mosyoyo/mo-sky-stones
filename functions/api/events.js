@@ -1,4 +1,4 @@
-const { updateEventOverrides } = require('../../src/event-overrides');
+const { stableJSON, updateEventOverrides } = require('../../src/event-overrides');
 const { githubPutJSONFiles, json, readAssetJSON } = require('../_shared');
 
 export async function onRequestGet(context) {
@@ -13,6 +13,9 @@ export async function onRequestPost(context) {
     const beforeEvents = await readAssetJSON(context, '/data/events.json', []);
     const beforeOverrides = await readAssetJSON(context, '/data/event-overrides.json', []);
     const overrides = updateEventOverrides(beforeOverrides, beforeEvents, events);
+    if (stableJSON(beforeEvents) === stableJSON(events) && stableJSON(beforeOverrides) === stableJSON(overrides)) {
+      return json({ ok: true, unchanged: true });
+    }
     await githubPutJSONFiles(context.env, {
       'data/events.json': events,
       'data/event-overrides.json': overrides,

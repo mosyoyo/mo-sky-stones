@@ -72,5 +72,6 @@ module.exports = {
   eventKey,
   publicEvent,
   samePublicEvent,
+  stableJSON,
   updateEventOverrides,
 };

@@ -11,7 +11,8 @@
 // 用户核心决策 6/17 晚：双倍/大蜡烛/维护 这三类**固定来自网易大神**，
 // admin 设置页只能切换另外三类（旅行先祖/季节/活动）。
 
-const { json, githubPutJSON } = require('../_shared');
+const { stableJSON } = require('../../src/event-overrides');
+const { json, githubPutJSON, readAssetJSON } = require('../_shared');
 
 const CONFIG_PATH = 'data/source-config.json';
 
@@ -67,6 +68,10 @@ export async function onRequestPost(context) {
   try {
     const body = await context.request.json();
     const next = validateConfig(body.config);
+    const current = await readAssetJSON(context, `/${CONFIG_PATH}`, DEFAULT_CONFIG);
+    if (stableJSON(validateConfig(current)) === stableJSON(next)) {
+      return json({ ok: true, config: next, unchanged: true });
+    }
     const result = await githubPutJSON(
       context.env,
       CONFIG_PATH,
