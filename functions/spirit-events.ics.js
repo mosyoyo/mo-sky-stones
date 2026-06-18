@@ -2,6 +2,7 @@ const { generateEventsICS } = require('../src/event-utils');
 const { publicEvent } = require('../src/event-overrides');
 const { matchSpirit } = require('../src/spirit-match');
 const { parseSelectedSpirits } = require('../src/spirit-query');
+const { handleIcsRequest } = require('./_ics-response');
 const { readAssetJSON } = require('./_shared');
 
 export async function onRequestGet(context) {
@@ -26,6 +27,5 @@ export async function onRequestGet(context) {
 }
 
 export async function onRequest(context) {
-  if (context.request.method === 'GET') return onRequestGet(context);
-  return new Response('Method Not Allowed', { status: 405 });
+  return handleIcsRequest(context, onRequestGet);
 }

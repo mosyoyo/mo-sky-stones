@@ -1,4 +1,5 @@
 const { buildCalendar, parseReminderOptions, parseTypes, readAssetJSON } = require('./_shared');
+const { handleIcsRequest } = require('./_ics-response');
 const { publicEvent } = require('../src/event-overrides');
 
 export async function onRequestGet(context) {
@@ -23,6 +24,5 @@ export async function onRequestGet(context) {
 }
 
 export async function onRequest(context) {
-  if (context.request.method === 'GET') return onRequestGet(context);
-  return new Response('Method Not Allowed', { status: 405 });
+  return handleIcsRequest(context, onRequestGet);
 }

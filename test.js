@@ -7,6 +7,7 @@ const { generateEventsICS } = require('./src/event-utils');
 const { matchSpirit } = require('./src/spirit-match');
 const { parseSelectedSpirits } = require('./src/spirit-query');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
+const { handleIcsRequest } = require('./functions/_ics-response');
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
 const { toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
@@ -160,6 +161,13 @@ assert(redDescriptionLines.length > 0, '红石 ICS 会生成 DESCRIPTION');
 assert(redDescriptionLines.every(line => !/[\r\n]/.test(line)), '红石 DESCRIPTION 字段行内不含真实 CR/LF');
 assert(redICS.includes('TRIGGER;RELATED=START:-PT10M'), '红石提醒为开始前 10 分钟');
 assert(redICS.includes('含 10 分钟提醒') && !redICS.includes('含 15 分钟提醒'), '红石日历描述与 10 分钟提醒一致');
+handleIcsRequest(
+  { request: new Request('https://sky-ics.pages.dev/calendar.ics', { method: 'HEAD' }) },
+  async () => new Response('BEGIN:VCALENDAR\r\nEND:VCALENDAR', { headers: { 'Content-Type': 'text/calendar; charset=utf-8' } }),
+).then(async response => {
+  assert(response.status === 200, 'ICS 路由支持 HEAD 预检');
+  assert((await response.text()) === '', 'ICS HEAD 响应不返回 body');
+});
 const summaryICS = generateEventsICS([
   { enabled: true, type: 'season', title: '【季节】狂欢季', start: '2026-04-23T04:00:00.000Z', end: '2026-07-08T04:00:00.000Z' },
   { enabled: true, type: 'activity', title: '【活动】端午节', start: '2026-06-19T04:00:00.000Z', end: '2026-07-02T04:00:00.000Z' },

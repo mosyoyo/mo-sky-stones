@@ -1,4 +1,5 @@
 const { generateICS } = require('../ics-generator');
+const { handleIcsRequest } = require('./_ics-response');
 
 export async function onRequestGet() {
   const ics = generateICS('black', 60, '光遇·黑石(最后一场)');
@@ -15,8 +16,5 @@ export async function onRequestGet() {
 }
 
 export async function onRequest(context) {
-  if (context.request.method === 'GET') {
-    return onRequestGet(context);
-  }
-  return new Response('Method Not Allowed', { status: 405 });
+  return handleIcsRequest(context, onRequestGet);
 }

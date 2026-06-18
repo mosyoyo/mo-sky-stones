@@ -1,5 +1,6 @@
 const { generateEventsICS } = require('../src/event-utils');
 const { parseReminderOptions, parseTypes, readAssetJSON } = require('./_shared');
+const { handleIcsRequest } = require('./_ics-response');
 
 // 默认包含 6 类事件（按 source-config 默认配置：traveling_spirit/season/activity 走 wiki，
 // bonus/candle_heap/maintenance 固定走 netease，合并后 events.json 全包含）
@@ -33,6 +34,5 @@ export async function onRequestGet(context) {
 }
 
 export async function onRequest(context) {
-  if (context.request.method === 'GET') return onRequestGet(context);
-  return new Response('Method Not Allowed', { status: 405 });
+  return handleIcsRequest(context, onRequestGet);
 }
