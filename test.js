@@ -2,6 +2,7 @@
 // 红石、黑石分开生成
 
 const { generateICS } = require('./ics-generator');
+const { applyEventOverrides, updateEventOverrides } = require('./src/event-overrides');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
 const { disableFeedEvents } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
@@ -103,3 +104,19 @@ console.log('=== 公告抓取游标验证 ===');
 const oldFeeds = [{ createTime: 1000 }, { createTime: 3000 }];
 assert(initialMaxTime(oldFeeds, true) === 999, '补历史模式从最旧公告之前继续抓');
 assert(initialMaxTime(oldFeeds, false) > Date.now(), '默认同步从最新公告开始抓');
+
+console.log('');
+console.log('=== 事件人工覆盖验证 ===');
+const generatedEvents = [
+  { id: 'event-a', enabled: true, title: '旧标题', type: 'activity', start: '2026-06-01T00:00:00.000Z', end: '2026-06-03T00:00:00.000Z' },
+  { id: 'event-b', enabled: true, title: '会被删除', type: 'bonus', start: '2026-06-04T00:00:00.000Z', end: '2026-06-06T00:00:00.000Z' },
+];
+const savedEvents = [
+  { ...generatedEvents[0], title: '人工标题' },
+  { id: 'manual-c', enabled: true, title: '手动新增', type: 'maintenance', start: '2026-06-07T00:00:00.000Z', end: '2026-06-07T02:00:00.000Z' },
+];
+const overrides = updateEventOverrides([], generatedEvents, savedEvents);
+const mergedEvents = applyEventOverrides(generatedEvents, overrides);
+assert(mergedEvents.some(event => event.id === 'event-a' && event.title === '人工标题'), '事件页修改会在同步后保留');
+assert(!mergedEvents.some(event => event.id === 'event-b'), '事件页删除会在同步后保留');
+assert(mergedEvents.some(event => event.id === 'manual-c' && event._source === 'manual'), '事件页手动新增会在同步后保留');

@@ -1,4 +1,5 @@
 const { appendSyncLog, readJSON, writeJSON } = require('./common');
+const { applyEventOverrides } = require('../event-overrides');
 
 // 数据源偏好（与 admin 设置页保持一致）
 // 用户核心决策 6/17 晚：只关心网易大神的 双倍/大蜡烛/维护 三类
@@ -103,23 +104,25 @@ function main() {
   try {
     console.log('🔀 开始合并双数据源...');
     const { result, config } = merge();
-    writeJSON('events.json', result);
+    const overrides = readJSON('event-overrides.json', []);
+    const finalResult = applyEventOverrides(result, overrides);
+    writeJSON('events.json', finalResult);
 
     // 统计
     const byType = {};
     const bySource = { netease: 0, wiki: 0 };
-    for (const e of result) {
+    for (const e of finalResult) {
       byType[e.type] = (byType[e.type] || 0) + 1;
       bySource[e._source] = (bySource[e._source] || 0) + 1;
     }
 
-    console.log(`✅ 合并完成: 共 ${result.length} 条事件`);
+    console.log(`✅ 合并完成: 共 ${finalResult.length} 条事件`);
     console.log('  按类型:', JSON.stringify(byType));
     console.log('  按数据源:', JSON.stringify(bySource));
     console.log('  配置:', JSON.stringify(config));
 
     appendSyncLog({
-      message: `合并完成: ${result.length} 条（netease ${bySource.netease} + wiki ${bySource.wiki}），按 type: ${JSON.stringify(byType)}`,
+      message: `合并完成: ${finalResult.length} 条（netease ${bySource.netease} + wiki ${bySource.wiki}，manual ${bySource.manual || 0}），按 type: ${JSON.stringify(byType)}，覆盖 ${overrides.length} 条`,
       source: 'merge',
     });
   } catch (err) {

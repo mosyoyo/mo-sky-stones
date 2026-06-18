@@ -243,6 +243,7 @@ src/scripts/*.js         抓取、解析、生成事件
 src/event-utils.js       公告分类、时间解析、活动 ICS 生成
 data/feeds.json          抓到并能解析时间的公告
 data/events.json         已进入日历的事件
+data/event-overrides.json 事件页的人工修改和删除记录
 data/sync.json           同步日志
 ```
 
