@@ -579,6 +579,8 @@ function generateEventsICS(events, options = {}) {
     `X-WR-CALNAME:${escapeICS(name)}`,
     `X-WR-CALDESC:${escapeICS(desc)}`,
     'X-WR-TIMEZONE:Asia/Shanghai',
+    'REFRESH-INTERVAL;VALUE=DURATION:PT1H',
+    'X-PUBLISHED-TTL:PT1H',
     ...blocks,
     'END:VCALENDAR',
   ]);

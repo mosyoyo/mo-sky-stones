@@ -153,6 +153,8 @@ console.log('=== ICS DESCRIPTION 格式验证 ===');
 const activityICS = generateEventsICS([
   { enabled: true, type: 'activity', title: '测试活动', start: '2026-06-20T00:00:00.000Z', end: '2026-06-24T00:00:00.000Z' },
 ]);
+assert(activityICS.includes('REFRESH-INTERVAL;VALUE=DURATION:PT1H'), '活动 ICS 包含订阅刷新间隔');
+assert(activityICS.includes('X-PUBLISHED-TTL:PT1H'), '活动 ICS 包含发布 TTL');
 const descriptionLines = activityICS.split('\r\n').filter(line => line.startsWith('DESCRIPTION:'));
 assert(descriptionLines.length > 0, '活动 ICS 会生成 DESCRIPTION');
 assert(descriptionLines.every(line => !/[\r\n]/.test(line)), 'DESCRIPTION 字段行内不含真实 CR/LF');

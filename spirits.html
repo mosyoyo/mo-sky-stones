@@ -278,7 +278,7 @@
       <button id="copy" class="button" type="button" disabled>复制</button>
       <a id="open" class="button secondary" href="#" aria-disabled="true">添加</a>
     </div>
-    <p class="hint" id="hint">最多选择 3 个。订阅会在这些先祖返场时显示日程。</p>
+    <p class="hint" id="hint">最多选择 3 个。未返场时日历可能暂时为空，返场后会自动出现。</p>
   </section>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -359,7 +359,7 @@
         urlInput.value = '选择先祖后生成链接';
         openLink.href = '#';
         openLink.setAttribute('aria-disabled', 'true');
-        hint.textContent = '最多选择 3 个。订阅会在这些先祖返场时显示日程。';
+        hint.textContent = '最多选择 3 个。未返场时日历可能暂时为空，返场后会自动出现。';
       }
     }
 
