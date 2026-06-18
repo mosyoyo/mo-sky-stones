@@ -189,9 +189,13 @@ assert(uidLines.every(line => !line.includes('---0618')), '中文事件 UID 不�
 console.log('');
 console.log('=== 指定先祖匹配验证 ===');
 assert(matchSpirit({ type: 'traveling_spirit', title: '旅行先祖', _names: ['排箫先祖'] }, ['排箫先祖']), '指定先祖订阅会匹配 _names');
+assert(matchSpirit({ type: 'traveling_spirit', title: '【复刻】希望之种' }, ['希望之种']), '指定先祖订阅会匹配复刻标题');
+assert(!matchSpirit({ type: 'traveling_spirit', title: '【复刻】希望之种' }, ['希望']), '指定先祖订阅不会用短词误匹配标题');
 assert(!matchSpirit({ type: 'activity', title: '排箫先祖', _names: ['排箫先祖'] }, ['排箫先祖']), '指定先祖订阅只匹配复刻事件');
 const selectedFromUrl = parseSelectedSpirits('https://sky-ics.pages.dev/spirit-events.ics?spirits=希望之种,%E8%87%B4%E6%95%AC%E9%92%A2%E7%90%B4%E5%AE%B6,希望之种,多余先祖', { selected: ['旧配置'] });
 assert(selectedFromUrl.length === 3 && selectedFromUrl[0] === '希望之种' && selectedFromUrl[1] === '致敬钢琴家', '指定先祖订阅优先使用 URL 参数并限制最多 3 个');
+const selectedWithPercent = parseSelectedSpirits('https://sky-ics.pages.dev/spirit-events.ics?spirits=50%25先祖', { selected: [] });
+assert(selectedWithPercent[0] === '50%先祖', '指定先祖订阅参数不会重复 decode');
 const selectedFallback = parseSelectedSpirits('https://sky-ics.pages.dev/spirit-events.ics', { selected: ['希望之种'] });
 assert(selectedFallback.length === 1 && selectedFallback[0] === '希望之种', '指定先祖订阅无 URL 参数时兼容后台保存配置');
 const soulSpirits = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'soul-spirits.json'), 'utf8'));
