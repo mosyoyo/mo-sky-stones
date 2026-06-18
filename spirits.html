@@ -39,9 +39,16 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 10px 0 10px;
-      background: rgba(245, 245, 247, .78);
+      margin: -18px -14px 0;
+      padding: 18px 14px 10px;
+      background: #fbfbfd;
       backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(60, 60, 67, .08);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
     .back {
       color: var(--blue);
@@ -73,14 +80,16 @@
     }
     .filters {
       position: sticky;
-      top: 44px;
+      top: 54px;
       z-index: 2;
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(150px, .45fr);
       gap: 10px;
-      padding: 8px 0 12px;
-      background: rgba(245, 245, 247, .78);
+      margin: 0 -14px;
+      padding: 10px 14px 12px;
+      background: #f5f5f7;
       backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(60, 60, 67, .08);
     }
     input[type="search"],
     input[type="text"],
@@ -256,12 +265,14 @@
     }
     @media (max-width: 560px) {
       main { padding: 10px 10px 176px; }
-      .nav { padding-top: 8px; }
+      .nav { margin: -10px -10px 0; padding: 10px 10px 9px; }
       header { padding-top: 12px; }
       h1 { font-size: 32px; }
       .lead { font-size: 13px; }
       .filters {
-        top: 42px;
+        top: 48px;
+        margin: 0 -10px;
+        padding: 9px 10px 10px;
         grid-template-columns: 1fr;
         gap: 8px;
       }
@@ -277,7 +288,10 @@
 <body>
   <main>
     <nav class="nav">
-      <a class="back" href="/subscribe">返回</a>
+      <div class="nav-links">
+        <a class="back" href="/">返回主页</a>
+        <a class="back" href="/subscribe">自定义订阅</a>
+      </div>
       <span class="count" id="count">已选 0 / 3</span>
     </nav>
 

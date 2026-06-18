@@ -12,15 +12,15 @@
   <main>
     <header class="hero">
       <div>
-        <h1>默认先祖订阅</h1>
-        <p class="muted">这里保存的是不带 URL 参数时的默认指定先祖配置。普通用户自选请使用公开页面。</p>
+        <h1>先祖资料</h1>
+        <p class="muted">编辑季节和兑换物品；公开指定先祖页会用这些内容做搜索和备注。</p>
       </div>
-      <button id="save">保存订阅</button>
+      <button id="save">统一保存</button>
     </header>
     <section>
       <div class="toolbar">
         <span class="muted" id="status">正在读取先祖列表...</span>
-        <a class="pill" href="/spirits.html">打开公开选择页</a>
+        <a class="pill" href="/spirits">打开公开选择页</a>
         <label class="pill"><input id="onlySelected" type="checkbox">仅看已订阅</label>
       </div>
     </section>
@@ -35,6 +35,7 @@
       const saveBtn = document.querySelector('#save');
       let items = [];
       let selected = new Set();
+      const drafts = new Map();
 
       function spiritLabel(item) {
         return item.englishName ? `${item.spiritName} · ${item.englishName}` : item.spiritName;
@@ -48,6 +49,9 @@
         const visible = items.filter(item => !onlySelected.checked || selected.has(item.spiritName));
         document.querySelector('#list').innerHTML = visible.map(item => {
           const on = selected.has(item.spiritName);
+          const draft = drafts.get(item.spiritName) || {};
+          const season = draft.season ?? item.season ?? '';
+          const itemText = draft.itemsText ?? (Array.isArray(item.items) ? item.items.join('、') : '');
           return `
             <section class="card">
               <div class="top">
@@ -60,8 +64,15 @@
                   <span>${on ? '已订阅' : '未订阅'}</span>
                 </label>
               </div>
-              <div class="row" style="margin-top:10px">
-                ${(item.items || item.aliases || []).slice(0, 4).map(alias => `<span class="tag other">${h(alias)}</span>`).join('')}
+              <div class="grid" style="margin-top:12px">
+                <label class="field">
+                  <span>季节</span>
+                  <input data-field="season" data-name="${h(item.spiritName)}" value="${h(season)}" placeholder="例如 欧若拉季">
+                </label>
+                <label class="field">
+                  <span>物品</span>
+                  <input data-field="items" data-name="${h(item.spiritName)}" value="${h(itemText)}" placeholder="用顿号或逗号分隔，例如 面具、发型、斗篷">
+                </label>
               </div>
             </section>`;
         }).join('');
@@ -74,7 +85,18 @@
             render();
           };
         });
-          status.textContent = `共 ${items.length} 个先祖，默认订阅 ${selected.size} 个。`;
+        document.querySelectorAll('[data-field]').forEach(input => {
+          input.oninput = () => {
+            const name = input.dataset.name;
+            const item = items.find(x => x.spiritName === name);
+            const draft = drafts.get(name) || { spiritName: name, season: item?.season || '', itemsText: Array.isArray(item?.items) ? item.items.join('、') : '' };
+            if (input.dataset.field === 'season') draft.season = input.value.trim();
+            if (input.dataset.field === 'items') draft.itemsText = input.value.trim();
+            drafts.set(name, draft);
+            status.textContent = `待保存 ${drafts.size} 个先祖，默认订阅 ${selected.size} 个。`;
+          };
+        });
+        status.textContent = drafts.size ? `待保存 ${drafts.size} 个先祖，默认订阅 ${selected.size} 个。` : `共 ${items.length} 个先祖，默认订阅 ${selected.size} 个。`;
       }
 
       async function load() {
@@ -96,15 +118,23 @@
           const data = await fetchJSON('/api/spirits', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ selected: [...selected] }),
+            body: JSON.stringify({
+              selected: [...selected],
+              items: [...drafts.values()].map(item => ({
+                spiritName: item.spiritName,
+                season: item.season,
+                items: String(item.itemsText || '').split(/[、,，\n]/).map(x => x.trim()).filter(Boolean),
+              })),
+            }),
           });
           showToast(`已保存${data.commit ? `：${data.commit.slice(0, 7)}` : ''}`, 'success');
           status.textContent = `已保存，默认订阅 ${selected.size} 个先祖。`;
+          drafts.clear();
         } catch (err) {
           showToast(err.message, 'error');
         } finally {
           saveBtn.disabled = false;
-          saveBtn.textContent = '保存订阅';
+          saveBtn.textContent = '统一保存';
         }
       };
 

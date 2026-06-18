@@ -127,7 +127,15 @@ async function main() {
     newFeeds.push(feed);
   }
 
-  const feeds = [...currentMap.values()].sort((a, b) => Number(b.createTime || 0) - Number(a.createTime || 0));
+  const deduped = new Map();
+  for (const feed of currentMap.values()) {
+    if (!feed || !feed.id) continue;
+    const existing = deduped.get(feed.id);
+    if (!existing || Number(feed.createTime || 0) > Number(existing.createTime || 0)) {
+      deduped.set(feed.id, feed);
+    }
+  }
+  const feeds = [...deduped.values()].sort((a, b) => Number(b.createTime || 0) - Number(a.createTime || 0));
   writeJSON('feeds.json', feeds);
   appendSyncLog({
     message: `发现新公告 ${newFeeds.length} 条（已拉取 ${feeds.length} 条）`,

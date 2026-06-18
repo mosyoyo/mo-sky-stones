@@ -586,6 +586,67 @@ function generateEventsICS(events, options = {}) {
   ]);
 }
 
+function generateSpiritEventsICS(events, options = {}) {
+  const name = options.name || '光遇·指定先祖';
+  const selected = Array.isArray(options.selected) ? options.selected : [];
+  const spiritInfo = options.spiritInfo instanceof Map ? options.spiritInfo : new Map();
+  const dtstamp = formatUTC(new Date());
+  const blocks = [];
+
+  for (const event of events || []) {
+    if (!event || event.enabled !== true || event.type !== 'traveling_spirit') continue;
+    if (!event.start || !event.end || new Date(event.end) <= new Date(event.start)) continue;
+    const spiritName = cleanSpiritEventName(event.title);
+    if (selected.length && !selected.map(cleanSpiritEventName).includes(spiritName)) continue;
+    const info = spiritInfo.get(spiritName) || {};
+    const items = Array.isArray(info.items) ? info.items.filter(Boolean).slice(0, 8) : [];
+    const start = new Date(event.start);
+    const end = new Date(event.end);
+    const desc = [
+      `${spiritName}返场`,
+      `开始: ${beijingText(start)}`,
+      `离开: ${beijingText(end)}`,
+      items.length ? `物品: ${items.join('、')}` : '',
+    ].filter(Boolean).join('\n');
+    const id = compactUid(event.id || event.sourceFeedId || spiritName);
+
+    blocks.push(createTimedEvent({
+      uid: `${id}-spirit-range@sky-stones-ics`,
+      dtstamp,
+      start,
+      end,
+      summary: `【复刻】${spiritName}返场`,
+      description: desc,
+      location: '旅行先祖',
+      category: '复刻',
+      alarm: { trigger: '-PT10M', description: `${spiritName}将在 10 分钟后到来` },
+    }));
+  }
+
+  return buildLines([
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//mo-sky-stones//Sky:CoL Spirit Events (CN)//ZH',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    `X-WR-CALNAME:${escapeICS(name)}`,
+    `X-WR-CALDESC:${escapeICS(selected.length ? `光遇指定先祖提醒：${selected.join('、')}` : '光遇指定先祖提醒')}`,
+    'X-WR-TIMEZONE:Asia/Shanghai',
+    'REFRESH-INTERVAL;VALUE=DURATION:PT1H',
+    'X-PUBLISHED-TTL:PT1H',
+    ...blocks,
+    'END:VCALENDAR',
+  ]);
+}
+
+function cleanSpiritEventName(value) {
+  return String(value || '')
+    .replace(/^【[^】]+】/, '')
+    .replace(/^旅行先祖[:：]/, '')
+    .replace(/返场$/, '')
+    .trim();
+}
+
 function normalizeFeed(raw) {
   const id = String(raw.id || raw.feedId || raw.feed_id || '');
   const body = parseContentPayload(raw.content) || parseContentPayload(raw.detail?.result?.feed?.content) || {};
@@ -620,6 +681,7 @@ module.exports = {
   extractDateRange,
   formatUTC,
   generateEventsICS,
+  generateSpiritEventsICS,
   isLikelyGameActivity,
   isOfflineEvent,
   isSingleDayEvent,

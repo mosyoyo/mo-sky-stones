@@ -21,6 +21,9 @@
     * { box-sizing: border-box; }
     body { margin: 0; min-height: 100vh; background: var(--bg); }
     main { width: min(760px, 100%); margin: 0 auto; padding: 28px 14px 24px; }
+    .topnav { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 0 4px 18px; }
+    .topnav a { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 650; }
+    .brand { color: var(--muted); font-size: 13px; font-weight: 680; letter-spacing: .08em; }
     header { padding: 6px 4px 16px; }
     h1 { margin: 0; font-size: clamp(30px, 7vw, 48px); line-height: 1.08; letter-spacing: 0; font-weight: 760; }
     .lead { margin: 8px 0 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
@@ -71,6 +74,7 @@
     .summary { margin: 8px 2px 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
     @media (max-width: 640px) {
       main { padding: 14px 10px; }
+      .topnav { padding-bottom: 12px; }
       header { padding-bottom: 10px; }
       h1 { font-size: 30px; }
       .lead { font-size: 13px; }
@@ -94,6 +98,10 @@
 </head>
 <body>
   <main>
+    <nav class="topnav" aria-label="页面导航">
+      <a href="/">返回主页</a>
+      <span class="brand">SKY CALENDAR</span>
+    </nav>
     <header>
       <h1>自定义订阅</h1>
       <p class="lead">选好内容，复制链接，添加到手机日历。</p>

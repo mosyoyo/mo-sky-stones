@@ -17,7 +17,15 @@ function compactFeed(feed) {
 
 export async function onRequestGet(context) {
   const feeds = await readAssetJSON(context, '/data/feeds.json', []);
-  return json(feeds.map(compactFeed));
+  const seen = new Set();
+  const unique = [];
+  for (const feed of feeds) {
+    const item = compactFeed(feed);
+    if (!item.id || seen.has(item.id)) continue;
+    seen.add(item.id);
+    unique.push(item);
+  }
+  return json(unique);
 }
 
 export async function onRequestOptions() {

@@ -1,4 +1,4 @@
-const { generateEventsICS } = require('../src/event-utils');
+const { generateSpiritEventsICS } = require('../src/event-utils');
 const { publicEvent } = require('../src/event-overrides');
 const { matchSpirit } = require('../src/spirit-match');
 const { parseSelectedSpirits } = require('../src/spirit-query');
@@ -7,14 +7,16 @@ const { readAssetJSON } = require('./_shared');
 
 export async function onRequestGet(context) {
   const rawEvents = await readAssetJSON(context, '/data/events.json', []);
+  const soulData = await readAssetJSON(context, '/data/soul-spirits.json', { spirits: [] });
   const saved = await readAssetJSON(context, '/data/spirit-subscriptions.json', { selected: [] });
   const selected = parseSelectedSpirits(context.request.url, saved);
   const events = rawEvents.filter(event => matchSpirit(event, selected)).map(publicEvent);
-  const ics = generateEventsICS(events, {
+  const spiritInfo = new Map((Array.isArray(soulData.spirits) ? soulData.spirits : [])
+    .map(item => [String(item.spiritName || '').trim(), item]));
+  const ics = generateSpiritEventsICS(events, {
     name: '光遇·指定先祖',
-    description: selected.length ? `光遇指定复刻先祖提醒：${selected.join('、')}` : '光遇指定复刻先祖提醒',
-    types: ['traveling_spirit'],
-    endOnly: new Set(),
+    selected,
+    spiritInfo,
   });
   return new Response(ics, {
     headers: {
