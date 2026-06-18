@@ -4,6 +4,7 @@
 const { generateICS } = require('./ics-generator');
 const { applyEventOverrides, updateEventOverrides } = require('./src/event-overrides');
 const { generateEventsICS } = require('./src/event-utils');
+const { matchSpirit } = require('./src/spirit-match');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
@@ -142,3 +143,8 @@ assert(redDescriptionLines.length > 0, '红石 ICS 会生成 DESCRIPTION');
 assert(redDescriptionLines.every(line => !/[\r\n]/.test(line)), '红石 DESCRIPTION 字段行内不含真实 CR/LF');
 assert(redICS.includes('TRIGGER;RELATED=START:-PT10M'), '红石提醒为开始前 10 分钟');
 assert(redICS.includes('含 10 分钟提醒') && !redICS.includes('含 15 分钟提醒'), '红石日历描述与 10 分钟提醒一致');
+
+console.log('');
+console.log('=== 指定先祖匹配验证 ===');
+assert(matchSpirit({ type: 'traveling_spirit', title: '旅行先祖', _names: ['排箫先祖'] }, ['排箫先祖']), '指定先祖订阅会匹配 _names');
+assert(!matchSpirit({ type: 'activity', title: '排箫先祖', _names: ['排箫先祖'] }, ['排箫先祖']), '指定先祖订阅只匹配复刻事件');

@@ -1,15 +1,10 @@
 const { generateEventsICS } = require('../src/event-utils');
+const { matchSpirit } = require('../src/spirit-match');
 const { readAssetJSON } = require('./_shared');
 
 function cleanEvent(e) {
   const { _source, _group, _names, ...rest } = e;
   return rest;
-}
-
-function matchSpirit(event, selected) {
-  if (!event || event.type !== 'traveling_spirit') return false;
-  const text = `${event.title || ''}\n${event.id || ''}\n${event.sourceFeedId || ''}`;
-  return selected.some(name => text.includes(name));
 }
 
 export async function onRequestGet(context) {
@@ -18,7 +13,7 @@ export async function onRequestGet(context) {
   const selected = Array.isArray(saved.selected)
     ? saved.selected.map(name => String(name || '').trim()).filter(Boolean)
     : [];
-  const events = rawEvents.map(cleanEvent).filter(event => matchSpirit(event, selected));
+  const events = rawEvents.filter(event => matchSpirit(event, selected)).map(cleanEvent);
   const ics = generateEventsICS(events, {
     name: '光遇·指定先祖',
     description: '光遇指定复刻先祖提醒',
