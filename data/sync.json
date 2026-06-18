@@ -1,5 +1,14 @@
 [
   {
+    "time": "2026-06-18T06:33:59.506Z",
+    "message": "解析公告 503 条，过滤无时间 0 条，自动过审 0 条，反查关闭 0 条，清理过期 19 条，关键词忽略 0 条（events-netease.json 全量 25 条，待 merge）",
+    "addedEvents": 21,
+    "autoApproved": 0,
+    "droppedFromEvents": 0,
+    "droppedExpired": 19,
+    "ignoredByKeyword": 0
+  },
+  {
     "time": "2026-06-18T04:09:28.920Z",
     "message": "合并完成: 5 条（netease 0 + wiki 5），按 type: {\"traveling_spirit\":2,\"season\":1,\"activity\":2}",
     "source": "merge"
