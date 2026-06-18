@@ -3,6 +3,7 @@
 
 const { generateICS } = require('./ics-generator');
 const { applyEventOverrides, updateEventOverrides } = require('./src/event-overrides');
+const { generateEventsICS } = require('./src/event-utils');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
@@ -127,3 +128,12 @@ const unchangedOverrides = updateEventOverrides([], generatedEvents, generatedEv
 assert(unchangedOverrides.length === 0, '事件页未改动保存不会冻结所有自动事件');
 const keptOverrides = updateEventOverrides(overrides, savedEvents, savedEvents);
 assert(keptOverrides.length === overrides.length, '已有人工覆盖在再次保存时会保留');
+
+console.log('');
+console.log('=== ICS DESCRIPTION 格式验证 ===');
+const activityICS = generateEventsICS([
+  { enabled: true, type: 'activity', title: '测试活动', start: '2026-06-20T00:00:00.000Z', end: '2026-06-24T00:00:00.000Z' },
+]);
+const descriptionLines = activityICS.split('\r\n').filter(line => line.startsWith('DESCRIPTION:'));
+assert(descriptionLines.length > 0, '活动 ICS 会生成 DESCRIPTION');
+assert(descriptionLines.every(line => !/[\r\n]/.test(line)), 'DESCRIPTION 字段行内不含真实 CR/LF');
