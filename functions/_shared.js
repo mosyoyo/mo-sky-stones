@@ -37,6 +37,13 @@ function appConfig(env) {
   };
 }
 
+async function signAdminAuth(value, secret) {
+  const input = new TextEncoder().encode(`${value}.${secret}`);
+  const buf = await crypto.subtle.digest('SHA-256', input);
+  const bytes = [...new Uint8Array(buf)];
+  return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 function extractVEVENTS(ics) {
   const events = [];
   const blocks = String(ics).split('BEGIN:VEVENT');
@@ -225,4 +232,5 @@ module.exports = {
   parseReminderOptions,
   parseTypes,
   readAssetJSON,
+  signAdminAuth,
 };

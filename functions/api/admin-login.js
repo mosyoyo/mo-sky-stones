@@ -1,16 +1,8 @@
-const { appConfig, json } = require('../_shared');
+const { appConfig, json, signAdminAuth } = require('../_shared');
 
 const COOKIE_NAME = 'mo_admin_auth';
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 let failCount = 0;
-
-function sign(value, secret) {
-  const input = new TextEncoder().encode(`${value}.${secret}`);
-  return crypto.subtle.digest('SHA-256', input).then(buf => {
-    const bytes = [...new Uint8Array(buf)];
-    return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
-  });
-}
 
 export async function onRequestPost(context) {
   try {
@@ -25,12 +17,12 @@ export async function onRequestPost(context) {
 
     failCount = 0;
     const expiresAt = Date.now() + COOKIE_MAX_AGE * 1000;
-    const signature = await sign(`mo-sky-stones:${expiresAt}`, secret);
+    const signature = await signAdminAuth(`mo-sky-stones:${expiresAt}`, secret);
     const token = `${expiresAt}.${signature}`;
     return new Response(JSON.stringify({ ok: true }), {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
-        'Set-Cookie': `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${COOKIE_MAX_AGE}`,
+        'Set-Cookie': `${COOKIE_NAME}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${COOKIE_MAX_AGE}`,
       },
     });
   } catch (err) {

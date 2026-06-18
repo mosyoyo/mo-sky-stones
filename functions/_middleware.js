@@ -1,4 +1,5 @@
 const COOKIE_NAME = 'mo_admin_auth';
+const { signAdminAuth } = require('./_shared');
 
 function appConfig(env) {
   let merged = {};
@@ -34,13 +35,6 @@ function getCookie(request) {
   return part ? part.slice(COOKIE_NAME.length + 1) : '';
 }
 
-async function sign(value, secret) {
-  const input = new TextEncoder().encode(`${value}.${secret}`);
-  const buf = await crypto.subtle.digest('SHA-256', input);
-  const bytes = [...new Uint8Array(buf)];
-  return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
 async function hasAuth(request, env) {
   const secret = appConfig(env).adminPassword;
   if (!secret) return false;
@@ -48,7 +42,7 @@ async function hasAuth(request, env) {
   const [expiresAt, signature] = token.split('.');
   const expiresMs = Number(expiresAt);
   if (!expiresAt || !signature || !Number.isFinite(expiresMs) || Date.now() > expiresMs) return false;
-  return signature === await sign(`mo-sky-stones:${expiresAt}`, secret);
+  return signature === await signAdminAuth(`mo-sky-stones:${expiresAt}`, secret);
 }
 
 export async function onRequest(context) {
