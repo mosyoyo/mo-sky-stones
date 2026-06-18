@@ -266,7 +266,7 @@
     </header>
 
     <div class="search">
-      <input id="search" type="search" placeholder="搜索先祖名字" autocomplete="off">
+      <input id="search" type="search" placeholder="搜索名字、季节、物品" autocomplete="off">
     </div>
 
     <section class="list" id="list" aria-live="polite"></section>
@@ -294,6 +294,11 @@
     const toast = document.querySelector('#toast');
     const selected = new Set();
     let spirits = [];
+
+    function initialSelected() {
+      const raw = new URLSearchParams(location.search).get('spirits') || '';
+      return raw.split(',').map(name => name.trim()).filter(Boolean).slice(0, 3);
+    }
 
     function spiritName(event) {
       return String(event.title || '')
@@ -360,7 +365,7 @@
 
     function render() {
       const q = search.value.trim().toLowerCase();
-      const visible = spirits.filter(item => !q || item.name.toLowerCase().includes(q));
+      const visible = spirits.filter(item => !q || item.searchText.includes(q));
       if (!visible.length) {
         list.innerHTML = '<div class="empty">没有找到符合条件的先祖。</div>';
         updateLink();
@@ -406,8 +411,11 @@
         const source = Array.isArray(soulData?.spirits) && soulData.spirits.length
           ? soulData.spirits.map(item => {
             const active = activeMap.get(item.spiritName);
+            const items = Array.isArray(item.items) ? item.items : [];
             return {
               name: item.spiritName,
+              season: item.season || '',
+              items,
               start: active?.start || '',
               end: active?.end || '',
               lastRevisit: item.lastRevisit || '',
@@ -418,6 +426,8 @@
           })
           : [...activeMap.values()].map(event => ({
             name: spiritName(event),
+            season: '',
+            items: [],
             start: event.start,
             end: event.end,
             lastRevisit: event.start || '',
@@ -425,7 +435,15 @@
           }));
         spirits = source
           .filter(item => item.name && !seen.has(item.name) && seen.add(item.name))
+          .map(item => ({
+            ...item,
+            searchText: [item.name, item.season, item.lastRevisit, ...(item.items || [])].join('\n').toLowerCase(),
+          }))
           .sort((a, b) => String(b.lastRevisit || b.start).localeCompare(String(a.lastRevisit || a.start)));
+        const names = new Set(spirits.map(item => item.name));
+        initialSelected().forEach(name => {
+          if (names.has(name)) selected.add(name);
+        });
         render();
       } catch (err) {
         list.innerHTML = `<div class="empty">读取复刻列表失败：${err.message}</div>`;
