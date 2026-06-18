@@ -5,16 +5,16 @@
 ## 订阅地址
 
 ```text
-https://sky-stones-bni.pages.dev/
+https://sky-ics.pages.dev/
 ```
 
 首页会生成自选订阅链接。也可以直接使用接口：
 
 ```text
-https://sky-stones-bni.pages.dev/red.ics
-https://sky-stones-bni.pages.dev/black.ics
-https://sky-stones-bni.pages.dev/events.ics
-https://sky-stones-bni.pages.dev/calendar.ics?types=red,traveling_spirit,season,activity,bonus,candle_heap,maintenance&endOnly=traveling_spirit,season,activity
+https://sky-ics.pages.dev/red.ics
+https://sky-ics.pages.dev/black.ics
+https://sky-ics.pages.dev/events.ics
+https://sky-ics.pages.dev/calendar.ics?types=red,traveling_spirit,season,activity,bonus,candle_heap,maintenance&endOnly=traveling_spirit,season,activity
 ```
 
 可选类型：
@@ -55,7 +55,7 @@ maintenance         维护
 后台入口不放在首页，直接访问：
 
 ```text
-https://sky-stones-bni.pages.dev/admin/login/
+https://sky-ics.pages.dev/admin/login/
 ```
 
 页面：
