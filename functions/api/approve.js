@@ -1,6 +1,6 @@
 const { detectType, extractDateRange, uidPart } = require('../../src/event-utils');
 const { disableFeedEvents } = require('../../src/feed-events');
-const { githubPutJSON, json, readAssetJSON } = require('../_shared');
+const { githubPutJSONFiles, json, readAssetJSON } = require('../_shared');
 
 export async function onRequestPost(context) {
   try {
@@ -32,8 +32,10 @@ export async function onRequestPost(context) {
       disableFeedEvents(events, feed.id);
     }
 
-    await githubPutJSON(context.env, 'data/feeds.json', feeds, `chore: ${feed.status} feed ${feed.id}`);
-    await githubPutJSON(context.env, 'data/events.json', events, `chore: update event from feed ${feed.id}`);
+    await githubPutJSONFiles(context.env, {
+      'data/feeds.json': feeds,
+      'data/events.json': events,
+    }, `chore: ${feed.status} feed ${feed.id}`);
     return json({ ok: true, feed, events });
   } catch (err) {
     return json({ error: err.message }, 500);
