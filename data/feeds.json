@@ -1,5 +1,605 @@
 [
   {
+    "id": "6a33c1a45b5f0d2346ed052b",
+    "title": "锦绣寻香 指尖芳华丨《光·遇》端午节运营活动公告\n#光遇# #光遇端午节# #光遇也要划龙舟#\n",
+    "content": "锦绣寻香 指尖芳华丨《光·遇》端午节运营活动公告\n#光遇# #光遇端午节# #光遇也要划龙舟#\n龙舟竞渡穿梭云海\n佩香祈福共度端阳\n🌿\n6月19日~7月2日 \n前往【锦绣寻香 指尖芳华】活动页面\n参与端午节专属活动，完成以下任务即可领取对应奖励：\n🍵 \n【寻香】\n①前往蝴蝶平原做引蝶动作，即可解锁 云野香包*1\n②前往荧光森林收集1次绿色染料，即可解锁 雨林香包*1\n③在圆梦村收集1次烛火，即可解锁 霞谷香包*1\n④在禁阁第一层点燃任意灯笼，即可解锁 禁阁香包*1\n🍃\n【制香】\n①前往圣岛坐一次龙舟，可解锁 莲花花纹*1\n②活动期间在圣岛采集一次贝壳，可解锁 如意云纹*1\n③累计3天前往圣岛参加端午活动，可解锁 宝币蝠纹*1\n④完成制作1只香包，即可解锁 光之子香包绣样*1\n⑤解锁2个香包形状，即可解锁 光之子香包绣样*1\n⑥累计获得3个香包纹样，即可解锁 光之子香包绣样*1 \n🎁\n【取香】\n①完成云野香包制作，可领取 留影蜡烛*1\n②完成雨林香包制作，可领取 绚丽彩虹*1\n③完成霞谷香包制作，可领取 璀璨之星*1\n④完成禁阁香包制作，可领取 浪漫烟花*1\n🍀\n将美好的祈愿寄于锦绣香囊\n让这阵端午清香伴你安康~",
+    "createTime": 1781776800723,
+    "status": "ignored",
+    "autoType": "activity",
+    "parsed": true,
+    "raw": {
+      "id": "6a33c1a45b5f0d2346ed052b",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"锦绣寻香 指尖芳华丨《光·遇》端午节运营活动公告\\n#光遇# #光遇端午节# #光遇也要划龙舟#\\n龙舟竞渡穿梭云海\\n佩香祈福共度端阳\\n🌿\\n6月19日~7月2日 \\n前往【锦绣寻香 指尖芳华】活动页面\\n参与端午节专属活动，完成以下任务即可领取对应奖励：\\n🍵 \\n【寻香】\\n①前往蝴蝶平原做引蝶动作，即可解锁 云野香包*1\\n②前往荧光森林收集1次绿色染料，即可解锁 雨林香包*1\\n③在圆梦村收集1次烛火，即可解锁 霞谷香包*1\\n④在禁阁第一层点燃任意灯笼，即可解锁 禁阁香包*1\\n🍃\\n【制香】\\n①前往圣岛坐一次龙舟，可解锁 莲花花纹*1\\n②活动期间在圣岛采集一次贝壳，可解锁 如意云纹*1\\n③累计3天前往圣岛参加端午活动，可解锁 宝币蝠纹*1\\n④完成制作1只香包，即可解锁 光之子香包绣样*1\\n⑤解锁2个香包形状，即可解锁 光之子香包绣样*1\\n⑥累计获得3个香包纹样，即可解锁 光之子香包绣样*1 \\n🎁\\n【取香】\\n①完成云野香包制作，可领取 留影蜡烛*1\\n②完成雨林香包制作，可领取 绚丽彩虹*1\\n③完成霞谷香包制作，可领取 璀璨之星*1\\n④完成禁阁香包制作，可领取 浪漫烟花*1\\n🍀\\n将美好的祈愿寄于锦绣香囊\\n让这阵端午清香伴你安康~\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260618_1744bc3b4bf3615590d6ec606afdf82c\",\"mimeType\":\"image/png\",\"size\":2288664,\"width\":1920,\"height\":1080,\"watermark\":true},{\"name\":\"2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260618_e1240f107e643d8ac5ba7ea588b00f77\",\"mimeType\":\"image/png\",\"size\":2160749,\"width\":1920,\"height\":1080,\"watermark\":true}]}}",
+      "deleteTime": 0,
+      "createTime": 1781776800723,
+      "updateTime": 1781776804316,
+      "clientType": 152,
+      "tagList": [
+        "5b02c181d545685882af86ee"
+      ],
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇端午节",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇也要划龙舟",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT",
+        "contentStatementOption": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6a33c1a45b5f0d2346ed052b",
+        "repostCount": 0,
+        "commentCount": 0,
+        "likeCount": 1,
+        "shareCount": 0,
+        "favCount": 0,
+        "createTime": 1781777725348
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6a33c1a45b5f0d2346ed052b",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"锦绣寻香 指尖芳华丨《光·遇》端午节运营活动公告\\n#光遇# #光遇端午节# #光遇也要划龙舟#\\n龙舟竞渡穿梭云海\\n佩香祈福共度端阳\\n🌿\\n6月19日~7月2日 \\n前往【锦绣寻香 指尖芳华】活动页面\\n参与端午节专属活动，完成以下任务即可领取对应奖励：\\n🍵 \\n【寻香】\\n①前往蝴蝶平原做引蝶动作，即可解锁 云野香包*1\\n②前往荧光森林收集1次绿色染料，即可解锁 雨林香包*1\\n③在圆梦村收集1次烛火，即可解锁 霞谷香包*1\\n④在禁阁第一层点燃任意灯笼，即可解锁 禁阁香包*1\\n🍃\\n【制香】\\n①前往圣岛坐一次龙舟，可解锁 莲花花纹*1\\n②活动期间在圣岛采集一次贝壳，可解锁 如意云纹*1\\n③累计3天前往圣岛参加端午活动，可解锁 宝币蝠纹*1\\n④完成制作1只香包，即可解锁 光之子香包绣样*1\\n⑤解锁2个香包形状，即可解锁 光之子香包绣样*1\\n⑥累计获得3个香包纹样，即可解锁 光之子香包绣样*1 \\n🎁\\n【取香】\\n①完成云野香包制作，可领取 留影蜡烛*1\\n②完成雨林香包制作，可领取 绚丽彩虹*1\\n③完成霞谷香包制作，可领取 璀璨之星*1\\n④完成禁阁香包制作，可领取 浪漫烟花*1\\n🍀\\n将美好的祈愿寄于锦绣香囊\\n让这阵端午清香伴你安康~\",\"media\":[{\"name\":\"1.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260618_1744bc3b4bf3615590d6ec606afdf82c\",\"mimeType\":\"image/png\",\"size\":2288664,\"width\":1920,\"height\":1080,\"watermark\":true},{\"name\":\"2.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260618_e1240f107e643d8ac5ba7ea588b00f77\",\"mimeType\":\"image/png\",\"size\":2160749,\"width\":1920,\"height\":1080,\"watermark\":true}]}}",
+            "deleteTime": 0,
+            "createTime": 1781776800723,
+            "updateTime": 1781776804316,
+            "clientType": 152,
+            "tagList": [
+              "5b02c181d545685882af86ee"
+            ],
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇端午节",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇也要划龙舟",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT",
+              "contentStatementOption": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6a33c1a45b5f0d2346ed052b",
+              "repostCount": 0,
+              "commentCount": 0,
+              "likeCount": 1,
+              "shareCount": 0,
+              "favCount": 0,
+              "createTime": 1781777725348
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2883,
+                "followerCount": 1254545,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511669,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "锦绣寻香 指尖芳华丨《光·遇》端午节运营活动公告光遇_光·遇 | 大神",
+            "desc": "锦绣寻香 指尖芳华丨《光·遇》端午节运营活动公告光遇,光遇端午节,光遇也要划龙舟龙舟竞渡穿梭云海佩香祈福共度端阳🌿6月19日~7月2日 前往【锦绣寻香 指尖芳华】活动页面参与端午节专属活动",
+            "keywords": ""
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "activity",
+      "title": "【活动】端午节",
+      "start": "2026-06-18T16:00:00.000Z",
+      "end": "2026-07-02T15:59:00.000Z"
+    }
+  },
+  {
+    "id": "6a33b39d46804c03983e3ed6",
+    "title": "星夜回响 | 《光·遇》致梵高场景揭秘 第七期\n#光遇# #致梵高# #光遇致梵高#\n“凝望星空",
+    "content": "星夜回响 | 《光·遇》致梵高场景揭秘 第七期\n#光遇# #致梵高# #光遇致梵高#\n“凝望星空总令我心生梦绪，这份感受，就像看着地图上标注城镇村落的黑点时那般纯粹。”\n——文森特·梵高(摘自信件No.506)\n🌌\n在流转的夜空中\n看见跨越百年的回响\n与一颗颗闪烁的星辰\n✨\n7月17日《光·遇》致梵高\n「每颗星都值得被看见」",
+    "createTime": 1781773200709,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "6a33b39d46804c03983e3ed6",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"星夜回响 | 《光·遇》致梵高场景揭秘 第七期\\n#光遇# #致梵高# #光遇致梵高#\\n“凝望星空总令我心生梦绪，这份感受，就像看着地图上标注城镇村落的黑点时那般纯粹。”\\n——文森特·梵高(摘自信件No.506)\\n🌌\\n在流转的夜空中\\n看见跨越百年的回响\\n与一颗颗闪烁的星辰\\n✨\\n7月17日《光·遇》致梵高\\n「每颗星都值得被看见」\",\"media\":[{\"name\":\"梵高季场景图爆料-第六期星月夜.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260618_28d0a7c05b3f1b724095da7abb67e6fe\",\"mimeType\":\"image/png\",\"size\":4947544,\"width\":2336,\"height\":1000,\"watermark\":true}]}}",
+      "deleteTime": 0,
+      "createTime": 1781773200709,
+      "updateTime": 1781773213163,
+      "clientType": 152,
+      "tagList": [
+        "5b02c181d545685882af86ee"
+      ],
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "致梵高",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇致梵高",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT",
+        "contentStatementOption": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6a33b39d46804c03983e3ed6",
+        "repostCount": 0,
+        "commentCount": 1,
+        "likeCount": 5,
+        "shareCount": 0,
+        "favCount": 0,
+        "createTime": 1781773316474
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6a33b39d46804c03983e3ed6",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"星夜回响 | 《光·遇》致梵高场景揭秘 第七期\\n#光遇# #致梵高# #光遇致梵高#\\n“凝望星空总令我心生梦绪，这份感受，就像看着地图上标注城镇村落的黑点时那般纯粹。”\\n——文森特·梵高(摘自信件No.506)\\n🌌\\n在流转的夜空中\\n看见跨越百年的回响\\n与一颗颗闪烁的星辰\\n✨\\n7月17日《光·遇》致梵高\\n「每颗星都值得被看见」\",\"media\":[{\"name\":\"梵高季场景图爆料-第六期星月夜.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260618_28d0a7c05b3f1b724095da7abb67e6fe\",\"mimeType\":\"image/png\",\"size\":4947544,\"width\":2336,\"height\":1000,\"watermark\":true}]}}",
+            "deleteTime": 0,
+            "createTime": 1781773200709,
+            "updateTime": 1781773213163,
+            "clientType": 152,
+            "tagList": [
+              "5b02c181d545685882af86ee"
+            ],
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "致梵高",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇致梵高",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT",
+              "contentStatementOption": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6a33b39d46804c03983e3ed6",
+              "repostCount": 0,
+              "commentCount": 1,
+              "likeCount": 5,
+              "shareCount": 0,
+              "favCount": 0,
+              "createTime": 1781773316474
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2883,
+                "followerCount": 1254545,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511669,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "星夜回响 | 《光·遇》致梵高场景揭秘 第七期光遇,致梵高_光·遇 | 大神",
+            "desc": "星夜回响 | 《光·遇》致梵高场景揭秘 第七期光遇,致梵高,光遇致梵高“凝望星空总令我心生梦绪，这份感受，就像看着地图上标注城镇村落的黑点时那般纯粹。”——文森特·梵高(摘自信件No",
+            "keywords": ""
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "《光·遇》致梵高",
+      "start": "2026-07-16T16:00:00.000Z",
+      "end": "2026-07-17T16:00:00.000Z"
+    }
+  },
+  {
+    "id": "6a336d4436173374eda87ec7",
+    "title": "6月18日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n",
+    "content": "6月18日丨本周旅行先祖到临提醒\n#光遇# #光遇旅行先祖#\n勤劳的先祖在今天重返天空王国啦~\n这位先祖将带着多重礼赠与大家见面\n🎁\n先祖正在霞谷热情鼓掌\n曾遗憾与之错过的旅人\n记得在本周四早上6:00至下周一中午12:00\n与先祖换取喜欢的赠礼哦~",
+    "createTime": 1781755201247,
+    "status": "ignored",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "6a336d4436173374eda87ec7",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"6月18日丨本周旅行先祖到临提醒\\n#光遇# #光遇旅行先祖#\\n勤劳的先祖在今天重返天空王国啦~\\n这位先祖将带着多重礼赠与大家见面\\n🎁\\n先祖正在霞谷热情鼓掌\\n曾遗憾与之错过的旅人\\n记得在本周四早上6:00至下周一中午12:00\\n与先祖换取喜欢的赠礼哦~\",\"media\":[{\"name\":\"0618.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260618_2aaa8b0af6a03cc985a31cf5bd223183\",\"mimeType\":\"image/png\",\"size\":2289514,\"width\":1920,\"height\":1080,\"watermark\":true}]}}",
+      "deleteTime": 0,
+      "createTime": 1781755201247,
+      "updateTime": 1781755204514,
+      "clientType": 152,
+      "tagList": [
+        "5b02c181d545685882af86ee"
+      ],
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇旅行先祖",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT",
+        "contentStatementOption": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6a336d4436173374eda87ec7",
+        "repostCount": 1,
+        "commentCount": 2,
+        "likeCount": 9,
+        "shareCount": 1,
+        "favCount": 1,
+        "createTime": 1781757738386
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6a336d4436173374eda87ec7",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"6月18日丨本周旅行先祖到临提醒\\n#光遇# #光遇旅行先祖#\\n勤劳的先祖在今天重返天空王国啦~\\n这位先祖将带着多重礼赠与大家见面\\n🎁\\n先祖正在霞谷热情鼓掌\\n曾遗憾与之错过的旅人\\n记得在本周四早上6:00至下周一中午12:00\\n与先祖换取喜欢的赠礼哦~\",\"media\":[{\"name\":\"0618.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260618_2aaa8b0af6a03cc985a31cf5bd223183\",\"mimeType\":\"image/png\",\"size\":2289514,\"width\":1920,\"height\":1080,\"watermark\":true}]}}",
+            "deleteTime": 0,
+            "createTime": 1781755201247,
+            "updateTime": 1781755204514,
+            "clientType": 152,
+            "tagList": [
+              "5b02c181d545685882af86ee"
+            ],
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇旅行先祖",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT",
+              "contentStatementOption": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6a336d4436173374eda87ec7",
+              "repostCount": 1,
+              "commentCount": 2,
+              "likeCount": 9,
+              "shareCount": 0,
+              "favCount": 1,
+              "createTime": 1781757738386
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2883,
+                "followerCount": 1254545,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511669,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "6月18日丨本周旅行先祖到临提醒光遇_光·遇 | 大神",
+            "desc": "6月18日丨本周旅行先祖到临提醒光遇",
+            "keywords": ""
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "旅行先祖",
+      "start": "2026-06-17T22:00:00.000Z",
+      "end": "2026-06-22T04:00:00.000Z"
+    }
+  },
+  {
+    "id": "6a32702c46804c03983b9fe5",
+    "title": "麦田鸦影 | 《光·遇》致梵高场景揭秘 第六期\n#光遇# #致梵高# #光遇致梵高#\n“画里是大",
+    "content": "麦田鸦影 | 《光·遇》致梵高场景揭秘 第六期\n#光遇# #致梵高# #光遇致梵高#\n“画里是大片大片的麦田，笼罩在阴郁的天色之下。我不必刻意强求，就足以描摹出深切的忧伤与无边的孤独。”\n——文森特·梵高(摘自信件No.649)\n🌾\n踏入狂风肆虐的麦田\n看见在空中盘旋的群鸦\n与隐于暮色的孤寂身影\n✨\n7月17日《光·遇》致梵高\n「每颗星都值得被看见」",
+    "createTime": 1781690400414,
+    "status": "pending",
+    "autoType": "other",
+    "parsed": true,
+    "raw": {
+      "id": "6a32702c46804c03983b9fe5",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"麦田鸦影 | 《光·遇》致梵高场景揭秘 第六期\\n#光遇# #致梵高# #光遇致梵高#\\n“画里是大片大片的麦田，笼罩在阴郁的天色之下。我不必刻意强求，就足以描摹出深切的忧伤与无边的孤独。”\\n——文森特·梵高(摘自信件No.649)\\n🌾\\n踏入狂风肆虐的麦田\\n看见在空中盘旋的群鸦\\n与隐于暮色的孤寂身影\\n✨\\n7月17日《光·遇》致梵高\\n「每颗星都值得被看见」\",\"media\":[{\"name\":\"梵高季场景图爆料-第五期麦田.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260617_59723d665fdc2de15f85e5509ac38eda\",\"mimeType\":\"image/png\",\"size\":3550354,\"width\":2336,\"height\":1000,\"watermark\":true}]}}",
+      "deleteTime": 0,
+      "createTime": 1781690400414,
+      "updateTime": 1781690412945,
+      "clientType": 152,
+      "tagList": [
+        "5b02c181d545685882af86ee"
+      ],
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "光遇",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "致梵高",
+          "type": "DEFAULT"
+        },
+        {
+          "topicName": "光遇致梵高",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT",
+        "contentStatementOption": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6a32702c46804c03983b9fe5",
+        "repostCount": 0,
+        "commentCount": 3,
+        "likeCount": 16,
+        "shareCount": 0,
+        "favCount": 1,
+        "createTime": 1781690442183
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6a32702c46804c03983b9fe5",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"麦田鸦影 | 《光·遇》致梵高场景揭秘 第六期\\n#光遇# #致梵高# #光遇致梵高#\\n“画里是大片大片的麦田，笼罩在阴郁的天色之下。我不必刻意强求，就足以描摹出深切的忧伤与无边的孤独。”\\n——文森特·梵高(摘自信件No.649)\\n🌾\\n踏入狂风肆虐的麦田\\n看见在空中盘旋的群鸦\\n与隐于暮色的孤寂身影\\n✨\\n7月17日《光·遇》致梵高\\n「每颗星都值得被看见」\",\"media\":[{\"name\":\"梵高季场景图爆料-第五期麦田.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260617_59723d665fdc2de15f85e5509ac38eda\",\"mimeType\":\"image/png\",\"size\":3550354,\"width\":2336,\"height\":1000,\"watermark\":true}]}}",
+            "deleteTime": 0,
+            "createTime": 1781690400414,
+            "updateTime": 1781690412945,
+            "clientType": 152,
+            "tagList": [
+              "5b02c181d545685882af86ee"
+            ],
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "光遇",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "致梵高",
+                "type": "DEFAULT"
+              },
+              {
+                "topicName": "光遇致梵高",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT",
+              "contentStatementOption": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6a32702c46804c03983b9fe5",
+              "repostCount": 0,
+              "commentCount": 3,
+              "likeCount": 16,
+              "shareCount": 0,
+              "favCount": 1,
+              "createTime": 1781690442183
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2883,
+                "followerCount": 1254545,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 511669,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "麦田鸦影 | 《光·遇》致梵高场景揭秘 第六期光遇,致梵高_光·遇 | 大神",
+            "desc": "麦田鸦影 | 《光·遇》致梵高场景揭秘 第六期光遇,致梵高,光遇致梵高“画里是大片大片的麦田，笼罩在阴郁的天色之下。我不必刻意强求，就足以描摹出深切的忧伤与无边的孤独",
+            "keywords": ""
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "other",
+      "title": "《光·遇》致梵高",
+      "start": "2026-07-16T16:00:00.000Z",
+      "end": "2026-07-17T16:00:00.000Z"
+    }
+  },
+  {
     "id": "6a312d4c52b4a94f03998826",
     "title": "星光奖入围作品创作故事分享 ①「立体创作星光奖」\n#光遇# #2026光遇星光奖# #光遇七周年",
     "content": "星光奖入围作品创作故事分享 ①「立体创作星光奖」\n#光遇# #2026光遇星光奖# #光遇七周年# #光遇每颗星都值得被看见# \n✨\n云端的微光，在指尖被赋予真实的温度\n跃出屏幕的热爱，正一点点将灵感化为现实\n🎞️\n不论是屏幕内流转的光影\n还是手中真实的触感\n这一次，我们把镜头交给赋予热爱以“形状”的创作者们\n点开视频，了解「立体创作星光奖」入围作品背后的灵感与故事吧！\n🌟\n获奖结果将于7月11日在《光·遇》星光奖颁奖典礼揭晓\n更多活动信息敬请期待",
