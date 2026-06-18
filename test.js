@@ -4,7 +4,7 @@
 const { generateICS } = require('./ics-generator');
 const { applyEventOverrides, updateEventOverrides } = require('./src/event-overrides');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
-const { disableFeedEvents } = require('./src/feed-events');
+const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
 const fs = require('fs');
 const path = require('path');
@@ -98,6 +98,9 @@ const ignoredEvents = [
 disableFeedEvents(ignoredEvents, 'feed-1');
 assert(ignoredEvents[0].enabled === false, '忽略公告会关闭对应日历事件');
 assert(ignoredEvents[1].enabled === true, '忽略公告不会影响其他事件');
+assert(shouldKeepFeedEvent({ status: 'approved' }, { type: 'bonus', start: '2026-01-01', end: '2026-01-02' }), '同步只保留已批准公告事件');
+assert(!shouldKeepFeedEvent({ status: 'ignored' }, { type: 'bonus', start: '2026-01-01', end: '2026-01-02' }), '同步不会让已忽略公告复活');
+assert(!shouldKeepFeedEvent({ status: 'pending' }, { type: 'bonus', start: '2026-01-01', end: '2026-01-02' }), '同步不会让待审核公告提前进日历');
 
 console.log('');
 console.log('=== 公告抓取游标验证 ===');

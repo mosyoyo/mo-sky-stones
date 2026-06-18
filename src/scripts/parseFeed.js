@@ -10,6 +10,7 @@ const {
   normalizeFeed,
   uidPart,
 } = require('../event-utils');
+const { shouldKeepFeedEvent } = require('../feed-events');
 const { appendSyncLog, readJSON, writeJSON } = require('./common');
 
 const TYPE_TITLE_PREFIX = {
@@ -118,20 +119,18 @@ function main() {
     parsedFeeds.push(feed);
 
     const existing = eventMap.get(feed.id);
-    if (existing && parsed.type !== 'other' && parsed.start && parsed.end) {
+    if (!shouldKeepFeedEvent(feed, parsed)) {
+      eventMap.delete(feed.id);
+    } else if (existing) {
       Object.assign(existing, {
         type: parsed.type,
         title: parsed.title || existing.title,
         start: parsed.start,
         end: parsed.end,
       });
-    }
-
-    if (feed.status === 'approved' && parsed.type !== 'other' && parsed.start && parsed.end) {
-      if (!existing) {
-        eventMap.set(feed.id, eventFromFeed(feed, parsed));
-        parsedCount++;
-      }
+    } else {
+      eventMap.set(feed.id, eventFromFeed(feed, parsed));
+      parsedCount++;
     }
   }
 
