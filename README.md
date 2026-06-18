@@ -15,7 +15,7 @@ https://sky-ics.pages.dev/red.ics
 https://sky-ics.pages.dev/black.ics
 https://sky-ics.pages.dev/events.ics
 https://sky-ics.pages.dev/spirit-events.ics
-https://sky-ics.pages.dev/spirits.html
+https://sky-ics.pages.dev/spirits
 https://sky-ics.pages.dev/calendar.ics
 https://sky-ics.pages.dev/calendar.ics?types=red,traveling_spirit,season,activity,bonus,candle_heap,maintenance&endOnly=traveling_spirit,season,activity
 ```
@@ -44,7 +44,7 @@ maintenance         维护
 指定先祖订阅页面：
 
 ```text
-https://sky-ics.pages.dev/spirits.html
+https://sky-ics.pages.dev/spirits
 ```
 
 页面会读取 `data/soul-spirits.json`，最多选择 3 个先祖，然后生成独立订阅链接：
