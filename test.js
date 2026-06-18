@@ -2,7 +2,7 @@
 // 红石、黑石分开生成
 
 const { generateICS } = require('./ics-generator');
-const { applyEventOverrides, stableJSON, updateEventOverrides } = require('./src/event-overrides');
+const { applyEventOverrides, publicEvent, restoreInternalFields, stableJSON, updateEventOverrides } = require('./src/event-overrides');
 const { generateEventsICS } = require('./src/event-utils');
 const { matchSpirit } = require('./src/spirit-match');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
@@ -130,6 +130,13 @@ assert(unchangedOverrides.length === 0, '事件页未改动保存不会冻结所
 const keptOverrides = updateEventOverrides(overrides, savedEvents, savedEvents);
 assert(keptOverrides.length === overrides.length, '已有人工覆盖在再次保存时会保留');
 assert(stableJSON({ b: 2, a: 1 }) === stableJSON({ a: 1, b: 2 }), '后台保存 no-op 判断不受对象字段顺序影响');
+const internalEvent = { id: 'event-internal', enabled: true, title: '带内部字段', source: 'wiki', wikiUrl: 'https://example.com', _source: 'wiki', _names: ['先祖名'] };
+const publicInternalEvent = publicEvent(internalEvent);
+assert(!('_source' in publicInternalEvent) && !('_names' in publicInternalEvent), '后台公开事件会移除下划线内部字段');
+assert(!('source' in publicInternalEvent) && !('wikiUrl' in publicInternalEvent), '后台公开事件会移除数据源字段');
+const restoredInternalEvents = restoreInternalFields([internalEvent], [{ id: 'event-internal', enabled: false, title: '人工关闭' }]);
+assert(restoredInternalEvents[0]._names?.[0] === '先祖名' && restoredInternalEvents[0]._source === 'wiki', '后台保存会保留先祖匹配所需内部字段');
+assert(restoredInternalEvents[0].enabled === false && restoredInternalEvents[0].title === '人工关闭', '后台保存会覆盖用户可编辑字段');
 
 console.log('');
 console.log('=== ICS DESCRIPTION 格式验证 ===');

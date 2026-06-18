@@ -3,8 +3,18 @@ function eventKey(event) {
 }
 
 function publicEvent(event) {
-  const { _source, _group, _names, ...rest } = event || {};
+  const { _source, _group, _names, source, wikiUrl, ...rest } = event || {};
   return rest;
+}
+
+function restoreInternalFields(beforeEvents, afterEvents) {
+  const beforeMap = new Map((beforeEvents || []).map(event => [eventKey(event), event]).filter(([key]) => key));
+  return (afterEvents || []).map(event => {
+    const key = eventKey(event);
+    const before = beforeMap.get(key);
+    if (!before) return publicEvent(event);
+    return { ...before, ...publicEvent(event) };
+  });
 }
 
 function stableJSON(value) {
@@ -71,6 +81,7 @@ module.exports = {
   applyEventOverrides,
   eventKey,
   publicEvent,
+  restoreInternalFields,
   samePublicEvent,
   stableJSON,
   updateEventOverrides,
