@@ -10,8 +10,12 @@ export async function onRequestGet(context) {
   const rawEvents = await readAssetJSON(context, '/data/events.json', []);
   // 清洗内部字段，避免泄漏到 ICS
   const events = rawEvents.map(cleanEvent);
+  const url = new URL(context.request.url);
   const types = parseTypes(context.request.url);
   const reminderOpts = parseReminderOptions(context.request.url);
+  if (!url.searchParams.has('types') && !url.searchParams.has('endOnly')) {
+    ['traveling_spirit', 'season', 'activity'].forEach(type => reminderOpts.endOnly.add(type));
+  }
   const ics = buildCalendar(events, types, { reminderOpts });
   return new Response(ics, {
     headers: {

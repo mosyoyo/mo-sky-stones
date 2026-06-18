@@ -14,8 +14,11 @@ https://sky-ics.pages.dev/
 https://sky-ics.pages.dev/red.ics
 https://sky-ics.pages.dev/black.ics
 https://sky-ics.pages.dev/events.ics
+https://sky-ics.pages.dev/calendar.ics
 https://sky-ics.pages.dev/calendar.ics?types=red,traveling_spirit,season,activity,bonus,candle_heap,maintenance&endOnly=traveling_spirit,season,activity
 ```
+
+直接订阅 `/calendar.ics` 时，默认等同首页推荐选择：红石、旅行先祖、季节、活动、双倍、大蜡烛、维护；其中旅行先祖、季节、活动只保留结束提醒。
 
 可选类型：
 

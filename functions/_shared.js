@@ -47,9 +47,10 @@ function extractVEVENTS(ics) {
   return events;
 }
 
+const DEFAULT_CALENDAR_TYPES = ['red', 'traveling_spirit', 'season', 'activity', 'bonus', 'candle_heap', 'maintenance'];
 function parseTypes(url) {
   const value = new URL(url).searchParams.get('types');
-  if (!value) return Object.keys(TYPE_LABELS);
+  if (!value) return DEFAULT_CALENDAR_TYPES;
   return value.split(',').map(s => s.trim()).filter(Boolean);
 }
 
