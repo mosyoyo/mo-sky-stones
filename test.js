@@ -165,9 +165,8 @@ assert(activityICS.includes('REFRESH-INTERVAL;VALUE=DURATION:PT1H'), '活动 ICS
 assert(activityICS.includes('X-PUBLISHED-TTL:PT1H'), '活动 ICS 包含发布 TTL');
 const descriptionLines = activityICS.split('\r\n').filter(line => line.startsWith('DESCRIPTION:'));
 assert(descriptionLines.length > 0, '活动 ICS 会生成 DESCRIPTION');
-assert(descriptionLines.every(line => !/[\r\n]/.test(line)), 'DESCRIPTION 字段行内不含真实 CR/LF');
-assert(activityICS.includes('DESCRIPTION:类型: 活动\\n 标题: 测试活动\\n 时间:'), '活动 DESCRIPTION 使用可订阅版本的折叠字面换行拼法');
-assert(!activityICS.includes('\r\n 标题:') && !activityICS.includes('\r\n 结束时间:'), '活动 DESCRIPTION 字段内不含真实折叠换行');
+assert(descriptionLines.some(line => line.includes('\r\\n ')), '活动 DESCRIPTION 保持与红石一致的 CR + 字面换行拼法');
+assert(activityICS.includes('DESCRIPTION:类型: 活动\r\\n 标题: 测试活动\r\\n 时间:'), '活动 DESCRIPTION 使用红石同款折叠字面换行拼法');
 const redDescriptionLines = redICS.split('\r\n').filter(line => line.startsWith('DESCRIPTION:'));
 assert(redDescriptionLines.length > 0, '红石 ICS 会生成 DESCRIPTION');
 assert(redDescriptionLines.some(line => line.includes('\\n ') && line.includes('地图: ') && line.includes('区域: ') && line.includes('时间: ')), '红石 DESCRIPTION 保持上午可用版本的折叠字面换行拼法');
@@ -215,7 +214,7 @@ const spiritSubscriptionICS = generateSpiritEventsICS([
 ], { selected: ['希望之种'], spiritInfo: soulInfo });
 assert(spiritSubscriptionICS.includes('DTSTART:20260617T220000Z') && spiritSubscriptionICS.includes('DTEND:20260622T040000Z'), '指定先祖 ICS 复用 06:00/12:00 精确复刻时间');
 assert(spiritSubscriptionICS.includes('SUMMARY:【复刻】希望之种返场'), '指定先祖 ICS 标题面向蹲先祖场景');
-assert(spiritSubscriptionICS.includes('DESCRIPTION:希望之种返场\\n 开始: 6/18 06:00\\n 离开: 6/22 12:00'), '指定先祖 ICS 备注简短且使用可订阅版本字面换行');
+assert(spiritSubscriptionICS.includes('DESCRIPTION:希望之种返场\r\\n 开始: 6/18 06:00\r\\n 离开: 6/22 12:00'), '指定先祖 ICS 备注简短且使用红石同款字节拼法');
 assert(spiritSubscriptionICS.includes('物品: 面具、发型、斗篷、乐谱'), '指定先祖 ICS 备注带可搜索/可编辑物品');
 assert(verifySoulSpirits(soulSpirits).length === 0, '完整先祖列表通过结构校验');
 assert(soulSpirits.spirits.length >= 50, '完整先祖列表包含 50 个以上先祖');

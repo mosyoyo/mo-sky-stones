@@ -65,7 +65,7 @@ function escapeDescriptionICS(text) {
     .replace(/\\/g, '\\\\')
     .replace(/;/g, '\\;')
     .replace(/,/g, '\\,')
-    .replace(/\r\n|\r|\n/g, '\\n');
+    .replace(/\n/g, '\\n');
 }
 
 function escapeICSLine(text) {
