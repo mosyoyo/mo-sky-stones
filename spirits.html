@@ -29,7 +29,7 @@
       width: min(760px, 100%);
       min-height: 100vh;
       margin: 0 auto;
-      padding: 18px 14px 118px;
+      padding: 18px 14px 170px;
     }
     .nav {
       position: sticky;
@@ -71,16 +71,20 @@
       font-size: 15px;
       line-height: 1.5;
     }
-    .search {
+    .filters {
       position: sticky;
       top: 54px;
       z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(150px, .45fr);
+      gap: 10px;
       padding: 0 0 12px;
       background: rgba(245, 245, 247, .78);
       backdrop-filter: blur(18px);
     }
     input[type="search"],
-    input[type="text"] {
+    input[type="text"],
+    select {
       width: 100%;
       height: 46px;
       border: 1px solid var(--line);
@@ -91,6 +95,19 @@
       font: inherit;
       font-size: 15px;
       outline: none;
+    }
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #6e6e73 50%),
+        linear-gradient(135deg, #6e6e73 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) 20px,
+        calc(100% - 12px) 20px;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 32px;
     }
     input:focus {
       border-color: rgba(0, 122, 255, .42);
@@ -238,12 +255,16 @@
       transform: translate(-50%, 0);
     }
     @media (max-width: 560px) {
-      main { padding: 10px 10px 126px; }
+      main { padding: 10px 10px 176px; }
       .nav { padding-top: 8px; }
       header { padding-top: 12px; }
       h1 { font-size: 32px; }
       .lead { font-size: 13px; }
-      .search { top: 48px; }
+      .filters {
+        top: 48px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
       .spirit { min-height: 64px; border-radius: 16px; box-shadow: none; }
       .name { font-size: 16px; }
       .dock { bottom: 10px; border-radius: 20px; }
@@ -265,8 +286,11 @@
       <p class="lead">选择你想单独关注的复刻先祖，生成一个只属于这几个先祖的日历订阅链接。</p>
     </header>
 
-    <div class="search">
+    <div class="filters">
       <input id="search" type="search" placeholder="搜索名字、季节、物品" autocomplete="off">
+      <select id="seasonFilter" aria-label="按季节筛选">
+        <option value="all">全部季节</option>
+      </select>
     </div>
 
     <section class="list" id="list" aria-live="polite"></section>
@@ -286,6 +310,7 @@
   <script>
     const list = document.querySelector('#list');
     const search = document.querySelector('#search');
+    const seasonFilter = document.querySelector('#seasonFilter');
     const count = document.querySelector('#count');
     const urlInput = document.querySelector('#url');
     const copyButton = document.querySelector('#copy');
@@ -365,7 +390,11 @@
 
     function render() {
       const q = search.value.trim().toLowerCase();
-      const visible = spirits.filter(item => !q || item.searchText.includes(q));
+      const season = seasonFilter.value;
+      const visible = spirits.filter(item => {
+        if (season !== 'all' && item.season !== season) return false;
+        return !q || item.searchText.includes(q);
+      });
       if (!visible.length) {
         list.innerHTML = '<div class="empty">没有找到符合条件的先祖。</div>';
         updateLink();
@@ -440,6 +469,8 @@
             searchText: [item.name, item.season, item.lastRevisit, ...(item.items || [])].join('\n').toLowerCase(),
           }))
           .sort((a, b) => String(b.lastRevisit || b.start).localeCompare(String(a.lastRevisit || a.start)));
+        const seasons = [...new Set(spirits.map(item => item.season).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+        seasonFilter.innerHTML = '<option value="all">全部季节</option>' + seasons.map(season => `<option value="${h(season)}">${h(season)}</option>`).join('');
         const names = new Set(spirits.map(item => item.name));
         initialSelected().forEach(name => {
           if (names.has(name)) selected.add(name);
@@ -451,6 +482,7 @@
     }
 
     search.addEventListener('input', render);
+    seasonFilter.addEventListener('change', render);
     copyButton.addEventListener('click', async () => {
       const url = subscriptionUrl();
       if (!url) return;
