@@ -1,19 +1,5 @@
 const COOKIE_NAME = 'mo_admin_auth';
-const { signAdminAuth } = require('./_shared');
-
-function appConfig(env) {
-  let merged = {};
-  if (env.APP_CONFIG) {
-    try {
-      merged = JSON.parse(env.APP_CONFIG);
-    } catch (_) {
-      merged = {};
-    }
-  }
-  return {
-    adminPassword: merged.adminPassword || env.ADMIN_PASSWORD,
-  };
-}
+const { appConfig, signAdminAuth } = require('./_shared');
 
 function isAdminPath(pathname) {
   return pathname.startsWith('/admin/') || pathname === '/admin' || pathname.startsWith('/src/admin/');
