@@ -121,7 +121,7 @@ function toUTCSpiritWindow(startDateStr) {
   const weekday = base.getUTCDay();
   const daysToMonday = (8 - weekday) % 7;
   const mondayNoonBJ = new Date(Date.UTC(year, month - 1, day + daysToMonday, 4, 0, 0, 0));
-  const thursdaySixBJ = new Date(Date.UTC(year, month - 1, day + daysToMonday - 4, 22, 0, 0, 0));
+  const thursdaySixBJ = new Date(Date.UTC(year, month - 1, day + daysToMonday - 5, 22, 0, 0, 0));
   return { start: thursdaySixBJ.toISOString(), end: mondayNoonBJ.toISOString() };
 }
 
@@ -338,4 +338,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { main };
+module.exports = { main, parseCalendarHTML, toUTCSpiritWindow };

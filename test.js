@@ -8,6 +8,7 @@ const { matchSpirit } = require('./src/spirit-match');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
+const { toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
 const fs = require('fs');
 const path = require('path');
 
@@ -109,6 +110,12 @@ console.log('=== 公告抓取游标验证 ===');
 const oldFeeds = [{ createTime: 1000 }, { createTime: 3000 }];
 assert(initialMaxTime(oldFeeds, true) === 999, '补历史模式从最旧公告之前继续抓');
 assert(initialMaxTime(oldFeeds, false) > Date.now(), '默认同步从最新公告开始抓');
+const hopeSeedWindow = toUTCSpiritWindow('2026-06-18');
+assert(hopeSeedWindow.start === '2026-06-17T22:00:00.000Z', 'Wiki 复刻开始时间为周四 06:00 北京');
+assert(hopeSeedWindow.end === '2026-06-22T04:00:00.000Z', 'Wiki 复刻结束时间为周一 12:00 北京');
+const pianistWindow = toUTCSpiritWindow('2026-06-11');
+assert(pianistWindow.start === '2026-06-10T22:00:00.000Z', '上一期复刻开始时间同样按北京时间 06:00');
+assert(pianistWindow.end === '2026-06-15T04:00:00.000Z', '上一期复刻结束时间同样按北京时间 12:00');
 
 console.log('');
 console.log('=== 事件人工覆盖验证 ===');
@@ -151,6 +158,14 @@ assert(redDescriptionLines.length > 0, '红石 ICS 会生成 DESCRIPTION');
 assert(redDescriptionLines.every(line => !/[\r\n]/.test(line)), '红石 DESCRIPTION 字段行内不含真实 CR/LF');
 assert(redICS.includes('TRIGGER;RELATED=START:-PT10M'), '红石提醒为开始前 10 分钟');
 assert(redICS.includes('含 10 分钟提醒') && !redICS.includes('含 15 分钟提醒'), '红石日历描述与 10 分钟提醒一致');
+const summaryICS = generateEventsICS([
+  { enabled: true, type: 'season', title: '【季节】狂欢季', start: '2026-04-23T04:00:00.000Z', end: '2026-07-08T04:00:00.000Z' },
+  { enabled: true, type: 'activity', title: '【活动】端午节', start: '2026-06-19T04:00:00.000Z', end: '2026-07-02T04:00:00.000Z' },
+  { enabled: true, type: 'traveling_spirit', title: '【复刻】希望之种', start: '2026-06-17T22:00:00.000Z', end: '2026-06-22T04:00:00.000Z' },
+]);
+assert(summaryICS.includes('SUMMARY:【季节结束】狂欢季 明天就要结束了'), '季节结束提醒 SUMMARY 与连续事件区分');
+assert(summaryICS.includes('SUMMARY:【活动结束】端午节'), '活动结束提醒 SUMMARY 与连续事件区分');
+assert(summaryICS.includes('SUMMARY:【先祖离开】希望之种'), '先祖离开提醒 SUMMARY 与连续事件区分');
 
 console.log('');
 console.log('=== 指定先祖匹配验证 ===');
