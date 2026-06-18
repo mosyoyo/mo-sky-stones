@@ -26,6 +26,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data
+          if git diff --cached --quiet -- \
+            data/feeds.json \
+            data/events.json \
+            data/events-netease.json \
+            data/events-wiki.json \
+            data/event-overrides.json \
+            data/source-config.json \
+            data/soul-spirits.json \
+            data/spirit-subscriptions.json; then
+            echo "No calendar data changes; skip committing sync logs only."
+            exit 0
+          fi
           git diff --cached --quiet || git commit -m "chore: sync events"
           git pull --rebase origin main
           git push

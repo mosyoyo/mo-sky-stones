@@ -204,6 +204,8 @@ BWiki 旅行先祖回归记录 -> data/soul-spirits.json
 
 然后提交 `data/` 的变化。也可以在 GitHub Actions 页面手动点 `Run workflow`。
 
+如果同步后只有 `data/sync.json` 日志变化，Action 会跳过提交；只有公告、事件、数据源配置或先祖目录等日历数据真的变化时，才会生成 `chore: sync events` 提交。
+
 本地手动同步：
 
 ```bash
