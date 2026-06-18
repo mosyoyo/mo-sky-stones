@@ -373,7 +373,7 @@ function shortSummary(title, label) {
 
 function buildDescription(lines) {
   const chunks = Array.isArray(lines) ? lines : [lines];
-  return chunks.map(line => escapeICSLine(line)).join('\r\n ');
+  return chunks.map(line => escapeICSLine(line)).join('\n');
 }
 
 function createTimedEvent({ uid, dtstamp, start, end, summary, description, location, category, alarm }) {
