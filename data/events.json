@@ -55,12 +55,13 @@
     "_source": "wiki"
   },
   {
+    "enabled": true,
     "id": "bonus-6a36104746804c0398433bec-11n995a",
     "sourceFeedId": "6a36104746804c0398433bec",
-    "enabled": true,
     "type": "bonus",
     "title": "【双倍爱心】双倍爱心",
     "start": "2026-06-20T16:00:00.000Z",
-    "end": "2026-06-27T15:59:00.000Z"
+    "end": "2026-06-27T15:59:00.000Z",
+    "_source": "manual"
   }
 ]
