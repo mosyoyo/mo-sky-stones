@@ -53,5 +53,14 @@
     "source": "wiki",
     "wikiUrl": "https://wiki.biligame.com/sky/2026%E5%B9%B4%E5%91%A8%E5%B9%B4%E5%BA%86",
     "_source": "wiki"
+  },
+  {
+    "id": "bonus-6a36104746804c0398433bec-11n995a",
+    "sourceFeedId": "6a36104746804c0398433bec",
+    "enabled": true,
+    "type": "bonus",
+    "title": "【双倍爱心】双倍爱心",
+    "start": "2026-06-20T16:00:00.000Z",
+    "end": "2026-06-27T15:59:00.000Z"
   }
 ]
