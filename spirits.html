@@ -25,6 +25,9 @@
       min-height: 100vh;
       background: linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 58%, #efeff4 100%);
     }
+    body.sheet-open {
+      overflow: hidden;
+    }
     main {
       width: min(760px, 100%);
       min-height: 100vh;
@@ -78,18 +81,133 @@
       font-size: 15px;
       line-height: 1.5;
     }
-    .filters {
-      position: sticky;
-      top: 54px;
-      z-index: 2;
+    .picker-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      min-height: 54px;
+      margin: 2px 0 12px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      text-align: left;
+    }
+    .picker-trigger span:last-child {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .selected-panel {
+      min-height: 108px;
+      margin-bottom: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .72);
+    }
+    .selection-summary {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .selected-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .selected-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 34px;
+      padding: 0 10px 0 12px;
+      border: 1px solid rgba(0, 122, 255, .18);
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: #0066cc;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .selected-empty {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .sheet {
+      position: fixed;
+      inset: 0;
+      z-index: 8;
+      display: grid;
+      align-items: end;
+      background: rgba(0, 0, 0, .28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+    }
+    .sheet[hidden] {
+      display: none;
+    }
+    .sheet.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .sheet-panel {
+      width: min(760px, 100%);
+      max-height: min(78vh, 720px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr);
+      padding: 12px 14px 14px;
+      border-radius: 24px 24px 0 0;
+      background: #f5f5f7;
+      box-shadow: 0 -18px 60px rgba(0, 0, 0, .18);
+      transform: translateY(18px);
+      transition: transform .18s ease;
+    }
+    .sheet.is-open .sheet-panel {
+      transform: translateY(0);
+    }
+    .sheet-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 4px 2px 12px;
+    }
+    .sheet-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 760;
+    }
+    .sheet-close {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: #e7e7eb;
+      color: #3a3a3c;
+      font: inherit;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .sheet-controls {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(150px, .45fr);
       gap: 10px;
-      margin: 0 -14px;
-      padding: 10px 14px 12px;
-      background: #f5f5f7;
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(60, 60, 67, .08);
+      padding-bottom: 10px;
     }
     input[type="search"],
     input[type="text"],
@@ -125,6 +243,8 @@
     .list {
       display: grid;
       gap: 10px;
+      overflow: auto;
+      padding: 2px 0 14px;
     }
     .spirit {
       display: grid;
@@ -269,10 +389,14 @@
       header { padding-top: 12px; }
       h1 { font-size: 32px; }
       .lead { font-size: 13px; }
-      .filters {
-        top: 48px;
-        margin: 0 -10px;
-        padding: 9px 10px 10px;
+      .picker-trigger { min-height: 50px; border-radius: 16px; box-shadow: none; }
+      .selected-panel { min-height: 96px; border-radius: 16px; }
+      .sheet-panel {
+        max-height: 84vh;
+        padding: 10px 10px 12px;
+        border-radius: 22px 22px 0 0;
+      }
+      .sheet-controls {
         grid-template-columns: 1fr;
         gap: 8px;
       }
@@ -301,15 +425,32 @@
       <p class="lead">选择你想单独关注的复刻先祖，生成一个只属于这几个先祖的日历订阅链接。</p>
     </header>
 
-    <div class="filters">
-      <input id="search" type="search" placeholder="搜索名字、季节、物品" autocomplete="off">
-      <select id="seasonFilter" aria-label="按季节筛选">
-        <option value="all">全部季节</option>
-      </select>
-    </div>
+    <button id="openPicker" class="picker-trigger" type="button">
+      <span>搜索名字、季节、物品</span>
+      <span>打开</span>
+    </button>
 
-    <section class="list" id="list" aria-live="polite"></section>
+    <section class="selected-panel" aria-label="已选择的先祖">
+      <p class="selection-summary" id="selectionSummary">还没有选择先祖。</p>
+      <div class="selected-list" id="selectedList"></div>
+    </section>
   </main>
+
+  <section class="sheet" id="pickerSheet" aria-hidden="true" aria-label="搜索和筛选先祖" hidden>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="pickerTitle">
+      <div class="sheet-head">
+        <h2 class="sheet-title" id="pickerTitle">选择先祖</h2>
+        <button id="closePicker" class="sheet-close" type="button" aria-label="关闭">×</button>
+      </div>
+      <div class="sheet-controls">
+        <input id="search" type="search" placeholder="搜索名字、季节、物品" autocomplete="off">
+        <select id="seasonFilter" aria-label="按季节筛选">
+          <option value="all">全部季节</option>
+        </select>
+      </div>
+      <section class="list" id="list" aria-live="polite"></section>
+    </div>
+  </section>
 
   <section class="dock" aria-label="订阅链接">
     <div class="dock-row">
@@ -326,6 +467,11 @@
     const list = document.querySelector('#list');
     const search = document.querySelector('#search');
     const seasonFilter = document.querySelector('#seasonFilter');
+    const openPicker = document.querySelector('#openPicker');
+    const closePicker = document.querySelector('#closePicker');
+    const pickerSheet = document.querySelector('#pickerSheet');
+    const selectionSummary = document.querySelector('#selectionSummary');
+    const selectedList = document.querySelector('#selectedList');
     const count = document.querySelector('#count');
     const urlInput = document.querySelector('#url');
     const copyButton = document.querySelector('#copy');
@@ -386,6 +532,41 @@
       return url.replace(/^https?:\/\//, 'webcal://');
     }
 
+    function openSheet() {
+      pickerSheet.hidden = false;
+      pickerSheet.classList.add('is-open');
+      pickerSheet.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('sheet-open');
+      setTimeout(() => search.focus(), 120);
+    }
+
+    function closeSheet() {
+      pickerSheet.classList.remove('is-open');
+      pickerSheet.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('sheet-open');
+      setTimeout(() => {
+        if (!pickerSheet.classList.contains('is-open')) pickerSheet.hidden = true;
+      }, 180);
+    }
+
+    function updateSelectedPanel() {
+      if (!selected.size) {
+        selectionSummary.textContent = '还没有选择先祖。';
+        selectedList.innerHTML = '<span class="selected-empty">点上方按钮搜索并选择，最多 3 个。</span>';
+        return;
+      }
+      selectionSummary.textContent = `已选择 ${selected.size} 个先祖。点名称可以移除。`;
+      selectedList.innerHTML = [...selected].map(name => (
+        `<button class="selected-chip" type="button" data-name="${h(name)}">${h(name)} ×</button>`
+      )).join('');
+      selectedList.querySelectorAll('.selected-chip').forEach(button => {
+        button.addEventListener('click', () => {
+          selected.delete(button.dataset.name);
+          render();
+        });
+      });
+    }
+
     function updateLink() {
       const url = subscriptionUrl();
       count.textContent = `已选 ${selected.size} / 3`;
@@ -401,6 +582,7 @@
         openLink.setAttribute('aria-disabled', 'true');
         hint.textContent = '最多选择 3 个。未返场时日历可能暂时为空，返场后会自动出现。';
       }
+      updateSelectedPanel();
     }
 
     function render() {
@@ -498,6 +680,14 @@
 
     search.addEventListener('input', render);
     seasonFilter.addEventListener('change', render);
+    openPicker.addEventListener('click', openSheet);
+    closePicker.addEventListener('click', closeSheet);
+    pickerSheet.addEventListener('click', event => {
+      if (event.target === pickerSheet) closeSheet();
+    });
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && pickerSheet.classList.contains('is-open')) closeSheet();
+    });
     copyButton.addEventListener('click', async () => {
       const url = subscriptionUrl();
       if (!url) return;
