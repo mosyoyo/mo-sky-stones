@@ -220,4 +220,169 @@ Admin 纯前端重构，不动数据和后端逻辑。
 
 ---
 
+## 9. 已知 bug：复刻先祖时间错误（本期修）
+
+> 这次顺手修一个**影响 ICS 输出**的 bug（虽然 plan 主体是 admin 重构，但这个 bug 跟时间规则相关，需要 codex 一并处理）
+
+### 9.1 现象
+
+用户反馈：
+
+> 复刻先祖应该是**早上 6 点钟来、中午 12 点钟走**。现在 wiki 抓出来的全是「12:00 来、12:00 走」。
+
+`data/events-wiki.json` 现状：
+
+```json
+{
+  "type": "traveling_spirit",
+  "title": "【复刻】希望之种",
+  "start": "2026-06-18T04:00:00.000Z",  // ← 错（北京时间 12:00）
+  "end":   "2026-06-22T04:00:00.000Z"   // ← 错（北京时间 12:00）
+}
+```
+
+正确应该是：
+
+```json
+{
+  "start": "2026-06-18T22:00:00.000Z",  // 周四 06:00 北京（UTC 22:00 前一天）
+  "end":   "2026-06-22T04:00:00.000Z"   // 周一 12:00 北京（UTC 04:00 当天）
+}
+```
+
+### 9.2 根因
+
+`src/scripts/fetchWikiEvents.js` 的 `toUTCChina12()` 是个**统一的「开始日 12:00 → 结束日 12:00」函数**：
+
+```js
+function toUTCChina12(dateStr) {
+  // 12:00 北京 = 04:00 UTC
+  return new Date(Date.UTC(year, month - 1, day, 4, 0, 0, 0)).toISOString();
+}
+```
+
+复刻先祖**沿用了这个函数**，但先祖的真实规则是「**周四早 6:00 来 → 周一中午 12:00 走**」——这是 Sky:CoL 游戏的固定机制。
+
+### 9.3 正确规则（参考网易那边的写法）
+
+网易大神的复刻先祖时间解析逻辑在 `src/event-utils.js` 的 `extractDateRange()` + `relativeWeekdayDate()` 里，**就是按这个规则做的**：
+
+```js
+// 匹配「本周/下周 + 周X + 时间点」
+const match = text.match(/(本周|下周)([日天一二三四五六])(?:早上|上午|中午|下午|晚上)?\s*(\d{1,2})[:：](\d{2})/);
+
+// 网易原文（节选）：
+// "6月18日丨本周旅行先祖即将到临 ... 本周四早上6:00 - 本周一中午12:00"
+```
+
+规则总结：
+- **start = 本周四 06:00 北京**（UTC 22:00 前一天）
+- **end   = 本周一 12:00 北京**（UTC 04:00 当天）
+- 网易公告里的「本周X」是指**公告所在那一周**（不是日历周），按 `now` 推算
+
+### 9.4 修复方案（让 codex 改）
+
+`src/scripts/fetchWikiEvents.js` 新增一个**复刻先祖专用**的转换函数，**不要改 `toUTCChina12`**（其他类型还在用）：
+
+```js
+/**
+ * 复刻先祖专用：周四 06:00 北京 → 周一 12:00 北京
+ * 输入是「start 日期」（MM-DD 或 YYYY-MM-DD）
+ * 算法：
+ *   1. 算出 start 是星期几
+ *   2. 找到同一周的「周一」（往前推 1~6 天）和「周四」（往后推 0~6 天）
+ *   3. startUTC = 周四 06:00 北京 = UTC 22:00 前一天
+ *      endUTC   = 周一 12:00 北京 = UTC 04:00 当天
+ * 注意：start 日期可能落在「周一~周三」或「周四~周日」两种情况，
+ *       都要用「包含 start 那个周一 + 包含 start 那个周四」
+ *       简单做法：end 永远 = start + (8 - weekday) % 7 天后的那个周一
+ *                 start = end - 3 天 后的那个周四
+ */
+function toUTCSpiritWindow(startDateStr) {
+  // ...
+}
+```
+
+调用点替换（`fetchWikiEvents.js` 第 216-217 行附近）：
+
+```js
+// 原：
+start: toUTCChina12(parseMonthDay(year, startMD)),
+end:   toUTCChina12(parseMonthDay(year, endMD)),
+
+// 改为（仅 traveling_spirit 类型）：
+start: type === 'traveling_spirit' ? toUTCSpiritWindow(parseMonthDay(year, startMD)) : toUTCChina12(parseMonthDay(year, startMD)),
+end:   type === 'traveling_spirit' ? toUTCSpiritWindow(parseMonthDay(year, endMD))   : toUTCChina12(parseMonthDay(year, endMD)),
+```
+
+### 9.5 验证清单
+
+- [ ] 「希望之种」`start` 应该是 `2026-06-18T22:00:00.000Z`（不是 `04:00:00`）
+- [ ] 「希望之种」`end` 应该是 `2026-06-22T04:00:00.000Z`（不是 `04:00:00`）
+- [ ] 「致敬钢琴家」同样：`start = 2026-06-10T22:00:00.000Z`，`end = 2026-06-15T04:00:00.000Z`
+- [ ] season / activity 类型的 `start/end` 保持 `toUTCChina12` 原行为
+- [ ] 跑 `node src/scripts/fetchWikiEvents.js --mock` 看输出确认
+- [ ] events.json 重新生成后，触发 Actions 验证 CF Pages ICS 输出
+
+---
+
+## 10. 已知 bug：「狂欢季 即将结束」跟 range 事件重复（本期修）
+
+> 同步修的第二个 bug。
+
+### 10.1 现象
+
+`/events.ics` 输出里**季节**有两行：
+
+```
+1. 【季节】狂欢季               DTSTART;VALUE=DATE:20260423   DTEND;VALUE=DATE:20260709
+2. 【季节】狂欢季 即将结束        DTSTART:20260707T040000Z     DTEND:20260708T040000Z
+```
+
+在 iOS 日历里看，**「狂欢季」会同时显示「狂欢季 7天 (全日)」+「狂欢季 即将结束 (1天前提醒)」两个事件**，看着像重复了。
+
+### 10.2 用户决策
+
+> 「end-reminder 改个不同的 SUMMARY」
+
+**预期输出**：
+
+```
+1. 【季节】狂欢季                                DTSTART;VALUE=DATE:20260423   DTEND;VALUE=DATE:20260709
+2. 【季节结束】狂欢季 明天就要结束了                 DTSTART:20260707T040000Z     DTEND:20260708T040000Z
+```
+
+SUMMARY 改个不一样的字符串，让 iOS 列表里能一眼分清。
+
+### 10.3 修复方案
+
+`src/event-utils.js` 第 478 行附近：
+
+```js
+// 原：
+const endTitle = event.type === 'traveling_spirit'
+  ? `${summary} 即将离开`
+  : `${summary} 即将结束`;
+
+// 改为：
+const endTitle = event.type === 'traveling_spirit'
+  ? `【先祖离开】${summary}`
+  : event.type === 'season'
+    ? `【季节结束】${summary}`
+    : event.type === 'activity'
+      ? `【活动结束】${summary}`
+      : `${summary} 即将结束`;
+```
+
+> 关键点：SUMMARY 前缀要**跟 range 事件的 `【季节】`/`【复刻】`/`【活动】` 区分**，避免 iOS 列表把它们排在一起看起来像重复。
+
+### 10.4 验证清单
+
+- [ ] `/events.ics` 里季节的 end-reminder SUMMARY 变成「【季节结束】狂欢季 明天就要结束了」
+- [ ] 复刻、活动、其他类型也按新规则命名
+- [ ] 双倍/大蜡烛/维护维持原样
+- [ ] iOS 日历订阅里同一季节只看到一行（range 整天事件），但能收到「明天就要结束」这个独立提醒
+
+---
+
 > 完成后告诉我，我会 review + 部署。
