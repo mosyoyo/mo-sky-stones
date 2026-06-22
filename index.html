@@ -107,7 +107,8 @@
       font-size: 13px;
       line-height: 1.5;
     }
-    .first-use {
+    .platform-tip {
+      display: none;
       width: min(460px, 100%);
       margin: 0;
       padding: 12px 14px;
@@ -119,7 +120,11 @@
       font-size: 13px;
       line-height: 1.55;
     }
-    .first-use strong {
+    body.is-apple .apple-tip,
+    body.is-android .android-tip {
+      display: block;
+    }
+    .platform-tip strong {
       font-weight: 720;
       color: var(--blue-dark);
     }
@@ -207,7 +212,8 @@
         <div class="actions">
           <button id="subscribe" class="primary" type="button">订阅光遇日历</button>
           <p class="note">一键订阅默认包含红石；复刻、季节、活动默认仅结束提醒；双倍、大蜡烛、维护保留全程提醒。</p>
-          <p class="first-use"><strong>苹果首次订阅：</strong>添加后到系统日历列表，点订阅右侧蓝色 ⓘ，打开事件提醒。<br><strong>安卓首次订阅：</strong>按钮会复制链接，请粘贴到日历 App 的订阅日历或 URL 入口。</p>
+          <p class="platform-tip apple-tip"><strong>首次订阅：</strong>添加后到系统日历列表，点订阅右侧蓝色 ⓘ，进入“订阅详细信息”，把“移除提醒”关掉。</p>
+          <p class="platform-tip android-tip"><strong>首次订阅：</strong>按钮会复制链接，请粘贴到日历 App 的“订阅日历”或 URL 入口。</p>
           <p class="secondary-note">想自己选择内容，或者只关注指定先祖，点击下面的按钮。</p>
           <div class="secondary-actions">
             <a class="advanced" href="/subscribe">自定义订阅</a>
@@ -231,6 +237,11 @@
     const httpsUrl = `https://${host}/calendar.ics?${query}`;
     const webcalUrl = `webcal://${host}/calendar.ics?${query}`;
     const toast = document.querySelector('#toast');
+    const ua = navigator.userAgent || '';
+    const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
+    const isAndroid = /Android/i.test(ua);
+
+    document.body.classList.add(isAppleMobile ? 'is-apple' : isAndroid ? 'is-android' : 'is-other');
 
     function showToast(message) {
       toast.textContent = message;
@@ -250,8 +261,6 @@
     }
 
     document.querySelector('#subscribe').addEventListener('click', async () => {
-      const ua = navigator.userAgent || '';
-      const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
       if (isAppleMobile) {
         location.href = webcalUrl;
         return;

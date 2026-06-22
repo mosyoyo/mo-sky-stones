@@ -27,8 +27,8 @@
     .section { background: var(--card); border: 1px solid rgba(255,255,255,.72); border-radius: 20px; padding: 24px 22px; margin-bottom: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.05); backdrop-filter: blur(18px); }
     .section h2 { margin: 0 0 14px; font-size: 20px; font-weight: 720; }
     .section p { margin: 8px 0; line-height: 1.6; font-size: 15px; color: var(--text); }
+    .section a { color: var(--blue); text-decoration: none; font-weight: 650; }
     .section .muted { color: var(--muted); font-size: 14px; }
-    .section .group-number { color: var(--text); font-size: 16px; }
     .step { display: flex; gap: 14px; margin: 14px 0; align-items: flex-start; }
     .step-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 700; }
     .step-text { flex: 1; line-height: 1.55; font-size: 15px; padding-top: 3px; }
@@ -37,6 +37,9 @@
     .warn strong { color: #b8860b; }
     .pill { display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border-radius: 999px; background: var(--blue); color: #fff; text-decoration: none; font-size: 16px; font-weight: 680; box-shadow: 0 8px 24px rgba(0,122,255,.22); }
     .link-box { background: rgba(0,0,0,.04); border-radius: 12px; padding: 12px 14px; margin: 12px 0; font-family: ui-monospace,monospace; font-size: 13px; word-break: break-all; color: var(--blue-dark); user-select: all; }
+    .source-list { list-style: none; padding: 0; margin: 10px 0 0; }
+    .source-list li { padding: 10px 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.55; }
+    .source-list li:first-child { border-top: 0; }
     .qq-card { text-align: center; }
     .qq-card .pill { margin-top: 10px; }
     footer { text-align: center; margin-top: 24px; color: var(--muted); font-size: 12px; }
@@ -59,26 +62,17 @@
       <h2>iPhone / iPad 订阅</h2>
       <div class="step"><span class="step-num">1</span><span class="step-text">在首页点<strong>「订阅光遇日历」</strong>，系统会自动唤起日历 App。</span></div>
       <div class="step"><span class="step-num">2</span><span class="step-text">弹出日历订阅确认页后，点右上角<strong>「添加」</strong>。</span></div>
-      <div class="step"><span class="step-num">3</span><span class="step-text">打开系统<strong>「日历」</strong>App，底部点<strong>「日历」</strong>，找到刚订阅的日历。</span></div>
-      <div class="warn">
-        <strong>重要：苹果会默认关掉订阅日历的提醒。</strong><br>
-        日历列表里，点这个订阅右边蓝色的 <strong>ⓘ</strong>，把<strong>「事件提醒」</strong>或<strong>「提醒」</strong>开关打开。关着的话，日程能显示但不会弹通知。
-      </div>
+      <div class="step"><span class="step-num">3</span><span class="step-text">打开系统<strong>「日历」</strong>App，底部点<strong>「日历」</strong>，找到刚订阅的日历，点右侧蓝色 <strong>ⓘ</strong>。</span></div>
+      <div class="step"><span class="step-num">4</span><span class="step-text">进入<strong>「订阅详细信息」</strong>，在<strong>「移除多余项目」</strong>下方找到<strong>「移除提醒」</strong>。</span></div>
+      <div class="step"><span class="step-num">5</span><span class="step-text"><strong>「移除提醒」默认是打开的</strong>，把这个开关关掉，日历里的提醒才会保留。</span></div>
     </section>
 
     <section class="section">
       <h2>安卓手机订阅</h2>
-      <p class="muted">安卓没有统一的"一键订阅"，需要手动把链接粘进日历 App。大部分品牌都支持。</p>
+      <p class="muted">安卓没有统一的“一键订阅”，通常需要把链接手动粘进日历 App。</p>
       <div class="step"><span class="step-num">1</span><span class="step-text">在首页点<strong>「订阅光遇日历」</strong>，链接会自动复制到剪贴板。</span></div>
       <div class="step"><span class="step-num">2</span><span class="step-text">打开手机自带的<strong>「日历」</strong>App。</span></div>
-      <div class="step"><span class="step-num">3</span><span class="step-text">找<strong>「添加日历」</strong>或<strong>「订阅日历」</strong>入口。不同品牌位置不同：</span></div>
-      <p class="muted" style="margin-left:42px;font-size:13px;line-height:1.7">
-        华为：日历 &rarr; 右下角&quot;&equiv;&quot; &rarr; 要显示的日历 &rarr; 添加账户 &rarr; 选择 CalDAV<br>
-        小米：日历 &rarr; 设置 &rarr; 日历账号 &rarr; 添加订阅日历<br>
-        OPPO/vivo：日历 &rarr; 设置 &rarr; 订阅日历 &rarr; 粘贴链接<br>
-        三星：日历 &rarr; 三条线菜单 &rarr; 管理日历 &rarr; 添加日历 &rarr; URL
-      </p>
-      <div class="step"><span class="step-num">4</span><span class="step-text">把刚才复制的链接<strong>粘贴进去</strong>，确认添加。</span></div>
+      <div class="step"><span class="step-num">3</span><span class="step-text">找<strong>「添加日历」</strong>、<strong>「订阅日历」</strong>或 <strong>URL</strong> 入口，把刚才复制的链接粘贴进去。</span></div>
       <p class="muted">如果你的日历 App 不支持订阅链接，可以装一个免费的 <strong>ICSx5</strong>（F-Droid）或用 Google 日历网页版添加。</p>
     </section>
 
@@ -90,16 +84,19 @@
     </section>
 
     <section class="section qq-card">
-      <h2>QQ 群</h2>
+      <h2>联系方式</h2>
       <p class="muted">遇到问题、提建议、催更新，欢迎加群。</p>
       <a class="pill" href="mqqapi://card/show_pslcard?src_type=internal&amp;version=1&amp;uin=1014055900&amp;card_type=group&amp;source=qrcode">加入 QQ 群</a>
-      <p class="muted group-number" style="margin-top:10px">群号：<strong>1014055900</strong></p>
     </section>
 
     <section class="section">
       <h2>关于这个日历</h2>
-      <p>数据来源：<strong>网易大神官方动态</strong>和 <strong>BWiki 光遇</strong>。</p>
-      <p>每 <strong>6 小时</strong>自动同步一次官方公告。红石和黑石按游戏内固定规律计算，公告事件由后台审核后才会进日历。</p>
+      <ul class="source-list">
+        <li><a href="https://ds.163.com/user/154db622a20e4327ac277bc35d4f2e76" target="_blank" rel="noopener">网易大神官方动态</a>：用于同步双倍、大蜡烛、维护等官方公告。</li>
+        <li><a href="https://wiki.biligame.com/sky/活动日历" target="_blank" rel="noopener">BWiki 光遇活动日历</a>：用于同步旅行先祖、季节和活动。</li>
+        <li><a href="https://github.com/CikiSyteen/sky-stones" target="_blank" rel="noopener">sky-stones</a>：红石、黑石计算参考这个项目的规则。</li>
+      </ul>
+      <p>每 <strong>6 小时</strong>自动同步一次数据源。公告事件由后台审核后才会进日历。</p>
       <p class="muted">这是一个个人兴趣小工具，不是官方服务。游戏更新了我会尽快跟，但偶尔可能慢一拍，以游戏内实际为准。</p>
     </section>
 
