@@ -107,6 +107,22 @@
       font-size: 13px;
       line-height: 1.5;
     }
+    .first-use {
+      width: min(460px, 100%);
+      margin: 0;
+      padding: 12px 14px;
+      border: 1px solid rgba(0, 122, 255, .14);
+      border-radius: 16px;
+      background: rgba(232, 242, 255, .72);
+      color: var(--text);
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .first-use strong {
+      font-weight: 720;
+      color: var(--blue-dark);
+    }
     .advanced {
       display: inline-flex;
       align-items: center;
@@ -191,10 +207,12 @@
         <div class="actions">
           <button id="subscribe" class="primary" type="button">订阅光遇日历</button>
           <p class="note">一键订阅默认包含红石；复刻、季节、活动默认仅结束提醒；双倍、大蜡烛、维护保留全程提醒。</p>
+          <p class="first-use"><strong>苹果首次订阅：</strong>添加后到系统日历列表，点订阅右侧蓝色 ⓘ，打开事件提醒。<br><strong>安卓首次订阅：</strong>按钮会复制链接，请粘贴到日历 App 的订阅日历或 URL 入口。</p>
           <p class="secondary-note">想自己选择内容，或者只关注指定先祖，点击下面的按钮。</p>
           <div class="secondary-actions">
             <a class="advanced" href="/subscribe">自定义订阅</a>
             <a class="advanced" href="/spirits">指定先祖</a>
+            <a class="advanced" href="/help">使用帮助</a>
           </div>
         </div>
       </div>

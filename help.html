@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>使用帮助 | sky-ics</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --card: rgba(255,255,255,.82);
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --blue: #007aff;
+      --blue-dark: #0066cc;
+      --line: rgba(60,60,67,.16);
+      font-family: -apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: linear-gradient(180deg,#fbfbfd 0%,#f5f5f7 55%,#efeff4 100%); }
+    main { width: min(680px,100%); margin: 0 auto; padding: 24px 18px 40px; }
+    .header { text-align: center; margin-bottom: 28px; }
+    .header h1 { margin: 0; font-size: clamp(28px,6vw,40px); font-weight: 780; letter-spacing: 0; }
+    .header .back { display: inline-block; margin-top: 14px; color: var(--blue); text-decoration: none; font-size: 15px; font-weight: 600; }
+    .section { background: var(--card); border: 1px solid rgba(255,255,255,.72); border-radius: 20px; padding: 24px 22px; margin-bottom: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.05); backdrop-filter: blur(18px); }
+    .section h2 { margin: 0 0 14px; font-size: 20px; font-weight: 720; }
+    .section p { margin: 8px 0; line-height: 1.6; font-size: 15px; color: var(--text); }
+    .section .muted { color: var(--muted); font-size: 14px; }
+    .section .group-number { color: var(--text); font-size: 16px; }
+    .step { display: flex; gap: 14px; margin: 14px 0; align-items: flex-start; }
+    .step-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 700; }
+    .step-text { flex: 1; line-height: 1.55; font-size: 15px; padding-top: 3px; }
+    .step-text strong { font-weight: 680; }
+    .warn { background: rgba(255,204,0,.12); border: 1px solid rgba(255,204,0,.3); border-radius: 14px; padding: 14px 16px; margin: 14px 0; font-size: 14px; line-height: 1.55; }
+    .warn strong { color: #b8860b; }
+    .pill { display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border-radius: 999px; background: var(--blue); color: #fff; text-decoration: none; font-size: 16px; font-weight: 680; box-shadow: 0 8px 24px rgba(0,122,255,.22); }
+    .link-box { background: rgba(0,0,0,.04); border-radius: 12px; padding: 12px 14px; margin: 12px 0; font-family: ui-monospace,monospace; font-size: 13px; word-break: break-all; color: var(--blue-dark); user-select: all; }
+    .qq-card { text-align: center; }
+    .qq-card .pill { margin-top: 10px; }
+    footer { text-align: center; margin-top: 24px; color: var(--muted); font-size: 12px; }
+    @media (max-width:560px) {
+      main { padding: 16px 14px 32px; }
+      .section { padding: 20px 16px; border-radius: 18px; }
+      .section h2 { font-size: 18px; }
+      .step-text { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="header">
+      <h1>使用帮助</h1>
+      <a class="back" href="/">&larr; 返回首页</a>
+    </div>
+
+    <section class="section">
+      <h2>iPhone / iPad 订阅</h2>
+      <div class="step"><span class="step-num">1</span><span class="step-text">在首页点<strong>「订阅光遇日历」</strong>，系统会自动唤起日历 App。</span></div>
+      <div class="step"><span class="step-num">2</span><span class="step-text">弹出日历订阅确认页后，点右上角<strong>「添加」</strong>。</span></div>
+      <div class="step"><span class="step-num">3</span><span class="step-text">打开系统<strong>「日历」</strong>App，底部点<strong>「日历」</strong>，找到刚订阅的日历。</span></div>
+      <div class="warn">
+        <strong>重要：苹果会默认关掉订阅日历的提醒。</strong><br>
+        日历列表里，点这个订阅右边蓝色的 <strong>ⓘ</strong>，把<strong>「事件提醒」</strong>或<strong>「提醒」</strong>开关打开。关着的话，日程能显示但不会弹通知。
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>安卓手机订阅</h2>
+      <p class="muted">安卓没有统一的"一键订阅"，需要手动把链接粘进日历 App。大部分品牌都支持。</p>
+      <div class="step"><span class="step-num">1</span><span class="step-text">在首页点<strong>「订阅光遇日历」</strong>，链接会自动复制到剪贴板。</span></div>
+      <div class="step"><span class="step-num">2</span><span class="step-text">打开手机自带的<strong>「日历」</strong>App。</span></div>
+      <div class="step"><span class="step-num">3</span><span class="step-text">找<strong>「添加日历」</strong>或<strong>「订阅日历」</strong>入口。不同品牌位置不同：</span></div>
+      <p class="muted" style="margin-left:42px;font-size:13px;line-height:1.7">
+        华为：日历 &rarr; 右下角&quot;&equiv;&quot; &rarr; 要显示的日历 &rarr; 添加账户 &rarr; 选择 CalDAV<br>
+        小米：日历 &rarr; 设置 &rarr; 日历账号 &rarr; 添加订阅日历<br>
+        OPPO/vivo：日历 &rarr; 设置 &rarr; 订阅日历 &rarr; 粘贴链接<br>
+        三星：日历 &rarr; 三条线菜单 &rarr; 管理日历 &rarr; 添加日历 &rarr; URL
+      </p>
+      <div class="step"><span class="step-num">4</span><span class="step-text">把刚才复制的链接<strong>粘贴进去</strong>，确认添加。</span></div>
+      <p class="muted">如果你的日历 App 不支持订阅链接，可以装一个免费的 <strong>ICSx5</strong>（F-Droid）或用 Google 日历网页版添加。</p>
+    </section>
+
+    <section class="section">
+      <h2>订阅链接长这样</h2>
+      <p>如果自动复制失败，可以手动复制下面这段：</p>
+      <div class="link-box" id="link">https://sky-ics.pages.dev/calendar.ics</div>
+      <p class="muted">想只订阅红石、或者自定义内容，去首页点<strong>「自定义订阅」</strong>。</p>
+    </section>
+
+    <section class="section qq-card">
+      <h2>QQ 群</h2>
+      <p class="muted">遇到问题、提建议、催更新，欢迎加群。</p>
+      <a class="pill" href="mqqapi://card/show_pslcard?src_type=internal&amp;version=1&amp;uin=1014055900&amp;card_type=group&amp;source=qrcode">加入 QQ 群</a>
+      <p class="muted group-number" style="margin-top:10px">群号：<strong>1014055900</strong></p>
+    </section>
+
+    <section class="section">
+      <h2>关于这个日历</h2>
+      <p>数据来源：<strong>网易大神官方动态</strong>和 <strong>BWiki 光遇</strong>。</p>
+      <p>每 <strong>6 小时</strong>自动同步一次官方公告。红石和黑石按游戏内固定规律计算，公告事件由后台审核后才会进日历。</p>
+      <p class="muted">这是一个个人兴趣小工具，不是官方服务。游戏更新了我会尽快跟，但偶尔可能慢一拍，以游戏内实际为准。</p>
+    </section>
+
+    <footer>by 喵喵 &middot; sky-ics</footer>
+  </main>
+</body>
+</html>
