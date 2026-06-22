@@ -22,7 +22,9 @@
     body { margin: 0; min-height: 100vh; background: var(--bg); }
     main { width: min(760px, 100%); margin: 0 auto; padding: 28px 14px 24px; }
     .topnav { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 0 4px 18px; }
+    .nav-links { display: flex; align-items: center; gap: 14px; }
     .topnav a { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 650; }
+    .help-button { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%; background: #fff; font-size: 16px; font-weight: 800; }
     .brand { color: var(--muted); font-size: 13px; font-weight: 680; letter-spacing: .08em; }
     header { padding: 6px 4px 16px; }
     h1 { margin: 0; font-size: clamp(30px, 7vw, 48px); line-height: 1.08; letter-spacing: 0; font-weight: 760; }
@@ -99,9 +101,12 @@
 <body>
   <main>
     <nav class="topnav" aria-label="页面导航">
-      <a href="/">返回主页</a>
-      <a href="/help">使用帮助</a>
+      <div class="nav-links">
+        <a href="/">返回主页</a>
+        <a href="/spirits">指定先祖</a>
+      </div>
       <span class="brand">SKY CALENDAR</span>
+      <a class="help-button" href="/help" aria-label="使用帮助" title="使用帮助">?</a>
     </nav>
     <header>
       <h1>自定义订阅</h1>

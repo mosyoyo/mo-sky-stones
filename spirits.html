@@ -53,16 +53,30 @@
       align-items: center;
       gap: 14px;
     }
+    .brand {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 680;
+      letter-spacing: .08em;
+    }
     .back {
       color: var(--blue);
       text-decoration: none;
       font-size: 15px;
       font-weight: 650;
     }
-    .count {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 650;
+    .help-button {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 800;
     }
     header {
       padding: 16px 2px 18px;
@@ -79,70 +93,6 @@
       max-width: 520px;
       color: var(--muted);
       font-size: 15px;
-      line-height: 1.5;
-    }
-    .picker-trigger {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      width: 100%;
-      min-height: 54px;
-      margin: 2px 0 12px;
-      padding: 0 16px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: #fff;
-      color: var(--text);
-      font: inherit;
-      font-size: 16px;
-      font-weight: 700;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      text-align: left;
-    }
-    .picker-trigger span:last-child {
-      color: var(--blue);
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .selected-panel {
-      min-height: 108px;
-      margin-bottom: 14px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, .72);
-    }
-    .selection-summary {
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .selected-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .selected-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      min-height: 34px;
-      padding: 0 10px 0 12px;
-      border: 1px solid rgba(0, 122, 255, .18);
-      border-radius: 999px;
-      background: var(--blue-soft);
-      color: #0066cc;
-      font: inherit;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .selected-empty {
-      color: var(--muted);
-      font-size: 14px;
       line-height: 1.5;
     }
     .sheet {
@@ -326,7 +276,7 @@
     }
     .dock-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
       align-items: center;
     }
@@ -389,8 +339,6 @@
       header { padding-top: 12px; }
       h1 { font-size: 32px; }
       .lead { font-size: 13px; }
-      .picker-trigger { min-height: 50px; border-radius: 16px; box-shadow: none; }
-      .selected-panel { min-height: 96px; border-radius: 16px; }
       .sheet-panel {
         max-height: 84vh;
         padding: 10px 10px 12px;
@@ -403,8 +351,6 @@
       .spirit { min-height: 64px; border-radius: 16px; box-shadow: none; }
       .name { font-size: 16px; }
       .dock { bottom: 10px; border-radius: 20px; }
-      .dock-row { grid-template-columns: 1fr 1fr; }
-      .dock input { grid-column: 1 / -1; height: 38px; }
       .button { width: 100%; height: 38px; min-width: 0; }
     }
   </style>
@@ -415,9 +361,9 @@
       <div class="nav-links">
         <a class="back" href="/">返回主页</a>
         <a class="back" href="/subscribe">自定义订阅</a>
-        <a class="back" href="/help">使用帮助</a>
       </div>
-      <span class="count" id="count">已选 0 / 3</span>
+      <span class="brand">SKY CALENDAR</span>
+      <a class="help-button" href="/help" aria-label="使用帮助" title="使用帮助">?</a>
     </nav>
 
     <header>
@@ -425,15 +371,6 @@
       <p class="lead">选择你想单独关注的复刻先祖，生成一个只属于这几个先祖的日历订阅链接。</p>
     </header>
 
-    <button id="openPicker" class="picker-trigger" type="button">
-      <span>搜索名字、季节、物品</span>
-      <span>打开</span>
-    </button>
-
-    <section class="selected-panel" aria-label="已选择的先祖">
-      <p class="selection-summary" id="selectionSummary">还没有选择先祖。</p>
-      <div class="selected-list" id="selectedList"></div>
-    </section>
   </main>
 
   <section class="sheet" id="pickerSheet" aria-hidden="true" aria-label="搜索和筛选先祖" hidden>
@@ -452,13 +389,12 @@
     </div>
   </section>
 
-  <section class="dock" aria-label="订阅链接">
+  <section class="dock" aria-label="订阅操作">
     <div class="dock-row">
-      <input id="url" type="text" readonly value="选择先祖后生成链接">
-      <button id="copy" class="button" type="button" disabled>复制</button>
-      <a id="open" class="button secondary" href="#" aria-disabled="true">添加</a>
+      <button id="subscribeButton" class="button" type="button" disabled>订阅</button>
+      <button id="chooseButton" class="button secondary" type="button">选择</button>
     </div>
-    <p class="hint" id="hint">最多选择 3 个。未返场时日历可能暂时为空，返场后会自动出现。</p>
+    <p class="hint"><span id="count">已选 0 / 3</span> · <span id="hintText">最多选择 3 个。未返场时日历可能暂时为空。</span></p>
   </section>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -467,16 +403,12 @@
     const list = document.querySelector('#list');
     const search = document.querySelector('#search');
     const seasonFilter = document.querySelector('#seasonFilter');
-    const openPicker = document.querySelector('#openPicker');
+    const chooseButton = document.querySelector('#chooseButton');
     const closePicker = document.querySelector('#closePicker');
     const pickerSheet = document.querySelector('#pickerSheet');
-    const selectionSummary = document.querySelector('#selectionSummary');
-    const selectedList = document.querySelector('#selectedList');
     const count = document.querySelector('#count');
-    const urlInput = document.querySelector('#url');
-    const copyButton = document.querySelector('#copy');
-    const openLink = document.querySelector('#open');
-    const hint = document.querySelector('#hint');
+    const subscribeButton = document.querySelector('#subscribeButton');
+    const hintText = document.querySelector('#hintText');
     const toast = document.querySelector('#toast');
     const selected = new Set();
     let spirits = [];
@@ -532,6 +464,31 @@
       return url.replace(/^https?:\/\//, 'webcal://');
     }
 
+    function collectSearchText(...values) {
+      const out = [];
+      const seen = new Set();
+      function walk(value) {
+        if (value == null) return;
+        if (typeof value === 'string' || typeof value === 'number') {
+          const text = String(value).trim();
+          if (text && !seen.has(text)) {
+            seen.add(text);
+            out.push(text);
+          }
+          return;
+        }
+        if (Array.isArray(value)) {
+          value.forEach(walk);
+          return;
+        }
+        if (typeof value === 'object') {
+          Object.values(value).forEach(walk);
+        }
+      }
+      values.forEach(walk);
+      return out.join('\n').toLowerCase();
+    }
+
     function openSheet() {
       pickerSheet.hidden = false;
       pickerSheet.classList.add('is-open');
@@ -549,40 +506,15 @@
       }, 180);
     }
 
-    function updateSelectedPanel() {
-      if (!selected.size) {
-        selectionSummary.textContent = '还没有选择先祖。';
-        selectedList.innerHTML = '<span class="selected-empty">点上方按钮搜索并选择，最多 3 个。</span>';
-        return;
-      }
-      selectionSummary.textContent = `已选择 ${selected.size} 个先祖。点名称可以移除。`;
-      selectedList.innerHTML = [...selected].map(name => (
-        `<button class="selected-chip" type="button" data-name="${h(name)}">${h(name)} ×</button>`
-      )).join('');
-      selectedList.querySelectorAll('.selected-chip').forEach(button => {
-        button.addEventListener('click', () => {
-          selected.delete(button.dataset.name);
-          render();
-        });
-      });
-    }
-
     function updateLink() {
       const url = subscriptionUrl();
       count.textContent = `已选 ${selected.size} / 3`;
-      copyButton.disabled = !url;
+      subscribeButton.disabled = !url;
       if (url) {
-        urlInput.value = url;
-        openLink.href = webcalUrl(url);
-        openLink.removeAttribute('aria-disabled');
-        hint.textContent = `已选择：${[...selected].join('、')}`;
+        hintText.textContent = [...selected].join('、');
       } else {
-        urlInput.value = '选择先祖后生成链接';
-        openLink.href = '#';
-        openLink.setAttribute('aria-disabled', 'true');
-        hint.textContent = '最多选择 3 个。未返场时日历可能暂时为空，返场后会自动出现。';
+        hintText.textContent = '最多选择 3 个。未返场时日历可能暂时为空。';
       }
-      updateSelectedPanel();
     }
 
     function render() {
@@ -642,6 +574,8 @@
               name: item.spiritName,
               season: item.season || '',
               items,
+              raw: item,
+              active,
               start: active?.start || '',
               end: active?.end || '',
               lastRevisit: item.lastRevisit || '',
@@ -654,6 +588,8 @@
             name: spiritName(event),
             season: '',
             items: [],
+            raw: event,
+            active: event,
             start: event.start,
             end: event.end,
             lastRevisit: event.start || '',
@@ -663,7 +599,7 @@
           .filter(item => item.name && !seen.has(item.name) && seen.add(item.name))
           .map(item => ({
             ...item,
-            searchText: [item.name, item.season, item.lastRevisit, ...(item.items || [])].join('\n').toLowerCase(),
+            searchText: collectSearchText(item.raw, item.active, item.name, item.season, item.lastRevisit, item.items),
           }))
           .sort((a, b) => String(b.lastRevisit || b.start).localeCompare(String(a.lastRevisit || a.start)));
         const seasons = [...new Set(spirits.map(item => item.season).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
@@ -680,7 +616,7 @@
 
     search.addEventListener('input', render);
     seasonFilter.addEventListener('change', render);
-    openPicker.addEventListener('click', openSheet);
+    chooseButton.addEventListener('click', openSheet);
     closePicker.addEventListener('click', closeSheet);
     pickerSheet.addEventListener('click', event => {
       if (event.target === pickerSheet) closeSheet();
@@ -688,33 +624,21 @@
     window.addEventListener('keydown', event => {
       if (event.key === 'Escape' && pickerSheet.classList.contains('is-open')) closeSheet();
     });
-    copyButton.addEventListener('click', async () => {
+    subscribeButton.addEventListener('click', async () => {
       const url = subscriptionUrl();
       if (!url) return;
-      try {
-        await navigator.clipboard.writeText(url);
-        showToast('已复制订阅链接');
-      } catch (_) {
-        urlInput.select();
-        showToast('浏览器不允许自动复制，请手动复制');
-      }
-    });
-    openLink.addEventListener('click', event => {
-      const url = subscriptionUrl();
-      if (!url) {
-        event.preventDefault();
-        return;
-      }
       const ua = navigator.userAgent || '';
       const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
-      if (isAppleMobile) return;
-      event.preventDefault();
-      navigator.clipboard.writeText(url)
-        .then(() => showToast('已复制 HTTPS 订阅链接，请粘贴到日历 App'))
-        .catch(() => {
-          urlInput.select();
-          showToast('请手动复制 HTTPS 订阅链接');
-        });
+      if (isAppleMobile) {
+        location.href = webcalUrl(url);
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        showToast('已复制 HTTPS 订阅链接，请粘贴到日历 App');
+      } catch (_) {
+        showToast('浏览器不允许自动复制，请长按页面链接手动复制');
+      }
     });
 
     load();

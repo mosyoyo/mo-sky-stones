@@ -34,6 +34,7 @@
       place-items: center;
     }
     .card {
+      position: relative;
       width: 100%;
       min-height: min(680px, calc(100vh - 56px));
       display: grid;
@@ -44,6 +45,23 @@
       background: var(--card);
       box-shadow: 0 28px 80px rgba(0, 0, 0, .08);
       backdrop-filter: blur(22px);
+    }
+    .help-button {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .7);
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 780;
+      line-height: 1;
     }
     .hero {
       align-self: center;
@@ -205,6 +223,7 @@
 <body>
   <main>
     <section class="card" aria-labelledby="title">
+      <a class="help-button" href="/help" aria-label="使用帮助" title="使用帮助">?</a>
       <div class="hero">
         <p class="eyebrow">SKY CALENDAR</p>
         <h1 id="title">光遇日历订阅</h1>
@@ -214,11 +233,10 @@
           <p class="note">一键订阅默认包含红石；复刻、季节、活动默认仅结束提醒；双倍、大蜡烛、维护保留全程提醒。</p>
           <p class="platform-tip apple-tip"><strong>首次订阅：</strong>添加后到系统日历列表，点订阅右侧蓝色 ⓘ，进入“订阅详细信息”，把“移除提醒”关掉。</p>
           <p class="platform-tip android-tip"><strong>首次订阅：</strong>按钮会复制链接，请粘贴到日历 App 的“订阅日历”或 URL 入口。</p>
-          <p class="secondary-note">想自己选择内容，或者只关注指定先祖，点击下面的按钮。</p>
+          <p class="secondary-note">想自己选择内容，或者只关注指定先祖。</p>
           <div class="secondary-actions">
             <a class="advanced" href="/subscribe">自定义订阅</a>
             <a class="advanced" href="/spirits">指定先祖</a>
-            <a class="advanced" href="/help">使用帮助</a>
           </div>
         </div>
       </div>
