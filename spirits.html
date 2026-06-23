@@ -4,6 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>sky-ics | 指定先祖订阅</title>
+  <meta name="description" content="指定关注光遇复刻先祖，生成只包含所选旅行先祖返场提醒的手机日历订阅链接。">
+  <link rel="canonical" href="https://sky-ics.pages.dev/spirits">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="sky-ics">
+  <meta property="og:title" content="sky-ics | 指定先祖订阅">
+  <meta property="og:description" content="搜索并选择指定旅行先祖，生成专属复刻返场日历订阅。">
+  <meta property="og:url" content="https://sky-ics.pages.dev/spirits">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="sky-ics | 指定先祖订阅">
+  <meta name="twitter:description" content="选择指定复刻先祖，生成只关注这些先祖返场的日历订阅。">
   <style>
     :root {
       color-scheme: light;
@@ -192,30 +202,33 @@
     }
     .list {
       display: grid;
-      gap: 10px;
       overflow: auto;
-      padding: 2px 0 14px;
+      align-content: start;
+      border: 1px solid rgba(0, 0, 0, .04);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .05);
     }
     .spirit {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: auto minmax(0, 1fr);
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
-      min-height: 72px;
-      padding: 13px 14px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--card);
-      box-shadow: var(--shadow);
+      min-height: 54px;
+      padding: 9px 12px 9px 16px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
       cursor: pointer;
       text-align: left;
-      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+      user-select: none;
+      transition: background .16s ease;
     }
+    .spirit + .spirit { border-top: 1px solid var(--line); }
     .spirit:active { transform: scale(.99); }
     .spirit.is-selected {
-      border-color: rgba(0, 122, 255, .48);
-      background: linear-gradient(180deg, #fff 0%, var(--blue-soft) 100%);
+      background: transparent;
     }
     .spirit.is-disabled {
       opacity: .48;
@@ -226,12 +239,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 17px;
-      font-weight: 720;
+      font-size: 16px;
+      font-weight: 620;
     }
     .meta {
       display: block;
-      margin-top: 5px;
+      margin-top: 3px;
       color: var(--muted);
       font-size: 12px;
       line-height: 1.35;
@@ -239,13 +252,14 @@
     .mark {
       display: grid;
       place-items: center;
-      width: 26px;
-      height: 26px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: #eef0f3;
       color: transparent;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
+      flex: 0 0 auto;
     }
     .is-selected .mark {
       background: var(--blue);
@@ -348,8 +362,9 @@
         grid-template-columns: 1fr;
         gap: 8px;
       }
-      .spirit { min-height: 64px; border-radius: 16px; box-shadow: none; }
-      .name { font-size: 16px; }
+      .list { border-radius: 16px; box-shadow: none; }
+      .spirit { min-height: 47px; padding: 7px 10px 7px 12px; }
+      .name { font-size: 15px; }
       .dock { bottom: 10px; border-radius: 20px; }
       .button { width: 100%; height: 38px; min-width: 0; }
     }
@@ -534,11 +549,11 @@
         const disabled = !on && selected.size >= 3;
         return `
           <button class="spirit ${on ? 'is-selected' : ''} ${disabled ? 'is-disabled' : ''}" type="button" data-name="${h(item.name)}">
+            <span class="mark">✓</span>
             <span>
               <span class="name">${h(item.name)}</span>
               <span class="meta">${h(item.meta)}</span>
             </span>
-            <span class="mark">✓</span>
           </button>`;
       }).join('');
       list.querySelectorAll('.spirit').forEach(button => {
