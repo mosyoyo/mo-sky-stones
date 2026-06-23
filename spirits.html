@@ -35,9 +35,6 @@
       min-height: 100vh;
       background: linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 58%, #efeff4 100%);
     }
-    body.sheet-open {
-      overflow: hidden;
-    }
     main {
       width: min(760px, 100%);
       min-height: 100vh;
@@ -105,73 +102,8 @@
       font-size: 15px;
       line-height: 1.5;
     }
-    .sheet {
-      position: fixed;
-      inset: 0;
-      z-index: 8;
-      display: grid;
-      align-items: end;
-      background: rgba(0, 0, 0, .28);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease;
-    }
-    .sheet[hidden] {
-      display: none;
-    }
-    .sheet.is-open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .sheet-panel {
-      width: min(760px, 100%);
-      max-height: min(78vh, 720px);
-      margin: 0 auto;
-      display: grid;
-      grid-template-rows: auto auto minmax(0, 1fr);
-      padding: 12px 14px 14px;
-      border-radius: 24px 24px 0 0;
-      background: #f5f5f7;
-      box-shadow: 0 -18px 60px rgba(0, 0, 0, .18);
-      transform: translateY(18px);
-      transition: transform .18s ease;
-    }
-    .sheet.is-open .sheet-panel {
-      transform: translateY(0);
-    }
-    .sheet-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 4px 2px 12px;
-    }
-    .sheet-title {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 760;
-    }
-    .sheet-close {
-      width: 34px;
-      height: 34px;
-      border: 0;
-      border-radius: 50%;
-      background: #e7e7eb;
-      color: #3a3a3c;
-      font: inherit;
-      font-size: 20px;
-      line-height: 1;
-      cursor: pointer;
-    }
-    .sheet-controls {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(150px, .45fr);
-      gap: 10px;
-      padding-bottom: 10px;
-    }
     input[type="search"],
-    input[type="text"],
-    select {
+    input[type="text"] {
       width: 100%;
       height: 46px;
       border: 1px solid var(--line);
@@ -183,22 +115,69 @@
       font-size: 15px;
       outline: none;
     }
-    select {
-      appearance: none;
-      -webkit-appearance: none;
-      background-image:
-        linear-gradient(45deg, transparent 50%, #6e6e73 50%),
-        linear-gradient(135deg, #6e6e73 50%, transparent 50%);
-      background-position:
-        calc(100% - 18px) 20px,
-        calc(100% - 12px) 20px;
-      background-size: 6px 6px, 6px 6px;
-      background-repeat: no-repeat;
-      padding-right: 32px;
-    }
     input:focus {
       border-color: rgba(0, 122, 255, .42);
       box-shadow: 0 0 0 4px rgba(0, 122, 255, .11);
+    }
+    .controls {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .chips {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .74);
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 650;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .chip.is-on {
+      border-color: rgba(0, 122, 255, .28);
+      background: var(--blue-soft);
+      color: #0066cc;
+    }
+    .selection-panel {
+      min-height: 40px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .selected-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .selected-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 11px;
+      border: 1px solid rgba(0, 122, 255, .18);
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: #0066cc;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
     }
     .list {
       display: grid;
@@ -353,15 +332,7 @@
       header { padding-top: 12px; }
       h1 { font-size: 32px; }
       .lead { font-size: 13px; }
-      .sheet-panel {
-        max-height: 84vh;
-        padding: 10px 10px 12px;
-        border-radius: 22px 22px 0 0;
-      }
-      .sheet-controls {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
+      .controls { gap: 8px; }
       .list { border-radius: 16px; box-shadow: none; }
       .spirit { min-height: 47px; padding: 7px 10px 7px 12px; }
       .name { font-size: 15px; }
@@ -386,28 +357,22 @@
       <p class="lead">选择你想单独关注的复刻先祖，生成一个只属于这几个先祖的日历订阅链接。</p>
     </header>
 
-  </main>
+    <section class="controls" aria-label="筛选先祖">
+      <input id="search" type="search" placeholder="搜索名字、季节、物品" autocomplete="off">
+      <div class="chips" id="seasonChips" aria-label="按季节筛选"></div>
+    </section>
 
-  <section class="sheet" id="pickerSheet" aria-hidden="true" aria-label="搜索和筛选先祖" hidden>
-    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="pickerTitle">
-      <div class="sheet-head">
-        <h2 class="sheet-title" id="pickerTitle">选择先祖</h2>
-        <button id="closePicker" class="sheet-close" type="button" aria-label="关闭">×</button>
-      </div>
-      <div class="sheet-controls">
-        <input id="search" type="search" placeholder="搜索名字、季节、物品" autocomplete="off">
-        <select id="seasonFilter" aria-label="按季节筛选">
-          <option value="all">全部季节</option>
-        </select>
-      </div>
-      <section class="list" id="list" aria-live="polite"></section>
-    </div>
-  </section>
+    <section class="selection-panel" aria-label="已选择的先祖">
+      <div class="selected-chips" id="selectedChips">还没有选择先祖。</div>
+    </section>
+
+    <section class="list" id="list" aria-live="polite"></section>
+  </main>
 
   <section class="dock" aria-label="订阅操作">
     <div class="dock-row">
       <button id="subscribeButton" class="button" type="button" disabled>订阅</button>
-      <button id="chooseButton" class="button secondary" type="button">选择</button>
+      <button id="clearButton" class="button secondary" type="button" disabled>清空</button>
     </div>
     <p class="hint"><span id="count">已选 0 / 3</span> · <span id="hintText">最多选择 3 个。未返场时日历可能暂时为空。</span></p>
   </section>
@@ -417,16 +382,16 @@
   <script>
     const list = document.querySelector('#list');
     const search = document.querySelector('#search');
-    const seasonFilter = document.querySelector('#seasonFilter');
-    const chooseButton = document.querySelector('#chooseButton');
-    const closePicker = document.querySelector('#closePicker');
-    const pickerSheet = document.querySelector('#pickerSheet');
+    const seasonChips = document.querySelector('#seasonChips');
+    const selectedChips = document.querySelector('#selectedChips');
+    const clearButton = document.querySelector('#clearButton');
     const count = document.querySelector('#count');
     const subscribeButton = document.querySelector('#subscribeButton');
     const hintText = document.querySelector('#hintText');
     const toast = document.querySelector('#toast');
     const selected = new Set();
     let spirits = [];
+    let activeSeason = 'all';
 
     function initialSelected() {
       const raw = new URLSearchParams(location.search).get('spirits') || '';
@@ -504,39 +469,55 @@
       return out.join('\n').toLowerCase();
     }
 
-    function openSheet() {
-      pickerSheet.hidden = false;
-      pickerSheet.classList.add('is-open');
-      pickerSheet.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('sheet-open');
-      setTimeout(() => search.focus(), 120);
+    function renderSelected() {
+      if (!selected.size) {
+        selectedChips.textContent = '还没有选择先祖。';
+        return;
+      }
+      selectedChips.innerHTML = [...selected].map(name => `
+        <button class="selected-chip" type="button" data-name="${h(name)}" aria-label="移除 ${h(name)}">
+          ${h(name)}
+        </button>
+      `).join('');
+      selectedChips.querySelectorAll('.selected-chip').forEach(button => {
+        button.addEventListener('click', () => {
+          selected.delete(button.dataset.name);
+          render();
+        });
+      });
     }
 
-    function closeSheet() {
-      pickerSheet.classList.remove('is-open');
-      pickerSheet.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('sheet-open');
-      setTimeout(() => {
-        if (!pickerSheet.classList.contains('is-open')) pickerSheet.hidden = true;
-      }, 180);
+    function renderSeasonChips(seasons) {
+      seasonChips.innerHTML = [
+        `<button class="chip ${activeSeason === 'all' ? 'is-on' : ''}" type="button" data-season="all">全部</button>`,
+        ...seasons.map(season => `<button class="chip ${activeSeason === season ? 'is-on' : ''}" type="button" data-season="${h(season)}">${h(season)}</button>`),
+      ].join('');
+      seasonChips.querySelectorAll('.chip').forEach(button => {
+        button.addEventListener('click', () => {
+          activeSeason = button.dataset.season;
+          renderSeasonChips(seasons);
+          render();
+        });
+      });
     }
 
     function updateLink() {
       const url = subscriptionUrl();
       count.textContent = `已选 ${selected.size} / 3`;
       subscribeButton.disabled = !url;
+      clearButton.disabled = !selected.size;
       if (url) {
         hintText.textContent = [...selected].join('、');
       } else {
         hintText.textContent = '最多选择 3 个。未返场时日历可能暂时为空。';
       }
+      renderSelected();
     }
 
     function render() {
       const q = search.value.trim().toLowerCase();
-      const season = seasonFilter.value;
       const visible = spirits.filter(item => {
-        if (season !== 'all' && item.season !== season) return false;
+        if (activeSeason !== 'all' && item.season !== activeSeason) return false;
         return !q || item.searchText.includes(q);
       });
       if (!visible.length) {
@@ -615,10 +596,10 @@
           .map(item => ({
             ...item,
             searchText: collectSearchText(item.raw, item.active, item.name, item.season, item.lastRevisit, item.items),
-          }))
+        }))
           .sort((a, b) => String(b.lastRevisit || b.start).localeCompare(String(a.lastRevisit || a.start)));
         const seasons = [...new Set(spirits.map(item => item.season).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-        seasonFilter.innerHTML = '<option value="all">全部季节</option>' + seasons.map(season => `<option value="${h(season)}">${h(season)}</option>`).join('');
+        renderSeasonChips(seasons);
         const names = new Set(spirits.map(item => item.name));
         initialSelected().forEach(name => {
           if (names.has(name)) selected.add(name);
@@ -630,14 +611,9 @@
     }
 
     search.addEventListener('input', render);
-    seasonFilter.addEventListener('change', render);
-    chooseButton.addEventListener('click', openSheet);
-    closePicker.addEventListener('click', closeSheet);
-    pickerSheet.addEventListener('click', event => {
-      if (event.target === pickerSheet) closeSheet();
-    });
-    window.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && pickerSheet.classList.contains('is-open')) closeSheet();
+    clearButton.addEventListener('click', () => {
+      selected.clear();
+      render();
     });
     subscribeButton.addEventListener('click', async () => {
       const url = subscriptionUrl();
