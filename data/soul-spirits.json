@@ -1,10 +1,24 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
-    "fetchedAt": "2026-06-22T11:58:42.974Z",
+    "fetchedAt": "2026-06-23T09:42:24.003Z",
     "spiritCount": 84
   },
   "spirits": [
+    {
+      "id": "e89fb9e8afade88085",
+      "spiritName": "蟹语者",
+      "season": "追光季",
+      "lastRevisit": "2026-06-25",
+      "visitCount": 5,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%9F%B9%E8%AF%AD%E8%80%85"
+    },
     {
       "id": "e5b88ce69c9be4b98be7a78d",
       "spiritName": "希望之种",
@@ -1042,19 +1056,6 @@
         "斗篷"
       ],
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%94%BE%E6%9D%BE%E6%97%A5%E6%B5%B4%E8%80%85"
-    },
-    {
-      "id": "e89fb9e8afade88085",
-      "spiritName": "蟹语者",
-      "season": "追光季",
-      "lastRevisit": "2023-09-21",
-      "visitCount": 4,
-      "items": [
-        "面具",
-        "发型",
-        "斗篷"
-      ],
-      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%9F%B9%E8%AF%AD%E8%80%85"
     },
     {
       "id": "e8b7b3e8b783e8889ee88085",
