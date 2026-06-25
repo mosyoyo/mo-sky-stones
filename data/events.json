@@ -55,7 +55,7 @@
     "_source": "wiki"
   },
   {
-    "enabled": true,
+    "enabled": false,
     "id": "maintenance-6a3baaa386a1b0305c4e30cf-11xqz2r",
     "type": "maintenance",
     "title": "【维护】维护更新",
