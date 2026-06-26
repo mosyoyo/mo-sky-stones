@@ -129,18 +129,25 @@ function detectType(title = '', content = '') {
   const text = `${title}
 ${content}`;
 
-  // Stage 1: title-based precision matching for maintenance and bonus
-  // Reason: "更新时间公告" body often mentions activity names (e.g. 端午节),
-  // which would wrongly trigger activity before maintenance in the old scan.
-  const MAINT_TITLE_KEYWORDS = ['更新时间公告', '维护补偿', '延迟开服', '停服', '升级维护', '更新维护'];
-  if (MAINT_TITLE_KEYWORDS.some(k => titleOnly.includes(k))) return 'maintenance';
+  const BONUS_TITLE_KEYWORDS = ['双倍蜡烛', '双倍爱心', '双倍季蜡', '双倍心火', '双倍烛火', '额外烛火'];
+  const CANDLE_TITLE_KEYWORDS = ['大蜡烛堆将出现在天空王国各地', '大蜡烛堆'];
+  if (CANDLE_TITLE_KEYWORDS.some(k => text.includes(k))) return 'candle_heap';
+  if (BONUS_TITLE_KEYWORDS.some(k => text.includes(k))) return 'bonus';
 
-  const BONUS_TITLE_KEYWORDS = ['双倍蜡烛', '双倍爱心', '双倍季蜡', '双倍心火', '双倍烛火', '双倍'];
+  const MAINT_TITLE_KEYWORDS = ['更新时间公告', '停服维护公告', '停服公告', '升级维护公告', '更新维护公告'];
+  const MAINT_BODY_PATTERNS = [
+    /我们将在\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2}\s*(?:至|到|~|—|-)\s*\d{1,2}[:：]\d{2}进行版本更新/,
+    /将于\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2}\s*(?:至|到|~|—|-)\s*\d{1,2}[:：]\d{2}进行(?:停服|版本)?(?:更新|维护)/,
+  ];
+  if (MAINT_TITLE_KEYWORDS.some(k => titleOnly.includes(k)) || MAINT_BODY_PATTERNS.some(pattern => pattern.test(text))) {
+    return 'maintenance';
+  }
+
+  const BONUS_FALLBACK_KEYWORDS = ['双倍'];
   if (BONUS_TITLE_KEYWORDS.some(k => titleOnly.includes(k))) return 'bonus';
+  if (BONUS_FALLBACK_KEYWORDS.some(k => text.includes(k))) return 'bonus';
 
-  // Stage 2: full-text scan, but maintenance/bonus already decided above
-  // Order: bonus (body fallback) -> maintenance (body fallback) -> season -> activity -> traveling_spirit -> candle_heap
-  for (const type of ['bonus', 'maintenance', 'season', 'activity', 'traveling_spirit', 'candle_heap']) {
+  for (const type of ['season', 'activity', 'traveling_spirit']) {
     if (TYPE_KEYWORDS[type].some(keyword => text.includes(keyword))) return type;
   }
   return 'other';
@@ -227,7 +234,7 @@ const OFFLINE_KEYWORDS = [
   '见面会', '签售', '签售会', '舞台剧', '音乐会', '演唱会', '展览', '漫展',
   '粉丝见面', '线下活动', '线下见面', '线下面基', '面基', '参展', '展会',
   '签到', '现场', '主办方', '票务', '门票', '售票', '预约报名',
-  '到场', '出席', '签到', '舞台', '演出',
+  '到场', '出席', '舞台剧', '演出',
 ];
 
 function isOfflineEvent(title = '', content = '') {
@@ -259,7 +266,14 @@ function isLikelyGameActivity(event) {
 
 function cleanText(text = '') {
   return String(text)
+    .replace(/<\s*br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
     .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
     .replace(/&nbsp;/g, ' ')
     .replace(/\r/g, '')
     .replace(/\n{3,}/g, '\n\n')
@@ -288,6 +302,12 @@ function parseDateMatch(match, fallbackYear) {
 
 function parseBeijingDateTime(year, month, day, hour = 0, minute = 0) {
   return new Date(Date.UTC(year, month - 1, day, hour - 8, minute, 0));
+}
+
+function resolveRangeYears(startMonth, endMonth, baseYear) {
+  const startYear = baseYear;
+  const endYear = endMonth < startMonth ? baseYear + 1 : baseYear;
+  return { startYear, endYear };
 }
 
 const WEEKDAY_MAP = {
@@ -354,12 +374,80 @@ function extractDateRange(title = '', content = '', now = new Date()) {
     return { start: start.toISOString(), end: end.toISOString() };
   }
 
+  const fullYearRange = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?\s*(?:期间|至|到|~|—|-)\s*(\d{4})年(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?/);
+  if (fullYearRange) {
+    const start = parseBeijingDateTime(
+      Number(fullYearRange[1]),
+      Number(fullYearRange[2]),
+      Number(fullYearRange[3]),
+      Number(fullYearRange[4] || 0),
+      Number(fullYearRange[5] || 0),
+    );
+    const end = parseBeijingDateTime(
+      Number(fullYearRange[6]),
+      Number(fullYearRange[7]),
+      Number(fullYearRange[8]),
+      Number(fullYearRange[9] || 23),
+      Number(fullYearRange[10] || 59),
+    );
+    return { start: start.toISOString(), end: end.toISOString() };
+  }
+
+  const monthDayRange = text.match(/(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?\s*(?:期间|至|到|~|—|-)\s*(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?/);
+  if (monthDayRange) {
+    const startMonth = Number(monthDayRange[1]);
+    const startDay = Number(monthDayRange[2]);
+    const endMonth = Number(monthDayRange[5]);
+    const endDay = Number(monthDayRange[6]);
+    const { startYear, endYear } = resolveRangeYears(startMonth, endMonth, year);
+    const start = parseBeijingDateTime(
+      startYear,
+      startMonth,
+      startDay,
+      Number(monthDayRange[3] || 0),
+      Number(monthDayRange[4] || 0),
+    );
+    const end = parseBeijingDateTime(
+      endYear,
+      endMonth,
+      endDay,
+      Number(monthDayRange[7] || 23),
+      Number(monthDayRange[8] || 59),
+    );
+    return { start: start.toISOString(), end: end.toISOString() };
+  }
+
+  const omittedMonthRange = text.match(/(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?\s*(?:期间|至|到|~|—|-)\s*(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?/);
+  if (omittedMonthRange) {
+    const startMonth = Number(omittedMonthRange[1]);
+    const startDay = Number(omittedMonthRange[2]);
+    const endDay = Number(omittedMonthRange[5]);
+    const start = parseBeijingDateTime(
+      year,
+      startMonth,
+      startDay,
+      Number(omittedMonthRange[3] || 0),
+      Number(omittedMonthRange[4] || 0),
+    );
+    const end = parseBeijingDateTime(
+      year,
+      startMonth,
+      endDay,
+      Number(omittedMonthRange[6] || 23),
+      Number(omittedMonthRange[7] || 59),
+    );
+    return { start: start.toISOString(), end: end.toISOString() };
+  }
+
   const dateTime = '(\\d{1,2})月(\\d{1,2})日(?:\\s*(\\d{1,2})[:：](\\d{2}))?';
   const between = new RegExp(`${dateTime}[\\s\\S]{0,20}(?:至|到|~|—|-)[\\s\\S]{0,20}${dateTime}`);
   const range = text.match(between);
   if (range) {
-    const start = parseDateMatch([null, range[1], range[2], range[3], range[4]], year);
-    const end = parseDateMatch([null, range[5], range[6], range[7] ?? '23', range[8] ?? '59'], year);
+    const startMonth = Number(range[1]);
+    const endMonth = Number(range[5]);
+    const { startYear, endYear } = resolveRangeYears(startMonth, endMonth, year);
+    const start = parseDateMatch([null, range[1], range[2], range[3], range[4]], startYear);
+    const end = parseDateMatch([null, range[5], range[6], range[7] ?? '23', range[8] ?? '59'], endYear);
     return { start: start.toISOString(), end: end.toISOString() };
   }
 
@@ -375,6 +463,34 @@ function uidPart(value) {
   const ascii = text.replace(/[^A-Za-z0-9_-]+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
   const hash = fnv1a(text);
   return ascii ? `${ascii}-${hash}` : `event-${hash}`;
+}
+
+function extractContextualDateRange(title = '', content = '', now = new Date(), patterns = []) {
+  const text = cleanText(`${title}\n${content}`);
+  const lines = text.split('\n').map(line => line.trim()).filter(Boolean);
+  for (let index = 0; index < lines.length; index++) {
+    if (!patterns.some(pattern => pattern.test(lines[index]))) continue;
+    const windowText = lines.slice(Math.max(0, index - 2), Math.min(lines.length, index + 3)).join('\n');
+    const range = extractDateRange('', windowText, now);
+    if (range) return range;
+  }
+  return extractDateRange(title, content, now);
+}
+
+function extractBonusDateRange(title = '', content = '', now = new Date()) {
+  return extractContextualDateRange(title, content, now, [
+    /好友[将可]?收获双倍(?:爱心|心火|烛火|季蜡|蜡烛)/,
+    /好友可获得双倍(?:爱心|心火|烛火|季蜡|蜡烛)/,
+    /双倍(?:爱心|心火|烛火|季蜡|蜡烛)/,
+    /额外烛火/,
+  ]);
+}
+
+function extractCandleHeapDateRange(title = '', content = '', now = new Date()) {
+  return extractContextualDateRange(title, content, now, [
+    /大蜡烛堆将出现在天空王国各地/,
+    /大蜡烛堆/,
+  ]);
 }
 
 function fnv1a(value) {
@@ -681,7 +797,9 @@ function normalizeFeed(raw) {
   const id = String(raw.id || raw.feedId || raw.feed_id || '');
   const body = parseContentPayload(raw.content) || parseContentPayload(raw.detail?.result?.feed?.content) || {};
   const title = cleanText(body.title || raw.title || raw.share_title || raw.summary || raw.contentTitle || '');
-  const content = cleanText(body.text || raw.text || raw.desc || raw.plainText || raw.content || '');
+  const bodyText = cleanText(body.text || '');
+  const longText = cleanText(body.longText || '');
+  const content = longText || bodyText || cleanText(raw.text || raw.desc || raw.plainText || raw.content || '');
   const autoType = detectType(title, content);
   return {
     id,
@@ -707,6 +825,8 @@ module.exports = {
   detectType,
   escapeICS,
   extractBonusLabel,
+  extractBonusDateRange,
+  extractCandleHeapDateRange,
   extractTravelingSpiritLabel,
   extractDateRange,
   formatUTC,
