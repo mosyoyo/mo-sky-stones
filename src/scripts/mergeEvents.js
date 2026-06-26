@@ -30,6 +30,32 @@ function isInternational(e) {
   return false;
 }
 
+function eventName(event) {
+  return String(event?.title || '')
+    .replace(/^【[^】]+】/, '')
+    .replace(/\s+/g, '')
+    .trim();
+}
+
+function overlaps(a, b) {
+  const aStart = new Date(a.start || 0).getTime();
+  const aEnd = new Date(a.end || 0).getTime();
+  const bStart = new Date(b.start || 0).getTime();
+  const bEnd = new Date(b.end || 0).getTime();
+  if (![aStart, aEnd, bStart, bEnd].every(Number.isFinite)) return false;
+  return aStart < bEnd && bStart < aEnd;
+}
+
+function hasSimilarEvent(events, event) {
+  const name = eventName(event);
+  if (!name) return false;
+  return events.some(existing =>
+    existing.type === event.type
+    && eventName(existing) === name
+    && overlaps(existing, event)
+  );
+}
+
 // 合并策略：
 // 1. 按 type 在 source-config 找数据源
 // 2. 从该数据源取所有该 type 的事件
@@ -92,6 +118,7 @@ function merge() {
       const startKey = (e.start || '').slice(0, 10);
       const key = `${type}|${startKey}`;
       if (seen.has(key)) continue;
+      if (hasSimilarEvent(result, e)) continue;
       seen.add(key);
       result.push({ enabled: true, ...e, _source: source === 'wiki' ? 'netease' : 'wiki' });
     }
@@ -139,4 +166,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { main };
+module.exports = { eventName, hasSimilarEvent, main, overlaps };
