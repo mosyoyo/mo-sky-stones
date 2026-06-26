@@ -45,6 +45,13 @@ function parseFeed(feed) {
   // 2. 长周期事件（活动/复刻/季节/双倍/大蜡烛）：duration < 1 天全部 drop
   // 3. 线下活动（见面会/签售/漫展/票务/现场/舞台/演出…）一律 drop
   //    维护通常 < 1 天，保留
+  // 网易大神只负责 bonus/candle_heap/maintenance/activity 四类
+  // traveling_spirit/season 走 wiki，这里直接标 other
+  const NETEASE_KEEP_TYPES = new Set(['bonus', 'candle_heap', 'maintenance', 'activity']);
+  if (!NETEASE_KEEP_TYPES.has(type)) {
+    type = 'other';
+  }
+
   const LONG_EVENT_TYPES = new Set(['traveling_spirit', 'activity', 'season', 'bonus', 'candle_heap']);
   if (isOfflineEvent(feed.title || '', feed.content || '')) {
     type = 'other';

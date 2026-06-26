@@ -125,11 +125,22 @@ function beijingText(date) {
 }
 
 function detectType(title = '', content = '') {
-  const text = `${title}\n${content}`;
-  // 优先级：season/activity 在 maintenance 之前
-  // 原因：季节/活动类「宴会节 更新内容公告」「时装节 更新内容公告」含「维护」字样
-  //       但实际是季节/活动公告，maintenance 关键词「维护」太宽
-  for (const type of ['season', 'activity', 'traveling_spirit', 'bonus', 'candle_heap', 'maintenance']) {
+  const titleOnly = title || '';
+  const text = `${title}
+${content}`;
+
+  // Stage 1: title-based precision matching for maintenance and bonus
+  // Reason: "更新时间公告" body often mentions activity names (e.g. 端午节),
+  // which would wrongly trigger activity before maintenance in the old scan.
+  const MAINT_TITLE_KEYWORDS = ['更新时间公告', '维护补偿', '延迟开服', '停服', '升级维护', '更新维护'];
+  if (MAINT_TITLE_KEYWORDS.some(k => titleOnly.includes(k))) return 'maintenance';
+
+  const BONUS_TITLE_KEYWORDS = ['双倍蜡烛', '双倍爱心', '双倍季蜡', '双倍心火', '双倍烛火', '双倍'];
+  if (BONUS_TITLE_KEYWORDS.some(k => titleOnly.includes(k))) return 'bonus';
+
+  // Stage 2: full-text scan, but maintenance/bonus already decided above
+  // Order: bonus (body fallback) -> maintenance (body fallback) -> season -> activity -> traveling_spirit -> candle_heap
+  for (const type of ['bonus', 'maintenance', 'season', 'activity', 'traveling_spirit', 'candle_heap']) {
     if (TYPE_KEYWORDS[type].some(keyword => text.includes(keyword))) return type;
   }
   return 'other';
@@ -150,7 +161,11 @@ function cleanEventTitle(title = '', content = '', type = '') {
 
   if (type === 'traveling_spirit' || /旅行先祖|复刻|先祖到访|先祖即将到访/.test(text)) return '旅行先祖';
   if (type === 'candle_heap' || /大蜡烛/.test(text)) return '《光·遇》大蜡烛';
-  if (type === 'maintenance' || /停服|维护|版本更新|更新时间公告/.test(text)) return '《光·遇》维护更新';
+  if (type === 'maintenance') {
+    // 从标题提取日期，如「6月12日 更新时间公告」→「6月12日 维护」
+    const dateMatch = firstLine.match(/(\d{1,2}月\d{1,2}日)/);
+    return dateMatch ? `${dateMatch[1]} 维护` : '维护更新';
+  }
   if (/端午/.test(text)) return '《光·遇》端午节';
   if (/七周年/.test(text)) return '《光·遇》七周年';
   if (/致梵高/.test(text)) return '《光·遇》致梵高';
@@ -308,6 +323,21 @@ function extractDateRange(title = '', content = '', now = new Date()) {
   if (relatives.length >= 2) {
     relatives.sort((a, b) => a - b);
     return { start: relatives[0].toISOString(), end: relatives[relatives.length - 1].toISOString() };
+  }
+
+  // Tight format: 6月12日01:00~10:00 (no space between day and time)
+  const tightDayRange = text.match(/(\d{1,2})月(\d{1,2})日(\d{1,2})[:：](\d{2})\s*(?:至|到|~|—|-)\s*(\d{1,2})[:：](\d{2})/);
+  if (tightDayRange) {
+    const month = Number(tightDayRange[1]);
+    const day = Number(tightDayRange[2]);
+    const startHour = Number(tightDayRange[3]);
+    const startMinute = Number(tightDayRange[4]);
+    const endHour = Number(tightDayRange[5]);
+    const endMinute = Number(tightDayRange[6]);
+    let start = parseBeijingDateTime(year, month, day, startHour, startMinute);
+    let end = parseBeijingDateTime(year, month, day, endHour, endMinute);
+    if (end <= start) end = addDays(end, 1);
+    return { start: start.toISOString(), end: end.toISOString() };
   }
 
   const sameDayTimeRange = text.match(/(\d{1,2})月(\d{1,2})日\s*(\d{1,2})[:：](\d{2})\s*(?:至|到|~|—|-)\s*(\d{1,2})[:：](\d{2})/);
