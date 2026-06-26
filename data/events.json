@@ -63,15 +63,5 @@
     "end": "2026-06-27T15:59:00.000Z",
     "sourceFeedId": "6a36104746804c0398433bec",
     "_source": "netease"
-  },
-  {
-    "enabled": true,
-    "id": "activity-6a2cc7b5ea7f101c5108ea3e-18o37ue",
-    "type": "activity",
-    "title": "【活动】端午节",
-    "start": "2026-06-18T16:00:00.000Z",
-    "end": "2026-07-02T15:59:00.000Z",
-    "sourceFeedId": "6a2cc7b5ea7f101c5108ea3e",
-    "_source": "netease"
   }
 ]
