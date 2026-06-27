@@ -127,15 +127,33 @@
     .chips {
       display: flex;
       gap: 8px;
+      width: 100%;
+      max-width: 100%;
       overflow-x: auto;
-      padding-bottom: 2px;
-      scrollbar-width: none;
+      overflow-y: hidden;
+      padding: 0 2px 8px;
+      cursor: grab;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(60, 60, 67, .24) transparent;
     }
-    .chips::-webkit-scrollbar { display: none; }
+    .chips.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      user-select: none;
+    }
+    .chips::-webkit-scrollbar { height: 6px; }
+    .chips::-webkit-scrollbar-track { background: transparent; }
+    .chips::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(60, 60, 67, .2);
+    }
     .chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex: 0 0 auto;
       min-height: 34px;
       padding: 0 13px;
       border: 1px solid var(--line);
@@ -147,6 +165,7 @@
       font-weight: 650;
       white-space: nowrap;
       cursor: pointer;
+      scroll-snap-align: start;
     }
     .chip.is-on {
       border-color: rgba(0, 122, 255, .28);
@@ -269,9 +288,22 @@
     }
     .dock-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) auto auto;
       gap: 8px;
       align-items: center;
+    }
+    .url {
+      width: 100%;
+      min-width: 0;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(245, 245, 247, .9);
+      color: #3a3a3c;
+      padding: 0 12px;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
     }
     .button {
       display: inline-flex;
@@ -337,6 +369,8 @@
       .spirit { min-height: 47px; padding: 7px 10px 7px 12px; }
       .name { font-size: 15px; }
       .dock { bottom: 10px; border-radius: 20px; }
+      .dock-row { grid-template-columns: 1fr 1fr; }
+      .url { grid-column: 1 / -1; height: 38px; }
       .button { width: 100%; height: 38px; min-width: 0; }
     }
   </style>
@@ -371,8 +405,9 @@
 
   <section class="dock" aria-label="订阅操作">
     <div class="dock-row">
-      <button id="subscribeButton" class="button" type="button" disabled>订阅</button>
-      <button id="clearButton" class="button secondary" type="button" disabled>清空</button>
+      <input id="url" class="url" type="text" readonly placeholder="选择先祖后生成订阅链接">
+      <button id="copyButton" class="button secondary" type="button" disabled>复制</button>
+      <a id="openButton" class="button" href="#" aria-disabled="true">添加</a>
     </div>
     <p class="hint"><span id="count">已选 0 / 3</span> · <span id="hintText">最多选择 3 个。未返场时日历可能暂时为空。</span></p>
   </section>
@@ -384,14 +419,16 @@
     const search = document.querySelector('#search');
     const seasonChips = document.querySelector('#seasonChips');
     const selectedChips = document.querySelector('#selectedChips');
-    const clearButton = document.querySelector('#clearButton');
+    const urlInput = document.querySelector('#url');
+    const copyButton = document.querySelector('#copyButton');
+    const openButton = document.querySelector('#openButton');
     const count = document.querySelector('#count');
-    const subscribeButton = document.querySelector('#subscribeButton');
     const hintText = document.querySelector('#hintText');
     const toast = document.querySelector('#toast');
     const selected = new Set();
     let spirits = [];
     let activeSeason = 'all';
+    let chipDrag = null;
 
     function initialSelected() {
       const raw = new URLSearchParams(location.search).get('spirits') || '';
@@ -494,6 +531,7 @@
       ].join('');
       seasonChips.querySelectorAll('.chip').forEach(button => {
         button.addEventListener('click', () => {
+          if (button.dataset.dragged) return;
           activeSeason = button.dataset.season;
           renderSeasonChips(seasons);
           render();
@@ -501,11 +539,50 @@
       });
     }
 
+    seasonChips.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      chipDrag = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        scrollLeft: seasonChips.scrollLeft,
+        moved: false,
+      };
+      seasonChips.classList.add('is-dragging');
+      seasonChips.setPointerCapture(event.pointerId);
+    });
+
+    seasonChips.addEventListener('pointermove', event => {
+      if (!chipDrag || chipDrag.pointerId !== event.pointerId) return;
+      const delta = event.clientX - chipDrag.startX;
+      if (Math.abs(delta) > 4) chipDrag.moved = true;
+      seasonChips.scrollLeft = chipDrag.scrollLeft - delta;
+      if (chipDrag.moved) event.preventDefault();
+    });
+
+    function endChipDrag(event) {
+      if (!chipDrag || chipDrag.pointerId !== event.pointerId) return;
+      seasonChips.classList.remove('is-dragging');
+      seasonChips.releasePointerCapture(event.pointerId);
+      const moved = chipDrag.moved;
+      chipDrag = null;
+      if (moved) {
+        seasonChips.querySelectorAll('.chip').forEach(button => {
+          button.dataset.dragged = '1';
+          setTimeout(() => delete button.dataset.dragged, 0);
+        });
+      }
+    }
+
+    seasonChips.addEventListener('pointerup', endChipDrag);
+    seasonChips.addEventListener('pointercancel', endChipDrag);
+
     function updateLink() {
       const url = subscriptionUrl();
+      urlInput.value = url;
       count.textContent = `已选 ${selected.size} / 3`;
-      subscribeButton.disabled = !url;
-      clearButton.disabled = !selected.size;
+      copyButton.disabled = !url;
+      openButton.href = url ? webcalUrl(url) : '#';
+      openButton.setAttribute('aria-disabled', url ? 'false' : 'true');
       if (url) {
         hintText.textContent = [...selected].join('、');
       } else {
@@ -611,24 +688,31 @@
     }
 
     search.addEventListener('input', render);
-    clearButton.addEventListener('click', () => {
-      selected.clear();
-      render();
-    });
-    subscribeButton.addEventListener('click', async () => {
+    copyButton.addEventListener('click', async () => {
       const url = subscriptionUrl();
       if (!url) return;
-      const ua = navigator.userAgent || '';
-      const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
-      if (isAppleMobile) {
-        location.href = webcalUrl(url);
-        return;
-      }
       try {
         await navigator.clipboard.writeText(url);
         showToast('已复制 HTTPS 订阅链接，请粘贴到日历 App');
       } catch (_) {
         showToast('浏览器不允许自动复制，请长按页面链接手动复制');
+      }
+    });
+    openButton.addEventListener('click', async event => {
+      const url = subscriptionUrl();
+      if (!url) {
+        event.preventDefault();
+        return;
+      }
+      const ua = navigator.userAgent || '';
+      const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
+      if (isAppleMobile) return;
+      event.preventDefault();
+      try {
+        await navigator.clipboard.writeText(url);
+        showToast('已复制 HTTPS 订阅链接，请粘贴到日历 App');
+      } catch (_) {
+        showToast('浏览器不允许自动复制，请手动复制链接');
       }
     });
 
