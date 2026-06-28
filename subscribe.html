@@ -35,7 +35,8 @@
     .nav-left { display: flex; align-items: center; min-width: 0; gap: 12px; }
     .brand-link { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .08em; white-space: nowrap; }
     .nav-divider { width: 1px; height: 14px; background: var(--line); flex: 0 0 auto; }
-    .nav-action, .nav-help { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
+    .nav-action { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
+    .help-button { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--blue); text-decoration: none; font-size: 16px; font-weight: 800; }
     header { padding: 6px 4px 16px; }
     h1 { margin: 0; font-size: clamp(30px, 7vw, 48px); line-height: 1.08; letter-spacing: 0; font-weight: 760; }
     .lead { margin: 8px 0 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
@@ -116,7 +117,7 @@
         <span class="nav-divider" aria-hidden="true"></span>
         <a class="nav-action" href="/spirits">指定先祖</a>
       </div>
-      <a class="nav-help" href="/help">帮助</a>
+      <a class="help-button" href="/help" aria-label="使用帮助" title="使用帮助">?</a>
     </nav>
     <header>
       <h1>自定义订阅</h1>
