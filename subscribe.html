@@ -36,7 +36,7 @@
     .brand-link { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .08em; white-space: nowrap; }
     .nav-divider { width: 1px; height: 14px; background: var(--line); flex: 0 0 auto; }
     .nav-action { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
-    .help-button { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--blue); text-decoration: none; font-size: 16px; font-weight: 800; }
+    .help-link { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
     header { padding: 6px 4px 16px; }
     h1 { margin: 0; font-size: clamp(30px, 7vw, 48px); line-height: 1.08; letter-spacing: 0; font-weight: 760; }
     .lead { margin: 8px 0 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
@@ -80,13 +80,13 @@
     .bulk { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; padding: 11px 14px 11px 16px; border-radius: 16px; background: rgba(255, 255, 255, .72); color: var(--muted); font-size: 14px; }
     .bulk label { display: flex; align-items: center; gap: 8px; color: var(--text); cursor: pointer; white-space: nowrap; }
     .link-panel { margin-top: 14px; padding: 12px; border-radius: 18px; background: var(--card); box-shadow: 0 12px 32px rgba(0, 0, 0, .05); }
-    .url-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; align-items: center; }
+    .url-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; }
     input[type="text"] { width: 100%; min-width: 0; height: 42px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: #f5f5f7; color: #3a3a3c; font-size: 13px; }
     button, a.button { display: inline-flex; align-items: center; justify-content: center; height: 42px; min-width: 78px; border: 0; border-radius: 999px; background: var(--blue); color: #fff; padding: 0 16px; font: inherit; font-size: 15px; font-weight: 650; text-decoration: none; cursor: pointer; white-space: nowrap; }
     a.button { background: #e9f2ff; color: #0066cc; }
     .summary { margin: 8px 2px 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
     @media (max-width: 640px) {
-      main { padding: 14px 10px; }
+      main { padding: 14px 10px 152px; }
       .topnav { padding-bottom: 12px; }
       header { padding-bottom: 10px; }
       h1 { font-size: 30px; }
@@ -101,8 +101,17 @@
       .switch::before { width: 24px; height: 24px; }
       .switch:checked::before { transform: translateX(18px); }
       .bulk { margin-top: 8px; padding: 9px 10px 9px 12px; font-size: 12px; }
-      .link-panel { margin-top: 10px; padding: 10px; }
-      .url-row { grid-template-columns: 1fr 1fr; }
+      .link-panel {
+        position: fixed;
+        left: 50%;
+        bottom: 10px;
+        z-index: 4;
+        width: calc(100vw - 20px);
+        margin-top: 0;
+        padding: 10px;
+        transform: translateX(-50%);
+      }
+      .url-row { grid-template-columns: 1fr; }
       input[type="text"] { grid-column: 1 / -1; height: 38px; }
       button, a.button { width: 100%; height: 38px; min-width: 0; }
       .summary { font-size: 11px; }
@@ -117,7 +126,7 @@
         <span class="nav-divider" aria-hidden="true"></span>
         <a class="nav-action" href="/spirits">指定先祖</a>
       </div>
-      <a class="help-button" href="/help" aria-label="使用帮助" title="使用帮助">?</a>
+      <a class="help-link" href="/help">帮助</a>
     </nav>
     <header>
       <h1>自定义订阅</h1>
@@ -126,26 +135,25 @@
 
     <p class="group-label">订阅内容</p>
     <section class="settings" id="options">
-      <div class="item is-on" data-type="red"><div><div class="item-title"><span class="checkmark">✓</span><span>红石</span></div><p class="item-note">每天最后一场。</p></div></div>
-      <div class="item" data-type="black"><div><div class="item-title"><span class="checkmark">✓</span><span>黑石</span></div><p class="item-note">每天最后一场。</p></div></div>
-      <div class="item is-on" data-type="traveling_spirit"><div><div class="item-title"><span class="checkmark">✓</span><span>旅行先祖</span></div><p class="item-note">默认仅在离开前提醒。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="traveling_spirit" checked></label></div>
-      <div class="item is-on" data-type="season"><div><div class="item-title"><span class="checkmark">✓</span><span>季节</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="season" checked></label></div>
-      <div class="item is-on" data-type="activity"><div><div class="item-title"><span class="checkmark">✓</span><span>活动</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="activity" checked></label></div>
-      <div class="item is-on" data-type="bonus"><div><div class="item-title"><span class="checkmark">✓</span><span>双倍</span></div><p class="item-note">连续事件。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="bonus"></label></div>
+      <div class="item is-on" data-type="red"><div><div class="item-title"><span class="checkmark">✓</span><span>红石时间</span></div><p class="item-note">每天最后一场。</p></div><label class="end-control"><span>仅最后一场提醒</span><input class="switch" type="checkbox" data-endonly="red" checked></label></div>
+      <div class="item" data-type="black"><div><div class="item-title"><span class="checkmark">✓</span><span>黑石时间</span></div><p class="item-note">每天最后一场。</p></div><label class="end-control"><span>仅最后一场提醒</span><input class="switch" type="checkbox" data-endonly="black" checked></label></div>
+      <div class="item is-on" data-type="traveling_spirit"><div><div class="item-title"><span class="checkmark">✓</span><span>先祖回归</span></div><p class="item-note">默认仅在离开前提醒。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="traveling_spirit" checked></label></div>
+      <div class="item is-on" data-type="season"><div><div class="item-title"><span class="checkmark">✓</span><span>季节时间</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="season" checked></label></div>
+      <div class="item is-on" data-type="activity"><div><div class="item-title"><span class="checkmark">✓</span><span>其他活动</span></div><p class="item-note">默认仅在结束前提醒。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="activity" checked></label></div>
+      <div class="item is-on" data-type="bonus"><div><div class="item-title"><span class="checkmark">✓</span><span>双倍活动</span></div><p class="item-note">连续事件。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="bonus"></label></div>
       <div class="item is-on" data-type="candle_heap"><div><div class="item-title"><span class="checkmark">✓</span><span>大蜡烛</span></div><p class="item-note">连续事件。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="candle_heap"></label></div>
-      <div class="item is-on" data-type="maintenance"><div><div class="item-title"><span class="checkmark">✓</span><span>维护</span></div><p class="item-note">停服升级维护。</p></div></div>
+      <div class="item is-on" data-type="maintenance"><div><div class="item-title"><span class="checkmark">✓</span><span>停服维护</span></div><p class="item-note">停服升级维护。</p></div><label class="end-control"><span>仅结束时提醒</span><input class="switch" type="checkbox" data-endonly="maintenance" checked></label></div>
     </section>
 
     <div class="bulk">
-      <span>结束提醒设置</span>
-      <label><span>全部仅结束时提醒</span><input id="endOnlyAll" class="switch" type="checkbox"></label>
+      <span>提醒方式设置</span>
+      <label><span>全部使用简化提醒</span><input id="endOnlyAll" class="switch" type="checkbox"></label>
     </div>
 
     <section class="link-panel">
       <div class="url-row">
         <input id="url" type="text" readonly>
-        <button id="copy" type="button">复制</button>
-        <a id="open" class="button" href="#">添加</a>
+        <button id="subscribeAction" type="button">订阅到日历</button>
       </div>
       <p class="summary" id="summary"></p>
     </section>
@@ -156,8 +164,9 @@
     const endOnlyChecks = [...document.querySelectorAll('input[data-endonly]')];
     const endOnlyAll = document.querySelector('#endOnlyAll');
     const urlInput = document.querySelector('#url');
-    const openLink = document.querySelector('#open');
     const summary = document.querySelector('#summary');
+    const subscribeAction = document.querySelector('#subscribeAction');
+    let copyFeedbackTimer;
 
     function selectedTypes() {
       return items.filter(item => item.classList.contains('is-on')).map(item => item.dataset.type);
@@ -184,9 +193,18 @@
       if (endOnly.length) params.set('endOnly', endOnly.join(','));
       const value = `${location.origin}/calendar.ics?${params.toString()}`;
       urlInput.value = value;
-      openLink.href = value.replace(/^https?:\/\//, 'webcal://');
-      summary.textContent = `已选 ${types.length} 项，其中 ${endOnly.length} 项仅在结束时提醒。`;
+      summary.textContent = `已选 ${types.length} 项，其中 ${endOnly.length} 项使用简化提醒。`;
       syncEndOnlyAll();
+    }
+
+    function showCopyFeedback(button) {
+      const original = button.dataset.label || button.textContent;
+      button.dataset.label = original;
+      button.textContent = '✓ 已复制';
+      clearTimeout(copyFeedbackTimer);
+      copyFeedbackTimer = setTimeout(() => {
+        button.textContent = button.dataset.label || original;
+      }, 1800);
     }
 
     items.forEach(item => {
@@ -207,17 +225,15 @@
       update();
     });
 
-    document.querySelector('#copy').addEventListener('click', async () => {
-      await navigator.clipboard.writeText(urlInput.value);
-      summary.textContent = '已复制订阅链接。';
-    });
-
-    openLink.addEventListener('click', async event => {
+    subscribeAction.addEventListener('click', async () => {
       const ua = navigator.userAgent || '';
       const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
-      if (isAppleMobile) return;
-      event.preventDefault();
+      if (isAppleMobile) {
+        location.href = urlInput.value.replace(/^https?:\/\//, 'webcal://');
+        return;
+      }
       await navigator.clipboard.writeText(urlInput.value);
+      showCopyFeedback(subscribeAction);
       summary.textContent = '已复制 HTTPS 订阅链接，请粘贴到日历 App。';
     });
 

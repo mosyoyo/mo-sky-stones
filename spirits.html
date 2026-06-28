@@ -46,7 +46,7 @@
     .brand-link { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .08em; white-space: nowrap; }
     .nav-divider { width: 1px; height: 14px; background: var(--line); flex: 0 0 auto; }
     .nav-action { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
-    .help-button { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--blue); text-decoration: none; font-size: 16px; font-weight: 800; }
+    .help-link { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
     header {
       padding: 6px 4px 16px;
     }
@@ -248,7 +248,7 @@
     }
     .dock-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 8px;
       align-items: center;
     }
@@ -329,7 +329,7 @@
       .spirit { min-height: 47px; padding: 7px 10px 7px 12px; }
       .name { font-size: 15px; }
       .dock { bottom: 10px; width: calc(100vw - 20px); padding: 10px; }
-      .dock-row { grid-template-columns: 1fr 1fr; }
+      .dock-row { grid-template-columns: 1fr; }
       .url { grid-column: 1 / -1; height: 38px; }
       .button { width: 100%; height: 38px; min-width: 0; }
     }
@@ -343,7 +343,7 @@
         <span class="nav-divider" aria-hidden="true"></span>
         <a class="nav-action" href="/subscribe">自定义订阅</a>
       </div>
-      <a class="help-button" href="/help" aria-label="使用帮助" title="使用帮助">?</a>
+      <a class="help-link" href="/help">帮助</a>
     </nav>
 
     <header>
@@ -366,8 +366,7 @@
   <section class="dock" aria-label="订阅操作">
     <div class="dock-row">
       <input id="url" class="url" type="text" readonly placeholder="选择先祖后生成订阅链接">
-      <button id="copyButton" class="button secondary" type="button" disabled>复制</button>
-      <a id="openButton" class="button" href="#" aria-disabled="true">添加</a>
+      <button id="subscribeAction" class="button" type="button" disabled>订阅到日历</button>
     </div>
     <p class="hint"><span id="count">已选 0 / 3</span> · <span id="hintText">最多选择 3 个。未返场时日历可能暂时为空。</span></p>
   </section>
@@ -380,11 +379,11 @@
     const seasonChips = document.querySelector('#seasonChips');
     const selectedChips = document.querySelector('#selectedChips');
     const urlInput = document.querySelector('#url');
-    const copyButton = document.querySelector('#copyButton');
-    const openButton = document.querySelector('#openButton');
+    const subscribeAction = document.querySelector('#subscribeAction');
     const count = document.querySelector('#count');
     const hintText = document.querySelector('#hintText');
     const toast = document.querySelector('#toast');
+    let copyFeedbackTimer;
     const selected = new Set();
     let spirits = [];
     let activeSeason = 'all';
@@ -418,6 +417,16 @@
       toast.classList.add('show');
       clearTimeout(showToast.timer);
       showToast.timer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function showCopyFeedback(button) {
+      const original = button.dataset.label || button.textContent;
+      button.dataset.label = original;
+      button.textContent = '✓ 已复制';
+      clearTimeout(copyFeedbackTimer);
+      copyFeedbackTimer = setTimeout(() => {
+        button.textContent = button.dataset.label || original;
+      }, 1800);
     }
 
     function h(value) {
@@ -540,9 +549,7 @@
       const url = subscriptionUrl();
       urlInput.value = url;
       count.textContent = `已选 ${selected.size} / 3`;
-      copyButton.disabled = !url;
-      openButton.href = url ? webcalUrl(url) : '#';
-      openButton.setAttribute('aria-disabled', url ? 'false' : 'true');
+      subscribeAction.disabled = !url;
       if (url) {
         hintText.textContent = [...selected].join('、');
       } else {
@@ -648,28 +655,18 @@
     }
 
     search.addEventListener('input', render);
-    copyButton.addEventListener('click', async () => {
+    subscribeAction.addEventListener('click', async () => {
       const url = subscriptionUrl();
       if (!url) return;
-      try {
-        await navigator.clipboard.writeText(url);
-        showToast('已复制 HTTPS 订阅链接，请粘贴到日历 App');
-      } catch (_) {
-        showToast('浏览器不允许自动复制，请长按页面链接手动复制');
-      }
-    });
-    openButton.addEventListener('click', async event => {
-      const url = subscriptionUrl();
-      if (!url) {
-        event.preventDefault();
-        return;
-      }
       const ua = navigator.userAgent || '';
       const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
-      if (isAppleMobile) return;
-      event.preventDefault();
+      if (isAppleMobile) {
+        location.href = webcalUrl(url);
+        return;
+      }
       try {
         await navigator.clipboard.writeText(url);
+        showCopyFeedback(subscribeAction);
         showToast('已复制 HTTPS 订阅链接，请粘贴到日历 App');
       } catch (_) {
         showToast('浏览器不允许自动复制，请手动复制链接');

@@ -60,17 +60,18 @@
       position: absolute;
       top: 18px;
       right: 18px;
-      display: grid;
-      place-items: center;
-      width: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       height: 34px;
+      padding: 0 14px;
       border: 1px solid var(--line);
-      border-radius: 50%;
+      border-radius: 999px;
       background: rgba(255, 255, 255, .7);
       color: var(--blue);
       text-decoration: none;
-      font-size: 18px;
-      font-weight: 780;
+      font-size: 13px;
+      font-weight: 650;
       line-height: 1;
     }
     .hero {
@@ -185,14 +186,14 @@
     }
     footer {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       gap: 12px;
       padding-top: 28px;
       color: var(--muted);
       font-size: 12px;
     }
-    .credit { margin-left: auto; }
+    .credit { margin-left: 0; }
     .toast {
       position: fixed;
       left: 50%;
@@ -233,7 +234,7 @@
 <body>
   <main>
     <section class="card" aria-labelledby="title">
-      <a class="help-button" href="/help" aria-label="使用帮助" title="使用帮助">?</a>
+      <a class="help-button" href="/help">帮助</a>
       <div class="hero">
         <p class="eyebrow">SKY CALENDAR</p>
         <h1 id="title">光遇日历订阅</h1>
