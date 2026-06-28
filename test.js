@@ -108,6 +108,23 @@ assert(customTypes.join(',') === 'red,black,bonus,candle_heap,maintenance', '自
 assert(customReminderOptions.endOnly.has('red') && customReminderOptions.endOnly.has('black') && customReminderOptions.endOnly.has('maintenance'), '自定义订阅会解析红石、黑石、维护简化提醒');
 assert(!customReminderOptions.endOnly.has('bonus') && !customReminderOptions.endOnly.has('candle_heap'), '双倍和大蜡烛默认不是简化提醒');
 
+function countSummaries(ics, prefix) {
+  return (ics.match(new RegExp(`SUMMARY:${prefix}`, 'g')) || []).length;
+}
+
+const redLastUrl = 'https://sky-ics.pages.dev/calendar.ics?types=red&endOnly=red';
+const redAllUrl = 'https://sky-ics.pages.dev/calendar.ics?types=red';
+const redLastCustomCalendar = buildCalendar([], ['red'], { url: redLastUrl, reminderOpts: parseReminderOptions(redLastUrl) });
+const redAllCustomCalendar = buildCalendar([], ['red'], { url: redAllUrl, reminderOpts: parseReminderOptions(redAllUrl) });
+assert(countSummaries(redLastCustomCalendar, '【红石】') === countSummaries(defaultCalendar, '【红石】'), '红石开关打开时保持每日最后一场');
+assert(countSummaries(redAllCustomCalendar, '【红石】') > countSummaries(redLastCustomCalendar, '【红石】'), '红石开关关闭时生成每日全部场次');
+
+const blackLastUrl = 'https://sky-ics.pages.dev/calendar.ics?types=black&endOnly=black';
+const blackAllUrl = 'https://sky-ics.pages.dev/calendar.ics?types=black';
+const blackLastCustomCalendar = buildCalendar([], ['black'], { url: blackLastUrl, reminderOpts: parseReminderOptions(blackLastUrl) });
+const blackAllCustomCalendar = buildCalendar([], ['black'], { url: blackAllUrl, reminderOpts: parseReminderOptions(blackAllUrl) });
+assert(countSummaries(blackAllCustomCalendar, '【黑石】') > countSummaries(blackLastCustomCalendar, '【黑石】'), '黑石开关关闭时生成每日全部场次');
+
 const customEvents = [
   { enabled: true, id: 'bonus-heart', type: 'bonus', title: '【双倍】双倍爱心', start: '2026-06-19T04:00:00.000Z', end: '2026-06-26T04:00:00.000Z' },
   { enabled: true, id: 'candle-heap', type: 'candle_heap', title: '【大蜡烛】大蜡烛堆', start: '2026-06-20T04:00:00.000Z', end: '2026-06-21T04:00:00.000Z' },

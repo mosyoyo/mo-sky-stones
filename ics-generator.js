@@ -1,8 +1,8 @@
 // iCalendar (.ics) 生成器
 // 输出 RFC 5545 标准的日历订阅文件
-// 每个订阅只包含"最后一场"事件，避免骚扰
+// 默认只包含"最后一场"事件，避免骚扰；自定义订阅可选择全部场次
 
-const { generateLastEvents } = require('./calendar-engine');
+const { generateEvents } = require('./calendar-engine');
 
 /**
  * 格式化时间为 ICS 格式: YYYYMMDDTHHMMSS
@@ -39,11 +39,13 @@ function escapeICS(text) {
  * @param {number} days - 生成未来多少天
  * @param {string} calName - 日历显示名
  */
-function generateICS(filterType, days = 30, calName = '光遇') {
-  const upcoming = generateLastEvents(filterType, days);
+function generateICS(filterType, days = 30, calName = '光遇', options = {}) {
+  const lastOnly = options.lastOnly !== false;
+  const upcoming = generateEvents(filterType, days, { lastOnly });
   const now = new Date();
   const dtstamp = formatICSDateTimeUTC(now);
   const typeName = filterType === 'red' ? '红石' : '黑石';
+  const descMode = lastOnly ? '仅含每日最后一场' : '包含每日全部场次';
 
   const lines = [
     'BEGIN:VCALENDAR',
@@ -52,7 +54,7 @@ function generateICS(filterType, days = 30, calName = '光遇') {
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     `X-WR-CALNAME:${calName}`,
-    `X-WR-CALDESC:光遇国服${typeName}降落时间表（仅含每日最后一场，含 10 分钟提醒）`,
+    `X-WR-CALDESC:光遇国服${typeName}降落时间表（${descMode}，含 10 分钟提醒）`,
     'X-WR-TIMEZONE:Asia/Shanghai',
   ];
 

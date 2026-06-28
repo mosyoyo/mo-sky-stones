@@ -86,7 +86,31 @@ function generateLastEvents(filterType, days = 60) {
   return result;
 }
 
+/**
+ * 生成未来 N 天的红黑石事件
+ * @param {'red' | 'black'} filterType - 过滤红石或黑石
+ * @param {number} days
+ * @param {{lastOnly?: boolean}} options
+ * @returns {Array<{date: Date, event: Object}>}
+ */
+function generateEvents(filterType, days = 60, options = {}) {
+  if (options.lastOnly !== false) return generateLastEvents(filterType, days);
+
+  const result = [];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  for (let i = 0; i < days; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    const events = getEventsOnDate(date).filter(event => event.type === filterType);
+    events.forEach(event => result.push({ date, event }));
+  }
+  return result;
+}
+
 module.exports = {
+  generateEvents,
   getStoneType,
   getEventsOnDate,
   getLastEventOnDate,
