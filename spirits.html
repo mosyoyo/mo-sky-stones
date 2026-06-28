@@ -41,44 +41,11 @@
       margin: 0 auto;
       padding: 28px 14px 170px;
     }
-    .topnav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 0 4px 18px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .brand {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 680;
-      letter-spacing: .08em;
-    }
-    .topnav a {
-      color: var(--blue);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 650;
-    }
-    .help-button {
-      display: grid;
-      place-items: center;
-      width: 30px;
-      height: 30px;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      background: #fff;
-      color: var(--blue);
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 800;
-    }
+    .topnav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 0 4px 18px; }
+    .nav-left { display: flex; align-items: center; min-width: 0; gap: 12px; }
+    .brand-link { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .08em; white-space: nowrap; }
+    .nav-divider { width: 1px; height: 14px; background: var(--line); flex: 0 0 auto; }
+    .nav-action, .nav-help { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
     header {
       padding: 6px 4px 16px;
     }
@@ -369,13 +336,13 @@
 </head>
 <body>
   <main>
-    <nav class="topnav">
-      <div class="nav-links">
-        <a href="/">返回主页</a>
-        <a href="/subscribe">自定义订阅</a>
+    <nav class="topnav" aria-label="页面导航">
+      <div class="nav-left">
+        <a class="brand-link" href="/">SKY CALENDAR</a>
+        <span class="nav-divider" aria-hidden="true"></span>
+        <a class="nav-action" href="/subscribe">自定义订阅</a>
       </div>
-      <span class="brand">SKY CALENDAR</span>
-      <a class="help-button" href="/help" aria-label="使用帮助" title="使用帮助">?</a>
+      <a class="nav-help" href="/help">帮助</a>
     </nav>
 
     <header>

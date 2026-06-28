@@ -8,9 +8,9 @@ node_modules/
 scripts/check-old-table.mjs
 scripts/search-spirit.mjs
 spirit-items.json
+
 # Plan 文件 - 只在本地留存，不要推送到仓库
 ADMIN_REFACTOR_PLAN.md
 HOME_PAGE_REDESIGN_PLAN.md
 CUSTOM_SPIRIT_SUBSCRIPTION_PLAN.md
 ONBOARDING_AND_PROMOTION_PLAN.md
-PROMOTION_AND_COMPLIANCE.md
