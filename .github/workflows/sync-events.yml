@@ -39,5 +39,5 @@ jobs:
             exit 0
           fi
           git diff --cached --quiet || git commit -m "chore: sync events"
-          git pull --rebase origin main
+          git pull --rebase origin "${GITHUB_REF_NAME}"
           git push

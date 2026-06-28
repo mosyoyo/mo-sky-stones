@@ -12,7 +12,7 @@ export async function onRequestGet(context) {
   if (!url.searchParams.has('types') && !url.searchParams.has('endOnly')) {
     ['traveling_spirit', 'season', 'activity'].forEach(type => reminderOpts.endOnly.add(type));
   }
-  const ics = buildCalendar(events, types, { reminderOpts });
+  const ics = buildCalendar(events, types, { reminderOpts, url: context.request.url });
   return new Response(ics, {
     headers: {
       'Content-Type': 'text/calendar; charset=utf-8',

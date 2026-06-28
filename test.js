@@ -100,6 +100,50 @@ assert(defaultCalendar.includes('REFRESH-INTERVAL;VALUE=DURATION:PT1H'), 'calend
 assert(defaultCalendar.includes('X-PUBLISHED-TTL:PT1H'), 'calendar.ics 默认组合包含发布 TTL');
 
 console.log('');
+console.log('=== 自定义订阅生成验证 ===');
+const customUrl = 'https://sky-ics.pages.dev/calendar.ics?types=red,black,bonus,candle_heap,maintenance&endOnly=red,black,maintenance';
+const customTypes = parseTypes(customUrl);
+const customReminderOptions = parseReminderOptions(customUrl);
+assert(customTypes.join(',') === 'red,black,bonus,candle_heap,maintenance', '自定义订阅会按 URL 保留所选类型顺序');
+assert(customReminderOptions.endOnly.has('red') && customReminderOptions.endOnly.has('black') && customReminderOptions.endOnly.has('maintenance'), '自定义订阅会解析红石、黑石、维护简化提醒');
+assert(!customReminderOptions.endOnly.has('bonus') && !customReminderOptions.endOnly.has('candle_heap'), '双倍和大蜡烛默认不是简化提醒');
+
+function countSummaries(ics, prefix) {
+  return (ics.match(new RegExp(`SUMMARY:${prefix}`, 'g')) || []).length;
+}
+
+const redLastUrl = 'https://sky-ics.pages.dev/calendar.ics?types=red&endOnly=red';
+const redAllUrl = 'https://sky-ics.pages.dev/calendar.ics?types=red';
+const redLastCustomCalendar = buildCalendar([], ['red'], { url: redLastUrl, reminderOpts: parseReminderOptions(redLastUrl) });
+const redAllCustomCalendar = buildCalendar([], ['red'], { url: redAllUrl, reminderOpts: parseReminderOptions(redAllUrl) });
+assert(countSummaries(redLastCustomCalendar, '【红石】') === countSummaries(defaultCalendar, '【红石】'), '红石开关打开时保持每日最后一场');
+assert(countSummaries(redAllCustomCalendar, '【红石】') > countSummaries(redLastCustomCalendar, '【红石】'), '红石开关关闭时生成每日全部场次');
+
+const blackLastUrl = 'https://sky-ics.pages.dev/calendar.ics?types=black&endOnly=black';
+const blackAllUrl = 'https://sky-ics.pages.dev/calendar.ics?types=black';
+const blackLastCustomCalendar = buildCalendar([], ['black'], { url: blackLastUrl, reminderOpts: parseReminderOptions(blackLastUrl) });
+const blackAllCustomCalendar = buildCalendar([], ['black'], { url: blackAllUrl, reminderOpts: parseReminderOptions(blackAllUrl) });
+assert(countSummaries(blackAllCustomCalendar, '【黑石】') > countSummaries(blackLastCustomCalendar, '【黑石】'), '黑石开关关闭时生成每日全部场次');
+
+const customEvents = [
+  { enabled: true, id: 'bonus-heart', type: 'bonus', title: '【双倍】双倍爱心', start: '2026-06-19T04:00:00.000Z', end: '2026-06-26T04:00:00.000Z' },
+  { enabled: true, id: 'candle-heap', type: 'candle_heap', title: '【大蜡烛】大蜡烛堆', start: '2026-06-20T04:00:00.000Z', end: '2026-06-21T04:00:00.000Z' },
+  { enabled: true, id: 'maintenance-0624', type: 'maintenance', title: '【维护】6月24日 维护', start: '2026-06-23T17:00:00.000Z', end: '2026-06-24T02:00:00.000Z' },
+  { enabled: true, id: 'activity-test', type: 'activity', title: '【活动】测试活动', start: '2026-06-20T04:00:00.000Z', end: '2026-06-26T04:00:00.000Z' },
+];
+const bonusAndCandleCalendar = buildCalendar(customEvents, ['bonus', 'candle_heap'], { reminderOpts: { endOnly: new Set() } });
+assert(bonusAndCandleCalendar.includes('SUMMARY:【双倍】双倍爱心') && bonusAndCandleCalendar.includes('SUMMARY:【大蜡烛】大蜡烛堆'), '双倍和大蜡烛同时选择时会同时生成');
+assert(!bonusAndCandleCalendar.includes('SUMMARY:【活动】测试活动') && !bonusAndCandleCalendar.includes('SUMMARY:【维护】6月24日 维护'), '自定义订阅不会生成未选择的公告类型');
+
+const maintenanceDefaultCalendar = buildCalendar(customEvents, ['maintenance'], { reminderOpts: { endOnly: new Set() } });
+assert(maintenanceDefaultCalendar.includes('SUMMARY:【维护开始】6月24日维护'), '维护默认生成开始提醒');
+assert(maintenanceDefaultCalendar.includes('SUMMARY:【维护结束】6月24日维护'), '维护默认生成结束提醒');
+
+const maintenanceEndOnlyCalendar = buildCalendar(customEvents, ['maintenance'], { reminderOpts: { endOnly: new Set(['maintenance']) } });
+assert(!maintenanceEndOnlyCalendar.includes('SUMMARY:【维护开始】6月24日维护'), '维护简化提醒不会生成开始提醒');
+assert(maintenanceEndOnlyCalendar.includes('SUMMARY:【维护结束】6月24日维护'), '维护简化提醒只保留结束提醒');
+
+console.log('');
 console.log('=== 公告隐藏一致性验证 ===');
 const ignoredEvents = [
   { id: 'a', sourceFeedId: 'feed-1', enabled: true },

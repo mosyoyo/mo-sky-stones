@@ -125,11 +125,29 @@ function beijingText(date) {
 }
 
 function detectType(title = '', content = '') {
-  const text = `${title}\n${content}`;
-  // 优先级：season/activity 在 maintenance 之前
-  // 原因：季节/活动类「宴会节 更新内容公告」「时装节 更新内容公告」含「维护」字样
-  //       但实际是季节/活动公告，maintenance 关键词「维护」太宽
-  for (const type of ['season', 'activity', 'traveling_spirit', 'bonus', 'candle_heap', 'maintenance']) {
+  const titleOnly = title || '';
+  const text = `${title}
+${content}`;
+
+  const BONUS_TITLE_KEYWORDS = ['双倍蜡烛', '双倍爱心', '双倍季蜡', '双倍心火', '双倍烛火', '额外烛火'];
+  const CANDLE_TITLE_KEYWORDS = ['大蜡烛堆将出现在天空王国各地', '大蜡烛堆'];
+  if (CANDLE_TITLE_KEYWORDS.some(k => text.includes(k))) return 'candle_heap';
+  if (BONUS_TITLE_KEYWORDS.some(k => text.includes(k))) return 'bonus';
+
+  const MAINT_TITLE_KEYWORDS = ['更新时间公告', '停服维护公告', '停服公告', '升级维护公告', '更新维护公告'];
+  const MAINT_BODY_PATTERNS = [
+    /我们将在\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2}\s*(?:至|到|~|—|-)\s*\d{1,2}[:：]\d{2}进行版本更新/,
+    /将于\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2}\s*(?:至|到|~|—|-)\s*\d{1,2}[:：]\d{2}进行(?:停服|版本)?(?:更新|维护)/,
+  ];
+  if (MAINT_TITLE_KEYWORDS.some(k => titleOnly.includes(k)) || MAINT_BODY_PATTERNS.some(pattern => pattern.test(text))) {
+    return 'maintenance';
+  }
+
+  const BONUS_FALLBACK_KEYWORDS = ['双倍'];
+  if (BONUS_TITLE_KEYWORDS.some(k => titleOnly.includes(k))) return 'bonus';
+  if (BONUS_FALLBACK_KEYWORDS.some(k => text.includes(k))) return 'bonus';
+
+  for (const type of ['season', 'activity', 'traveling_spirit']) {
     if (TYPE_KEYWORDS[type].some(keyword => text.includes(keyword))) return type;
   }
   return 'other';
@@ -150,7 +168,11 @@ function cleanEventTitle(title = '', content = '', type = '') {
 
   if (type === 'traveling_spirit' || /旅行先祖|复刻|先祖到访|先祖即将到访/.test(text)) return '旅行先祖';
   if (type === 'candle_heap' || /大蜡烛/.test(text)) return '《光·遇》大蜡烛';
-  if (type === 'maintenance' || /停服|维护|版本更新|更新时间公告/.test(text)) return '《光·遇》维护更新';
+  if (type === 'maintenance') {
+    // 从标题提取日期，如「6月12日 更新时间公告」→「6月12日 维护」
+    const dateMatch = firstLine.match(/(\d{1,2}月\d{1,2}日)/);
+    return dateMatch ? `${dateMatch[1]} 维护` : '维护更新';
+  }
   if (/端午/.test(text)) return '《光·遇》端午节';
   if (/七周年/.test(text)) return '《光·遇》七周年';
   if (/致梵高/.test(text)) return '《光·遇》致梵高';
@@ -212,7 +234,7 @@ const OFFLINE_KEYWORDS = [
   '见面会', '签售', '签售会', '舞台剧', '音乐会', '演唱会', '展览', '漫展',
   '粉丝见面', '线下活动', '线下见面', '线下面基', '面基', '参展', '展会',
   '签到', '现场', '主办方', '票务', '门票', '售票', '预约报名',
-  '到场', '出席', '签到', '舞台', '演出',
+  '到场', '出席', '舞台剧', '演出',
 ];
 
 function isOfflineEvent(title = '', content = '') {
@@ -244,7 +266,14 @@ function isLikelyGameActivity(event) {
 
 function cleanText(text = '') {
   return String(text)
+    .replace(/<\s*br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
     .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
     .replace(/&nbsp;/g, ' ')
     .replace(/\r/g, '')
     .replace(/\n{3,}/g, '\n\n')
@@ -273,6 +302,12 @@ function parseDateMatch(match, fallbackYear) {
 
 function parseBeijingDateTime(year, month, day, hour = 0, minute = 0) {
   return new Date(Date.UTC(year, month - 1, day, hour - 8, minute, 0));
+}
+
+function resolveRangeYears(startMonth, endMonth, baseYear) {
+  const startYear = baseYear;
+  const endYear = endMonth < startMonth ? baseYear + 1 : baseYear;
+  return { startYear, endYear };
 }
 
 const WEEKDAY_MAP = {
@@ -310,6 +345,21 @@ function extractDateRange(title = '', content = '', now = new Date()) {
     return { start: relatives[0].toISOString(), end: relatives[relatives.length - 1].toISOString() };
   }
 
+  // Tight format: 6月12日01:00~10:00 (no space between day and time)
+  const tightDayRange = text.match(/(\d{1,2})月(\d{1,2})日(\d{1,2})[:：](\d{2})\s*(?:至|到|~|—|-)\s*(\d{1,2})[:：](\d{2})/);
+  if (tightDayRange) {
+    const month = Number(tightDayRange[1]);
+    const day = Number(tightDayRange[2]);
+    const startHour = Number(tightDayRange[3]);
+    const startMinute = Number(tightDayRange[4]);
+    const endHour = Number(tightDayRange[5]);
+    const endMinute = Number(tightDayRange[6]);
+    let start = parseBeijingDateTime(year, month, day, startHour, startMinute);
+    let end = parseBeijingDateTime(year, month, day, endHour, endMinute);
+    if (end <= start) end = addDays(end, 1);
+    return { start: start.toISOString(), end: end.toISOString() };
+  }
+
   const sameDayTimeRange = text.match(/(\d{1,2})月(\d{1,2})日\s*(\d{1,2})[:：](\d{2})\s*(?:至|到|~|—|-)\s*(\d{1,2})[:：](\d{2})/);
   if (sameDayTimeRange) {
     const month = Number(sameDayTimeRange[1]);
@@ -324,12 +374,80 @@ function extractDateRange(title = '', content = '', now = new Date()) {
     return { start: start.toISOString(), end: end.toISOString() };
   }
 
+  const fullYearRange = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?\s*(?:期间|至|到|~|—|-)\s*(\d{4})年(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?/);
+  if (fullYearRange) {
+    const start = parseBeijingDateTime(
+      Number(fullYearRange[1]),
+      Number(fullYearRange[2]),
+      Number(fullYearRange[3]),
+      Number(fullYearRange[4] || 0),
+      Number(fullYearRange[5] || 0),
+    );
+    const end = parseBeijingDateTime(
+      Number(fullYearRange[6]),
+      Number(fullYearRange[7]),
+      Number(fullYearRange[8]),
+      Number(fullYearRange[9] || 23),
+      Number(fullYearRange[10] || 59),
+    );
+    return { start: start.toISOString(), end: end.toISOString() };
+  }
+
+  const monthDayRange = text.match(/(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?\s*(?:期间|至|到|~|—|-)\s*(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?/);
+  if (monthDayRange) {
+    const startMonth = Number(monthDayRange[1]);
+    const startDay = Number(monthDayRange[2]);
+    const endMonth = Number(monthDayRange[5]);
+    const endDay = Number(monthDayRange[6]);
+    const { startYear, endYear } = resolveRangeYears(startMonth, endMonth, year);
+    const start = parseBeijingDateTime(
+      startYear,
+      startMonth,
+      startDay,
+      Number(monthDayRange[3] || 0),
+      Number(monthDayRange[4] || 0),
+    );
+    const end = parseBeijingDateTime(
+      endYear,
+      endMonth,
+      endDay,
+      Number(monthDayRange[7] || 23),
+      Number(monthDayRange[8] || 59),
+    );
+    return { start: start.toISOString(), end: end.toISOString() };
+  }
+
+  const omittedMonthRange = text.match(/(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?\s*(?:期间|至|到|~|—|-)\s*(\d{1,2})日(?:\s*(\d{1,2})[:：](\d{2}))?/);
+  if (omittedMonthRange) {
+    const startMonth = Number(omittedMonthRange[1]);
+    const startDay = Number(omittedMonthRange[2]);
+    const endDay = Number(omittedMonthRange[5]);
+    const start = parseBeijingDateTime(
+      year,
+      startMonth,
+      startDay,
+      Number(omittedMonthRange[3] || 0),
+      Number(omittedMonthRange[4] || 0),
+    );
+    const end = parseBeijingDateTime(
+      year,
+      startMonth,
+      endDay,
+      Number(omittedMonthRange[6] || 23),
+      Number(omittedMonthRange[7] || 59),
+    );
+    return { start: start.toISOString(), end: end.toISOString() };
+  }
+
   const dateTime = '(\\d{1,2})月(\\d{1,2})日(?:\\s*(\\d{1,2})[:：](\\d{2}))?';
   const between = new RegExp(`${dateTime}[\\s\\S]{0,20}(?:至|到|~|—|-)[\\s\\S]{0,20}${dateTime}`);
   const range = text.match(between);
   if (range) {
-    const start = parseDateMatch([null, range[1], range[2], range[3], range[4]], year);
-    const end = parseDateMatch([null, range[5], range[6], range[7] ?? '23', range[8] ?? '59'], year);
+    const startMonth = Number(range[1]);
+    const endMonth = Number(range[5]);
+    const { startYear, endYear } = resolveRangeYears(startMonth, endMonth, year);
+    const start = parseDateMatch([null, range[1], range[2], range[3], range[4]], startYear);
+    const end = parseDateMatch([null, range[5], range[6], range[7] ?? '23', range[8] ?? '59'], endYear);
     return { start: start.toISOString(), end: end.toISOString() };
   }
 
@@ -345,6 +463,34 @@ function uidPart(value) {
   const ascii = text.replace(/[^A-Za-z0-9_-]+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
   const hash = fnv1a(text);
   return ascii ? `${ascii}-${hash}` : `event-${hash}`;
+}
+
+function extractContextualDateRange(title = '', content = '', now = new Date(), patterns = []) {
+  const text = cleanText(`${title}\n${content}`);
+  const lines = text.split('\n').map(line => line.trim()).filter(Boolean);
+  for (let index = 0; index < lines.length; index++) {
+    if (!patterns.some(pattern => pattern.test(lines[index]))) continue;
+    const windowText = lines.slice(Math.max(0, index - 2), Math.min(lines.length, index + 3)).join('\n');
+    const range = extractDateRange('', windowText, now);
+    if (range) return range;
+  }
+  return extractDateRange(title, content, now);
+}
+
+function extractBonusDateRange(title = '', content = '', now = new Date()) {
+  return extractContextualDateRange(title, content, now, [
+    /好友[将可]?收获双倍(?:爱心|心火|烛火|季蜡|蜡烛)/,
+    /好友可获得双倍(?:爱心|心火|烛火|季蜡|蜡烛)/,
+    /双倍(?:爱心|心火|烛火|季蜡|蜡烛)/,
+    /额外烛火/,
+  ]);
+}
+
+function extractCandleHeapDateRange(title = '', content = '', now = new Date()) {
+  return extractContextualDateRange(title, content, now, [
+    /大蜡烛堆将出现在天空王国各地/,
+    /大蜡烛堆/,
+  ]);
 }
 
 function fnv1a(value) {
@@ -458,6 +604,42 @@ function buildReminderEvents(events, options = {}) {
 
     const summary = shortSummary(title, label);
     const reminder = REMINDERS[event.type] || REMINDERS.activity;
+
+    if (event.type === 'maintenance') {
+      const maintenanceTitle = summary.replace(/^【[^】]+】/, '');
+      const maintenanceDesc = buildDescription([
+        `标题: ${summary}`,
+        `开始时间: ${beijingText(start)}`,
+        `结束时间: ${beijingText(end)}`,
+      ]);
+
+      if (!endOnly.has(event.type)) {
+        blocks.push(createTimedEvent({
+          uid: `${id}-start-reminder@sky-stones-ics`,
+          dtstamp,
+          start,
+          end: addMinutes(start, 1),
+          summary: `【维护开始】${maintenanceTitle}`,
+          description: maintenanceDesc,
+          location: label,
+          category: label,
+          alarm: { trigger: '-PT0M', description: '维护开始' },
+        }));
+      }
+
+      blocks.push(createTimedEvent({
+        uid: `${id}-end-reminder@sky-stones-ics`,
+        dtstamp,
+        start: end,
+        end: addMinutes(end, 1),
+        summary: `【维护结束】${maintenanceTitle}`,
+        description: maintenanceDesc,
+        location: label,
+        category: label,
+        alarm: { trigger: '-PT0M', description: '维护结束' },
+      }));
+      continue;
+    }
 
     // 1) range 事件（持续事件，全天格式）
     if (!endOnly.has(event.type)) {
@@ -651,7 +833,9 @@ function normalizeFeed(raw) {
   const id = String(raw.id || raw.feedId || raw.feed_id || '');
   const body = parseContentPayload(raw.content) || parseContentPayload(raw.detail?.result?.feed?.content) || {};
   const title = cleanText(body.title || raw.title || raw.share_title || raw.summary || raw.contentTitle || '');
-  const content = cleanText(body.text || raw.text || raw.desc || raw.plainText || raw.content || '');
+  const bodyText = cleanText(body.text || '');
+  const longText = cleanText(body.longText || '');
+  const content = longText || bodyText || cleanText(raw.text || raw.desc || raw.plainText || raw.content || '');
   const autoType = detectType(title, content);
   return {
     id,
@@ -677,6 +861,8 @@ module.exports = {
   detectType,
   escapeICS,
   extractBonusLabel,
+  extractBonusDateRange,
+  extractCandleHeapDateRange,
   extractTravelingSpiritLabel,
   extractDateRange,
   formatUTC,

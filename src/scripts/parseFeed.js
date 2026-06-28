@@ -1,7 +1,9 @@
 const {
   cleanEventTitle,
   detectType,
+  extractBonusDateRange,
   extractBonusLabel,
+  extractCandleHeapDateRange,
   extractDateRange,
   extractTravelingSpiritLabel,
   isLikelyGameActivity,
@@ -22,42 +24,32 @@ const TYPE_TITLE_PREFIX = {
   maintenance: '【维护】',
 };
 
-// 网易大神数据源只保留的 3 类（其余 3 类改从 wiki 抓取）
-// 用户的核心决策：除了维护和大蜡烛双倍，其余全部抓 wiki
-// 注：实际拆分不在这里做，parseFeed.js 保留全部类型，mergeEvents.js 按 config 决定
-const NETEASE_ALLOWED_TYPES = new Set(['maintenance', 'candle_heap', 'bonus']);
-const WIKI_TAKEN_TYPES = new Set(['traveling_spirit', 'season', 'activity']);
+const NETEASE_KEEP_TYPES = new Set(['activity', 'bonus', 'maintenance']);
+const BONUS_KEYWORDS = [
+  '双倍爱心', '双倍心火', '双倍烛火', '双倍季蜡', '双倍蜡烛', '额外烛火',
+  '收获双倍爱心', '收获双倍心火', '收获双倍烛火', '收获双倍季蜡', '收获双倍蜡烛',
+  '收获一份双倍爱心', '收获一份双倍心火', '收获一份双倍烛火',
+];
+const CANDLE_KEYWORDS = ['大蜡烛堆将出现在天空王国各地', '大蜡烛堆'];
 
 function shouldAutoIgnoreParsedFeed(feed) {
   return feed?.status === 'pending' && feed?.parsedResult?.type === 'other';
 }
 
 function parseFeed(feed) {
-  let type = detectType(feed.title, feed.content);
-  const baseTime = Number(feed.createTime || 0) > 0 ? new Date(Number(feed.createTime)) : new Date();
-  const range = extractDateRange(feed.title, feed.content, baseTime);
-  if (type === 'activity' && range && !isLikelyGameActivity(range)) {
-    type = 'other';
-  }
+  return parseFeedVariants(feed)[0] || {
+    type: 'other',
+    title: '',
+    start: '',
+    end: '',
+  };
+}
 
-  // 过滤规则：
-  // 1. 复刻先祖：只保留「即将到临/即将来临」类预告，过滤「到临提醒/已到来/已离开」
-  // 2. 长周期事件（活动/复刻/季节/双倍/大蜡烛）：duration < 1 天全部 drop
-  // 3. 线下活动（见面会/签售/漫展/票务/现场/舞台/演出…）一律 drop
-  //    维护通常 < 1 天，保留
-  const LONG_EVENT_TYPES = new Set(['traveling_spirit', 'activity', 'season', 'bonus', 'candle_heap']);
-  if (isOfflineEvent(feed.title || '', feed.content || '')) {
-    type = 'other';
-  } else if (type === 'traveling_spirit' && !isTravelingSpiritUpcoming(feed.title || '', feed.content || '')) {
-    type = 'other';
-  } else if (LONG_EVENT_TYPES.has(type) && range && range.start && range.end) {
-    const durationMs = new Date(range.end) - new Date(range.start);
-    const oneDayMs = 24 * 60 * 60 * 1000;
-    if (durationMs < oneDayMs) {
-      type = 'other';
-    }
-  }
+function hasAny(text, keywords) {
+  return keywords.some(keyword => text.includes(keyword));
+}
 
+function buildParsed(feed, type, range) {
   const spiritLabel = type === 'traveling_spirit'
     ? extractTravelingSpiritLabel(`${feed.title || ''}\n${feed.content || ''}`)
     : '';
@@ -65,13 +57,12 @@ function parseFeed(feed) {
     ? extractBonusLabel(`${feed.title || ''}\n${feed.content || ''}`)
     : '';
   const prefix = TYPE_TITLE_PREFIX[type] || '';
+  const title = cleanEventTitle(feed.title, feed.content, type);
   const baseTitle = spiritLabel
     ? `${prefix}${spiritLabel}`
     : bonusLabel
       ? `${prefix}${bonusLabel}`
-      : (cleanEventTitle(feed.title, feed.content, type) && prefix
-          ? `${prefix}${cleanEventTitle(feed.title, feed.content, type).replace(/^[《【].+?[》】]\s*/, '')}`
-          : cleanEventTitle(feed.title, feed.content, type));
+      : (title && prefix ? `${prefix}${title.replace(/^[《【].+?[》】]\s*/, '')}` : title);
   return {
     type,
     title: baseTitle,
@@ -80,15 +71,78 @@ function parseFeed(feed) {
   };
 }
 
+function pushUnique(variants, parsed) {
+  if (!parsed || !parsed.type || !parsed.start || !parsed.end) return;
+  if (variants.some(item => item.type === parsed.type && item.start === parsed.start && item.end === parsed.end)) return;
+  variants.push(parsed);
+}
+
+function parseFeedVariants(feed) {
+  const title = feed.title || '';
+  const content = feed.content || '';
+  const text = `${title}\n${content}`;
+  const baseTime = Number(feed.createTime || 0) > 0 ? new Date(Number(feed.createTime)) : new Date();
+  const variants = [];
+  const isOffline = isOfflineEvent(title, content);
+
+  if (hasAny(text, CANDLE_KEYWORDS)) {
+    const range = extractCandleHeapDateRange(title, content, baseTime);
+    if (range && range.start && range.end) {
+      pushUnique(variants, buildParsed(feed, 'candle_heap', range));
+    }
+  }
+
+  if (hasAny(text, BONUS_KEYWORDS)) {
+    const range = extractBonusDateRange(title, content, baseTime);
+    if (range && range.start && range.end) {
+      pushUnique(variants, buildParsed(feed, 'bonus', range));
+    }
+  }
+
+  if (isOffline) {
+    return variants;
+  }
+
+  let type = detectType(title, content);
+  if (!NETEASE_KEEP_TYPES.has(type)) {
+    type = 'other';
+  }
+
+  const range = type === 'bonus'
+    ? extractBonusDateRange(title, content, baseTime)
+    : type === 'candle_heap'
+      ? extractCandleHeapDateRange(title, content, baseTime)
+      : extractDateRange(title, content, baseTime);
+
+  const LONG_EVENT_TYPES = new Set(['traveling_spirit', 'activity', 'season', 'candle_heap']);
+  if (type === 'activity' && range && !isLikelyGameActivity(range)) {
+    type = 'other';
+  } else if (type === 'traveling_spirit' && !isTravelingSpiritUpcoming(title, content)) {
+    type = 'other';
+  } else if (LONG_EVENT_TYPES.has(type) && type !== 'bonus' && range && range.start && range.end) {
+    const durationMs = new Date(range.end) - new Date(range.start);
+    const oneDayMs = 24 * 60 * 60 * 1000;
+    if (durationMs < oneDayMs) {
+      type = 'other';
+    }
+  }
+
+  if (type !== 'other' && range && range.start && range.end) {
+    pushUnique(variants, buildParsed(feed, type, range));
+  }
+
+  return variants;
+}
+
 function eventFromFeed(feed, parsed) {
   return {
-    id: `${parsed.type}-${uidPart(feed.id)}`,
+    id: `${parsed.type}-${uidPart(parsed.sourceFeedId || feed.id)}`,
     enabled: feed.status === 'approved',
     type: parsed.type,
     title: parsed.title || feed.title || parsed.type,
     start: parsed.start,
     end: parsed.end,
-    sourceFeedId: feed.id,
+    sourceFeedId: parsed.sourceFeedId || feed.id,
   };
 }
 
@@ -111,30 +165,36 @@ function main() {
       feed.title = normalized.title;
       feed.content = normalized.content;
     }
-    const parsed = parseFeed(feed);
-    if (!parsed.start || !parsed.end) {
-      eventMap.delete(feed.id);
+    const parsedList = parseFeedVariants(feed);
+    for (const key of [...eventMap.keys()]) {
+      if (key === feed.id || key.startsWith(`${feed.id}::`)) eventMap.delete(key);
+    }
+    if (!parsedList.length) {
       droppedCount++;
       continue;
     }
-    feed.autoType = parsed.type;
-    feed.parsed = Boolean(parsed.start && parsed.end);
-    feed.parsedResult = parsed;
+    feed.autoType = parsedList[0].type;
+    feed.parsed = true;
+    feed.parsedResult = parsedList[0];
+    feed.parsedResults = parsedList;
     parsedFeeds.push(feed);
 
-    const existing = eventMap.get(feed.id);
-    if (!shouldKeepFeedEvent(feed, parsed)) {
-      eventMap.delete(feed.id);
-    } else if (existing) {
-      Object.assign(existing, {
-        type: parsed.type,
-        title: parsed.title || existing.title,
-        start: parsed.start,
-        end: parsed.end,
-      });
-    } else {
-      eventMap.set(feed.id, eventFromFeed(feed, parsed));
-      parsedCount++;
+    for (const [index, parsed] of parsedList.entries()) {
+      if (!shouldKeepFeedEvent(feed, parsed)) continue;
+      const sourceFeedId = index === 0 ? feed.id : `${feed.id}::${parsed.type}`;
+      const parsedWithSource = { ...parsed, sourceFeedId };
+      const existing = eventMap.get(sourceFeedId);
+      if (existing) {
+        Object.assign(existing, {
+          type: parsed.type,
+          title: parsed.title || existing.title,
+          start: parsed.start,
+          end: parsed.end,
+        });
+      } else {
+        eventMap.set(sourceFeedId, eventFromFeed(feed, parsedWithSource));
+        parsedCount++;
+      }
     }
   }
 
@@ -152,30 +212,31 @@ function main() {
     '创作激励', '成果展示', '纪录片', '发布会回顾',
   ];
   for (const feed of parsedFeeds) {
-    if (feed.status !== 'pending' || !feed.parsedResult) continue;
-    const p = feed.parsedResult;
-    if (p.type === 'other' || !p.start || !p.end) continue;
+    if (feed.status !== 'pending' || !feed.parsedResults?.length) continue;
     const title = feed.title || '';
     const content = feed.content || '';
-    let shouldApprove = false;
-    if (p.type === 'candle_heap' || p.type === 'bonus' || p.type === 'traveling_spirit') {
-      // 复刻「已到临提醒/已离开」剔除（只保留「即将到临/即将来临」）
-      if (p.type === 'traveling_spirit' && !isTravelingSpiritUpcoming(title, content)) continue;
-      shouldApprove = true;
-    } else if (p.type === 'maintenance') {
-      // skip 关键词：标题必查 + content 整词匹配
-      const hasSkip = MAINTENANCE_SKIP_KEYWORDS.some(k => {
-        if (title.includes(k)) return true;
-        // content 用「完整词组」匹配（k 长度 ≥ 4 才查 content）
-        return k.length >= 4 && content.includes(k);
-      });
-      const isPure = title.includes('更新时间公告') && !hasSkip;
-      if (isPure) shouldApprove = true;
-    }
-    if (shouldApprove) {
-      // ✅ 关键修复：一定要改 feed.status，公告页（admin/feed）才不会再显示
+    let approvedAny = false;
+    for (const p of feed.parsedResults) {
+      if (p.type === 'other' || !p.start || !p.end) continue;
+      let shouldApprove = false;
+      if (p.type === 'candle_heap' || p.type === 'bonus' || p.type === 'traveling_spirit') {
+        if (p.type === 'traveling_spirit' && !isTravelingSpiritUpcoming(title, content)) continue;
+        shouldApprove = true;
+      } else if (p.type === 'maintenance') {
+        const hasSkip = MAINTENANCE_SKIP_KEYWORDS.some(k => {
+          if (title.includes(k)) return true;
+          return k.length >= 4 && content.includes(k);
+        });
+        const isPure = title.includes('更新时间公告') && !hasSkip;
+        if (isPure) shouldApprove = true;
+      }
+      if (!shouldApprove) continue;
       feed.status = 'approved';
-      const existing = eventMap.get(feed.id);
+      const key = p.type === 'candle_heap' ? `${feed.id}::candle_heap`
+        : p.type === 'bonus' ? `${feed.id}::bonus`
+        : feed.id;
+      const existing = eventMap.get(key);
+      const parsedWithSource = { ...p, sourceFeedId: key };
       if (existing) {
         existing.enabled = true;
         existing.type = p.type;
@@ -183,8 +244,9 @@ function main() {
         existing.start = p.start;
         existing.end = p.end;
       } else {
-        eventMap.set(feed.id, eventFromFeed(feed, p));
+        eventMap.set(key, eventFromFeed(feed, parsedWithSource));
       }
+      approvedAny = true;
       autoApprovedCount++;
     }
   }
@@ -209,12 +271,7 @@ function main() {
   }
   const finalEvents = allEvents.filter(e => e.type !== 'traveling_spirit' || keptIds.has(e.id));
 
-  // === 双数据源拆分准备：events-netease.json 只保留锁定类型 ===
-  // 用户核心决策 6/17 晚：网易大神只用于 双倍/大蜡烛/维护 三类
-  // 其他类型（旅行先祖/季节/活动）不进入 events-netease.json，
-  // 由 wiki 提供，避免 mergeEvents 兜底时混入网易大神的同类型事件
-  const NETEASE_ONLY_TYPES = new Set(['bonus', 'candle_heap', 'maintenance']);
-  const neteaseEvents = finalEvents.filter(e => NETEASE_ONLY_TYPES.has(e.type));
+  const neteaseEvents = finalEvents.filter(e => NETEASE_KEEP_TYPES.has(e.type));
 
   // 清理已过期 enabled 事件（end < 现在）—— ICS 唔再显示，iOS 也不会堆积历史
   const now = Date.now();
@@ -296,4 +353,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { eventFromFeed, main, parseFeed, shouldAutoIgnoreParsedFeed };
+module.exports = { eventFromFeed, main, parseFeed, parseFeedVariants, shouldAutoIgnoreParsedFeed };

@@ -8,7 +8,13 @@
 https://sky-ics.pages.dev/
 ```
 
-首页会生成自选订阅链接。也可以直接使用接口：
+首页会生成推荐订阅和自选订阅链接。用户也可以从帮助页查看手机日历添加方式：
+
+```text
+https://sky-ics.pages.dev/help
+```
+
+也可以直接使用接口：
 
 ```text
 https://sky-ics.pages.dev/red.ics
@@ -56,6 +62,56 @@ https://sky-ics.pages.dev/spirit-events.ics?spirits=希望之种,致敬钢琴家
 复制时保留 HTTPS 链接；点击“添加”时使用 `webcal://` 唤起手机日历。
 
 公开自选链接不依赖后台保存，每个用户可以生成自己的 `?spirits=` 订阅地址。后台的先祖页面只用于维护“不带 URL 参数时”的默认配置。
+
+## 使用教学
+
+普通用户推荐从首页开始：
+
+1. 打开 `https://sky-ics.pages.dev/`。
+2. 点“订阅光遇日历”。iPhone / iPad 会尝试唤起系统日历；安卓会复制 HTTPS 订阅链接。
+3. 苹果设备添加后，打开系统“日历”App，进入底部“日历”列表，点订阅右侧蓝色 `i`，打开“事件提醒”或“提醒”开关。
+4. 安卓设备打开自带日历 App，找到“添加日历”“订阅日历”或“URL”入口，粘贴刚复制的链接。
+5. 如果想控制内容，进入 `/subscribe` 自选红石、黑石、旅行先祖、季节、活动、双倍、大蜡烛和维护。
+6. 如果只想关注指定复刻先祖，进入 `/spirits`，最多选择 3 个先祖生成独立订阅链接。
+
+遇到订阅入口找不到、提醒不弹、链接复制失败等问题，可以访问 `/help`，或加入 QQ 群 `1014055900`。
+
+## 传播方式
+
+对外传播优先发首页地址：
+
+```text
+https://sky-ics.pages.dev/
+```
+
+需要给朋友直接复制日历链接时，推荐使用默认合集：
+
+```text
+https://sky-ics.pages.dev/calendar.ics?types=red,traveling_spirit,season,activity,bonus,candle_heap,maintenance&endOnly=traveling_spirit,season,activity
+```
+
+也可以按场景传播：
+
+```text
+https://sky-ics.pages.dev/help       使用帮助
+https://sky-ics.pages.dev/subscribe  自定义订阅
+https://sky-ics.pages.dev/spirits    指定先祖订阅
+```
+
+分享给手机用户时，建议说清楚：苹果点“添加”后还要手动打开订阅日历提醒；安卓通常需要把复制出来的 HTTPS 链接粘贴到日历 App。
+
+## 数据来源与更新频率
+
+日历数据来自两个公开来源：
+
+```text
+网易大神官方动态  旅行先祖、季节、活动、双倍、大蜡烛、维护等公告
+BWiki 光遇        活动日历、旅行先祖回归记录和先祖目录
+```
+
+红石、黑石按游戏内固定规律由本项目计算。公告数据由脚本抓取和解析，进入后台审核后才会写入正式日历，避免把无关动态或解析错误直接推给订阅用户。
+
+GitHub Action 每 6 小时自动同步一次数据源并提交变化。Cloudflare Pages 部署后，用户手机日历会按各自系统的订阅刷新策略拉取最新 ICS；不同系统刷新速度不完全一致，通常不是即时生效。
 
 ## 当前规则
 

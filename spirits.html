@@ -4,6 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>sky-ics | 指定先祖订阅</title>
+  <meta name="description" content="指定关注光遇复刻先祖，生成只包含所选旅行先祖返场提醒的手机日历订阅链接。">
+  <link rel="canonical" href="https://sky-ics.pages.dev/spirits">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="sky-ics">
+  <meta property="og:title" content="sky-ics | 指定先祖订阅">
+  <meta property="og:description" content="搜索并选择指定旅行先祖，生成专属复刻返场日历订阅。">
+  <meta property="og:url" content="https://sky-ics.pages.dev/spirits">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="sky-ics | 指定先祖订阅">
+  <meta name="twitter:description" content="选择指定复刻先祖，生成只关注这些先祖返场的日历订阅。">
+  <link rel="stylesheet" href="/inner.css">
   <style>
     :root {
       color-scheme: light;
@@ -15,85 +26,17 @@
       --blue: #007aff;
       --blue-soft: #e8f2ff;
       --shadow: 0 18px 46px rgba(0, 0, 0, .07);
+      --page-bottom-padding: 170px;
+      --mobile-bottom-padding: 176px;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 58%, #efeff4 100%);
-    }
-    main {
-      width: min(760px, 100%);
-      min-height: 100vh;
-      margin: 0 auto;
-      padding: 18px 14px 170px;
-    }
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: -18px -14px 0;
-      padding: 18px 14px 10px;
-      background: #fbfbfd;
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(60, 60, 67, .08);
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .back {
-      color: var(--blue);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 650;
-    }
-    .count {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 650;
-    }
-    header {
-      padding: 16px 2px 18px;
-    }
-    h1 {
-      margin: 0;
-      font-size: clamp(34px, 8vw, 56px);
-      line-height: 1.04;
-      letter-spacing: 0;
-      font-weight: 780;
-    }
-    .lead {
-      margin: 10px 0 0;
-      max-width: 520px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.5;
-    }
-    .filters {
-      position: sticky;
-      top: 54px;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(150px, .45fr);
-      gap: 10px;
-      margin: 0 -14px;
-      padding: 10px 14px 12px;
-      background: #f5f5f7;
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(60, 60, 67, .08);
-    }
+    main { min-height: 100vh; }
+    .lead { max-width: 520px; }
     input[type="search"],
-    input[type="text"],
-    select {
+    input[type="text"] {
       width: 100%;
       height: 46px;
       border: 1px solid var(--line);
@@ -102,50 +45,121 @@
       color: var(--text);
       padding: 0 14px;
       font: inherit;
-      font-size: 15px;
+      font-size: 14px;
       outline: none;
-    }
-    select {
-      appearance: none;
-      -webkit-appearance: none;
-      background-image:
-        linear-gradient(45deg, transparent 50%, #6e6e73 50%),
-        linear-gradient(135deg, #6e6e73 50%, transparent 50%);
-      background-position:
-        calc(100% - 18px) 20px,
-        calc(100% - 12px) 20px;
-      background-size: 6px 6px, 6px 6px;
-      background-repeat: no-repeat;
-      padding-right: 32px;
     }
     input:focus {
       border-color: rgba(0, 122, 255, .42);
       box-shadow: 0 0 0 4px rgba(0, 122, 255, .11);
     }
-    .list {
+    .controls {
       display: grid;
       gap: 10px;
+      margin-bottom: 12px;
+    }
+    .chips {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0 2px 8px;
+      cursor: grab;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(60, 60, 67, .24) transparent;
+    }
+    .chips.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      user-select: none;
+    }
+    .chips::-webkit-scrollbar { height: 6px; }
+    .chips::-webkit-scrollbar-track { background: transparent; }
+    .chips::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(60, 60, 67, .2);
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      min-height: 34px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .74);
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 650;
+      white-space: nowrap;
+      cursor: pointer;
+      scroll-snap-align: start;
+    }
+    .chip.is-on {
+      border-color: rgba(0, 122, 255, .28);
+      background: var(--blue-soft);
+      color: #0066cc;
+    }
+    .selection-panel {
+      min-height: 40px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .selected-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .selected-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 11px;
+      border: 1px solid rgba(0, 122, 255, .18);
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: #0066cc;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .list {
+      display: grid;
+      overflow: auto;
+      align-content: start;
+      border: 1px solid rgba(0, 0, 0, .04);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .05);
     }
     .spirit {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: auto minmax(0, 1fr);
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
-      min-height: 72px;
-      padding: 13px 14px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--card);
-      box-shadow: var(--shadow);
+      min-height: 54px;
+      padding: 9px 12px 9px 16px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
       cursor: pointer;
       text-align: left;
-      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+      user-select: none;
+      transition: background .16s ease;
     }
+    .spirit + .spirit { border-top: 1px solid var(--line); }
     .spirit:active { transform: scale(.99); }
     .spirit.is-selected {
-      border-color: rgba(0, 122, 255, .48);
-      background: linear-gradient(180deg, #fff 0%, var(--blue-soft) 100%);
+      background: transparent;
     }
     .spirit.is-disabled {
       opacity: .48;
@@ -156,12 +170,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 17px;
-      font-weight: 720;
+      font-size: 16px;
+      font-weight: 620;
     }
     .meta {
       display: block;
-      margin-top: 5px;
+      margin-top: 3px;
       color: var(--muted);
       font-size: 12px;
       line-height: 1.35;
@@ -169,13 +183,14 @@
     .mark {
       display: grid;
       place-items: center;
-      width: 26px;
-      height: 26px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: #eef0f3;
       color: transparent;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
+      flex: 0 0 auto;
     }
     .is-selected .mark {
       background: var(--blue);
@@ -195,27 +210,38 @@
       left: 50%;
       bottom: 14px;
       z-index: 4;
-      width: min(760px, calc(100vw - 24px));
+      width: min(732px, calc(100vw - 28px));
       transform: translateX(-50%);
-      padding: 10px;
-      border: 1px solid rgba(255, 255, 255, .72);
-      border-radius: 22px;
-      background: rgba(255, 255, 255, .86);
-      box-shadow: 0 18px 60px rgba(0, 0, 0, .12);
-      backdrop-filter: blur(22px);
+      padding: 12px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .05);
     }
     .dock-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 8px;
       align-items: center;
+    }
+    .url {
+      width: 100%;
+      min-width: 0;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f5f5f7;
+      color: #3a3a3c;
+      padding: 0 12px;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
     }
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       height: 42px;
-      min-width: 72px;
+      min-width: 78px;
       border: 0;
       border-radius: 999px;
       padding: 0 16px;
@@ -223,11 +249,12 @@
       color: #fff;
       font: inherit;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 650;
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
     }
+    #subscribeAction { width: 116px; }
     .button.secondary {
       background: var(--blue-soft);
       color: #0066cc;
@@ -263,36 +290,28 @@
       opacity: 1;
       transform: translate(-50%, 0);
     }
-    @media (max-width: 560px) {
-      main { padding: 10px 10px 176px; }
-      .nav { margin: -10px -10px 0; padding: 10px 10px 9px; }
-      header { padding-top: 12px; }
-      h1 { font-size: 32px; }
-      .lead { font-size: 13px; }
-      .filters {
-        top: 48px;
-        margin: 0 -10px;
-        padding: 9px 10px 10px;
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-      .spirit { min-height: 64px; border-radius: 16px; box-shadow: none; }
-      .name { font-size: 16px; }
-      .dock { bottom: 10px; border-radius: 20px; }
-      .dock-row { grid-template-columns: 1fr 1fr; }
-      .dock input { grid-column: 1 / -1; height: 38px; }
+    @media (max-width: 640px) {
+      .controls { gap: 8px; }
+      .list { border-radius: 16px; box-shadow: none; }
+      .spirit { min-height: 47px; padding: 7px 10px 7px 12px; }
+      .name { font-size: 15px; }
+      .dock { bottom: 10px; width: calc(100vw - 20px); padding: 10px; }
+      .dock-row { grid-template-columns: 1fr; }
+      .url { grid-column: 1 / -1; height: 38px; }
       .button { width: 100%; height: 38px; min-width: 0; }
+      #subscribeAction { width: 100%; }
     }
   </style>
 </head>
 <body>
   <main>
-    <nav class="nav">
-      <div class="nav-links">
-        <a class="back" href="/">返回主页</a>
-        <a class="back" href="/subscribe">自定义订阅</a>
+    <nav class="topnav" aria-label="页面导航">
+      <div class="nav-left">
+        <a class="brand-link" href="/">SKY CALENDAR</a>
+        <span class="nav-divider" aria-hidden="true"></span>
+        <a class="nav-action" href="/subscribe">自定义订阅</a>
       </div>
-      <span class="count" id="count">已选 0 / 3</span>
+      <a class="help-link" href="/help">帮助</a>
     </nav>
 
     <header>
@@ -300,23 +319,24 @@
       <p class="lead">选择你想单独关注的复刻先祖，生成一个只属于这几个先祖的日历订阅链接。</p>
     </header>
 
-    <div class="filters">
+    <section class="controls" aria-label="筛选先祖">
       <input id="search" type="search" placeholder="搜索名字、季节、物品" autocomplete="off">
-      <select id="seasonFilter" aria-label="按季节筛选">
-        <option value="all">全部季节</option>
-      </select>
-    </div>
+      <div class="chips" id="seasonChips" aria-label="按季节筛选"></div>
+    </section>
+
+    <section class="selection-panel" aria-label="已选择的先祖">
+      <div class="selected-chips" id="selectedChips">还没有选择先祖。</div>
+    </section>
 
     <section class="list" id="list" aria-live="polite"></section>
   </main>
 
-  <section class="dock" aria-label="订阅链接">
+  <section class="dock" aria-label="订阅操作">
     <div class="dock-row">
-      <input id="url" type="text" readonly value="选择先祖后生成链接">
-      <button id="copy" class="button" type="button" disabled>复制</button>
-      <a id="open" class="button secondary" href="#" aria-disabled="true">添加</a>
+      <input id="url" class="url" type="text" readonly placeholder="选择先祖后生成订阅链接">
+      <button id="subscribeAction" class="button" type="button" disabled>订阅到日历</button>
     </div>
-    <p class="hint" id="hint">最多选择 3 个。未返场时日历可能暂时为空，返场后会自动出现。</p>
+    <p class="hint"><span id="count">已选 0 / 3</span> · <span id="hintText">最多选择 3 个。未返场时日历可能暂时为空。</span></p>
   </section>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -324,15 +344,18 @@
   <script>
     const list = document.querySelector('#list');
     const search = document.querySelector('#search');
-    const seasonFilter = document.querySelector('#seasonFilter');
-    const count = document.querySelector('#count');
+    const seasonChips = document.querySelector('#seasonChips');
+    const selectedChips = document.querySelector('#selectedChips');
     const urlInput = document.querySelector('#url');
-    const copyButton = document.querySelector('#copy');
-    const openLink = document.querySelector('#open');
-    const hint = document.querySelector('#hint');
+    const subscribeAction = document.querySelector('#subscribeAction');
+    const count = document.querySelector('#count');
+    const hintText = document.querySelector('#hintText');
     const toast = document.querySelector('#toast');
+    let copyFeedbackTimer;
     const selected = new Set();
     let spirits = [];
+    let activeSeason = 'all';
+    let chipDrag = null;
 
     function initialSelected() {
       const raw = new URLSearchParams(location.search).get('spirits') || '';
@@ -364,6 +387,16 @@
       showToast.timer = setTimeout(() => toast.classList.remove('show'), 2200);
     }
 
+    function showCopyFeedback(button) {
+      const original = button.dataset.label || button.textContent;
+      button.dataset.label = original;
+      button.textContent = '✓ 已复制';
+      clearTimeout(copyFeedbackTimer);
+      copyFeedbackTimer = setTimeout(() => {
+        button.textContent = button.dataset.label || original;
+      }, 1800);
+    }
+
     function h(value) {
       return String(value || '')
         .replace(/&/g, '&amp;')
@@ -385,28 +418,118 @@
       return url.replace(/^https?:\/\//, 'webcal://');
     }
 
+    function collectSearchText(...values) {
+      const out = [];
+      const seen = new Set();
+      function walk(value) {
+        if (value == null) return;
+        if (typeof value === 'string' || typeof value === 'number') {
+          const text = String(value).trim();
+          if (text && !seen.has(text)) {
+            seen.add(text);
+            out.push(text);
+          }
+          return;
+        }
+        if (Array.isArray(value)) {
+          value.forEach(walk);
+          return;
+        }
+        if (typeof value === 'object') {
+          Object.values(value).forEach(walk);
+        }
+      }
+      values.forEach(walk);
+      return out.join('\n').toLowerCase();
+    }
+
+    function renderSelected() {
+      if (!selected.size) {
+        selectedChips.textContent = '还没有选择先祖。';
+        return;
+      }
+      selectedChips.innerHTML = [...selected].map(name => `
+        <button class="selected-chip" type="button" data-name="${h(name)}" aria-label="移除 ${h(name)}">
+          ${h(name)}
+        </button>
+      `).join('');
+      selectedChips.querySelectorAll('.selected-chip').forEach(button => {
+        button.addEventListener('click', () => {
+          selected.delete(button.dataset.name);
+          render();
+        });
+      });
+    }
+
+    function renderSeasonChips(seasons) {
+      seasonChips.innerHTML = [
+        `<button class="chip ${activeSeason === 'all' ? 'is-on' : ''}" type="button" data-season="all">全部</button>`,
+        ...seasons.map(season => `<button class="chip ${activeSeason === season ? 'is-on' : ''}" type="button" data-season="${h(season)}">${h(season)}</button>`),
+      ].join('');
+      seasonChips.querySelectorAll('.chip').forEach(button => {
+        button.addEventListener('click', () => {
+          if (button.dataset.dragged) return;
+          activeSeason = button.dataset.season;
+          renderSeasonChips(seasons);
+          render();
+        });
+      });
+    }
+
+    seasonChips.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      chipDrag = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        scrollLeft: seasonChips.scrollLeft,
+        moved: false,
+      };
+      seasonChips.classList.add('is-dragging');
+      seasonChips.setPointerCapture(event.pointerId);
+    });
+
+    seasonChips.addEventListener('pointermove', event => {
+      if (!chipDrag || chipDrag.pointerId !== event.pointerId) return;
+      const delta = event.clientX - chipDrag.startX;
+      if (Math.abs(delta) > 4) chipDrag.moved = true;
+      seasonChips.scrollLeft = chipDrag.scrollLeft - delta;
+      if (chipDrag.moved) event.preventDefault();
+    });
+
+    function endChipDrag(event) {
+      if (!chipDrag || chipDrag.pointerId !== event.pointerId) return;
+      seasonChips.classList.remove('is-dragging');
+      seasonChips.releasePointerCapture(event.pointerId);
+      const moved = chipDrag.moved;
+      chipDrag = null;
+      if (moved) {
+        seasonChips.querySelectorAll('.chip').forEach(button => {
+          button.dataset.dragged = '1';
+          setTimeout(() => delete button.dataset.dragged, 0);
+        });
+      }
+    }
+
+    seasonChips.addEventListener('pointerup', endChipDrag);
+    seasonChips.addEventListener('pointercancel', endChipDrag);
+
     function updateLink() {
       const url = subscriptionUrl();
+      urlInput.value = url;
       count.textContent = `已选 ${selected.size} / 3`;
-      copyButton.disabled = !url;
+      subscribeAction.disabled = !url;
       if (url) {
-        urlInput.value = url;
-        openLink.href = webcalUrl(url);
-        openLink.removeAttribute('aria-disabled');
-        hint.textContent = `已选择：${[...selected].join('、')}`;
+        hintText.textContent = [...selected].join('、');
       } else {
-        urlInput.value = '选择先祖后生成链接';
-        openLink.href = '#';
-        openLink.setAttribute('aria-disabled', 'true');
-        hint.textContent = '最多选择 3 个。未返场时日历可能暂时为空，返场后会自动出现。';
+        hintText.textContent = '最多选择 3 个。未返场时日历可能暂时为空。';
       }
+      renderSelected();
     }
 
     function render() {
       const q = search.value.trim().toLowerCase();
-      const season = seasonFilter.value;
       const visible = spirits.filter(item => {
-        if (season !== 'all' && item.season !== season) return false;
+        if (activeSeason !== 'all' && item.season !== activeSeason) return false;
         return !q || item.searchText.includes(q);
       });
       if (!visible.length) {
@@ -419,11 +542,11 @@
         const disabled = !on && selected.size >= 3;
         return `
           <button class="spirit ${on ? 'is-selected' : ''} ${disabled ? 'is-disabled' : ''}" type="button" data-name="${h(item.name)}">
+            <span class="mark">✓</span>
             <span>
               <span class="name">${h(item.name)}</span>
               <span class="meta">${h(item.meta)}</span>
             </span>
-            <span class="mark">✓</span>
           </button>`;
       }).join('');
       list.querySelectorAll('.spirit').forEach(button => {
@@ -459,6 +582,8 @@
               name: item.spiritName,
               season: item.season || '',
               items,
+              raw: item,
+              active,
               start: active?.start || '',
               end: active?.end || '',
               lastRevisit: item.lastRevisit || '',
@@ -471,6 +596,8 @@
             name: spiritName(event),
             season: '',
             items: [],
+            raw: event,
+            active: event,
             start: event.start,
             end: event.end,
             lastRevisit: event.start || '',
@@ -480,11 +607,11 @@
           .filter(item => item.name && !seen.has(item.name) && seen.add(item.name))
           .map(item => ({
             ...item,
-            searchText: [item.name, item.season, item.lastRevisit, ...(item.items || [])].join('\n').toLowerCase(),
-          }))
+            searchText: collectSearchText(item.raw, item.active, item.name, item.season, item.lastRevisit, item.items),
+        }))
           .sort((a, b) => String(b.lastRevisit || b.start).localeCompare(String(a.lastRevisit || a.start)));
         const seasons = [...new Set(spirits.map(item => item.season).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-        seasonFilter.innerHTML = '<option value="all">全部季节</option>' + seasons.map(season => `<option value="${h(season)}">${h(season)}</option>`).join('');
+        renderSeasonChips(seasons);
         const names = new Set(spirits.map(item => item.name));
         initialSelected().forEach(name => {
           if (names.has(name)) selected.add(name);
@@ -496,34 +623,22 @@
     }
 
     search.addEventListener('input', render);
-    seasonFilter.addEventListener('change', render);
-    copyButton.addEventListener('click', async () => {
+    subscribeAction.addEventListener('click', async () => {
       const url = subscriptionUrl();
       if (!url) return;
-      try {
-        await navigator.clipboard.writeText(url);
-        showToast('已复制订阅链接');
-      } catch (_) {
-        urlInput.select();
-        showToast('浏览器不允许自动复制，请手动复制');
-      }
-    });
-    openLink.addEventListener('click', event => {
-      const url = subscriptionUrl();
-      if (!url) {
-        event.preventDefault();
-        return;
-      }
       const ua = navigator.userAgent || '';
       const isAppleMobile = /iPhone|iPad|iPod/i.test(ua);
-      if (isAppleMobile) return;
-      event.preventDefault();
-      navigator.clipboard.writeText(url)
-        .then(() => showToast('已复制 HTTPS 订阅链接，请粘贴到日历 App'))
-        .catch(() => {
-          urlInput.select();
-          showToast('请手动复制 HTTPS 订阅链接');
-        });
+      if (isAppleMobile) {
+        location.href = webcalUrl(url);
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        showCopyFeedback(subscribeAction);
+        showToast('已复制 HTTPS 订阅链接，请粘贴到日历 App');
+      } catch (_) {
+        showToast('浏览器不允许自动复制，请手动复制链接');
+      }
     });
 
     load();

@@ -65,7 +65,8 @@ function parseTypes(url) {
 // 支持 ?endOnly=traveling_spirit,activity&eventMode=all (向后兼容)
 function parseReminderOptions(url) {
   const params = new URL(url).searchParams;
-  const allTypes = Object.keys(TYPE_LABELS);
+  const allTypes = ['red', 'black', ...Object.keys(TYPE_LABELS)];
+  const allowedTypes = new Set(allTypes);
   const result = { endOnly: new Set() };
 
   // 1) 新参数：endOnly
@@ -75,7 +76,7 @@ function parseReminderOptions(url) {
       allTypes.forEach(t => result.endOnly.add(t));
     } else {
       endOnlyRaw.split(',').map(s => s.trim()).filter(Boolean).forEach(t => {
-        if (TYPE_LABELS[t]) result.endOnly.add(t);
+        if (allowedTypes.has(t)) result.endOnly.add(t);
       });
     }
   }
@@ -99,6 +100,9 @@ function parseEventMode(url) {
 function buildCalendar(events, types, options = {}) {
   const include = new Set(types);
   const reminderOpts = options.reminderOpts || parseReminderOptions(options.url || 'https://x/?');
+  const params = options.url ? new URL(options.url).searchParams : null;
+  const isExplicitCustom = !!(params && (params.has('types') || params.has('endOnly')));
+  const stoneLastOnly = type => !isExplicitCustom || reminderOpts.endOnly.has(type);
   const parts = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -112,8 +116,8 @@ function buildCalendar(events, types, options = {}) {
     'X-PUBLISHED-TTL:PT1H',
   ];
 
-  if (include.has('red')) parts.push(...extractVEVENTS(generateStoneICS('red', 60, '光遇·红石(最后一场)')));
-  if (include.has('black')) parts.push(...extractVEVENTS(generateStoneICS('black', 60, '光遇·黑石(最后一场)')));
+  if (include.has('red')) parts.push(...extractVEVENTS(generateStoneICS('red', 60, stoneLastOnly('red') ? '光遇·红石(最后一场)' : '光遇·红石(全部场次)', { lastOnly: stoneLastOnly('red') })));
+  if (include.has('black')) parts.push(...extractVEVENTS(generateStoneICS('black', 60, stoneLastOnly('black') ? '光遇·黑石(最后一场)' : '光遇·黑石(全部场次)', { lastOnly: stoneLastOnly('black') })));
   const eventTypes = [...include].filter(type => !['red', 'black'].includes(type));
   if (eventTypes.length) {
     const ics = generateEventsICS(events, {
