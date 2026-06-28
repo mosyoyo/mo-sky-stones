@@ -605,6 +605,42 @@ function buildReminderEvents(events, options = {}) {
     const summary = shortSummary(title, label);
     const reminder = REMINDERS[event.type] || REMINDERS.activity;
 
+    if (event.type === 'maintenance') {
+      const maintenanceTitle = summary.replace(/^【[^】]+】/, '');
+      const maintenanceDesc = buildDescription([
+        `标题: ${summary}`,
+        `开始时间: ${beijingText(start)}`,
+        `结束时间: ${beijingText(end)}`,
+      ]);
+
+      if (!endOnly.has(event.type)) {
+        blocks.push(createTimedEvent({
+          uid: `${id}-start-reminder@sky-stones-ics`,
+          dtstamp,
+          start,
+          end: addMinutes(start, 1),
+          summary: `【维护开始】${maintenanceTitle}`,
+          description: maintenanceDesc,
+          location: label,
+          category: label,
+          alarm: { trigger: '-PT0M', description: '维护开始' },
+        }));
+      }
+
+      blocks.push(createTimedEvent({
+        uid: `${id}-end-reminder@sky-stones-ics`,
+        dtstamp,
+        start: end,
+        end: addMinutes(end, 1),
+        summary: `【维护结束】${maintenanceTitle}`,
+        description: maintenanceDesc,
+        location: label,
+        category: label,
+        alarm: { trigger: '-PT0M', description: '维护结束' },
+      }));
+      continue;
+    }
+
     // 1) range 事件（持续事件，全天格式）
     if (!endOnly.has(event.type)) {
       const rangeDesc = buildDescription([

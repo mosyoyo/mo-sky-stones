@@ -65,7 +65,8 @@ function parseTypes(url) {
 // 支持 ?endOnly=traveling_spirit,activity&eventMode=all (向后兼容)
 function parseReminderOptions(url) {
   const params = new URL(url).searchParams;
-  const allTypes = Object.keys(TYPE_LABELS);
+  const allTypes = ['red', 'black', ...Object.keys(TYPE_LABELS)];
+  const allowedTypes = new Set(allTypes);
   const result = { endOnly: new Set() };
 
   // 1) 新参数：endOnly
@@ -75,7 +76,7 @@ function parseReminderOptions(url) {
       allTypes.forEach(t => result.endOnly.add(t));
     } else {
       endOnlyRaw.split(',').map(s => s.trim()).filter(Boolean).forEach(t => {
-        if (TYPE_LABELS[t]) result.endOnly.add(t);
+        if (allowedTypes.has(t)) result.endOnly.add(t);
       });
     }
   }
