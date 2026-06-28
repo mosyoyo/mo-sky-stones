@@ -14,6 +14,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="sky-ics | 指定先祖订阅">
   <meta name="twitter:description" content="选择指定复刻先祖，生成只关注这些先祖返场的日历订阅。">
+  <link rel="stylesheet" href="/inner.css">
   <style>
     :root {
       color-scheme: light;
@@ -25,45 +26,15 @@
       --blue: #007aff;
       --blue-soft: #e8f2ff;
       --shadow: 0 18px 46px rgba(0, 0, 0, .07);
+      --page-bottom-padding: 170px;
+      --mobile-bottom-padding: 176px;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 58%, #efeff4 100%);
-    }
-    main {
-      width: min(760px, 100%);
-      min-height: 100vh;
-      margin: 0 auto;
-      padding: 28px 14px 170px;
-    }
-    .topnav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 0 4px 18px; }
-    .nav-left { display: flex; align-items: center; min-width: 0; gap: 12px; }
-    .brand-link { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .08em; white-space: nowrap; }
-    .nav-divider { width: 1px; height: 14px; background: var(--line); flex: 0 0 auto; }
-    .nav-action { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
-    .help-link { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
-    header {
-      padding: 6px 4px 16px;
-    }
-    h1 {
-      margin: 0;
-      font-size: clamp(30px, 7vw, 48px);
-      line-height: 1.08;
-      letter-spacing: 0;
-      font-weight: 760;
-    }
-    .lead {
-      margin: 8px 0 0;
-      max-width: 520px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.45;
-    }
+    main { min-height: 100vh; }
+    .lead { max-width: 520px; }
     input[type="search"],
     input[type="text"] {
       width: 100%;
@@ -320,11 +291,6 @@
       transform: translate(-50%, 0);
     }
     @media (max-width: 640px) {
-      main { padding: 14px 10px 176px; }
-      .topnav { padding-bottom: 12px; }
-      header { padding-bottom: 10px; }
-      h1 { font-size: 30px; }
-      .lead { font-size: 13px; }
       .controls { gap: 8px; }
       .list { border-radius: 16px; box-shadow: none; }
       .spirit { min-height: 47px; padding: 7px 10px 7px 12px; }

@@ -14,6 +14,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="使用帮助 | sky-ics">
   <meta name="twitter:description" content="查看 iPhone、iPad 和安卓手机如何添加 sky-ics 日历订阅。">
+  <link rel="stylesheet" href="/inner.css">
   <style>
     :root {
       color-scheme: light;
@@ -24,19 +25,14 @@
       --blue: #007aff;
       --blue-dark: #0066cc;
       --line: rgba(60,60,67,.16);
+      --page-bottom-padding: 40px;
+      --mobile-bottom-padding: 32px;
       font-family: -apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
       background: var(--bg);
       color: var(--text);
     }
     * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; background: linear-gradient(180deg,#fbfbfd 0%,#f5f5f7 55%,#efeff4 100%); }
-    main { width: min(760px,100%); margin: 0 auto; padding: 28px 14px 40px; }
-    .topnav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 0 4px 18px; }
-    .nav-left { display: flex; align-items: center; min-width: 0; gap: 12px; }
-    .brand-link { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .08em; white-space: nowrap; }
-    .nav-action { border: 0; padding: 0; background: transparent; color: var(--blue); font: inherit; font-size: 14px; font-weight: 400; text-decoration: none; white-space: nowrap; cursor: pointer; }
     .header { text-align: center; margin-bottom: 28px; }
-    .header h1 { margin: 0; font-size: clamp(28px,6vw,40px); font-weight: 780; letter-spacing: 0; }
     .section { background: var(--card); border: 1px solid rgba(255,255,255,.72); border-radius: 20px; padding: 24px 22px; margin-bottom: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.05); backdrop-filter: blur(18px); }
     .section h2 { margin: 0 0 14px; font-size: 20px; font-weight: 720; }
     .section p { margin: 8px 0; line-height: 1.6; font-size: 15px; color: var(--text); }
@@ -58,8 +54,6 @@
     .qq-card .pill { margin-top: 10px; }
     footer { text-align: center; margin-top: 24px; color: var(--muted); font-size: 12px; }
     @media (max-width:560px) {
-      main { padding: 14px 10px 32px; }
-      .topnav { padding-bottom: 12px; }
       .section { padding: 20px 16px; border-radius: 18px; }
       .section h2 { font-size: 18px; }
       .step-text { font-size: 14px; }

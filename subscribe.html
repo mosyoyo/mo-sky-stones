@@ -14,6 +14,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="sky-ics | 自定义订阅">
   <meta name="twitter:description" content="自定义选择光遇日历订阅内容，生成适合自己的手机日历链接。">
+  <link rel="stylesheet" href="/inner.css">
   <style>
     :root {
       color-scheme: light;
@@ -24,22 +25,13 @@
       --line: rgba(60, 60, 67, .16);
       --blue: #007aff;
       --green: #34c759;
+      --page-bottom-padding: 24px;
+      --mobile-bottom-padding: 152px;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
     }
     * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; background: var(--bg); }
-    main { width: min(760px, 100%); margin: 0 auto; padding: 28px 14px 24px; }
-    .topnav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 0 4px 18px; }
-    .nav-left { display: flex; align-items: center; min-width: 0; gap: 12px; }
-    .brand-link { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .08em; white-space: nowrap; }
-    .nav-divider { width: 1px; height: 14px; background: var(--line); flex: 0 0 auto; }
-    .nav-action { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
-    .help-link { color: var(--blue); text-decoration: none; font-size: 14px; font-weight: 400; white-space: nowrap; }
-    header { padding: 6px 4px 16px; }
-    h1 { margin: 0; font-size: clamp(30px, 7vw, 48px); line-height: 1.08; letter-spacing: 0; font-weight: 760; }
-    .lead { margin: 8px 0 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
     .group-label { margin: 0; padding: 0 16px 7px; color: var(--muted); font-size: 12px; font-weight: 650; letter-spacing: .04em; }
     .settings { overflow: hidden; border: 1px solid rgba(0, 0, 0, .04); border-radius: 18px; background: var(--card); box-shadow: 0 12px 32px rgba(0, 0, 0, .05); }
     .item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; min-height: 54px; padding: 9px 12px 9px 16px; cursor: pointer; user-select: none; }
@@ -86,11 +78,6 @@
     a.button { background: #e9f2ff; color: #0066cc; }
     .summary { margin: 8px 2px 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
     @media (max-width: 640px) {
-      main { padding: 14px 10px 152px; }
-      .topnav { padding-bottom: 12px; }
-      header { padding-bottom: 10px; }
-      h1 { font-size: 30px; }
-      .lead { font-size: 13px; }
       .group-label { padding-left: 10px; }
       .settings { border-radius: 16px; }
       .item { min-height: 47px; padding: 7px 10px 7px 12px; }
