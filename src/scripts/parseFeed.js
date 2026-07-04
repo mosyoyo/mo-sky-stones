@@ -24,7 +24,7 @@ const TYPE_TITLE_PREFIX = {
   maintenance: '【维护】',
 };
 
-const NETEASE_KEEP_TYPES = new Set(['activity', 'bonus', 'maintenance']);
+const NETEASE_KEEP_TYPES = new Set(['activity', 'bonus', 'candle_heap', 'maintenance']);
 const BONUS_KEYWORDS = [
   '双倍爱心', '双倍心火', '双倍烛火', '双倍季蜡', '双倍蜡烛', '额外烛火',
   '收获双倍爱心', '收获双倍心火', '收获双倍烛火', '收获双倍季蜡', '收获双倍蜡烛',
@@ -34,6 +34,10 @@ const CANDLE_KEYWORDS = ['大蜡烛堆将出现在天空王国各地', '大蜡�
 
 function shouldAutoIgnoreParsedFeed(feed) {
   return feed?.status === 'pending' && feed?.parsedResult?.type === 'other';
+}
+
+function shouldKeepNeteaseEventType(type) {
+  return NETEASE_KEEP_TYPES.has(type);
 }
 
 function parseFeed(feed) {
@@ -271,7 +275,7 @@ function main() {
   }
   const finalEvents = allEvents.filter(e => e.type !== 'traveling_spirit' || keptIds.has(e.id));
 
-  const neteaseEvents = finalEvents.filter(e => NETEASE_KEEP_TYPES.has(e.type));
+  const neteaseEvents = finalEvents.filter(e => shouldKeepNeteaseEventType(e.type));
 
   // 清理已过期 enabled 事件（end < 现在）—— ICS 唔再显示，iOS 也不会堆积历史
   const now = Date.now();
@@ -353,4 +357,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { eventFromFeed, main, parseFeed, parseFeedVariants, shouldAutoIgnoreParsedFeed };
+module.exports = { eventFromFeed, main, parseFeed, parseFeedVariants, shouldAutoIgnoreParsedFeed, shouldKeepNeteaseEventType };

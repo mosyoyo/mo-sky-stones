@@ -10,7 +10,7 @@ const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions
 const { handleIcsRequest } = require('./functions/_ics-response');
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
-const { shouldAutoIgnoreParsedFeed } = require('./src/scripts/parseFeed');
+const { shouldAutoIgnoreParsedFeed, shouldKeepNeteaseEventType } = require('./src/scripts/parseFeed');
 const { stableJSON: stableWikiJSON, toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
 const { stableJSON: stableSpiritJSON } = require('./src/scripts/fetchSoulSpirits');
 const { verifySoulSpirits } = require('./src/scripts/verifySoulSpirits');
@@ -158,6 +158,8 @@ assert(!shouldKeepFeedEvent({ status: 'pending' }, { type: 'bonus', start: '2026
 assert(shouldAutoIgnoreParsedFeed({ status: 'pending', parsedResult: { type: 'other' } }), '解析为其他的待审核公告会自动忽略');
 assert(!shouldAutoIgnoreParsedFeed({ status: 'approved', parsedResult: { type: 'other' } }), '已批准公告不会被其他类型规则自动忽略');
 assert(!shouldAutoIgnoreParsedFeed({ status: 'pending', parsedResult: { type: 'bonus' } }), '可进入日历的公告不会被其他类型规则自动忽略');
+assert(shouldKeepNeteaseEventType('candle_heap'), '大蜡烛会写入网易事件输出');
+assert(shouldKeepNeteaseEventType('bonus') && shouldKeepNeteaseEventType('maintenance'), '双倍和维护会写入网易事件输出');
 
 console.log('');
 console.log('=== 公告抓取游标验证 ===');
