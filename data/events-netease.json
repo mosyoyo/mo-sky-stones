@@ -1,5 +1,14 @@
 [
   {
+    "id": "candle_heap-6a4741d54124333dc878e2cd-1qheqtl",
+    "enabled": true,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2026-07-03T16:00:00.000Z",
+    "end": "2026-07-24T15:59:00.000Z",
+    "sourceFeedId": "6a4741d54124333dc878e2cd"
+  },
+  {
     "id": "bonus-6a36104746804c0398433bec-11n995a",
     "enabled": false,
     "type": "bonus",
@@ -45,6 +54,24 @@
     "sourceFeedId": "69d9b9333390632b0292211c"
   },
   {
+    "id": "candle_heap-69d07eb306a7c35f3226831f-166xa6j",
+    "enabled": false,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2026-03-31T16:00:00.000Z",
+    "end": "2026-04-07T15:59:00.000Z",
+    "sourceFeedId": "69d07eb306a7c35f3226831f"
+  },
+  {
+    "id": "candle_heap-69c9f544bcc4bb50b4f84350-1yhu468",
+    "enabled": false,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2026-03-31T16:00:00.000Z",
+    "end": "2026-04-07T15:59:00.000Z",
+    "sourceFeedId": "69c9f544bcc4bb50b4f84350"
+  },
+  {
     "id": "maintenance-69b62ec5dd3b677ce8eadc9e-rq9sa9",
     "enabled": false,
     "type": "maintenance",
@@ -88,6 +115,15 @@
     "start": "2026-02-09T16:00:00.000Z",
     "end": "2026-02-23T15:59:00.000Z",
     "sourceFeedId": "698977e38dde0a1bc75a2d35"
+  },
+  {
+    "id": "candle_heap-69759548327cc208071a0038-ea88e0",
+    "enabled": false,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2026-01-29T16:00:00.000Z",
+    "end": "2026-03-05T15:59:00.000Z",
+    "sourceFeedId": "69759548327cc208071a0038"
   },
   {
     "id": "maintenance-696c4cb7315d635827e41630-nlr6r0",
@@ -144,6 +180,15 @@
     "sourceFeedId": "68d350a8ad5fa077d2591b71"
   },
   {
+    "id": "candle_heap-68c21f193cde8a6321aabfb6-adaofp",
+    "enabled": false,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2025-09-11T16:00:00.000Z",
+    "end": "2025-09-18T15:59:00.000Z",
+    "sourceFeedId": "68c21f193cde8a6321aabfb6"
+  },
+  {
     "id": "bonus-68ae66a7bb045e3735fa6a65-1ancqfc",
     "enabled": false,
     "type": "bonus",
@@ -171,6 +216,24 @@
     "sourceFeedId": "688452c89ffe3c575ffd06bc"
   },
   {
+    "id": "candle_heap-686f0287a882ea659f59efa0-sevssn",
+    "enabled": false,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2025-07-09T16:00:00.000Z",
+    "end": "2025-07-16T15:59:00.000Z",
+    "sourceFeedId": "686f0287a882ea659f59efa0"
+  },
+  {
+    "id": "candle_heap-6850e847df6a3452cbceefea-1mqolj5",
+    "enabled": false,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2025-06-13T16:00:00.000Z",
+    "end": "2025-06-27T15:59:00.000Z",
+    "sourceFeedId": "6850e847df6a3452cbceefea"
+  },
+  {
     "id": "maintenance-684e0d09378e9113eb7ed695-n72zm3",
     "enabled": false,
     "type": "maintenance",
@@ -196,6 +259,15 @@
     "start": "2025-04-23T17:00:00.000Z",
     "end": "2025-04-24T02:00:00.000Z",
     "sourceFeedId": "6802e78739898315a2794e3a"
+  },
+  {
+    "id": "candle_heap-67df87496a0a4051327a83bf-gnhc5e",
+    "enabled": false,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2025-03-24T16:00:00.000Z",
+    "end": "2025-04-07T15:59:00.000Z",
+    "sourceFeedId": "67df87496a0a4051327a83bf"
   },
   {
     "id": "maintenance-67df6b28feeeaf5f62e0fb37-10zohuq",
