@@ -144,25 +144,12 @@ function parseCalendarHTML(html) {
   if (startIdx < 0) {
     throw new Error('找不到「最近活动」版块');
   }
-  // 活动日历页：section 结束于「◀YYYY年▶」导航行
-  // 兼容首页（如果误用）：兜底用「更多结果」或文末
+  // 活动日历页的年份导航现在由多个 DOM 节点组成，转换后通常是独立的「◀」行，
+  // 不能再用「更多结果」作为边界：最近活动内部本身就有多个“更多结果”链接。
   const yearMatch = html.match(RE_YEAR);
-  let endIdx;
-  if (yearMatch) {
-    // ◀YYYY年▶ 行开头
-    const yearLineStart = html.lastIndexOf('\n', yearMatch.index) + 1;
-    endIdx = yearLineStart;
-  } else {
-    // 兜底：找「...更多结果」或文末
-    const lastMore = html.lastIndexOf('...更多结果');
-    if (lastMore > 0) {
-      endIdx = html.lastIndexOf('\n', lastMore) + 1;
-    } else {
-      endIdx = html.length;
-    }
-  }
+  const navigationMatch = html.slice(startIdx).match(/\n\s*◀\s*\n/);
+  const endIdx = navigationMatch ? startIdx + navigationMatch.index : html.length;
   const section = html.slice(startIdx, endIdx);
-
   // 2. 提取年份（活动日历页是真实值）
   const year = yearMatch ? parseInt(yearMatch[1], 10) : new Date().getFullYear();
 

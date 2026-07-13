@@ -7,11 +7,11 @@ const { generateEventsICS, generateSpiritEventsICS } = require('./src/event-util
 const { matchSpirit } = require('./src/spirit-match');
 const { parseSelectedSpirits } = require('./src/spirit-query');
 const { buildCalendar, parseReminderOptions, parseTypes } = require('./functions/_shared');
-const { handleIcsRequest } = require('./functions/_ics-response');
+const { createIcsResponse, handleIcsRequest } = require('./functions/_ics-response');
 const { disableFeedEvents, shouldKeepFeedEvent } = require('./src/feed-events');
 const { initialMaxTime } = require('./src/scripts/fetchFeeds');
 const { shouldAutoIgnoreParsedFeed, shouldKeepNeteaseEventType } = require('./src/scripts/parseFeed');
-const { stableJSON: stableWikiJSON, toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
+const { parseCalendarHTML, stableJSON: stableWikiJSON, toUTCSpiritWindow } = require('./src/scripts/fetchWikiEvents');
 const { stableJSON: stableSpiritJSON } = require('./src/scripts/fetchSoulSpirits');
 const { verifySoulSpirits } = require('./src/scripts/verifySoulSpirits');
 const fs = require('fs');
@@ -167,6 +167,17 @@ const oldFeeds = [{ createTime: 1000 }, { createTime: 3000 }];
 assert(initialMaxTime(oldFeeds, true) === 999, '补历史模式从最旧公告之前继续抓');
 assert(initialMaxTime(oldFeeds, false) > Date.now(), '默认同步从最新公告开始抓');
 assert(stableWikiJSON({ b: 2, a: 1 }) === stableWikiJSON({ a: 1, b: 2 }), 'Wiki 活动同步 no-op 判断不受字段顺序影响');
+const currentWikiMarkup = `<b>最近活动</b>
+<a href="/sky/%E8%87%B4%E6%A2%B5%E9%AB%98">奇妙之旅：致梵高</a>&#160;&#160;07.17 - 12.31<br />
+<a href="/sky/query">...更多结果</a>
+<a href="/sky/2026%E5%B9%B4%E5%91%A8%E5%B9%B4%E5%BA%86">周年庆</a>&#160;&#160;07.04 - 07.24<br />
+<a href="/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%B4%BB%E8%B7%83%E4%BC%98%E7%AD%89%E7%94%9F">国服复刻：活跃优等生</a>&#160;&#160;07.09 - 07.13<br />
+<a href="/sky/Traveling_Spirits:Greeting_Shaman">国际服复刻：拳礼武僧</a>&#160;&#160;07.02 - 07.05<br />
+<td id="eventCalendarYearM">◀</td>`;
+const currentWikiEvents = parseCalendarHTML(currentWikiMarkup);
+assert(currentWikiEvents.some(event => event.type === 'traveling_spirit' && event.title === '【复刻】活跃优等生'), 'Wiki 最近活动不会在“更多结果”处截断国服复刻');
+assert(currentWikiEvents.some(event => event.title === '【活动】周年庆'), 'Wiki 最近活动会保留“更多结果”之后的普通活动');
+assert(!currentWikiEvents.some(event => event.title.includes('拳礼武僧')), 'Wiki 最近活动继续过滤国际服复刻');
 const hopeSeedWindow = toUTCSpiritWindow('2026-06-18');
 assert(hopeSeedWindow.start === '2026-06-17T22:00:00.000Z', 'Wiki 复刻开始时间为周四 06:00 北京');
 assert(hopeSeedWindow.end === '2026-06-22T04:00:00.000Z', 'Wiki 复刻结束时间为周一 12:00 北京');
@@ -262,6 +273,28 @@ assert(spiritSubscriptionICS.includes('DTSTART:20260617T220000Z') && spiritSubsc
 assert(spiritSubscriptionICS.includes('SUMMARY:【复刻】希望之种返场'), '指定先祖 ICS 标题面向蹲先祖场景');
 assert(spiritSubscriptionICS.includes('DESCRIPTION:希望之种返场\r\\n 开始: 6/18 06:00\r\\n 离开: 6/22 12:00'), '指定先祖 ICS 备注简短且使用红石同款字节拼法');
 assert(spiritSubscriptionICS.includes('物品: 面具、发型、斗篷、乐谱'), '指定先祖 ICS 备注带可搜索/可编辑物品');
+const enrichedSpiritICS = generateEventsICS([
+  { enabled: true, type: 'traveling_spirit', title: '【复刻】希望之种', id: 'wiki-traveling_spirit-希望之种-0618', start: hopeSeedWindow.start, end: hopeSeedWindow.end },
+], { spiritInfo: soulInfo });
+assert(enrichedSpiritICS.includes('所属季节: 欧若拉季'), '普通事件 ICS 会显示 Wiki 先祖所属季节');
+assert(enrichedSpiritICS.includes('可兑换物品: 面具、发型、斗篷、乐谱'), '普通事件 ICS 会显示 Wiki 先祖物品');
+assert(enrichedSpiritICS.includes('Wiki: https://wiki.biligame.com/sky/'), '普通事件 ICS 会显示 Wiki 详情链接');
+const stableSpiritICS = generateEventsICS([
+  { enabled: true, type: 'traveling_spirit', title: '【复刻】希望之种', id: 'wiki-traveling_spirit-希望之种-0618', start: hopeSeedWindow.start, end: hopeSeedWindow.end },
+], { spiritInfo: soulInfo });
+assert(enrichedSpiritICS === stableSpiritICS, '相同事件内容重复请求会生成稳定 ICS');
 assert(verifySoulSpirits(soulSpirits).length === 0, '完整先祖列表通过结构校验');
 assert(soulSpirits.spirits.length >= 50, '完整先祖列表包含 50 个以上先祖');
 assert(stableSpiritJSON({ b: 2, a: 1 }) === stableSpiritJSON({ a: 1, b: 2 }), '完整先祖同步 no-op 判断不受字段顺序影响');
+
+(async () => {
+  const first = await createIcsResponse(new Request('https://example.com/calendar.ics'), enrichedSpiritICS, 'calendar.ics');
+  const etag = first.headers.get('ETag');
+  assert(first.status === 200 && !!etag, 'ICS 响应包含内容 ETag');
+  assert(first.headers.get('Cache-Control') === 'no-cache, max-age=0, must-revalidate', 'ICS 响应要求每次刷新重新验证');
+  const second = await createIcsResponse(new Request('https://example.com/calendar.ics', { headers: { 'If-None-Match': etag } }), enrichedSpiritICS, 'calendar.ics');
+  assert(second.status === 304, 'ICS 条件刷新在内容未变化时返回 304');
+})().catch(error => {
+  console.error(error);
+  process.exitCode = 1;
+});

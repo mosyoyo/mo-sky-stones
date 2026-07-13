@@ -579,10 +579,10 @@ function createAllDayEvent({ uid, dtstamp, start, end, summary, description, loc
 
 function buildReminderEvents(events, options = {}) {
   const types = new Set(options.types || Object.keys(TYPE_LABELS));
+  const spiritInfo = options.spiritInfo instanceof Map ? options.spiritInfo : new Map();
   const endOnly = options.endOnly instanceof Set
     ? options.endOnly
     : new Set(Array.isArray(options.endOnly) ? options.endOnly : []);
-  const dtstamp = formatUTC(new Date());
   const blocks = [];
 
   for (const event of events || []) {
@@ -594,6 +594,7 @@ function buildReminderEvents(events, options = {}) {
     const title = event.title || label;
     const start = new Date(event.start);
     const end = new Date(event.end);
+    const dtstamp = formatUTC(new Date(event.updatedAt || event.start));
     const durationDays = eventDurationDays(event);
     // 连续事件默认全部全天（用户决策：持续事件无明确时间点，用全天更直观）
     const useAllDay = true;
@@ -604,6 +605,15 @@ function buildReminderEvents(events, options = {}) {
 
     const summary = shortSummary(title, label);
     const reminder = REMINDERS[event.type] || REMINDERS.activity;
+    const spiritName = event.type === 'traveling_spirit' ? cleanSpiritEventName(title) : '';
+    const info = spiritName ? (spiritInfo.get(spiritName) || {}) : {};
+    const spiritDetails = event.type === 'traveling_spirit'
+      ? [
+          info.season ? `所属季节: ${info.season}` : '',
+          Array.isArray(info.items) && info.items.length ? `可兑换物品: ${info.items.filter(Boolean).slice(0, 8).join('、')}` : '',
+          info.wikiUrl ? `Wiki: ${info.wikiUrl}` : '',
+        ].filter(Boolean)
+      : [];
 
     if (event.type === 'maintenance') {
       const maintenanceTitle = summary.replace(/^【[^】]+】/, '');
@@ -647,6 +657,7 @@ function buildReminderEvents(events, options = {}) {
         `类型: ${label}`,
         `标题: ${summary}`,
         `时间: ${beijingText(start)} - ${beijingText(end)}`,
+        ...spiritDetails,
       ]);
       const rangeAlarm = { trigger: reminder.start, description: reminder.startDesc };
       const rangeUid = `${id}-range@sky-stones-ics`;
@@ -682,6 +693,7 @@ function buildReminderEvents(events, options = {}) {
         `标题: ${summary}`,
         `结束时间: ${beijingText(end)}`,
         `提醒: ${leadLabel}（事件开始时响）`,
+        ...spiritDetails,
       ]);
       const endUid = `${id}-end-reminder@sky-stones-ics`;
       blocks.push(createTimedEvent({
@@ -772,7 +784,6 @@ function generateSpiritEventsICS(events, options = {}) {
   const name = options.name || '光遇·指定先祖';
   const selected = Array.isArray(options.selected) ? options.selected : [];
   const spiritInfo = options.spiritInfo instanceof Map ? options.spiritInfo : new Map();
-  const dtstamp = formatUTC(new Date());
   const blocks = [];
 
   for (const event of events || []) {
@@ -784,6 +795,7 @@ function generateSpiritEventsICS(events, options = {}) {
     const items = Array.isArray(info.items) ? info.items.filter(Boolean).slice(0, 8) : [];
     const start = new Date(event.start);
     const end = new Date(event.end);
+    const dtstamp = formatUTC(new Date(event.updatedAt || event.start));
     const desc = buildDescription([
       `${spiritName}返场`,
       `开始: ${beijingText(start)}`,

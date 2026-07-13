@@ -2,7 +2,7 @@ const { generateSpiritEventsICS } = require('../src/event-utils');
 const { publicEvent } = require('../src/event-overrides');
 const { matchSpirit } = require('../src/spirit-match');
 const { parseSelectedSpirits } = require('../src/spirit-query');
-const { handleIcsRequest } = require('./_ics-response');
+const { createIcsResponse, handleIcsRequest } = require('./_ics-response');
 const { readAssetJSON } = require('./_shared');
 
 export async function onRequestGet(context) {
@@ -18,14 +18,7 @@ export async function onRequestGet(context) {
     selected,
     spiritInfo,
   });
-  return new Response(ics, {
-    headers: {
-      'Content-Type': 'text/calendar; charset=utf-8',
-      'Content-Disposition': 'inline; filename="spirit-events.ics"',
-      'Cache-Control': 'public, max-age=900',
-      'Access-Control-Allow-Origin': '*',
-    },
-  });
+  return createIcsResponse(context.request, ics, 'spirit-events.ics');
 }
 
 export async function onRequest(context) {

@@ -124,6 +124,7 @@ function buildCalendar(events, types, options = {}) {
       name: '光遇·活动提醒',
       types: eventTypes,
       endOnly: reminderOpts.endOnly,
+      spiritInfo: options.spiritInfo,
     });
     parts.push(...extractVEVENTS(ics));
   }
