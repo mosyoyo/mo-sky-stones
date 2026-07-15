@@ -1,5 +1,149 @@
 [
   {
+    "id": "6a573e0cbb48da1d62ae39ba",
+    "title": "《光·遇》7月17日 更新时间公告\n#光遇#\n亲爱的旅人们：\n　　感谢各位对《光·遇》的关注与支",
+    "content": "《光·遇》7月17日 更新时间公告\n#光遇#\n亲爱的旅人们：\n　　感谢各位对《光·遇》的关注与支持！我们将在7月17日05:00~15:00进行版本更新，预计更新时间为10小时。更新中无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。\n　　此次更新为资源预载与体验优化，更新结束后，以下内容将陆续开启与上线：\n【全新季节】\n《光·遇》致梵高 7月17日 正式开启\n【趣味活动】\n《光·遇》有友节 7月24日 正式开启\n《光·遇》夏之日 8月2日 正式开启\n《光·遇》七夕节 8月19日 正式开启\n【体验优化】\n好友好感度系统 7月17日 正式上线\n动作栏与魔法栏分类优化 7月17日 正式上线\n \n2026年7月15日\n《光·遇》官方运营团队",
+    "createTime": 1784102409635,
+    "status": "approved",
+    "autoType": "maintenance",
+    "parsed": true,
+    "raw": {
+      "id": "6a573e0cbb48da1d62ae39ba",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"《光·遇》7月17日 更新时间公告\\n#光遇#\\n亲爱的旅人们：\\n　　感谢各位对《光·遇》的关注与支持！我们将在7月17日05:00~15:00进行版本更新，预计更新时间为10小时。更新中无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。\\n　　此次更新为资源预载与体验优化，更新结束后，以下内容将陆续开启与上线：\\n【全新季节】\\n《光·遇》致梵高 7月17日 正式开启\\n【趣味活动】\\n《光·遇》有友节 7月24日 正式开启\\n《光·遇》夏之日 8月2日 正式开启\\n《光·遇》七夕节 8月19日 正式开启\\n【体验优化】\\n好友好感度系统 7月17日 正式上线\\n动作栏与魔法栏分类优化 7月17日 正式上线\\n \\n2026年7月15日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"更新公告16：9.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260715_85a30484ee01b51938804cf685fe3001\",\"mimeType\":\"image/png\",\"size\":4017084,\"width\":2490,\"height\":1401,\"watermark\":true}]}}",
+      "deleteTime": 0,
+      "createTime": 1784102409635,
+      "updateTime": 1784102412847,
+      "clientType": 152,
+      "tagList": [
+        "5b02c181d545685882af86ee"
+      ],
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "光遇",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT",
+        "contentStatementOption": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6a573e0cbb48da1d62ae39ba",
+        "repostCount": 0,
+        "commentCount": 0,
+        "likeCount": 1,
+        "shareCount": 0,
+        "favCount": 0,
+        "createTime": 1784102751344
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6a573e0cbb48da1d62ae39ba",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"《光·遇》7月17日 更新时间公告\\n#光遇#\\n亲爱的旅人们：\\n　　感谢各位对《光·遇》的关注与支持！我们将在7月17日05:00~15:00进行版本更新，预计更新时间为10小时。更新中无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。\\n　　此次更新为资源预载与体验优化，更新结束后，以下内容将陆续开启与上线：\\n【全新季节】\\n《光·遇》致梵高 7月17日 正式开启\\n【趣味活动】\\n《光·遇》有友节 7月24日 正式开启\\n《光·遇》夏之日 8月2日 正式开启\\n《光·遇》七夕节 8月19日 正式开启\\n【体验优化】\\n好友好感度系统 7月17日 正式上线\\n动作栏与魔法栏分类优化 7月17日 正式上线\\n \\n2026年7月15日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"更新公告16：9.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260715_85a30484ee01b51938804cf685fe3001\",\"mimeType\":\"image/png\",\"size\":4017084,\"width\":2490,\"height\":1401,\"watermark\":true}]}}",
+            "deleteTime": 0,
+            "createTime": 1784102409635,
+            "updateTime": 1784102412847,
+            "clientType": 152,
+            "tagList": [
+              "5b02c181d545685882af86ee"
+            ],
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "光遇",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT",
+              "contentStatementOption": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6a573e0cbb48da1d62ae39ba",
+              "repostCount": 0,
+              "commentCount": 0,
+              "likeCount": 1,
+              "shareCount": 0,
+              "favCount": 0,
+              "createTime": 1784102751344
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 2949,
+                "followerCount": 1259798,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 516203,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "光·遇》7月17日 更新时间公告光遇亲爱的旅人们：　　感谢各_光·遇 | 大神",
+            "desc": "《光·遇》7月17日 更新时间公告光遇亲爱的旅人们：　　感谢各位对《光·遇》的关注与支持！我们将在7月17日05:00~15:00进行版本更新，预计更新时间为10小时。更新中无法正常游戏，敬请谅解",
+            "keywords": ""
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "maintenance",
+      "title": "【维护】7月17日 维护",
+      "start": "2026-07-16T21:00:00.000Z",
+      "end": "2026-07-17T07:00:00.000Z"
+    },
+    "parsedResults": [
+      {
+        "type": "maintenance",
+        "title": "【维护】7月17日 维护",
+        "start": "2026-07-16T21:00:00.000Z",
+        "end": "2026-07-17T07:00:00.000Z"
+      }
+    ]
+  },
+  {
     "id": "6a48df0b4124333dc87c7be9",
     "title": "《光·遇》七周年多平台创作激励\n#光遇# #光遇七周年# #光遇每颗星都值得被看见#\n携光赴约云",
     "content": "《光·遇》七周年多平台创作激励\n#光遇# #光遇七周年# #光遇每颗星都值得被看见#\n携光赴约云海之间\n欢歌同庆周年盛宴\n🛶\n《光·遇》七周年多平台创作激励活动现已开启，快来分享你漫游云巢嘉年华解锁的全新玩法攻略、记录群星盛典的高光瞬间、奔赴线下嘉年华感受的相聚时刻，或是挖掘地图彩蛋、盘点拍照点位、拍摄氛围感短片等等，带上活动话题投稿内容，一起瓜分丰厚创作奖励吧！\n✨\n活动时间：2026年6月29日~7月28日\n参与方式：在对应平台带上活动话题 #光遇七周年# #光遇每颗星都值得被看见# 投稿作品，瓜分创作大奖吧，详细活动规则请留意各平台活动页面\n更多活动详情，请点击图片查看",

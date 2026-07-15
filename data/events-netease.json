@@ -286,5 +286,14 @@
     "start": "2025-03-12T16:00:00.000Z",
     "end": "2025-03-19T15:59:00.000Z",
     "sourceFeedId": "67d0eaa76a0a4051323b1fd8"
+  },
+  {
+    "id": "maintenance-6a573e0cbb48da1d62ae39ba-1ae7gfg",
+    "enabled": true,
+    "type": "maintenance",
+    "title": "【维护】7月17日 维护",
+    "start": "2026-07-16T21:00:00.000Z",
+    "end": "2026-07-17T07:00:00.000Z",
+    "sourceFeedId": "6a573e0cbb48da1d62ae39ba"
   }
 ]
