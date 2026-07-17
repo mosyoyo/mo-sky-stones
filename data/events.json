@@ -44,16 +44,6 @@
   },
   {
     "enabled": true,
-    "id": "maintenance-6a573e0cbb48da1d62ae39ba-1ae7gfg",
-    "type": "maintenance",
-    "title": "【维护】7月17日 维护",
-    "start": "2026-07-16T21:00:00.000Z",
-    "end": "2026-07-17T07:00:00.000Z",
-    "sourceFeedId": "6a573e0cbb48da1d62ae39ba",
-    "_source": "netease"
-  },
-  {
-    "enabled": true,
     "id": "bonus-6a36104746804c0398433bec-11n995a",
     "sourceFeedId": "6a36104746804c0398433bec",
     "type": "bonus",

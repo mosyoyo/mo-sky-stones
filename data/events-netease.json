@@ -1,7 +1,7 @@
 [
   {
     "id": "maintenance-6a573e0cbb48da1d62ae39ba-1ae7gfg",
-    "enabled": true,
+    "enabled": false,
     "type": "maintenance",
     "title": "【维护】7月17日 维护",
     "start": "2026-07-16T21:00:00.000Z",
