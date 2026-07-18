@@ -1,7 +1,7 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/活动日历",
-    "lastUpdated": "2026-07-17T02:45:03.899Z",
+    "lastUpdated": "2026-07-18T07:52:57.853Z",
     "counts": {
       "season": 1,
       "activity": 1,
@@ -10,13 +10,13 @@
   },
   "events": [
     {
-      "id": "wiki-season-致梵高-0717",
+      "id": "wiki-season-致梵高季-0717",
       "type": "season",
-      "title": "【季节】致梵高",
+      "title": "【季节】致梵高季",
       "start": "2026-07-17T04:00:00.000Z",
       "end": "2026-10-02T04:00:00.000Z",
       "source": "wiki",
-      "wikiUrl": "https://wiki.biligame.com/sky/%E8%87%B4%E6%A2%B5%E9%AB%98"
+      "wikiUrl": "https://wiki.biligame.com/sky/%E8%87%B4%E6%A2%B5%E9%AB%98%E5%AD%A3"
     },
     {
       "id": "wiki-activity-2026年周年庆-0704",
