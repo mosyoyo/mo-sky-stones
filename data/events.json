@@ -1,6 +1,17 @@
 [
   {
     "enabled": true,
+    "id": "wiki-traveling_spirit-旅行先祖：击掌光农-0723",
+    "type": "traveling_spirit",
+    "title": "【复刻】击掌光农",
+    "start": "2026-07-22T22:00:00.000Z",
+    "end": "2026-07-27T04:00:00.000Z",
+    "source": "wiki",
+    "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%87%BB%E6%8E%8C%E5%85%89%E5%86%9C",
+    "_source": "wiki"
+  },
+  {
+    "enabled": true,
     "id": "wiki-season-致梵高季-0717",
     "type": "season",
     "title": "【季节】致梵高季",

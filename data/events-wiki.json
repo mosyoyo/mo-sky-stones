@@ -1,11 +1,11 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/活动日历",
-    "lastUpdated": "2026-07-21T08:31:40.216Z",
+    "lastUpdated": "2026-07-21T13:53:40.250Z",
     "counts": {
       "season": 1,
       "activity": 1,
-      "traveling_spirit": 0
+      "traveling_spirit": 1
     }
   },
   "events": [
@@ -26,6 +26,15 @@
       "end": "2026-07-24T04:00:00.000Z",
       "source": "wiki",
       "wikiUrl": "https://wiki.biligame.com/sky/2026%E5%B9%B4%E5%91%A8%E5%B9%B4%E5%BA%86"
+    },
+    {
+      "id": "wiki-traveling_spirit-旅行先祖：击掌光农-0723",
+      "type": "traveling_spirit",
+      "title": "【复刻】击掌光农",
+      "start": "2026-07-22T22:00:00.000Z",
+      "end": "2026-07-27T04:00:00.000Z",
+      "source": "wiki",
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%87%BB%E6%8E%8C%E5%85%89%E5%86%9C"
     }
   ]
 }
