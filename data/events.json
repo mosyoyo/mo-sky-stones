@@ -1,17 +1,6 @@
 [
   {
     "enabled": true,
-    "id": "wiki-traveling_spirit-旅行先祖：活跃优等生-0709",
-    "type": "traveling_spirit",
-    "title": "【复刻】活跃优等生",
-    "start": "2026-07-08T22:00:00.000Z",
-    "end": "2026-07-13T04:00:00.000Z",
-    "source": "wiki",
-    "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%B4%BB%E8%B7%83%E4%BC%98%E7%AD%89%E7%94%9F",
-    "_source": "wiki"
-  },
-  {
-    "enabled": true,
     "id": "wiki-season-致梵高季-0717",
     "type": "season",
     "title": "【季节】致梵高季",
