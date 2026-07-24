@@ -45,16 +45,6 @@
   },
   {
     "enabled": true,
-    "id": "candle_heap-6a4741d54124333dc878e2cd-1qheqtl",
-    "type": "candle_heap",
-    "title": "【大蜡烛】大蜡烛",
-    "start": "2026-07-03T16:00:00.000Z",
-    "end": "2026-07-24T15:59:00.000Z",
-    "sourceFeedId": "6a4741d54124333dc878e2cd",
-    "_source": "netease"
-  },
-  {
-    "enabled": true,
     "id": "bonus-6a36104746804c0398433bec-11n995a",
     "sourceFeedId": "6a36104746804c0398433bec",
     "type": "bonus",
