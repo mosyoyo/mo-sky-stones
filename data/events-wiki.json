@@ -1,10 +1,10 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/活动日历",
-    "lastUpdated": "2026-07-22T13:58:19.604Z",
+    "lastUpdated": "2026-07-26T08:28:12.006Z",
     "counts": {
       "season": 1,
-      "activity": 2,
+      "activity": 1,
       "traveling_spirit": 1
     }
   },
@@ -17,15 +17,6 @@
       "end": "2026-10-02T04:00:00.000Z",
       "source": "wiki",
       "wikiUrl": "https://wiki.biligame.com/sky/%E8%87%B4%E6%A2%B5%E9%AB%98%E5%AD%A3"
-    },
-    {
-      "id": "wiki-activity-2026年周年庆-0704",
-      "type": "activity",
-      "title": "【活动】周年庆",
-      "start": "2026-07-04T04:00:00.000Z",
-      "end": "2026-07-24T04:00:00.000Z",
-      "source": "wiki",
-      "wikiUrl": "https://wiki.biligame.com/sky/2026%E5%B9%B4%E5%91%A8%E5%B9%B4%E5%BA%86"
     },
     {
       "id": "wiki-activity-2026年有友节-0724",
