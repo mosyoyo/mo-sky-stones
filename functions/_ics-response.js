@@ -1,16 +1,35 @@
 async function handleIcsRequest(context, getResponse) {
-  if (context.request.method === 'GET') return getResponse(context);
-  if (context.request.method === 'HEAD') {
-    const response = await getResponse(context);
-    return new Response(null, {
-      status: response.status,
-      headers: response.headers,
+  try {
+    if (context.request.method === 'GET') return await getResponse(context);
+    if (context.request.method === 'HEAD') {
+      const response = await getResponse(context);
+      return new Response(null, {
+        status: response.status,
+        headers: response.headers,
+      });
+    }
+    return new Response('Method Not Allowed', {
+      status: 405,
+      headers: { Allow: 'GET, HEAD' },
+    });
+  } catch (err) {
+    console.error('[ICS] handler error:', err.message);
+    const empty = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//mo-sky-stones//Error//ZH',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'END:VCALENDAR',
+    ].join('\r\n');
+    return new Response(empty, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/calendar; charset=utf-8',
+        'Cache-Control': 'no-cache, max-age=0',
+      },
     });
   }
-  return new Response('Method Not Allowed', {
-    status: 405,
-    headers: { Allow: 'GET, HEAD' },
-  });
 }
 
 async function createIcsResponse(request, ics, filename) {

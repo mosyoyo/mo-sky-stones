@@ -7,7 +7,11 @@ const DATA_DIR = path.join(ROOT, 'data');
 function readJSON(name, fallback) {
   const file = path.join(DATA_DIR, name);
   if (!fs.existsSync(file)) return fallback;
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (err) {
+    throw new Error(`Failed to parse ${file}: ${err.message}`);
+  }
 }
 
 function writeJSON(name, data) {

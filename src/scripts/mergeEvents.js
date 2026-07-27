@@ -56,6 +56,18 @@ function hasSimilarEvent(events, event) {
   );
 }
 
+// 返回事件 start 的北京日历日字符串 YYYY-MM-DD，用于去重 key
+// 不能直接 .slice(0,10) 取 UTC 日期，因为北京 00:00-08:00 的事件 UTC 日期会早一天
+function toBeijingDateKey(isoString) {
+  if (!isoString) return '';
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date(isoString));
+}
+
 // 合并策略：
 // 1. 按 type 在 source-config 找数据源
 // 2. 从该数据源取所有该 type 的事件
@@ -96,7 +108,7 @@ function merge() {
     for (const e of sourceList) {
       if (e.enabled === false) continue;
       if (isInternational(e)) continue;  // 防御性兜底：去掉国际服事件
-      const startKey = (e.start || '').slice(0, 10);  // YYYY-MM-DD
+      const startKey = toBeijingDateKey(e.start);
       const key = `${type}|${startKey}`;
       if (seen.has(key)) continue;
       seen.add(key);
@@ -115,7 +127,7 @@ function merge() {
     for (const e of fallbackList) {
       if (e.enabled === false) continue;
       if (isInternational(e)) continue;  // 防御性兜底：去掉国际服事件
-      const startKey = (e.start || '').slice(0, 10);
+      const startKey = toBeijingDateKey(e.start);
       const key = `${type}|${startKey}`;
       if (seen.has(key)) continue;
       if (hasSimilarEvent(result, e)) continue;

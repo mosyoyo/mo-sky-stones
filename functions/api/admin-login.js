@@ -1,21 +1,21 @@
-const { appConfig, json, signAdminAuth } = require('../_shared');
+const { appConfig, json, signAdminAuth, timingSafeEqual } = require('../_shared');
 
 const COOKIE_NAME = 'mo_admin_auth';
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-let failCount = 0;
+// 固定延迟：每次密码错误都等待 500ms，防止简单时序测量
+// 注意：跨边缘节点的速率限制需在 Cloudflare Dashboard 的 Rate Limiting 规则中配置
+const WRONG_PASSWORD_DELAY_MS = 500;
 
 export async function onRequestPost(context) {
   try {
     const { password } = await context.request.json();
     const secret = appConfig(context.env).adminPassword;
     if (!secret) return json({ error: 'APP_CONFIG or ADMIN_PASSWORD is not configured' }, 500);
-    if (!password || password !== secret) {
-      failCount += 1;
-      if (failCount > 5) await new Promise(resolve => setTimeout(resolve, 2000));
+    if (!password || !timingSafeEqual(password, secret)) {
+      await new Promise(resolve => setTimeout(resolve, WRONG_PASSWORD_DELAY_MS));
       return json({ error: '密码不对' }, 401);
     }
 
-    failCount = 0;
     const expiresAt = Date.now() + COOKIE_MAX_AGE * 1000;
     const signature = await signAdminAuth(`mo-sky-stones:${expiresAt}`, secret);
     const token = `${expiresAt}.${signature}`;

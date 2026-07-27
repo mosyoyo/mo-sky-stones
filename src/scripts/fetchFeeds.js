@@ -35,15 +35,24 @@ function collectFeeds(payload) {
   return found;
 }
 
+const FETCH_TIMEOUT_MS = 15000;
+
 async function fetchJSON(url) {
-  const res = await fetch(url, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 mo-sky-stones',
-      'Accept': 'application/json,text/plain,*/*',
-    },
-  });
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-  return res.json();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 mo-sky-stones',
+        'Accept': 'application/json,text/plain,*/*',
+      },
+    });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    return res.json();
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 function collectByType(payload) {
@@ -71,7 +80,8 @@ async function fetchDetail(feedId) {
   url.searchParams.set('feedId', feedId);
   try {
     return await fetchJSON(url);
-  } catch (_) {
+  } catch (err) {
+    console.warn(`fetchDetail(${feedId}) failed: ${err.message}`);
     return null;
   }
 }

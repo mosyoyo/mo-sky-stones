@@ -587,7 +587,10 @@ function buildReminderEvents(events, options = {}) {
 
   for (const event of events || []) {
     if (!event || event.enabled !== true || !types.has(event.type)) continue;
-    if (!event.start || !event.end || new Date(event.end) <= new Date(event.start)) continue;
+    if (!event.start || !event.end) continue;
+    const startDate = new Date(event.start);
+    const endDate = new Date(event.end);
+    if (!Number.isFinite(startDate.getTime()) || !Number.isFinite(endDate.getTime()) || endDate <= startDate) continue;
 
     const label = TYPE_LABELS[event.type] || event.type;
     const id = compactUid(event.sourceFeedId || event.id || event.title);
@@ -788,7 +791,10 @@ function generateSpiritEventsICS(events, options = {}) {
 
   for (const event of events || []) {
     if (!event || event.enabled !== true || event.type !== 'traveling_spirit') continue;
-    if (!event.start || !event.end || new Date(event.end) <= new Date(event.start)) continue;
+    if (!event.start || !event.end) continue;
+    const startDate = new Date(event.start);
+    const endDate = new Date(event.end);
+    if (!Number.isFinite(startDate.getTime()) || !Number.isFinite(endDate.getTime()) || endDate <= startDate) continue;
     const spiritName = cleanSpiritEventName(event.title);
     if (selected.length && !selected.map(cleanSpiritEventName).includes(spiritName)) continue;
     const info = spiritInfo.get(spiritName) || {};

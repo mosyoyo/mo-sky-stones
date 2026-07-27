@@ -1,18 +1,9 @@
 const { generateICS } = require('../ics-generator');
-const { handleIcsRequest } = require('./_ics-response');
+const { createIcsResponse, handleIcsRequest } = require('./_ics-response');
 
-export async function onRequestGet() {
+export async function onRequestGet(context) {
   const ics = generateICS('black', 60, '光遇·黑石(最后一场)');
-
-  return new Response(ics, {
-    status: 200,
-    headers: {
-      'Content-Type': 'text/calendar; charset=utf-8',
-      'Content-Disposition': 'inline; filename="sky-black.ics"',
-      'Cache-Control': 'public, max-age=3600',
-      'Access-Control-Allow-Origin': '*',
-    },
-  });
+  return createIcsResponse(context.request, ics, 'sky-black.ics');
 }
 
 export async function onRequest(context) {

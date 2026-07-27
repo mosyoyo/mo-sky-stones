@@ -5,13 +5,47 @@
 const { STONE_CONFIG } = require('./config');
 
 /**
+ * 获取北京时区的日期组件
+ * @param {Date} date - UTC Date 对象
+ * @returns {{day: number, dow: number}}
+ */
+function getBeijingDateParts(date) {
+  const dateStr = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(date);
+  const utcDate = new Date(dateStr);
+  return {
+    day: utcDate.getUTCDate(),
+    dow: utcDate.getUTCDay(),
+  };
+}
+
+/**
+ * 获取当前北京日历日的零点对应的 UTC 时间戳
+ * @param {Date} [now=new Date()] - 参考时间点
+ * @returns {Date} 代表北京日历日零点的 UTC Date 对象
+ */
+function getBeijingMidnightUTC(now = new Date()) {
+  const dateStr = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(now);
+  const [year, month, day] = dateStr.split('-').map(Number);
+  return new Date(Date.UTC(year, month - 1, day) - 8 * 60 * 60 * 1000);
+}
+
+/**
  * 判断某日期是否有红石/黑石
- * @param {Date} date - 当地时区日期
+ * @param {Date} date - Date 对象（北京日历日的零点 UTC 时间戳）
  * @returns {'red' | 'black' | null}
  */
 function getStoneType(date) {
-  const day = date.getDate();
-  const dow = date.getDay(); // 0=周日, 1=周一, ..., 6=周六
+  const { day, dow } = getBeijingDateParts(date);
   const isFirstHalf = day <= STONE_CONFIG.halfMonthBoundary;
 
   if (isFirstHalf) {
@@ -33,8 +67,7 @@ function getEventsOnDate(date) {
   const type = getStoneType(date);
   if (!type) return [];
 
-  const dow = date.getDay();
-  const day = date.getDate();
+  const { day, dow } = getBeijingDateParts(date);
   const slots = STONE_CONFIG.timeSlots[dow] || [];
   const map = STONE_CONFIG.maps[day % 5];
   const area = (STONE_CONFIG.areas[map] && STONE_CONFIG.areas[map][dow]) || '';
@@ -72,12 +105,10 @@ function getLastEventOnDate(date) {
  */
 function generateLastEvents(filterType, days = 60) {
   const result = [];
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = getBeijingMidnightUTC();
 
   for (let i = 0; i < days; i++) {
-    const date = new Date(today);
-    date.setDate(today.getDate() + i);
+    const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
     const lastEvent = getLastEventOnDate(date);
     if (lastEvent && lastEvent.type === filterType) {
       result.push({ date, event: lastEvent });
@@ -97,12 +128,10 @@ function generateEvents(filterType, days = 60, options = {}) {
   if (options.lastOnly !== false) return generateLastEvents(filterType, days);
 
   const result = [];
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = getBeijingMidnightUTC();
 
   for (let i = 0; i < days; i++) {
-    const date = new Date(today);
-    date.setDate(today.getDate() + i);
+    const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
     const events = getEventsOnDate(date).filter(event => event.type === filterType);
     events.forEach(event => result.push({ date, event }));
   }
@@ -115,4 +144,6 @@ module.exports = {
   getEventsOnDate,
   getLastEventOnDate,
   generateLastEvents,
+  getBeijingDateParts,
+  getBeijingMidnightUTC,
 };

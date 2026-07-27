@@ -56,12 +56,12 @@ function generateICS(filterType, days = 30, calName = '光遇', options = {}) {
     `X-WR-CALNAME:${calName}`,
     `X-WR-CALDESC:光遇国服${typeName}降落时间表（${descMode}，含 10 分钟提醒）`,
     'X-WR-TIMEZONE:Asia/Shanghai',
+    'REFRESH-INTERVAL;VALUE=DURATION:PT1H',
+    'X-PUBLISHED-TTL:PT1H',
   ];
 
   for (const { date, event } of upcoming) {
     const summary = `【${typeName}】${event.map}·${event.area}`;
-    // 这里保留上午可订阅版本的旧拼法：
-    // CR + 字面量 \n + 空格。安卓日历对这个字节形态很敏感。
     const descriptionLines = [
       `地图: ${event.map}`,
       `区域: ${event.area}`,
@@ -71,17 +71,13 @@ function generateICS(filterType, days = 30, calName = '光遇', options = {}) {
       .map(line => escapeICS(line))
       .join('\r\n ');
 
-    // 转 UTC 时间（iOS/Android 都识识别，更可靠）
-    const [sh, sm] = event.startTime.split(':');
-    const [eh, em] = event.endTime.split(':');
-    const dtStart = new Date(date);
-    dtStart.setHours(parseInt(sh), parseInt(sm), 0, 0);
-    // 北京时间是 UTC+8，减 8 小时得到 UTC
-    const dtStartUTC = new Date(dtStart.getTime() - 8 * 60 * 60 * 1000);
-
-    const dtEnd = new Date(date);
-    dtEnd.setHours(parseInt(eh), parseInt(em), 0, 0);
-    const dtEndUTC = new Date(dtEnd.getTime() - 8 * 60 * 60 * 1000);
+    const beijingDateStr = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Shanghai',
+    }).format(date);
+    const startTime = event.startTime.padStart(5, '0');
+    const endTime = event.endTime.padStart(5, '0');
+    const dtStartUTC = new Date(`${beijingDateStr}T${startTime}:00+08:00`);
+    const dtEndUTC = new Date(`${beijingDateStr}T${endTime}:00+08:00`);
 
     const dtstart = formatICSDateTimeUTC(dtStartUTC);
     const dtend = formatICSDateTimeUTC(dtEndUTC);

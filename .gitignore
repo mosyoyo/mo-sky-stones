@@ -14,3 +14,13 @@ ADMIN_REFACTOR_PLAN.md
 HOME_PAGE_REDESIGN_PLAN.md
 CUSTOM_SPIRIT_SUBSCRIPTION_PLAN.md
 ONBOARDING_AND_PROMOTION_PLAN.md
+
+# 调试/同步产物大文件（避免误提交）
+feeds-main.json
+data/feeds-main.json
+data/events-netease-main.json
+events-online.json
+events-online.ics
+
+# 工具目录
+.codex/

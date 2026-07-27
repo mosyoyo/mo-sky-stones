@@ -38,10 +38,25 @@ function appConfig(env) {
 }
 
 async function signAdminAuth(value, secret) {
-  const input = new TextEncoder().encode(`${value}.${secret}`);
-  const buf = await crypto.subtle.digest('SHA-256', input);
-  const bytes = [...new Uint8Array(buf)];
-  return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  );
+  const buf = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(value));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function timingSafeEqual(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
+  const aBytes = new TextEncoder().encode(a);
+  const bBytes = new TextEncoder().encode(b);
+  if (aBytes.length !== bBytes.length) return false;
+  let diff = 0;
+  for (let i = 0; i < aBytes.length; i++) diff |= aBytes[i] ^ bBytes[i];
+  return diff === 0;
 }
 
 function extractVEVENTS(ics) {
@@ -240,4 +255,5 @@ module.exports = {
   parseTypes,
   readAssetJSON,
   signAdminAuth,
+  timingSafeEqual,
 };
