@@ -24,3 +24,8 @@ events-online.ics
 
 # 工具目录
 .codex/
+
+# 本地环境变量（防止误提交）
+.env
+.env.*
+!.env.example
