@@ -295,5 +295,14 @@
     "start": "2025-03-12T16:00:00.000Z",
     "end": "2025-03-19T15:59:00.000Z",
     "sourceFeedId": "67d0eaa76a0a4051323b1fd8"
+  },
+  {
+    "id": "bonus-6a702e67fbac67145c35b1c3-bonus-y51owj",
+    "enabled": true,
+    "type": "bonus",
+    "title": "【双倍】双倍心火",
+    "start": "2026-08-04T16:00:00.000Z",
+    "end": "2026-08-11T15:59:00.000Z",
+    "sourceFeedId": "6a702e67fbac67145c35b1c3::bonus"
   }
 ]
