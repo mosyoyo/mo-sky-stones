@@ -45,12 +45,12 @@
   },
   {
     "enabled": true,
-    "id": "bonus-6a702e67fbac67145c35b1c3-bonus-y51owj",
+    "id": "bonus-6a702e67fbac67145c35b1c3-npmd28",
     "type": "bonus",
     "title": "【双倍】双倍心火",
     "start": "2026-08-04T16:00:00.000Z",
     "end": "2026-08-11T15:59:00.000Z",
-    "sourceFeedId": "6a702e67fbac67145c35b1c3::bonus",
+    "sourceFeedId": "6a702e67fbac67145c35b1c3",
     "_source": "netease"
   },
   {
