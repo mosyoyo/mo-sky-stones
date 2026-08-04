@@ -1,10 +1,24 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
-    "fetchedAt": "2026-07-21T08:31:40.591Z",
-    "spiritCount": 85
+    "fetchedAt": "2026-08-04T08:38:38.900Z",
+    "spiritCount": 86
   },
   "spirits": [
+    {
+      "id": "e58fafe99da0e68aa4e69e97e59198",
+      "spiritName": "可靠护林员",
+      "season": "拾光季",
+      "lastRevisit": "2026-08-06",
+      "visitCount": 1,
+      "items": [
+        "发饰",
+        "面具",
+        "面饰",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%8F%AF%E9%9D%A0%E6%8A%A4%E6%9E%97%E5%91%98"
+    },
     {
       "id": "e587bbe68e8ce58589e5869c",
       "spiritName": "击掌光农",
