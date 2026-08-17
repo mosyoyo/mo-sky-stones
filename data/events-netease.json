@@ -304,5 +304,14 @@
     "start": "2025-03-12T16:00:00.000Z",
     "end": "2025-03-19T15:59:00.000Z",
     "sourceFeedId": "67d0eaa76a0a4051323b1fd8"
+  },
+  {
+    "id": "bonus-6a82a363fe803743061b7866-bonus-m2ndk8",
+    "enabled": true,
+    "type": "bonus",
+    "title": "【双倍】双倍爱心",
+    "start": "2026-08-18T16:00:00.000Z",
+    "end": "2026-09-01T15:59:00.000Z",
+    "sourceFeedId": "6a82a363fe803743061b7866::bonus"
   }
 ]

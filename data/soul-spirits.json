@@ -1,10 +1,24 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
-    "fetchedAt": "2026-08-04T08:38:38.900Z",
+    "fetchedAt": "2026-08-17T06:57:13.896Z",
     "spiritCount": 86
   },
   "spirits": [
+    {
+      "id": "e6b0b4e58588e79fa5",
+      "spiritName": "水先知",
+      "season": "预言季",
+      "lastRevisit": "2026-08-20",
+      "visitCount": 5,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷",
+        "小型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%B0%B4%E5%85%88%E7%9F%A5"
+    },
     {
       "id": "e58fafe99da0e68aa4e69e97e59198",
       "spiritName": "可靠护林员",
@@ -969,20 +983,6 @@
         "乐谱"
       ],
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%95%AC%E7%A4%BC%E6%8A%A4%E5%8D%AB"
-    },
-    {
-      "id": "e6b0b4e58588e79fa5",
-      "spiritName": "水先知",
-      "season": "预言季",
-      "lastRevisit": "2024-09-18",
-      "visitCount": 4,
-      "items": [
-        "面具",
-        "发型",
-        "斗篷",
-        "小型家具"
-      ],
-      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%B0%B4%E5%85%88%E7%9F%A5"
     },
     {
       "id": "e68385e7bbaae88d89e88dafe5b888",
