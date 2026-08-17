@@ -1,11 +1,11 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/活动日历",
-    "lastUpdated": "2026-08-09T01:49:13.852Z",
+    "lastUpdated": "2026-08-17T12:45:21.291Z",
     "counts": {
       "season": 1,
       "activity": 2,
-      "traveling_spirit": 1
+      "traveling_spirit": 2
     }
   },
   "events": [
@@ -44,6 +44,15 @@
       "end": "2026-08-10T04:00:00.000Z",
       "source": "wiki",
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%8F%AF%E9%9D%A0%E6%8A%A4%E6%9E%97%E5%91%98"
+    },
+    {
+      "id": "wiki-traveling_spirit-旅行先祖：水先知-0820",
+      "type": "traveling_spirit",
+      "title": "【复刻】水先知",
+      "start": "2026-08-19T22:00:00.000Z",
+      "end": "2026-08-24T04:00:00.000Z",
+      "source": "wiki",
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%B0%B4%E5%85%88%E7%9F%A5"
     }
   ]
 }
