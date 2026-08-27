@@ -1,10 +1,10 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/活动日历",
-    "lastUpdated": "2026-08-20T12:51:43.549Z",
+    "lastUpdated": "2026-08-27T21:54:43.456Z",
     "counts": {
       "season": 1,
-      "activity": 1,
+      "activity": 2,
       "traveling_spirit": 1
     }
   },
@@ -26,6 +26,15 @@
       "end": "2026-09-01T04:00:00.000Z",
       "source": "wiki",
       "wikiUrl": "https://wiki.biligame.com/sky/2026%E5%B9%B4%E4%B8%83%E5%A4%95%E8%8A%82"
+    },
+    {
+      "id": "wiki-activity-2026年缤纷飞行日-0904",
+      "type": "activity",
+      "title": "【活动】缤纷飞行日",
+      "start": "2026-09-04T04:00:00.000Z",
+      "end": "2026-09-17T04:00:00.000Z",
+      "source": "wiki",
+      "wikiUrl": "https://wiki.biligame.com/sky/2026%E5%B9%B4%E7%BC%A4%E7%BA%B7%E9%A3%9E%E8%A1%8C%E6%97%A5"
     },
     {
       "id": "wiki-traveling_spirit-旅行先祖：水先知-0820",
