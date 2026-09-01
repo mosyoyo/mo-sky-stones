@@ -1,10 +1,24 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
-    "fetchedAt": "2026-08-17T06:57:13.896Z",
+    "fetchedAt": "2026-09-01T16:12:32.375Z",
     "spiritCount": 86
   },
   "spirits": [
+    {
+      "id": "e9a38ee8a18ce9a286e888aae59198",
+      "spiritName": "风行领航员",
+      "season": "风行季",
+      "lastRevisit": "2026-09-03",
+      "visitCount": 3,
+      "items": [
+        "发型",
+        "发饰",
+        "斗篷",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%A3%8E%E8%A1%8C%E9%A2%86%E8%88%AA%E5%91%98"
+    },
     {
       "id": "e6b0b4e58588e79fa5",
       "spiritName": "水先知",
@@ -629,20 +643,6 @@
         "乐谱"
       ],
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%A4%A9%E6%89%8D%E5%BB%BA%E7%AD%91%E5%B8%88"
-    },
-    {
-      "id": "e9a38ee8a18ce9a286e888aae59198",
-      "spiritName": "风行领航员",
-      "season": "风行季",
-      "lastRevisit": "2025-05-29",
-      "visitCount": 2,
-      "items": [
-        "发型",
-        "发饰",
-        "斗篷",
-        "乐谱"
-      ],
-      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%A3%8E%E8%A1%8C%E9%A2%86%E8%88%AA%E5%91%98"
     },
     {
       "id": "e9b8a3e8b0a2e694b6e8978fe5aeb6",
