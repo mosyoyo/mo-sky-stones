@@ -45,6 +45,16 @@
   },
   {
     "enabled": true,
+    "id": "maintenance-6a978326b6e01c625a7c2885-1dvu7c5",
+    "type": "maintenance",
+    "title": "【维护】9月4日 维护",
+    "start": "2026-09-03T17:00:00.000Z",
+    "end": "2026-09-04T02:00:00.000Z",
+    "sourceFeedId": "6a978326b6e01c625a7c2885",
+    "_source": "netease"
+  },
+  {
+    "enabled": true,
     "id": "bonus-6a36104746804c0398433bec-11n995a",
     "sourceFeedId": "6a36104746804c0398433bec",
     "type": "bonus",
