@@ -1,6 +1,17 @@
 [
   {
     "enabled": true,
+    "id": "wiki-traveling_spirit-旅行先祖：智慧长者-0917",
+    "type": "traveling_spirit",
+    "title": "【复刻】智慧长者",
+    "start": "2026-09-16T22:00:00.000Z",
+    "end": "2026-09-21T04:00:00.000Z",
+    "source": "wiki",
+    "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%99%BA%E6%85%A7%E9%95%BF%E8%80%85",
+    "_source": "wiki"
+  },
+  {
+    "enabled": true,
     "id": "wiki-season-致梵高季-0717",
     "type": "season",
     "title": "【季节】致梵高季",
