@@ -1,5 +1,23 @@
 [
   {
+    "id": "candle_heap-6aaa5a9418c6641c101d88ac-m20913",
+    "enabled": true,
+    "type": "candle_heap",
+    "title": "【大蜡烛】大蜡烛",
+    "start": "2026-09-18T16:00:00.000Z",
+    "end": "2026-10-07T15:59:00.000Z",
+    "sourceFeedId": "6aaa5a9418c6641c101d88ac"
+  },
+  {
+    "id": "bonus-6aaa14475b32bc1f3adf712a-10s999j",
+    "enabled": true,
+    "type": "bonus",
+    "title": "【双倍】双倍心火",
+    "start": "2026-09-18T16:00:00.000Z",
+    "end": "2026-09-25T15:59:00.000Z",
+    "sourceFeedId": "6aaa14475b32bc1f3adf712a"
+  },
+  {
     "id": "maintenance-6a978326b6e01c625a7c2885-1dvu7c5",
     "enabled": false,
     "type": "maintenance",
@@ -322,23 +340,5 @@
     "start": "2025-03-12T16:00:00.000Z",
     "end": "2025-03-19T15:59:00.000Z",
     "sourceFeedId": "67d0eaa76a0a4051323b1fd8"
-  },
-  {
-    "id": "candle_heap-6aaa5a9418c6641c101d88ac-candle_heap-1yab70x",
-    "enabled": true,
-    "type": "candle_heap",
-    "title": "【大蜡烛】大蜡烛",
-    "start": "2026-09-18T16:00:00.000Z",
-    "end": "2026-10-07T15:59:00.000Z",
-    "sourceFeedId": "6aaa5a9418c6641c101d88ac::candle_heap"
-  },
-  {
-    "id": "bonus-6aaa14475b32bc1f3adf712a-bonus-9petsa",
-    "enabled": true,
-    "type": "bonus",
-    "title": "【双倍】双倍心火",
-    "start": "2026-09-18T16:00:00.000Z",
-    "end": "2026-09-25T15:59:00.000Z",
-    "sourceFeedId": "6aaa14475b32bc1f3adf712a::bonus"
   }
 ]

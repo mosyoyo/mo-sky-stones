@@ -34,22 +34,22 @@
   },
   {
     "enabled": true,
-    "id": "bonus-6aaa14475b32bc1f3adf712a-bonus-9petsa",
+    "id": "bonus-6aaa14475b32bc1f3adf712a-10s999j",
     "type": "bonus",
     "title": "【双倍】双倍心火",
     "start": "2026-09-18T16:00:00.000Z",
     "end": "2026-09-25T15:59:00.000Z",
-    "sourceFeedId": "6aaa14475b32bc1f3adf712a::bonus",
+    "sourceFeedId": "6aaa14475b32bc1f3adf712a",
     "_source": "netease"
   },
   {
     "enabled": true,
-    "id": "candle_heap-6aaa5a9418c6641c101d88ac-candle_heap-1yab70x",
+    "id": "candle_heap-6aaa5a9418c6641c101d88ac-m20913",
     "type": "candle_heap",
     "title": "【大蜡烛】大蜡烛",
     "start": "2026-09-18T16:00:00.000Z",
     "end": "2026-10-07T15:59:00.000Z",
-    "sourceFeedId": "6aaa5a9418c6641c101d88ac::candle_heap",
+    "sourceFeedId": "6aaa5a9418c6641c101d88ac",
     "_source": "netease"
   },
   {
