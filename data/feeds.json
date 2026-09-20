@@ -1,5 +1,149 @@
 [
   {
+    "id": "6aafaea36ec21132639b8cd3",
+    "title": "《光·遇》9月24日 更新时间公告\n#光遇#\n亲爱的旅人们：\n　　感谢各位对《光·遇》的关注与支",
+    "content": "《光·遇》9月24日 更新时间公告\n#光遇#\n亲爱的旅人们：\n　　感谢各位对《光·遇》的关注与支持！我们将在​9月24日01:00~10:00​进行版本更新，预计更新时间为​9小时​。更新中无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。\n　　此次更新为资源预载，更新结束后：\n【趣味活动】\n《光·遇》秋宵节 9月24日 正式开启\n《光·遇》《我的世界》联动活动 10月2日 正式开启\n\n2026年9月20日\n《光·遇》官方运营团队",
+    "createTime": 1789898400079,
+    "status": "approved",
+    "autoType": "maintenance",
+    "parsed": true,
+    "raw": {
+      "id": "6aafaea36ec21132639b8cd3",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"《光·遇》9月24日 更新时间公告\\n#光遇#\\n亲爱的旅人们：\\n　　感谢各位对《光·遇》的关注与支持！我们将在​9月24日01:00~10:00​进行版本更新，预计更新时间为​9小时​。更新中无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。\\n　　此次更新为资源预载，更新结束后：\\n【趣味活动】\\n《光·遇》秋宵节 9月24日 正式开启\\n《光·遇》《我的世界》联动活动 10月2日 正式开启\\n\\n2026年9月20日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"0924更新公告.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260918_0a726c57c5c4954032f58041c7b60b98\",\"mimeType\":\"image/png\",\"size\":4019227,\"width\":2490,\"height\":1401,\"watermark\":true}]}}",
+      "deleteTime": 0,
+      "createTime": 1789898400079,
+      "updateTime": 1789898403022,
+      "clientType": 152,
+      "tagList": [
+        "5b02c181d545685882af86ee"
+      ],
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "光遇",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT",
+        "handpick": false,
+        "contentStatementOption": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "repostCount": 0,
+        "commentCount": 0,
+        "likeCount": 0,
+        "shareCount": 0,
+        "favCount": 0,
+        "faceImportCount": 0
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6aafaea36ec21132639b8cd3",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"《光·遇》9月24日 更新时间公告\\n#光遇#\\n亲爱的旅人们：\\n　　感谢各位对《光·遇》的关注与支持！我们将在​9月24日01:00~10:00​进行版本更新，预计更新时间为​9小时​。更新中无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。\\n　　此次更新为资源预载，更新结束后：\\n【趣味活动】\\n《光·遇》秋宵节 9月24日 正式开启\\n《光·遇》《我的世界》联动活动 10月2日 正式开启\\n\\n2026年9月20日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"0924更新公告.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20260918_0a726c57c5c4954032f58041c7b60b98\",\"mimeType\":\"image/png\",\"size\":4019227,\"width\":2490,\"height\":1401,\"watermark\":true}]}}",
+            "deleteTime": 0,
+            "createTime": 1789898400079,
+            "updateTime": 1789898403022,
+            "clientType": 152,
+            "tagList": [
+              "5b02c181d545685882af86ee"
+            ],
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "光遇",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT",
+              "handpick": false,
+              "contentStatementOption": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "repostCount": 0,
+              "commentCount": 0,
+              "likeCount": 0,
+              "shareCount": 0,
+              "favCount": 0,
+              "faceImportCount": 0
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 3061,
+                "followerCount": 1267931,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 521664,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "光·遇》9月24日 更新时间公告光遇亲爱的旅人们：　　感谢各_光·遇 | 大神",
+            "desc": "《光·遇》9月24日 更新时间公告光遇亲爱的旅人们：　　感谢各位对《光·遇》的关注与支持！我们将在9月24日01:00~10:00进行版本更新，预计更新时间为9小时。更新中无法正常游戏，敬请谅解",
+            "keywords": ""
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "maintenance",
+      "title": "【维护】9月24日 维护",
+      "start": "2026-09-23T17:00:00.000Z",
+      "end": "2026-09-24T02:00:00.000Z"
+    },
+    "parsedResults": [
+      {
+        "type": "maintenance",
+        "title": "【维护】9月24日 维护",
+        "start": "2026-09-23T17:00:00.000Z",
+        "end": "2026-09-24T02:00:00.000Z"
+      }
+    ]
+  },
+  {
     "id": "6aaa5a9418c6641c101d88ac",
     "title": "跨世同行丨大蜡烛堆将出现在天空王国各地！\n​#光遇# #光遇我的世界联动# #光遇九色鹿联动回归",
     "content": "跨世同行丨大蜡烛堆将出现在天空王国各地！\n​#光遇# #光遇我的世界联动# #光遇九色鹿联动回归#\n新朋旧识相遇天空王国\n跨世的相逢正拉开帷幕\n🎉\n9月19日~10月7日\n大蜡烛堆将出现在天空王国各地\n🔥\n围坐篝火旁，细数相遇的每一份惊喜\n邀上旅人伙伴，共赴这场欢聚的约定吧！\n\n2026年9月16日\n《光·遇》官方运营团队",
