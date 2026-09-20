@@ -1,5 +1,14 @@
 [
   {
+    "id": "maintenance-6aafaea36ec21132639b8cd3-osnz2e",
+    "enabled": true,
+    "type": "maintenance",
+    "title": "【维护】9月24日 维护",
+    "start": "2026-09-23T17:00:00.000Z",
+    "end": "2026-09-24T02:00:00.000Z",
+    "sourceFeedId": "6aafaea36ec21132639b8cd3"
+  },
+  {
     "id": "candle_heap-6aaa5a9418c6641c101d88ac-m20913",
     "enabled": true,
     "type": "candle_heap",
@@ -340,14 +349,5 @@
     "start": "2025-03-12T16:00:00.000Z",
     "end": "2025-03-19T15:59:00.000Z",
     "sourceFeedId": "67d0eaa76a0a4051323b1fd8"
-  },
-  {
-    "id": "maintenance-6aafaea36ec21132639b8cd3-osnz2e",
-    "enabled": true,
-    "type": "maintenance",
-    "title": "【维护】9月24日 维护",
-    "start": "2026-09-23T17:00:00.000Z",
-    "end": "2026-09-24T02:00:00.000Z",
-    "sourceFeedId": "6aafaea36ec21132639b8cd3"
   }
 ]
