@@ -1,10 +1,24 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
-    "fetchedAt": "2026-09-15T16:28:21.723Z",
+    "fetchedAt": "2026-09-30T12:04:37.713Z",
     "spiritCount": 90
   },
   "spirits": [
+    {
+      "id": "e694bee69dbee697a5e6b5b4e88085",
+      "spiritName": "放松日浴者",
+      "season": "圣岛季",
+      "lastRevisit": "2026-10-01",
+      "visitCount": 4,
+      "items": [
+        "面饰",
+        "发饰",
+        "斗篷",
+        "大型家具"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%94%BE%E6%9D%BE%E6%97%A5%E6%B5%B4%E8%80%85"
+    },
     {
       "id": "e98787e88dafe4baba",
       "spiritName": "采药人",
@@ -1139,19 +1153,6 @@
         "手持"
       ],
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%93%AC%E5%A4%B4%E9%9D%92%E5%B9%B4"
-    },
-    {
-      "id": "e694bee69dbee697a5e6b5b4e88085",
-      "spiritName": "放松日浴者",
-      "season": "圣岛季",
-      "lastRevisit": "2023-11-16",
-      "visitCount": 3,
-      "items": [
-        "面饰",
-        "发饰",
-        "斗篷"
-      ],
-      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E6%94%BE%E6%9D%BE%E6%97%A5%E6%B5%B4%E8%80%85"
     },
     {
       "id": "e8b7b3e8b783e8889ee88085",
