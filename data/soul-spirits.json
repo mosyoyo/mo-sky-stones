@@ -1,10 +1,22 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
-    "fetchedAt": "2026-09-30T12:04:37.713Z",
+    "fetchedAt": "2026-10-13T13:44:38.222Z",
     "spiritCount": 90
   },
   "spirits": [
+    {
+      "id": "e99d99e58589e5ada6e88085",
+      "spiritName": "静光学者",
+      "season": "追光季",
+      "lastRevisit": "2026-10-15",
+      "visitCount": 4,
+      "items": [
+        "面具",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%9D%99%E5%85%89%E5%AD%A6%E8%80%85"
+    },
     {
       "id": "e694bee69dbee697a5e6b5b4e88085",
       "spiritName": "放松日浴者",
@@ -1092,18 +1104,6 @@
         "小型家具"
       ],
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%A3%8E%E5%85%88%E7%9F%A5"
-    },
-    {
-      "id": "e99d99e58589e5ada6e88085",
-      "spiritName": "静光学者",
-      "season": "追光季",
-      "lastRevisit": "2024-05-16",
-      "visitCount": 3,
-      "items": [
-        "面具",
-        "斗篷"
-      ],
-      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%9D%99%E5%85%89%E5%AD%A6%E8%80%85"
     },
     {
       "id": "e78caee68385e6bc94e59198",
