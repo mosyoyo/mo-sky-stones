@@ -1,5 +1,151 @@
 [
   {
+    "id": "6ad1a1483bc8a279837bcfe3",
+    "title": "《光·遇》10月22日 更新时间公告\n#光遇# \n亲爱的旅人们：\n　　感谢各位对《光·遇》的关注",
+    "content": "《光·遇》10月22日 更新时间公告\n#光遇# \n亲爱的旅人们：\n　　感谢各位对《光·遇》的关注与支持！我们将在10月22日01:00~10:00进行版本更新，预计更新时间为9小时。更新期间无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。\n　　此次更新为资源预载，更新结束后：\n《光·遇》奇妙之旅：珍珠季 10月22日 正式开启\n《光·遇》恶作剧之日 10月24日 正式开启\n《光​·​遇》致梵高主题小屋全新内容 10月22日 正式上线\n\n2026年10月16日\n《光·遇》官方运营团队",
+    "createTime": 1792123200358,
+    "status": "approved",
+    "autoType": "maintenance",
+    "parsed": true,
+    "raw": {
+      "id": "6ad1a1483bc8a279837bcfe3",
+      "uid": "154db622a20e4327ac277bc35d4f2e76",
+      "type": 2,
+      "content": "{\"type\":2,\"body\":{\"text\":\"《光·遇》10月22日 更新时间公告\\n#光遇# \\n亲爱的旅人们：\\n　　感谢各位对《光·遇》的关注与支持！我们将在10月22日01:00~10:00进行版本更新，预计更新时间为9小时。更新期间无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。\\n　　此次更新为资源预载，更新结束后：\\n《光·遇》奇妙之旅：珍珠季 10月22日 正式开启\\n《光·遇》恶作剧之日 10月24日 正式开启\\n《光​·​遇》致梵高主题小屋全新内容 10月22日 正式上线\\n\\n2026年10月16日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"1022.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20261015_56f4d69dc2e632b26fef77b35cfc6ba2\",\"mimeType\":\"image/png\",\"size\":3522029,\"width\":2490,\"height\":1401,\"watermark\":true}]}}",
+      "deleteTime": 0,
+      "createTime": 1792123200358,
+      "updateTime": 1792123208057,
+      "clientType": 152,
+      "tagList": [
+        "5b02c181d545685882af86ee"
+      ],
+      "attributeInfoList": [],
+      "topicInfoList": [
+        {
+          "topicName": "光遇",
+          "type": "DEFAULT"
+        }
+      ],
+      "pendant": {},
+      "interactOption": {
+        "comment": "DEFAULT",
+        "repost": "DEFAULT",
+        "handpick": false,
+        "contentStatementOption": "DEFAULT"
+      },
+      "displayIpInfo": {
+        "ipLocationName": "浙江"
+      },
+      "record": {
+        "id": "6ad1a1483bc8a279837bcfe3",
+        "repostCount": 0,
+        "commentCount": 0,
+        "likeCount": 10,
+        "shareCount": 3,
+        "favCount": 1,
+        "createTime": 1792123687982
+      },
+      "detail": {
+        "result": {
+          "feed": {
+            "id": "6ad1a1483bc8a279837bcfe3",
+            "uid": "154db622a20e4327ac277bc35d4f2e76",
+            "type": 2,
+            "content": "{\"type\":2,\"body\":{\"text\":\"《光·遇》10月22日 更新时间公告\\n#光遇# \\n亲爱的旅人们：\\n　　感谢各位对《光·遇》的关注与支持！我们将在10月22日01:00~10:00进行版本更新，预计更新时间为9小时。更新期间无法正常游戏，敬请谅解。如果在预计时间内无法完成更新内容，开服时间将顺延。\\n　　此次更新为资源预载，更新结束后：\\n《光·遇》奇妙之旅：珍珠季 10月22日 正式开启\\n《光·遇》恶作剧之日 10月24日 正式开启\\n《光​·​遇》致梵高主题小屋全新内容 10月22日 正式上线\\n\\n2026年10月16日\\n《光·遇》官方运营团队\",\"media\":[{\"name\":\"1022.png\",\"url\":\"https://ok.166.net/reunionpub/1_kol_20261015_56f4d69dc2e632b26fef77b35cfc6ba2\",\"mimeType\":\"image/png\",\"size\":3522029,\"width\":2490,\"height\":1401,\"watermark\":true}]}}",
+            "deleteTime": 0,
+            "createTime": 1792123200358,
+            "updateTime": 1792123208057,
+            "clientType": 152,
+            "tagList": [
+              "5b02c181d545685882af86ee"
+            ],
+            "attributeInfoList": [],
+            "topicInfoList": [
+              {
+                "topicName": "光遇",
+                "type": "DEFAULT"
+              }
+            ],
+            "pendant": {},
+            "interactOption": {
+              "comment": "DEFAULT",
+              "repost": "DEFAULT",
+              "handpick": false,
+              "contentStatementOption": "DEFAULT"
+            },
+            "displayIpInfo": {
+              "ipLocationName": "浙江"
+            },
+            "record": {
+              "id": "6ad1a1483bc8a279837bcfe3",
+              "repostCount": 0,
+              "commentCount": 0,
+              "likeCount": 10,
+              "shareCount": 3,
+              "favCount": 1,
+              "createTime": 1792123687982
+            }
+          },
+          "userInfos": [
+            {
+              "user": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "nick": "Sky光遇",
+                "icon": "https://ok.166.net/reunionpub/3_20221207_184ebd6851a224893.png",
+                "intro": "爱与给予会照亮你前行的路",
+                "gender": 2,
+                "birth": "2017-09-13",
+                "location": "广州市",
+                "identityAuthenticInfo": "光·遇手游官方",
+                "identityType": "1",
+                "followerLevel": 1,
+                "deleteTime": 0,
+                "createTime": 1526877715264,
+                "updateTime": 1712893901717
+              },
+              "record": {
+                "uid": "154db622a20e4327ac277bc35d4f2e76",
+                "feedCount": 3111,
+                "followerCount": 1270546,
+                "followingCount": 42,
+                "squareCount": 1,
+                "likeCount": 524774,
+                "lastPostIpLocation": "浙江"
+              }
+            }
+          ],
+          "tdk": {
+            "title": "光·遇》10月22日 更新时间公告光遇 亲爱的旅人们：　　感_光·遇 | 大神",
+            "desc": "《光·遇》10月22日 更新时间公告光遇 亲爱的旅人们：　　感谢各位对《光·遇》的关注与支持！我们将在10月22日01:00~10:00进行版本更新，预计更新时间为9小时。更新期间无法正常游戏",
+            "keywords": ""
+          },
+          "squareBasicInfo": {
+            "squareId": "5cb546a0d5456870b97d9424",
+            "icon": "https://img.166.net/reunionpub/100_20260319_19d03d9fad4213906.png",
+            "name": "光·遇",
+            "tag": "5b02c181d545685882af86ee"
+          }
+        },
+        "code": 200,
+        "errmsg": "OK"
+      }
+    },
+    "parsedResult": {
+      "type": "maintenance",
+      "title": "【维护】10月22日 维护",
+      "start": "2026-10-21T17:00:00.000Z",
+      "end": "2026-10-22T02:00:00.000Z"
+    },
+    "parsedResults": [
+      {
+        "type": "maintenance",
+        "title": "【维护】10月22日 维护",
+        "start": "2026-10-21T17:00:00.000Z",
+        "end": "2026-10-22T02:00:00.000Z"
+      }
+    ]
+  },
+  {
     "id": "6acee2299c02552c2b703ca1",
     "title": "秋风送暖丨向好友送出双份的心意吧\n#光遇# \n秋风轻送温情不期而遇\n暖阳轻洒花叶缀满旅途\n☀️\n",
     "content": "秋风送暖丨向好友送出双份的心意吧\n#光遇# \n秋风轻送温情不期而遇\n暖阳轻洒花叶缀满旅途\n☀️\n10月15日~10月21日\n赠送好友爱心，好友将收获双倍爱心\n🍃\n与好友漫步秋日云端\n将这份温暖轻轻放进彼此手心吧~\n\n2026年10月14日\n《光·遇》官方运营团队",
