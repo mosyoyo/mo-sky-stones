@@ -34,16 +34,6 @@
   },
   {
     "enabled": true,
-    "id": "bonus-6acee2299c02552c2b703ca1-12ukcya",
-    "type": "bonus",
-    "title": "【双倍】双倍爱心",
-    "start": "2026-10-14T16:00:00.000Z",
-    "end": "2026-10-21T15:59:00.000Z",
-    "sourceFeedId": "6acee2299c02552c2b703ca1",
-    "_source": "netease"
-  },
-  {
-    "enabled": true,
     "id": "maintenance-6ad1a1483bc8a279837bcfe3-1dpawq1",
     "type": "maintenance",
     "title": "【维护】10月22日 维护",
