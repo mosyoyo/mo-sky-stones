@@ -1,7 +1,7 @@
 [
   {
     "id": "maintenance-6ad1a1483bc8a279837bcfe3-1dpawq1",
-    "enabled": true,
+    "enabled": false,
     "type": "maintenance",
     "title": "【维护】10月22日 维护",
     "start": "2026-10-21T17:00:00.000Z",
