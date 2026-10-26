@@ -1,10 +1,23 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
-    "fetchedAt": "2026-10-13T13:44:38.222Z",
+    "fetchedAt": "2026-10-26T12:25:46.336Z",
     "spiritCount": 90
   },
   "spirits": [
+    {
+      "id": "e78caee68385e6bc94e59198",
+      "spiritName": "献情演员",
+      "season": "音韵季",
+      "lastRevisit": "2026-10-28",
+      "visitCount": 4,
+      "items": [
+        "裤子",
+        "面具",
+        "乐谱"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%8C%AE%E6%83%85%E6%BC%94%E5%91%98"
+    },
     {
       "id": "e99d99e58589e5ada6e88085",
       "spiritName": "静光学者",
@@ -1104,18 +1117,6 @@
         "小型家具"
       ],
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%A3%8E%E5%85%88%E7%9F%A5"
-    },
-    {
-      "id": "e78caee68385e6bc94e59198",
-      "spiritName": "献情演员",
-      "season": "音韵季",
-      "lastRevisit": "2024-05-02",
-      "visitCount": 3,
-      "items": [
-        "裤子",
-        "面具"
-      ],
-      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%8C%AE%E6%83%85%E6%BC%94%E5%91%98"
     },
     {
       "id": "e88892e5b195e5a4a7e5b888",

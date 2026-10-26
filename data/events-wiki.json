@@ -1,11 +1,11 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/活动日历",
-    "lastUpdated": "2026-10-22T11:19:22.308Z",
+    "lastUpdated": "2026-10-26T12:25:45.137Z",
     "counts": {
       "season": 1,
       "activity": 1,
-      "traveling_spirit": 1
+      "traveling_spirit": 2
     }
   },
   "events": [
@@ -35,6 +35,15 @@
       "end": "2026-10-19T04:00:00.000Z",
       "source": "wiki",
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E9%9D%99%E5%85%89%E5%AD%A6%E8%80%85"
+    },
+    {
+      "id": "wiki-traveling_spirit-旅行先祖：献情演员-1028",
+      "type": "traveling_spirit",
+      "title": "【复刻】献情演员",
+      "start": "2026-10-28T22:00:00.000Z",
+      "end": "2026-11-02T04:00:00.000Z",
+      "source": "wiki",
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E7%8C%AE%E6%83%85%E6%BC%94%E5%91%98"
     }
   ]
 }
