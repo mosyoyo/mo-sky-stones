@@ -1,7 +1,7 @@
 [
   {
     "enabled": true,
-    "id": "wiki-traveling_spirit-旅行先祖：献情演员-1028",
+    "id": "wiki-traveling_spirit-旅行先祖：献情演员-1029",
     "type": "traveling_spirit",
     "title": "【复刻】献情演员",
     "start": "2026-10-28T22:00:00.000Z",
@@ -34,12 +34,12 @@
   },
   {
     "enabled": true,
-    "id": "candle_heap-6ae2a8a29a24a1198dc57146-candle_heap-5mgmsl",
+    "id": "candle_heap-6ae2a8a29a24a1198dc57146-1ptg18z",
     "type": "candle_heap",
     "title": "【大蜡烛】大蜡烛",
     "start": "2026-10-29T16:00:00.000Z",
     "end": "2026-11-05T15:59:00.000Z",
-    "sourceFeedId": "6ae2a8a29a24a1198dc57146::candle_heap",
+    "sourceFeedId": "6ae2a8a29a24a1198dc57146",
     "_source": "netease"
   },
   {
