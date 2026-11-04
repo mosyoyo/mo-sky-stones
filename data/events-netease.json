@@ -1,5 +1,14 @@
 [
   {
+    "id": "bonus-6aeaadc31652f12cda87dd14-q7yu04",
+    "enabled": true,
+    "type": "bonus",
+    "title": "【双倍】双十一魔法商店活动公告",
+    "start": "2026-11-06T16:00:00.000Z",
+    "end": "2026-11-13T15:59:00.000Z",
+    "sourceFeedId": "6aeaadc31652f12cda87dd14"
+  },
+  {
     "id": "candle_heap-6ae2a8a29a24a1198dc57146-1ptg18z",
     "enabled": true,
     "type": "candle_heap",
@@ -376,14 +385,5 @@
     "start": "2025-03-12T16:00:00.000Z",
     "end": "2025-03-19T15:59:00.000Z",
     "sourceFeedId": "67d0eaa76a0a4051323b1fd8"
-  },
-  {
-    "id": "bonus-6aeaadc31652f12cda87dd14-bonus-lpvilz",
-    "enabled": true,
-    "type": "bonus",
-    "title": "【双倍】双十一魔法商店活动公告",
-    "start": "2026-11-06T16:00:00.000Z",
-    "end": "2026-11-13T15:59:00.000Z",
-    "sourceFeedId": "6aeaadc31652f12cda87dd14::bonus"
   }
 ]
