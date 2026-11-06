@@ -10,7 +10,7 @@
   },
   {
     "id": "candle_heap-6ae2a8a29a24a1198dc57146-1ptg18z",
-    "enabled": true,
+    "enabled": false,
     "type": "candle_heap",
     "title": "【大蜡烛】大蜡烛",
     "start": "2026-10-29T16:00:00.000Z",
