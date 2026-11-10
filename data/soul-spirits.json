@@ -1,8 +1,8 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
-    "fetchedAt": "2026-11-05T14:10:37.766Z",
-    "spiritCount": 90
+    "fetchedAt": "2026-11-10T01:15:18.217Z",
+    "spiritCount": 94
   },
   "spirits": [
     {
@@ -188,6 +188,58 @@
         "斗篷"
       ],
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%9F%B9%E8%AF%AD%E8%80%85"
+    },
+    {
+      "id": "e8a2abe98197e5bc83e4b98be5a484e79a84e59b",
+      "spiritName": "被遗弃之处的回响",
+      "season": "归巢季",
+      "lastRevisit": "2026-06-19",
+      "visitCount": 1,
+      "items": [
+        "斗篷",
+        "发饰",
+        "鞋子"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/index.php"
+    },
+    {
+      "id": "e8a2abe98197e5bf98e79a84e5a4a9e5a082e4b8",
+      "spiritName": "被遗忘的天堂一隅",
+      "season": "归巢季",
+      "lastRevisit": "2026-06-19",
+      "visitCount": 1,
+      "items": [
+        "斗篷",
+        "发饰",
+        "鞋子"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/index.php"
+    },
+    {
+      "id": "e6b299e6bca0e7bbbfe6b4b2e79a84e4bd99e797",
+      "spiritName": "沙漠绿洲的余痕",
+      "season": "归巢季",
+      "lastRevisit": "2026-06-19",
+      "visitCount": 1,
+      "items": [
+        "斗篷",
+        "发型",
+        "鞋子"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/index.php"
+    },
+    {
+      "id": "e5a4b1e890bde5b08fe99587e79a84e8aeb0e5bf",
+      "spiritName": "失落小镇的记忆",
+      "season": "归巢季",
+      "lastRevisit": "2026-06-19",
+      "visitCount": 1,
+      "items": [
+        "斗篷",
+        "发型",
+        "裤子"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/index.php"
     },
     {
       "id": "e5b88ce69c9be4b98be7a78d",
