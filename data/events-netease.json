@@ -1,5 +1,14 @@
 [
   {
+    "id": "bonus-6af3e84318a5e875e214303e-gzsej4",
+    "enabled": true,
+    "type": "bonus",
+    "title": "【双倍】双倍心火",
+    "start": "2026-11-13T16:00:00.000Z",
+    "end": "2026-11-20T15:59:00.000Z",
+    "sourceFeedId": "6af3e84318a5e875e214303e"
+  },
+  {
     "id": "bonus-6aeaadc31652f12cda87dd14-q7yu04",
     "enabled": true,
     "type": "bonus",
@@ -385,14 +394,5 @@
     "start": "2025-03-12T16:00:00.000Z",
     "end": "2025-03-19T15:59:00.000Z",
     "sourceFeedId": "67d0eaa76a0a4051323b1fd8"
-  },
-  {
-    "id": "bonus-6af3e84318a5e875e214303e-bonus-16ja4df",
-    "enabled": true,
-    "type": "bonus",
-    "title": "【双倍】双倍心火",
-    "start": "2026-11-13T16:00:00.000Z",
-    "end": "2026-11-20T15:59:00.000Z",
-    "sourceFeedId": "6af3e84318a5e875e214303e::bonus"
   }
 ]
