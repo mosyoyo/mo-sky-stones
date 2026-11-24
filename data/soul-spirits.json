@@ -1,10 +1,23 @@
 {
   "_meta": {
     "source": "https://wiki.biligame.com/sky/旅行先祖回归记录",
-    "fetchedAt": "2026-11-12T14:46:25.349Z",
+    "fetchedAt": "2026-11-24T08:51:38.234Z",
     "spiritCount": 95
   },
   "spirits": [
+    {
+      "id": "e586b7e6bca0e69cafe5a3ab",
+      "spiritName": "冷漠术士",
+      "season": "魔法季",
+      "lastRevisit": "2026-11-26",
+      "visitCount": 5,
+      "items": [
+        "面具",
+        "发型",
+        "斗篷"
+      ],
+      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%86%B7%E6%BC%A0%E6%9C%AF%E5%A3%AB"
+    },
     {
       "id": "e8a2abe98197e5bc83e4b98be5a484e79a84e59b",
       "spiritName": "被遗弃之处的回响",
@@ -1167,19 +1180,6 @@
         "斗篷"
       ],
       "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E8%88%92%E5%B1%95%E5%A4%A7%E5%B8%88"
-    },
-    {
-      "id": "e586b7e6bca0e69cafe5a3ab",
-      "spiritName": "冷漠术士",
-      "season": "魔法季",
-      "lastRevisit": "2024-03-12",
-      "visitCount": 4,
-      "items": [
-        "面具",
-        "发型",
-        "斗篷"
-      ],
-      "wikiUrl": "https://wiki.biligame.com/sky/%E6%97%85%E8%A1%8C%E5%85%88%E7%A5%96%EF%BC%9A%E5%86%B7%E6%BC%A0%E6%9C%AF%E5%A3%AB"
     },
     {
       "id": "e893ace5a4b4e99d92e5b9b4",
